@@ -16,9 +16,10 @@
 #
 import platform
 import shlex
+import re
 from functools import total_ordering
 
-from maple_test.utils import PASS, EXEC_FLAG, ERRCHECK_FLAG, EXPECT_FLAG, DEPENDENCE_FLAG, TIMEOUT_FLAG, LEVEL_FLAG
+from maple_test.utils import PASS, EXEC_FLAG, SEPARATE_FILE_DIRECTIVE, ERRCHECK_FLAG, EXPECT_FLAG, DEPENDENCE_FLAG, TIMEOUT_FLAG, LEVEL_FLAG
 from maple_test.utils import read_file, safe_print
 from maple_test.utils import split_comment, filter_line, filter_command_line, precheck_flag, filter_level
 from maple_test.utils import FAIL, UNRESOLVED
@@ -60,9 +61,10 @@ class Case:
             self.level = False
         else:
             self.level = extract_level(comment_lines, level, condition)
-            self.commands = extract_commands(comment_lines, condition, run_script)
+            self.commands = enumerate_compares(extract_commands(comment_lines, condition, run_script))
             self.expect = extract_expect(comment_lines)
             self.dependence = extract_dependence(comment_lines, condition)
+            self.separation_by_files = extract_separation_by_files(comment_lines, self.path, condition)
             self.timeout = extract_timeout(comment_lines, condition)
         if not self.level:
             self.relative_path = ''
@@ -91,6 +93,47 @@ def extract_dependence(comment_lines, condition):
         parser.whitespace_split = True
         dependence += list(parser)
     return set(dependence)
+
+
+def extract_separation_by_files(comment_lines, filepath, condition):
+    # Check if file need to be separated
+    need_separation = False
+    for line in comment_lines:
+        if filter_line(line, SEPARATE_FILE_DIRECTIVE, condition):
+            need_separation = True
+            break
+    
+    if not need_separation:
+        return []
+    
+    # Return pairs of (file_path, file_content)
+    separation = []
+    cur_file_lines = []
+    cur_file_path = ""
+    with open(filepath) as file:
+        for line in file:
+            match = re.match(r'//\s*' + SEPARATE_FILE_DIRECTIVE + '\s*:\s*(.+)\s*', line)
+
+            if not match:
+                cur_file_lines.append(line)
+            else:
+                # save previous file content
+                if cur_file_path != "":
+                    separation.append((cur_file_path, '\n'.join(cur_file_lines)))
+                # set new separation buffer
+                cur_file_lines = []
+                cur_file_path = match.group(1).strip()
+                if cur_file_path == "":
+                    raise Exception('ERROR: Specify file in separation "' + line + '"')
+
+    # save last file content
+    if cur_file_path != "":
+        separation.append((cur_file_path, ''.join(cur_file_lines)))
+
+    # print information about separation
+    separation_files = ', '.join([("'" + filepath + "'") for (filepath, _) in separation])
+
+    return separation
 
 
 def extract_timeout(comment_lines, condition):
@@ -129,6 +172,27 @@ def extract_level(comment_lines, target_level, condition):
             return True
     return filter_level("0", target_level) if not found_flag else False
 
+
+# If there is more than one 'compare %f' commands.
+# Then they will be enumerated to distiguish them in `compare.py`.
+# This needed to apply SCANs only after handled `compare`. 
+def enumerate_compares(commands):
+    def isCommandPipedIntoCompare(command):
+        last = command['cmd'][-1]
+        if command['PIPE'] and last.strip().startswith("compare"):
+            return True
+        return False
+ 
+    count_of_compares = sum(1 for command in commands if isCommandPipedIntoCompare(command))
+ 
+    i = 1
+    if count_of_compares > 1:
+        for command in commands:
+            if isCommandPipedIntoCompare(command):
+                command['cmd'][-1] += f' --compare_number={i}'
+                i += 1
+ 
+    return commands
 
 def read_list(content):
     if not content:

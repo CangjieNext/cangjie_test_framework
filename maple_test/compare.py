@@ -116,6 +116,7 @@ def main():
     compare_object = opts.compare_object
     assert_flags = opts.assert_flag
     transfer = opts.transfer
+    compare_number = opts.compare_number
     if not assert_flags:
         assert_flags.append(ASSERT_FLAG)
     expected_flags = opts.expected_flag
@@ -137,7 +138,7 @@ def main():
     compare_line_regex = gen_compare_regex(comment, assert_flags, expected_flags)
     compare_lines = extract_compare_lines(case_path, compare_line_regex)
     compare_lines = check_condition(compare_lines, condition)
-    multiline_compares = parse_all_multiline_comment(case_path)
+    multiline_compares = parse_all_multiline_comment(case_path, compare_number)
     compare_result = True
     start = 0
     if not compare_lines and not multiline_compares:
@@ -500,9 +501,12 @@ multi_L = '/*'
 multi_R = '*/'
 
 
-def parse_all_multiline_comment(file):
+def parse_all_multiline_comment(file, compare_number):
     with open(file, 'r', encoding='utf-8') as f:
-        contents = f.read()
+        if compare_number == -1:
+            contents = f.read()
+        else:
+            contents = read_scans(f, compare_number)
         all_match = []
         found = re.search(multiscan_pattern, contents)
         if not found:
@@ -530,6 +534,18 @@ def parse_all_multiline_comment(file):
 
         return res
 
+def read_scans(file, compare_number):
+    compares_above = 0
+    content = ""
+    for line in file:
+        if compares_above > compare_number:
+            break
+        if line.find("| compare %f") != -1:
+            compares_above += 1
+        if compares_above == compare_number:
+            content += line
+ 
+    return content
 
 def parse_cli():
     parser = argparse.ArgumentParser(prog="compare.py")
@@ -548,6 +564,10 @@ def parse_cli():
     )
     parser.add_argument(
         "case_path", type=complete_path, help="Source path: read compare rules"
+    )
+    parser.add_argument(
+        "--compare_number", type=int, nargs='?', default=-1,
+        help="Number of 'compare %f' pipe in file after which SCANs will be checked. All SCANs is checked by default."
     )
     parser.add_argument(
         "com_opt", type=str, nargs='?', default='', help="Compile option of this case, default empty."

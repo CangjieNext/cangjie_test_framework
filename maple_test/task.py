@@ -680,7 +680,22 @@ class SingleTask:
             return FAIL, err
         self.prepare_dir(dest)
         shutil.copy(str(src_path), str(dest))
-        return self.prepare_dependence(src_path.parent, case.dependence, dest, config)
+        return self.prepare_dependence(src_path.parent, case.dependence, case.separation_by_files, dest, config)
+
+
+    @staticmethod
+    def separate_by_files(separation, dest, logger, config):
+        if separation == []:
+            return
+        
+        for filepath, content in separation:
+            filepath = SingleTask._form_line(filepath, config)
+            path = os.path.normpath(dest / filepath)
+            (dir, file) = os.path.split(path)
+            SingleTask.prepare_dir(Path(dir))
+            with open(path, "w") as file:
+                file.write(content)
+
 
     @staticmethod
     def check_and_record_cases_without_level(case_path, base_path, output_file='cases_without_level.txt'):
@@ -716,7 +731,7 @@ class SingleTask:
                 print(f"无法写入输出文件 {output_file}: {e}")
 
     @staticmethod
-    def prepare_dependence(src_dir, dependence, dest, config):
+    def prepare_dependence(src_dir, dependence, separation_by_files, dest, config):
         logger = configs.LOGGER
         src_files = []
         for file in dependence:
@@ -738,6 +753,7 @@ class SingleTask:
                     shutil.copytree(str(file), str(dest / name))
                 except:
                     pass
+        SingleTask.separate_by_files(separation_by_files, dest, logger, config)
         return NOT_RUN, None
 
     @staticmethod
