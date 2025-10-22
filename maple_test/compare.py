@@ -567,7 +567,7 @@ def parse_cli():
     )
     parser.add_argument(
         "--compare_number", type=int, nargs='?', default=-1,
-        help="Number of 'compare %f' pipe in file after which SCANs will be checked. All SCANs is checked by default."
+        help="Number of 'compare %%f' pipe in file after which SCANs will be checked. All SCANs is checked by default."
     )
     parser.add_argument(
         "com_opt", type=str, nargs='?', default='', help="Compile option of this case, default empty."
