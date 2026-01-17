@@ -1,0 +1,11 @@
+2026-01-07 09:48:41 DEBUG Log file at: E:\cangjie_test_suite\cangjie_test_framework\test_temp\log\test_generic_user_defined_type_1_cj_fe3eed16eb6a11f0b0fc84a93e8bbbff.log
+2026-01-07 09:48:41 DEBUG Case Path: E:\cangjie_test_suite\cangjie_test\testsuites\HLT\API\std\reflect\cjnative\Generic\test_generic_user_defined_type_1.cj
+2026-01-07 09:48:41 DEBUG Work directory: E:\cangjie_test_suite\cangjie_test_framework\test_temp\run\test_generic_user_defined_type_1_cj_fe3eed16eb6a11f0b0fc84a93e8bbbff
+2026-01-07 09:48:41 DEBUG execute cmd ===>>>: cjc --error-count-limit=all --diagnostic-format=json test_generic_user_defined_type_1.cj --test -o test_generic_user_defined_type_1.exe
+2026-01-07 09:48:43 DEBUG return code: 0
+2026-01-07 09:48:43 DEBUG stdout : 
+
+2026-01-07 09:48:43 DEBUG stderr : 
+
+2026-01-07 09:48:43 DEBUG Run time: 1.9689 second, remain time: 598.03 second
+2026-01-07 09:48:43 DEBUG Task executed successfully

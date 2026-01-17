@@ -1,0 +1,52 @@
+2025-12-18 18:54:40 DEBUG Log file at: E:\cangjie_test_suite\cangjie_test_framework\test_temp\log\test_info_f3d2f20bdbff11f0af8a84a93e8bbbff.log
+2025-12-18 18:54:40 DEBUG Case Path: E:\cangjie_test_suite\cangjie_test\testsuites\HLT\compiler\cjnative\visibility\overload\testcase_0\test.info
+2025-12-18 18:54:40 DEBUG Work directory: E:\cangjie_test_suite\cangjie_test_framework\test_temp\run\test_info_f3d2f20bdbff11f0af8a84a93e8bbbff
+2025-12-18 18:54:40 DEBUG execute cmd ===>>>: cjc --error-count-limit=all --diagnostic-format=json a.cj b.cj b.cj main.cj -o test.exe
+2025-12-18 18:54:41 DEBUG return code: 1
+2025-12-18 18:54:41 DEBUG stdout : 
+
+2025-12-18 18:54:41 DEBUG stderr : 
+@	{
+@	    "Diags":[
+@	            {
+@	                "DiagKind": "module_read_file_conflicted",
+@	                "Severity": "error",
+@	                "WarnGroup": "none",
+@	                "DiagCategory": "module",
+@	                "Message": "the file 'b.cj' is a duplicate source file",
+@	                "Location": {
+@	                    "File": "",
+@	                    "Line": -1,
+@	                    "Column": -1
+@	                },
+@	                "MainHint": {
+@	                    "Content": "",
+@	                    "Range": {
+@	                        "Begin": {
+@	                            "File": "",
+@	                            "Line": -1,
+@	                            "Column": -1
+@	                        },
+@	                        "End": {
+@	                            "File": "",
+@	                            "Line": -1,
+@	                            "Column": 0
+@	                        }
+@	                    }
+@	                },
+@	                "OtherHints": [],
+@	                "Notes": [],
+@	                "Helps": []
+@	            }
+@	    ],
+@	    "Num":{
+@	        "Errors": 1,
+@	        "PrintedErrors": 1,
+@	        "Warnings": 0,
+@	        "PrintedWarnings": 0
+@	    }
+@	}
+
+2025-12-18 18:54:41 DEBUG Run time: 0.47128 second, remain time: 179.53 second
+2025-12-18 18:54:41 ERROR Failed!
+2025-12-18 18:54:41 ERROR Command return code 1 not equals to expected return code 0

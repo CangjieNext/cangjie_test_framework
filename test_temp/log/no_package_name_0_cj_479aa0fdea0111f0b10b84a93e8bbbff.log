@@ -1,0 +1,140 @@
+2026-01-05 14:39:28 DEBUG Log file at: E:\cangjie_test_suite\cangjie_test_framework\test_temp\log\no_package_name_0_cj_479aa0fdea0111f0b10b84a93e8bbbff.log
+2026-01-05 14:39:28 DEBUG Case Path: E:\cangjie_test_suite\cangjie_test\testsuites\HLT\compiler\cjnative\Packages\org_name\package_decl\no_package_name_0.cj
+2026-01-05 14:39:28 DEBUG Work directory: E:\cangjie_test_suite\cangjie_test_framework\test_temp\run\no_package_name_0_cj_479aa0fdea0111f0b10b84a93e8bbbff
+2026-01-05 14:39:28 DEBUG execute cmd ===>>>: cjc --error-count-limit=all --diagnostic-format=json --output-type=dylib no_package_name_0.cj 2>&1
+2026-01-05 14:39:28 DEBUG return code: 1
+2026-01-05 14:39:28 DEBUG stdout : 
++	{
++	    "Diags":[
++	            {
++	                "DiagKind": "parse_expected_name",
++	                "Severity": "error",
++	                "WarnGroup": "none",
++	                "DiagCategory": "parse",
++	                "Message": "expected a package name after '.' in qualified name, found '<EOF>'",
++	                "Location": {
++	                    "File": "no_package_name_0.cj",
++	                    "Line": 14,
++	                    "Column": 14
++	                },
++	                "MainHint": {
++	                    "Content": "expected a package name here",
++	                    "Range": {
++	                        "Begin": {
++	                            "File": "no_package_name_0.cj",
++	                            "Line": 14,
++	                            "Column": 14
++	                        },
++	                        "End": {
++	                            "File": "no_package_name_0.cj",
++	                            "Line": 14,
++	                            "Column": 14
++	                        }
++	                    }
++	                },
++	                "OtherHints": [
++	                    {
++	                        "Content": "after '.' in qualified name",
++	                        "Range": {
++	                            "Begin": {
++	                                "File": "no_package_name_0.cj",
++	                                "Line": 14,
++	                                "Column": 12
++	                            },
++	                            "End": {
++	                                "File": "no_package_name_0.cj",
++	                                "Line": 14,
++	                                "Column": 13
++	                            }
++	                        }
++	                    }
++	                ],
++	                "Notes": [],
++	                "Helps": []
++	            }
++	    ],
++	    "Num":{
++	        "Errors": 1,
++	        "PrintedErrors": 1,
++	        "Warnings": 0,
++	        "PrintedWarnings": 0
++	    }
++	}
+
+2026-01-05 14:39:28 DEBUG stderr : 
+
+2026-01-05 14:39:28 DEBUG Run time: 0.53339 second, remain time: 599.47 second
+2026-01-05 14:39:28 DEBUG execute cmd ===>>>: C:\Python314\python.exe E:\cangjie_test_suite\cangjie_test_framework\maple_test\compare.py --comment="//" --condition="'x86', 'Windows', 'CJNATIVE'" no_package_name_0.cj
+2026-01-05 14:39:29 DEBUG return code: 1
+2026-01-05 14:39:29 DEBUG stdout : 
++	compare.py input:
++		{
++		    "Diags":[
++		            {
++		                "DiagKind": "parse_expected_name",
++		                "Severity": "error",
++		                "WarnGroup": "none",
++		                "DiagCategory": "parse",
++		                "Message": "expected a package name after '.' in qualified name, found '<EOF>'",
++		                "Location": {
++		                    "File": "no_package_name_0.cj",
++		                    "Line": 14,
++		                    "Column": 14
++		                },
++		                "MainHint": {
++		                    "Content": "expected a package name here",
++		                    "Range": {
++		                        "Begin": {
++		                            "File": "no_package_name_0.cj",
++		                            "Line": 14,
++		                            "Column": 14
++		                        },
++		                        "End": {
++		                            "File": "no_package_name_0.cj",
++		                            "Line": 14,
++		                            "Column": 14
++		                        }
++		                    }
++		                },
++		                "OtherHints": [
++		                    {
++		                        "Content": "after '.' in qualified name",
++		                        "Range": {
++		                            "Begin": {
++		                                "File": "no_package_name_0.cj",
++		                                "Line": 14,
++		                                "Column": 12
++		                            },
++		                            "End": {
++		                                "File": "no_package_name_0.cj",
++		                                "Line": 14,
++		                                "Column": 13
++		                            }
++		                        }
++		                    }
++		                ],
++		                "Notes": [],
++		                "Helps": []
++		            }
++		    ],
++		    "Num":{
++		        "Errors": 1,
++		        "PrintedErrors": 1,
++		        "Warnings": 0,
++		        "PrintedWarnings": 0
++		    }
++		}
++	
++	compare.py input end
++	
++	Starting SingleLine Compare:
++	b"It's a assert, flag: scan, pattern: expected a package name after '::' in qualified name, found '<EOF>' , result: False, matched at output line: 0 "
++	back reference dict:{}
++	SingleLine Compare Failed
++	[Compare Fail]
+
+2026-01-05 14:39:29 DEBUG stderr : 
+
+2026-01-05 14:39:29 DEBUG Run time: 0.54446 second, remain time: 598.92 second
+2026-01-05 14:39:29 ERROR Failed!
+2026-01-05 14:39:29 ERROR Command return code 1 not equals to expected return code 0

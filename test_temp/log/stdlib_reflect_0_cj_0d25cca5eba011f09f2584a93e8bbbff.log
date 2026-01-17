@@ -1,0 +1,76 @@
+2026-01-07 16:08:30 DEBUG Log file at: E:\cangjie_test_suite\cangjie_test_framework\test_temp\log\stdlib_reflect_0_cj_0d25cca5eba011f09f2584a93e8bbbff.log
+2026-01-07 16:08:30 DEBUG Case Path: E:\cangjie_test_suite\cangjie_test\testsuites\HLT\API\std\reflect\cjnative\stdlib_reflect\stdlib_reflect_0.cj
+2026-01-07 16:08:30 DEBUG Work directory: E:\cangjie_test_suite\cangjie_test_framework\test_temp\run\stdlib_reflect_0_cj_0d25cca5eba011f09f2584a93e8bbbff
+2026-01-07 16:08:30 DEBUG execute cmd ===>>>: cjc --error-count-limit=all --diagnostic-format=json stdlib_reflect_0.cj --test -o stdlib_reflect_0.exe
+2026-01-07 16:08:31 DEBUG return code: 0
+2026-01-07 16:08:31 DEBUG stdout : 
+
+2026-01-07 16:08:31 DEBUG stderr : 
+@	{
+@	    "Diags":[
+@	            {
+@	                "DiagKind": "sema_unused_import",
+@	                "Severity": "warning",
+@	                "WarnGroup": "unused",
+@	                "DiagCategory": "sema",
+@	                "Message": "unused import 'std.collection.*'",
+@	                "Location": {
+@	                    "File": "stdlib_reflect_0.cj",
+@	                    "Line": 14,
+@	                    "Column": 1
+@	                },
+@	                "MainHint": {
+@	                    "Content": "unused import",
+@	                    "Range": {
+@	                        "Begin": {
+@	                            "File": "stdlib_reflect_0.cj",
+@	                            "Line": 14,
+@	                            "Column": 1
+@	                        },
+@	                        "End": {
+@	                            "File": "stdlib_reflect_0.cj",
+@	                            "Line": 14,
+@	                            "Column": 24
+@	                        }
+@	                    }
+@	                },
+@	                "OtherHints": [],
+@	                "Notes": [
+@	                    {
+@	                        "Message": "this warning can be suppressed by setting the compiler option `-Woff unused`",
+@	                        "MainHint": null,
+@	                        "OtherHints": [],
+@	                        "Help": null
+@	                    }
+@	                ],
+@	                "Helps": []
+@	            }
+@	    ],
+@	    "Num":{
+@	        "Errors": 0,
+@	        "PrintedErrors": 0,
+@	        "Warnings": 1,
+@	        "PrintedWarnings": 1
+@	    }
+@	}
+
+2026-01-07 16:08:31 DEBUG Run time: 1.3871 second, remain time: 598.61 second
+2026-01-07 16:08:31 DEBUG execute cmd ===>>>: set LD_LIBRARY_PATH=%chdir%:%LD_LIBRARY_PATH% && stdlib_reflect_0.exe --no-progress
+2026-01-07 16:08:32 DEBUG return code: 0
+2026-01-07 16:08:32 DEBUG stdout : 
++	--------------------------------------------------------------------------------------------------
++	TP: [33mdefault[0m, time elapsed: 849200 ns, RESULT:
++	    TCS: [33mTestStdLibReflection[0m, time elapsed: 838900 ns, RESULT:
++	    [[32m PASSED [0m] CASE: test00 (304700 ns)
++	    [[32m PASSED [0m] CASE: genericStructType (12300 ns)
++	    [[32m PASSED [0m] CASE: nonGenericStructType (50400 ns)
++	    [[32m PASSED [0m] CASE: interfaceType (20600 ns)
++	Summary: TOTAL: 4
++	    [32mPASSED[0m: 4, [32mSKIPPED[0m: 0, ERROR: 0
++	    [31mFAILED[0m: 0
++	--------------------------------------------------------------------------------------------------
+
+2026-01-07 16:08:32 DEBUG stderr : 
+
+2026-01-07 16:08:32 DEBUG Run time: 0.60027 second, remain time: 598.01 second
+2026-01-07 16:08:32 DEBUG Task executed successfully

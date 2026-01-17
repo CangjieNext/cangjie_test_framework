@@ -1,0 +1,26 @@
+2026-01-04 14:15:59 DEBUG Log file at: E:\cangjie_test_suite\cangjie_test_framework\test_temp\log\test_info_d6b27e8de93411f0857784a93e8bbbff.log
+2026-01-04 14:15:59 DEBUG Case Path: E:\cangjie_test_suite\cangjie_test\testsuites\HLT\compiler\cjnative\HLE\c\array\test.info
+2026-01-04 14:15:59 DEBUG Work directory: E:\cangjie_test_suite\cangjie_test_framework\test_temp\run\test_info_d6b27e8de93411f0857784a93e8bbbff
+2026-01-04 14:15:59 DEBUG execute cmd ===>>>: set LD_LIBRARY_PATH=%chdir%:%LD_LIBRARY_PATH% && %CANGJIE_HOME%/tools/bin/hle -c -b %CANGJIE_HOME%/tools/dtsparser/node_modules/.bin/cjbind.exe --module-name="my_module" -i a.h -o . --clang-args=""
+2026-01-04 14:16:00 DEBUG return code: 0
+2026-01-04 14:16:00 DEBUG stdout : 
++	========Generate C to cangjie bindings Begins!========
++	The out dir is:./
++	The command is: E:\cangjie/tools/dtsparser/node_modules/.bin/cjbind.exe --auto-cstring --array-pointers-in-args --no-layout-test  -p my_module -o ./a.cj a.h -- 
++	========Generate C to cangjie bindings end!========
++	total cost of hle: 307ms138us500ns
+
+2026-01-04 14:16:00 DEBUG stderr : 
+
+2026-01-04 14:16:00 DEBUG Run time: 0.40763 second, remain time: 599.59 second
+2026-01-04 14:16:00 DEBUG execute cmd ===>>>: type a.cj
+2026-01-04 14:16:00 DEBUG Can not decode stderr with utf-8, ignore error!
+2026-01-04 14:16:00 DEBUG return code: 1
+2026-01-04 14:16:00 DEBUG stdout : 
+
+2026-01-04 14:16:00 DEBUG stderr : 
+@	ϵͳҲָļ
+
+2026-01-04 14:16:00 DEBUG Run time: 0.017584 second, remain time: 599.57 second
+2026-01-04 14:16:00 ERROR Failed!
+2026-01-04 14:16:00 ERROR Command return code 1 not equals to expected return code 0

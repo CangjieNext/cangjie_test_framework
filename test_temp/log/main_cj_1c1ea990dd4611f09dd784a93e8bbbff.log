@@ -1,0 +1,27 @@
+2025-12-20 09:53:39 DEBUG Log file at: E:\cangjie_test_suite\cangjie_test_framework\test_temp\log\main_cj_1c1ea990dd4611f09dd784a93e8bbbff.log
+2025-12-20 09:53:39 DEBUG Case Path: E:\cangjie_test_suite\cangjie_test\testsuites\HLT\compiler\cjnative\Chir\DeadCodeWarnning\negative\TestCase_41\main.cj
+2025-12-20 09:53:39 DEBUG Work directory: E:\cangjie_test_suite\cangjie_test_framework\test_temp\run\main_cj_1c1ea990dd4611f09dd784a93e8bbbff
+2025-12-20 09:53:40 DEBUG execute cmd ===>>>: cjc main.cj --error-count-limit=all --diagnostic-format=json 2>&1
+2025-12-20 09:53:42 DEBUG return code: 0
+2025-12-20 09:53:42 DEBUG stdout : 
+
+2025-12-20 09:53:42 DEBUG stderr : 
+
+2025-12-20 09:53:42 DEBUG Run time: 2.9431 second, remain time: 177.06 second
+2025-12-20 09:53:42 DEBUG execute cmd ===>>>: C:\Python314\python.exe E:\cangjie_test_suite\cangjie_test_framework\maple_test\compare.py --comment="//" --condition="'CJNATIVE', 'Windows', 'x86'" main.cj
+2025-12-20 09:53:44 DEBUG return code: 0
+2025-12-20 09:53:44 DEBUG stdout : 
++	compare.py input:
++	
++	compare.py input end
++	
++	Starting SingleLine Compare:
++	b"It's a assert, flag: scan-not, pattern: chir_dce_unreachable_block_in_expression , result: True, matched at output line: 0 "
++	back reference dict:{}
++	SingleLine Compare End
++	[Compare Pass]
+
+2025-12-20 09:53:44 DEBUG stderr : 
+
+2025-12-20 09:53:44 DEBUG Run time: 1.5208 second, remain time: 175.54 second
+2025-12-20 09:53:44 DEBUG Task executed successfully

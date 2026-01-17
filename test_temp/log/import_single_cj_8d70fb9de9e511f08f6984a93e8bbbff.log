@@ -1,0 +1,21 @@
+2026-01-05 11:20:57 DEBUG Log file at: E:\cangjie_test_suite\cangjie_test_framework\test_temp\log\import_single_cj_8d70fb9de9e511f08f6984a93e8bbbff.log
+2026-01-05 11:20:57 DEBUG Case Path: E:\cangjie_test_suite\cangjie_test\testsuites\LLT\compiler\Package\org\import_single.cj
+2026-01-05 11:20:57 DEBUG Work directory: E:\cangjie_test_suite\cangjie_test_framework\test_temp\run\import_single_cj_8d70fb9de9e511f08f6984a93e8bbbff
+2026-01-05 11:20:57 DEBUG execute cmd ===>>>: cjc.exe -j1 import.pkg.cj --output-type=staticlib
+2026-01-05 11:20:58 DEBUG return code: 0
+2026-01-05 11:20:58 DEBUG stdout : 
+
+2026-01-05 11:20:58 DEBUG stderr : 
+
+2026-01-05 11:20:58 DEBUG Run time: 0.5547 second, remain time: 599.45 second
+2026-01-05 11:20:58 DEBUG execute cmd ===>>>: cjc.exe -j1 import_single.cj libb@a.a -o import_single.exe
+2026-01-05 11:20:58 DEBUG return code: 1
+2026-01-05 11:20:58 DEBUG stdout : 
+
+2026-01-05 11:20:58 DEBUG stderr : 
+@	error[0m: invalid binary file 'libb@a.a'
+@	Invalid options. Try: 'cjc --help' for more information.
+
+2026-01-05 11:20:58 DEBUG Run time: 0.26127 second, remain time: 599.18 second
+2026-01-05 11:20:58 ERROR Failed!
+2026-01-05 11:20:58 ERROR Command return code 1 not equals to expected return code 0

@@ -1,0 +1,19 @@
+2026-01-05 14:58:45 DEBUG Log file at: E:\cangjie_test_suite\cangjie_test_framework\test_temp\log\backtick_in_org_name_0_cj_f82dcbb1ea0311f09ff284a93e8bbbff.log
+2026-01-05 14:58:45 DEBUG Case Path: E:\cangjie_test_suite\cangjie_test\testsuites\HLT\compiler\cjnative\Packages\org_name\import_decl\backtick_in_org_name_0.cj
+2026-01-05 14:58:45 DEBUG Work directory: E:\cangjie_test_suite\cangjie_test_framework\test_temp\run\backtick_in_org_name_0_cj_f82dcbb1ea0311f09ff284a93e8bbbff
+2026-01-05 14:58:45 DEBUG execute cmd ===>>>: cjc --error-count-limit=all --diagnostic-format=json --output-type=dylib upstream_package.cj
+2026-01-05 14:58:46 DEBUG return code: 0
+2026-01-05 14:58:46 DEBUG stdout : 
+
+2026-01-05 14:58:46 DEBUG stderr : 
+
+2026-01-05 14:58:46 DEBUG Run time: 1.0439 second, remain time: 598.96 second
+2026-01-05 14:58:46 DEBUG execute cmd ===>>>: cjc --error-count-limit=all --diagnostic-format=json backtick_in_org_name_0.cj -L. -lmy_pkg@my_org -o backtick_in_org_name_0.exe 2>&1
+2026-01-05 14:58:47 DEBUG return code: 0
+2026-01-05 14:58:47 DEBUG stdout : 
+
+2026-01-05 14:58:47 DEBUG stderr : 
+
+2026-01-05 14:58:47 DEBUG Run time: 0.99448 second, remain time: 597.96 second
+2026-01-05 14:58:47 ERROR Failed!
+2026-01-05 14:58:47 ERROR Command return code 0 not equals to expected return code 1

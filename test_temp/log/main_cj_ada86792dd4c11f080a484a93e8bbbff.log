@@ -1,0 +1,18 @@
+2025-12-20 10:37:14 DEBUG Log file at: E:\cangjie_test_suite\cangjie_test_framework\test_temp\log\main_cj_ada86792dd4c11f080a484a93e8bbbff.log
+2025-12-20 10:37:14 DEBUG Case Path: E:\cangjie_test_suite\cangjie_test\testsuites\HLT\compiler\cjnative\MetaProgramming\ConditionalCompile\When\cross_compilation\TestCase_219\main.cj
+2025-12-20 10:37:14 DEBUG Work directory: E:\cangjie_test_suite\cangjie_test_framework\test_temp\run\main_cj_ada86792dd4c11f080a484a93e8bbbff
+2025-12-20 10:37:14 DEBUG execute cmd ===>>>: cjc --error-count-limit=all --diagnostic-format=json main.cj -o main.exe
+2025-12-20 10:37:16 DEBUG return code: 0
+2025-12-20 10:37:16 DEBUG stdout : 
+
+2025-12-20 10:37:16 DEBUG stderr : 
+
+2025-12-20 10:37:16 DEBUG Run time: 1.3656 second, remain time: 178.63 second
+2025-12-20 10:37:16 DEBUG execute cmd ===>>>: set LD_LIBRARY_PATH=%chdir%:%LD_LIBRARY_PATH% && main.exe
+2025-12-20 10:37:16 DEBUG return code: 1
+2025-12-20 10:37:16 DEBUG stdout : 
+
+2025-12-20 10:37:16 DEBUG stderr : 
+
+2025-12-20 10:37:17 DEBUG Run time: 0.73602 second, remain time: 177.9 second
+2025-12-20 10:37:17 DEBUG Task executed successfully

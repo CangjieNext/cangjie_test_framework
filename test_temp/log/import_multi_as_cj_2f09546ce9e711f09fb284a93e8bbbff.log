@@ -1,0 +1,52 @@
+2026-01-05 11:32:38 DEBUG Log file at: E:\cangjie_test_suite\cangjie_test_framework\test_temp\log\import_multi_as_cj_2f09546ce9e711f09fb284a93e8bbbff.log
+2026-01-05 11:32:38 DEBUG Case Path: E:\cangjie_test_suite\cangjie_test\testsuites\LLT\compiler\Package\org\import_multi_as.cj
+2026-01-05 11:32:38 DEBUG Work directory: E:\cangjie_test_suite\cangjie_test_framework\test_temp\run\import_multi_as_cj_2f09546ce9e711f09fb284a93e8bbbff
+2026-01-05 11:32:38 DEBUG execute cmd ===>>>: cjc.exe -j1 import.pkg.cj --output-type=staticlib -o import_multi_as.a
+2026-01-05 11:32:38 DEBUG return code: 0
+2026-01-05 11:32:38 DEBUG stdout : 
+
+2026-01-05 11:32:38 DEBUG stderr : 
+
+2026-01-05 11:32:38 DEBUG Run time: 0.55938 second, remain time: 599.44 second
+2026-01-05 11:32:39 DEBUG execute cmd ===>>>: cjc.exe -j1 importtwopkgs_withsamename_difforg.pkg.cj --output-type=staticlib
+2026-01-05 11:32:39 DEBUG return code: 0
+2026-01-05 11:32:39 DEBUG stdout : 
+
+2026-01-05 11:32:39 DEBUG stderr : 
+
+2026-01-05 11:32:39 DEBUG Run time: 0.56365 second, remain time: 598.88 second
+2026-01-05 11:32:39 DEBUG execute cmd ===>>>: dir
+2026-01-05 11:32:39 DEBUG Can not decode stdout with utf-8, ignore error!
+2026-01-05 11:32:39 DEBUG return code: 0
+2026-01-05 11:32:39 DEBUG stdout : 
++	  E еľ ¼Ӿ
++	 к F40B-BD7E
++	
++	 E:\cangjie_test_suite\cangjie_test_framework\test_temp\run\import_multi_as_cj_2f09546ce9e711f09fb284a93e8bbbff Ŀ¼
++	
++	2026/01/05  11:32    <DIR>          .
++	2026/01/05  11:32    <DIR>          ..
++	2026/01/05  11:32             1,552 a@b.cjo
++	2026/01/05  11:32               347 import.pkg.cj
++	2026/01/05  11:32               310 importtwopkgs_withsamename_difforg.pkg.cj
++	2026/01/05  11:32             6,004 import_multi_as.a
++	2026/01/05  11:32               725 import_multi_as.cj
++	2026/01/05  11:32             5,504 libm@b.a
++	2026/01/05  11:32               960 m@b.cjo
++	               7 ļ         15,402 ֽ
++	               2 Ŀ¼ 487,096,893,440 ֽ
+
+2026-01-05 11:32:39 DEBUG stderr : 
+
+2026-01-05 11:32:39 DEBUG Run time: 0.014854 second, remain time: 598.86 second
+2026-01-05 11:32:39 DEBUG execute cmd ===>>>: cjc.exe -j1 import_multi_as.cj import_multi_as.a libb@m.a -o import_multi_as.exe
+2026-01-05 11:32:39 DEBUG return code: 1
+2026-01-05 11:32:39 DEBUG stdout : 
+
+2026-01-05 11:32:39 DEBUG stderr : 
+@	error[0m: invalid binary file 'libb@m.a'
+@	Invalid options. Try: 'cjc --help' for more information.
+
+2026-01-05 11:32:39 DEBUG Run time: 0.26208 second, remain time: 598.6 second
+2026-01-05 11:32:39 ERROR Failed!
+2026-01-05 11:32:39 ERROR Command return code 1 not equals to expected return code 0

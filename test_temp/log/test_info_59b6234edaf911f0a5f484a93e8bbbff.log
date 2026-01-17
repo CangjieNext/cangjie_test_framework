@@ -1,0 +1,25 @@
+2025-12-17 11:34:54 DEBUG Log file at: E:\cangjie_test_suite\cangjie_test_framework\test_temp\log\test_info_59b6234edaf911f0a5f484a93e8bbbff.log
+2025-12-17 11:34:54 DEBUG Case Path: E:\cangjie_test_suite\cangjie_test\testsuites\HLT\compiler\cjnative\HLE\c\array\test.info
+2025-12-17 11:34:54 DEBUG Work directory: E:\cangjie_test_suite\cangjie_test_framework\test_temp\run\test_info_59b6234edaf911f0a5f484a93e8bbbff
+2025-12-17 11:34:54 DEBUG execute cmd ===>>>: %CANGJIE_HOME%/tools/bin/hle -c -b %CANGJIE_HOME%/tools/dtsparser/node_modules/.bin/cjbind.exe --module-name="my_module" -i a.h -o . --clang-args=""
+2025-12-17 11:34:54 DEBUG return code: 1
+2025-12-17 11:34:54 DEBUG stdout : 
++	========Generate C to cangjie bindings Begins!========
++	The out dir is:./
++	The command is: E:\cangjie/tools/dtsparser/node_modules/.bin/cjbind.exe --auto-cstring --array-pointers-in-args --no-layout-test  -p my_module -o ./a.cj a.h -- 
+
+2025-12-17 11:34:54 DEBUG stderr : 
+@	An exception has occurred:
+@	ProcessException: Created process failed, errMessage: "The system cannot find the file specified.".
+@		 at std.io.IOException::init(std.core::String)(std/io\io_exception.cj:19)
+@		 at std.process.ProcessException::init(std.core::String)(std/process\process_exception.cj:18)
+@		 at _CCNba10SubProcess10waitOutputHvEL0_E$i.exception_outlined_func(:123)
+@		 at std.process.buildSubProcess(std.core::String, std.core::Array<...>, CString, std.core::Option<...>, std.core::Array<...>)(std/process\process.cj:0)
+@		 at std.process.launch(std.core::String, std.core::Array<...>, std.core::Option<...>, std.core::Option<...>, std.process::ProcessRedirect, std.process::ProcessRedirect, std.process::ProcessRedirect)(std/process\process.cj:993)
+@		 at std.process.execute(std.core::String, std.core::Array<...>, std.core::Option<...>, std.core::Option<...>, std.process::ProcessRedirect, std.process::ProcessRedirect, std.process::ProcessRedirect, std.core::Option<...>)(std/process\process.cj:1009)
+@		 at hle.generateCangjieBindingsForC(std.core::String, std.core::String, std.core::String)(/devcloud/slavespace/usr1/4ee0f10fd9b24192af5e394290bb462a/cangjie/cangjie_tools/hyperlangExtension/src\main.cj:183)
+@		 at hle.main(std.core::Array<...>)(/devcloud/slavespace/usr1/4ee0f10fd9b24192af5e394290bb462a/cangjie/cangjie_tools/hyperlangExtension/src\main.cj:104)
+
+2025-12-17 11:34:54 DEBUG Run time: 0.34645 second, remain time: 179.65 second
+2025-12-17 11:34:54 ERROR Failed!
+2025-12-17 11:34:54 ERROR Command return code 1 not equals to expected return code 0

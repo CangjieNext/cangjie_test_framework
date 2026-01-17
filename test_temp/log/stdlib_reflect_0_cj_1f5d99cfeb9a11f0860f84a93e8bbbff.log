@@ -1,0 +1,80 @@
+2026-01-07 15:26:03 DEBUG Log file at: E:\cangjie_test_suite\cangjie_test_framework\test_temp\log\stdlib_reflect_0_cj_1f5d99cfeb9a11f0860f84a93e8bbbff.log
+2026-01-07 15:26:03 DEBUG Case Path: E:\cangjie_test_suite\cangjie_test\testsuites\HLT\API\std\reflect\cjnative\stdlib_reflect\stdlib_reflect_0.cj
+2026-01-07 15:26:03 DEBUG Work directory: E:\cangjie_test_suite\cangjie_test_framework\test_temp\run\stdlib_reflect_0_cj_1f5d99cfeb9a11f0860f84a93e8bbbff
+2026-01-07 15:26:03 DEBUG execute cmd ===>>>: cjc --error-count-limit=all --diagnostic-format=json stdlib_reflect_0.cj --test -o stdlib_reflect_0.exe
+2026-01-07 15:26:04 DEBUG return code: 0
+2026-01-07 15:26:04 DEBUG stdout : 
+
+2026-01-07 15:26:04 DEBUG stderr : 
+@	{
+@	    "Diags":[
+@	            {
+@	                "DiagKind": "sema_unused_import",
+@	                "Severity": "warning",
+@	                "WarnGroup": "unused",
+@	                "DiagCategory": "sema",
+@	                "Message": "unused import 'std.collection.*'",
+@	                "Location": {
+@	                    "File": "stdlib_reflect_0.cj",
+@	                    "Line": 14,
+@	                    "Column": 1
+@	                },
+@	                "MainHint": {
+@	                    "Content": "unused import",
+@	                    "Range": {
+@	                        "Begin": {
+@	                            "File": "stdlib_reflect_0.cj",
+@	                            "Line": 14,
+@	                            "Column": 1
+@	                        },
+@	                        "End": {
+@	                            "File": "stdlib_reflect_0.cj",
+@	                            "Line": 14,
+@	                            "Column": 24
+@	                        }
+@	                    }
+@	                },
+@	                "OtherHints": [],
+@	                "Notes": [
+@	                    {
+@	                        "Message": "this warning can be suppressed by setting the compiler option `-Woff unused`",
+@	                        "MainHint": null,
+@	                        "OtherHints": [],
+@	                        "Help": null
+@	                    }
+@	                ],
+@	                "Helps": []
+@	            }
+@	    ],
+@	    "Num":{
+@	        "Errors": 0,
+@	        "PrintedErrors": 0,
+@	        "Warnings": 1,
+@	        "PrintedWarnings": 1
+@	    }
+@	}
+
+2026-01-07 15:26:04 DEBUG Run time: 1.17 second, remain time: 598.83 second
+2026-01-07 15:26:04 DEBUG execute cmd ===>>>: set LD_LIBRARY_PATH=%chdir%:%LD_LIBRARY_PATH% && stdlib_reflect_0.exe --no-progress
+2026-01-07 15:26:05 DEBUG return code: 1
+2026-01-07 15:26:05 DEBUG stdout : 
++	--------------------------------------------------------------------------------------------------
++	TP: [33mdefault[0m, time elapsed: 29474100 ns, RESULT:
++	    TCS: [33mTestStdLibReflection[0m, time elapsed: 29464200 ns, RESULT:
++	    [[31m ERROR  [0m] CASE: test00 (28905500 ns)
++	    REASON: An exception has occurred:InfoNotFoundException: func info `sleep` not found from package `std.core`
++		at std.reflect.ReflectException.init(std.core.String)(std/reflect\exception.cj:17)
++		at std.reflect.PackageInfo.getFunction(std.core.String, std.core.Array<...>)(std/reflect\package_info_cjnative.cj:339)
++		at default.TestStdLibReflection.test00()(E:\cangjie_test_suite\cangjie_test_framework\test_temp\run\stdlib_reflect_0_cj_1f5d99cfeb9a11f0860f84a93e8bbbff\stdlib_reflect_0.cj:22)
++		at default.TestStdLibReflection.asTestSuite.lambda.0.lambda.0()(E:\cangjie_test_suite\cangjie_test_framework\test_temp\run\stdlib_reflect_0_cj_1f5d99cfeb9a11f0860f84a93e8bbbff\stdlib_reflect_0.cj:21)
++	Summary: TOTAL: 1
++	    [32mPASSED[0m: 0, [32mSKIPPED[0m: 0, ERROR: 1
++	    [31mFAILED[0m: 0, listed below:
++	            TCS: [33mTestStdLibReflection[0m, CASE: test00
++	--------------------------------------------------------------------------------------------------
+
+2026-01-07 15:26:05 DEBUG stderr : 
+
+2026-01-07 15:26:05 DEBUG Run time: 0.57656 second, remain time: 598.25 second
+2026-01-07 15:26:05 ERROR Failed!
+2026-01-07 15:26:05 ERROR Command return code 1 not equals to expected return code 0

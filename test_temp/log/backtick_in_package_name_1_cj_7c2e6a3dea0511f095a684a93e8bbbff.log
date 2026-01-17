@@ -1,0 +1,107 @@
+2026-01-05 15:09:33 DEBUG Log file at: E:\cangjie_test_suite\cangjie_test_framework\test_temp\log\backtick_in_package_name_1_cj_7c2e6a3dea0511f095a684a93e8bbbff.log
+2026-01-05 15:09:33 DEBUG Case Path: E:\cangjie_test_suite\cangjie_test\testsuites\HLT\compiler\cjnative\Packages\org_name\package_decl\backtick_in_package_name_1.cj
+2026-01-05 15:09:33 DEBUG Work directory: E:\cangjie_test_suite\cangjie_test_framework\test_temp\run\backtick_in_package_name_1_cj_7c2e6a3dea0511f095a684a93e8bbbff
+2026-01-05 15:09:33 DEBUG execute cmd ===>>>: cjc --error-count-limit=all --diagnostic-format=json --output-type=dylib backtick_in_package_name_1.cj 2>&1
+2026-01-05 15:09:33 DEBUG return code: 1
+2026-01-05 15:09:33 DEBUG stdout : 
++	{
++	    "Diags":[
++	            {
++	                "DiagKind": "parse_package_name_has_backtick",
++	                "Severity": "error",
++	                "WarnGroup": "none",
++	                "DiagCategory": "parse",
++	                "Message": "cannot using '`' in package name",
++	                "Location": {
++	                    "File": "backtick_in_package_name_1.cj",
++	                    "Line": 14,
++	                    "Column": 14
++	                },
++	                "MainHint": {
++	                    "Content": "",
++	                    "Range": {
++	                        "Begin": {
++	                            "File": "backtick_in_package_name_1.cj",
++	                            "Line": 14,
++	                            "Column": 14
++	                        },
++	                        "End": {
++	                            "File": "backtick_in_package_name_1.cj",
++	                            "Line": 14,
++	                            "Column": 19
++	                        }
++	                    }
++	                },
++	                "OtherHints": [],
++	                "Notes": [],
++	                "Helps": []
++	            }
++	    ],
++	    "Num":{
++	        "Errors": 1,
++	        "PrintedErrors": 1,
++	        "Warnings": 0,
++	        "PrintedWarnings": 0
++	    }
++	}
+
+2026-01-05 15:09:33 DEBUG stderr : 
+
+2026-01-05 15:09:33 DEBUG Run time: 0.5897 second, remain time: 599.41 second
+2026-01-05 15:09:33 DEBUG execute cmd ===>>>: C:\Python314\python.exe E:\cangjie_test_suite\cangjie_test_framework\maple_test\compare.py --comment="//" --condition="'x86', 'Windows', 'CJNATIVE'" backtick_in_package_name_1.cj
+2026-01-05 15:09:34 DEBUG return code: 0
+2026-01-05 15:09:34 DEBUG stdout : 
++	compare.py input:
++		{
++		    "Diags":[
++		            {
++		                "DiagKind": "parse_package_name_has_backtick",
++		                "Severity": "error",
++		                "WarnGroup": "none",
++		                "DiagCategory": "parse",
++		                "Message": "cannot using '`' in package name",
++		                "Location": {
++		                    "File": "backtick_in_package_name_1.cj",
++		                    "Line": 14,
++		                    "Column": 14
++		                },
++		                "MainHint": {
++		                    "Content": "",
++		                    "Range": {
++		                        "Begin": {
++		                            "File": "backtick_in_package_name_1.cj",
++		                            "Line": 14,
++		                            "Column": 14
++		                        },
++		                        "End": {
++		                            "File": "backtick_in_package_name_1.cj",
++		                            "Line": 14,
++		                            "Column": 19
++		                        }
++		                    }
++		                },
++		                "OtherHints": [],
++		                "Notes": [],
++		                "Helps": []
++		            }
++		    ],
++		    "Num":{
++		        "Errors": 1,
++		        "PrintedErrors": 1,
++		        "Warnings": 0,
++		        "PrintedWarnings": 0
++		    }
++		}
++	
++	compare.py input end
++	
++	Starting SingleLine Compare:
++	b"It's a assert, flag: scan, pattern: parse_package_name_has_backtick , result: True, matched at output line: 0 "
++	back reference dict:{}
++	SingleLine Compare End
++	[Compare Pass]
+
+2026-01-05 15:09:34 DEBUG stderr : 
+
+2026-01-05 15:09:34 DEBUG Run time: 0.41185 second, remain time: 599.0 second
+2026-01-05 15:09:34 DEBUG Task executed successfully

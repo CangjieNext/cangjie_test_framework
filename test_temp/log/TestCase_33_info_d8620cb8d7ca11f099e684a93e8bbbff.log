@@ -1,0 +1,149 @@
+2025-12-13 10:24:27 DEBUG Log file at: E:\cangjie_test_suite\cangjie_test_framework\test_temp\log\TestCase_33_info_d8620cb8d7ca11f099e684a93e8bbbff.log
+2025-12-13 10:24:27 DEBUG Case Path: E:\cangjie_test_suite\cangjie_test_1208\testsuites\HLT\compiler\cjnative\stable_abi\package_name\TestCase_33\TestCase_33.info
+2025-12-13 10:24:27 DEBUG Work directory: E:\cangjie_test_suite\cangjie_test_framework\test_temp\run\TestCase_33_info_d8620cb8d7ca11f099e684a93e8bbbff
+2025-12-13 10:24:27 DEBUG execute cmd ===>>>: cjc --error-count-limit=all --diagnostic-format=json --output-type=dylib upstream\upstream.cj -o libupstream.dll
+2025-12-13 10:24:35 DEBUG return code: 0
+2025-12-13 10:24:35 DEBUG stdout : 
+
+2025-12-13 10:24:35 DEBUG stderr : 
+@	{
+@	    "Diags":[
+@	            {
+@	                "DiagKind": "chir_dce_unused_variable",
+@	                "Severity": "warning",
+@	                "WarnGroup": "unused",
+@	                "DiagCategory": "chir",
+@	                "Message": "unused variable:'v'",
+@	                "Location": {
+@	                    "File": "upstream\\upstream.cj",
+@	                    "Line": 38,
+@	                    "Column": 13
+@	                },
+@	                "MainHint": {
+@	                    "Content": "unused variable",
+@	                    "Range": {
+@	                        "Begin": {
+@	                            "File": "upstream\\upstream.cj",
+@	                            "Line": 38,
+@	                            "Column": 13
+@	                        },
+@	                        "End": {
+@	                            "File": "upstream\\upstream.cj",
+@	                            "Line": 38,
+@	                            "Column": 14
+@	                        }
+@	                    }
+@	                },
+@	                "OtherHints": [],
+@	                "Notes": [
+@	                    {
+@	                        "Message": "this warning can be suppressed by setting the compiler option `-Woff unused`",
+@	                        "MainHint": null,
+@	                        "OtherHints": [],
+@	                        "Help": null
+@	                    }
+@	                ],
+@	                "Helps": []
+@	            },
+@	            {
+@	                "DiagKind": "chir_dce_unused_variable",
+@	                "Severity": "warning",
+@	                "WarnGroup": "unused",
+@	                "DiagCategory": "chir",
+@	                "Message": "unused variable:'v'",
+@	                "Location": {
+@	                    "File": "upstream\\upstream.cj",
+@	                    "Line": 55,
+@	                    "Column": 13
+@	                },
+@	                "MainHint": {
+@	                    "Content": "unused variable",
+@	                    "Range": {
+@	                        "Begin": {
+@	                            "File": "upstream\\upstream.cj",
+@	                            "Line": 55,
+@	                            "Column": 13
+@	                        },
+@	                        "End": {
+@	                            "File": "upstream\\upstream.cj",
+@	                            "Line": 55,
+@	                            "Column": 14
+@	                        }
+@	                    }
+@	                },
+@	                "OtherHints": [],
+@	                "Notes": [
+@	                    {
+@	                        "Message": "this warning can be suppressed by setting the compiler option `-Woff unused`",
+@	                        "MainHint": null,
+@	                        "OtherHints": [],
+@	                        "Help": null
+@	                    }
+@	                ],
+@	                "Helps": []
+@	            }
+@	    ],
+@	    "Num":{
+@	        "Errors": 0,
+@	        "PrintedErrors": 0,
+@	        "Warnings": 2,
+@	        "PrintedWarnings": 2
+@	    }
+@	}
+
+2025-12-13 10:24:35 DEBUG Run time: 8.5564 second, remain time: 591.44 second
+2025-12-13 10:24:35 DEBUG execute cmd ===>>>: cjc --error-count-limit=all --diagnostic-format=json downstream\downstream.cj -L. -lupstream -o TestCase_33.exe
+2025-12-13 10:24:37 DEBUG return code: 0
+2025-12-13 10:24:37 DEBUG stdout : 
+
+2025-12-13 10:24:37 DEBUG stderr : 
+@	{
+@	    "Diags":[
+@	            {
+@	                "DiagKind": "sema_unused_import",
+@	                "Severity": "warning",
+@	                "WarnGroup": "unused",
+@	                "DiagCategory": "sema",
+@	                "Message": "unused import 'std.reflect.*'",
+@	                "Location": {
+@	                    "File": "downstream\\downstream.cj",
+@	                    "Line": 12,
+@	                    "Column": 1
+@	                },
+@	                "MainHint": {
+@	                    "Content": "unused import",
+@	                    "Range": {
+@	                        "Begin": {
+@	                            "File": "downstream\\downstream.cj",
+@	                            "Line": 12,
+@	                            "Column": 1
+@	                        },
+@	                        "End": {
+@	                            "File": "downstream\\downstream.cj",
+@	                            "Line": 12,
+@	                            "Column": 21
+@	                        }
+@	                    }
+@	                },
+@	                "OtherHints": [],
+@	                "Notes": [
+@	                    {
+@	                        "Message": "this warning can be suppressed by setting the compiler option `-Woff unused`",
+@	                        "MainHint": null,
+@	                        "OtherHints": [],
+@	                        "Help": null
+@	                    }
+@	                ],
+@	                "Helps": []
+@	            }
+@	    ],
+@	    "Num":{
+@	        "Errors": 0,
+@	        "PrintedErrors": 0,
+@	        "Warnings": 1,
+@	        "PrintedWarnings": 1
+@	    }
+@	}
+
+2025-12-13 10:24:37 DEBUG Run time: 1.8947 second, remain time: 589.55 second
+2025-12-13 10:24:37 DEBUG execute cmd ===>>>: set LD_LIBRARY_PATH=%chdir%:%LD_LIBRARY_PATH% && TestCase_33.exe

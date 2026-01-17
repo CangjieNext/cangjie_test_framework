@@ -1,0 +1,47 @@
+2026-01-05 11:24:53 DEBUG Log file at: E:\cangjie_test_suite\cangjie_test_framework\test_temp\log\backtick_in_import_0_cj_19e3e3fbe9e611f090ab84a93e8bbbff.log
+2026-01-05 11:24:53 DEBUG Case Path: E:\cangjie_test_suite\cangjie_test\testsuites\HLT\compiler\cjnative\Packages\org_name\import_decl\backtick_in_import_0.cj
+2026-01-05 11:24:53 DEBUG Work directory: E:\cangjie_test_suite\cangjie_test_framework\test_temp\run\backtick_in_import_0_cj_19e3e3fbe9e611f090ab84a93e8bbbff
+2026-01-05 11:24:53 DEBUG execute cmd ===>>>: cjc --error-count-limit=all --diagnostic-format=json --output-type=dylib upstream_package.cj -o libmy_pkg@my_org.dll
+2026-01-05 11:24:54 DEBUG return code: 0
+2026-01-05 11:24:54 DEBUG stdout : 
+
+2026-01-05 11:24:54 DEBUG stderr : 
+
+2026-01-05 11:24:54 DEBUG Run time: 0.59788 second, remain time: 599.4 second
+2026-01-05 11:24:54 DEBUG execute cmd ===>>>: dir
+2026-01-05 11:24:54 DEBUG Can not decode stdout with utf-8, ignore error!
+2026-01-05 11:24:54 DEBUG return code: 0
+2026-01-05 11:24:54 DEBUG stdout : 
++	  E еľ ¼Ӿ
++	 к F40B-BD7E
++	
++	 E:\cangjie_test_suite\cangjie_test_framework\test_temp\run\backtick_in_import_0_cj_19e3e3fbe9e611f090ab84a93e8bbbff Ŀ¼
++	
++	2026/01/05  11:24    <DIR>          .
++	2026/01/05  11:24    <DIR>          ..
++	2026/01/05  11:24               647 backtick_in_import_0.cj
++	2026/01/05  11:24           105,984 libmy_pkg@my_org.dll
++	2026/01/05  11:24             3,560 my_org@my_pkg.cjo
++	2026/01/05  11:24               475 upstream_package.cj
++	               4 ļ        110,666 ֽ
++	               2 Ŀ¼ 487,096,852,480 ֽ
+
+2026-01-05 11:24:54 DEBUG stderr : 
+
+2026-01-05 11:24:54 DEBUG Run time: 0.015946 second, remain time: 599.39 second
+2026-01-05 11:24:54 DEBUG execute cmd ===>>>: cjc --error-count-limit=all --diagnostic-format=json backtick_in_import_0.cj -L. -l "my_pkg@my_org" -o backtick_in_import_0.exe
+2026-01-05 11:24:54 DEBUG return code: 0
+2026-01-05 11:24:54 DEBUG stdout : 
+
+2026-01-05 11:24:54 DEBUG stderr : 
+
+2026-01-05 11:24:54 DEBUG Run time: 0.61309 second, remain time: 598.77 second
+2026-01-05 11:24:54 DEBUG execute cmd ===>>>: set LD_LIBRARY_PATH=%chdir%:%LD_LIBRARY_PATH% && backtick_in_import_0.exe
+2026-01-05 11:24:54 DEBUG return code: 0
+2026-01-05 11:24:54 DEBUG stdout : 
++	foo
+
+2026-01-05 11:24:54 DEBUG stderr : 
+
+2026-01-05 11:24:54 DEBUG Run time: 0.19353 second, remain time: 598.58 second
+2026-01-05 11:24:54 DEBUG Task executed successfully

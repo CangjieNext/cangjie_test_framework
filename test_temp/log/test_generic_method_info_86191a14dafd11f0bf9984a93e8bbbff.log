@@ -1,0 +1,175 @@
+2025-12-17 12:04:46 DEBUG Log file at: E:\cangjie_test_suite\cangjie_test_framework\test_temp\log\test_generic_method_info_86191a14dafd11f0bf9984a93e8bbbff.log
+2025-12-17 12:04:46 DEBUG Case Path: E:\cangjie_test_suite\cangjie_test\testsuites\HLT\compiler\cjnative\HLE\arkts\class\test_generic_method.info
+2025-12-17 12:04:46 DEBUG Work directory: E:\cangjie_test_suite\cangjie_test_framework\test_temp\run\test_generic_method_info_86191a14dafd11f0bf9984a93e8bbbff
+2025-12-17 12:04:46 DEBUG execute cmd ===>>>: %CANGJIE_HOME%/tools/bin/hle -r %CANGJIE_HOME%/tools/dtsparser/node_modules/typescript -j %CANGJIE_HOME%/tools/dtsparser/analysis.js -i generic_method.d.ts -o . --module-name="my_module"
+2025-12-17 12:04:47 DEBUG return code: 0
+2025-12-17 12:04:47 DEBUG stdout : 
++	generic_method.d.ts is analyzed completely, json file saved!
++	========Analyzing generic_method.d.ts Begins!========
++	module: generic_method.d.ts
++	output: ./cj
++	
++	total cost of hle: 519ms401us400ns
+
+2025-12-17 12:04:47 DEBUG stderr : 
+
+2025-12-17 12:04:47 DEBUG Run time: 0.60615 second, remain time: 179.39 second
+2025-12-17 12:04:47 DEBUG execute cmd ===>>>: type cj\generic_method\src\generic_method.cj
+2025-12-17 12:04:47 DEBUG return code: 0
+2025-12-17 12:04:47 DEBUG stdout : 
++	// Copyright (c) Huawei Technologies Co., Ltd. 2025. All rights reserved.
++	// This source file is part of the Cangjie project, licensed under Apache-2.0
++	// with Runtime Library Exception.
++	//
++	// See https://cangjie-lang.cn/pages/LICENSE for license information.
++	
++	package my_module
++	
++	import tpc.*
++	import ohos.ark_interop.*
++	import ohos.ark_interop_helper.*
++	import ohos.base.*
++	
++	public enum AutoGenType0 {
++	    | NUMBER(Float64)
++	    | STRING(String)
++	    
++	    public func toJSValue(context: JSContext): JSValue {
++	        match(this) {
++	            case NUMBER(x) => context.number(x).toJSValue()
++	            case STRING(x) => context.string(x).toJSValue()
++	        }
++	    }
++	    public static func fromJSValue(context: JSContext, input: JSValue): AutoGenType0 {
++	        
++	        if(input.isNumber()) {
++	            return NUMBER(Float64.fromJSValue(context, input))
++	        }  
++	        if(input.isString()) {
++	            return STRING(String.fromJSValue(context, input))
++	        }
++	        throw Exception("unsupport type!")
++	    }
++	}
++	
++	
++	/*class ExportKeyword DeclareKeyword C {
++	    f(p: T): number | String
++	    }*/
++	
++	public class C {
++	    
++	    protected C(var arkts_object: JSObject) { }
++	    
++	    
++	    /**
++		 * @brief f(p: T): number | String
++		 */
++	    public func f < T >(p: T): AutoGenType0 where T <: JSInteropType<T> {
++	        jsObjApiCall < AutoGenType0 >( arkts_object, "f", { ctx =>[p.toJSValue(ctx)] }) {
++	            ctx, info => AutoGenType0.fromJSValue(ctx, info)
++	        }
++	    }
++	    
++	    func toJSValue(context: JSContext): JSValue {
++	        arkts_object.toJSValue()
++	    }
++	    
++	     static func fromJSValue(context: JSContext, input: JSValue): C {
++	        C(input.asObject())
++	    }
++	}
++	
+
+2025-12-17 12:04:47 DEBUG stderr : 
+
+2025-12-17 12:04:47 DEBUG Run time: 0.013182 second, remain time: 179.38 second
+2025-12-17 12:04:47 DEBUG execute cmd ===>>>: C:\Python314\python.exe E:\cangjie_test_suite\cangjie_test_framework\maple_test\compare.py --comment="//" --condition="'x86', 'CJNATIVE', 'Windows'" test_generic_method.info
+2025-12-17 12:04:47 DEBUG return code: 0
+2025-12-17 12:04:47 DEBUG stdout : 
++	compare.py input:
++		// Copyright (c) Huawei Technologies Co., Ltd. 2025. All rights reserved.
++		// This source file is part of the Cangjie project, licensed under Apache-2.0
++		// with Runtime Library Exception.
++		//
++		// See https://cangjie-lang.cn/pages/LICENSE for license information.
++		
++		package my_module
++		
++		import tpc.*
++		import ohos.ark_interop.*
++		import ohos.ark_interop_helper.*
++		import ohos.base.*
++		
++		public enum AutoGenType0 {
++		    | NUMBER(Float64)
++		    | STRING(String)
++		    
++		    public func toJSValue(context: JSContext): JSValue {
++		        match(this) {
++		            case NUMBER(x) => context.number(x).toJSValue()
++		            case STRING(x) => context.string(x).toJSValue()
++		        }
++		    }
++		    public static func fromJSValue(context: JSContext, input: JSValue): AutoGenType0 {
++		        
++		        if(input.isNumber()) {
++		            return NUMBER(Float64.fromJSValue(context, input))
++		        }  
++		        if(input.isString()) {
++		            return STRING(String.fromJSValue(context, input))
++		        }
++		        throw Exception("unsupport type!")
++		    }
++		}
++		
++		
++		/*class ExportKeyword DeclareKeyword C {
++		    f(p: T): number | String
++		    }*/
++		
++		public class C {
++		    
++		    protected C(var arkts_object: JSObject) { }
++		    
++		    
++		    /**
++			 * @brief f(p: T): number | String
++			 */
++		    public func f < T >(p: T): AutoGenType0 where T <: JSInteropType<T> {
++		        jsObjApiCall < AutoGenType0 >( arkts_object, "f", { ctx =>[p.toJSValue(ctx)] }) {
++		            ctx, info => AutoGenType0.fromJSValue(ctx, info)
++		        }
++		    }
++		    
++		    func toJSValue(context: JSContext): JSValue {
++		        arkts_object.toJSValue()
++		    }
++		    
++		     static func fromJSValue(context: JSContext, input: JSValue): C {
++		        C(input.asObject())
++		    }
++		}
++		
++	
++	compare.py input end
++	
++	Starting SingleLine Compare:
++	b"It's a assert, flag: scan, pattern: public enum AutoGenType0 { , result: True, matched at output line: 0 "
++	back reference dict:{}
++	SingleLine Compare End
++	b"It's a assert, flag: scan, pattern: | NUMBER(Float64) , result: True, matched at output line: 13 "
++	back reference dict:{}
++	SingleLine Compare End
++	b"It's a assert, flag: scan, pattern: | STRING(String) , result: True, matched at output line: 15 "
++	back reference dict:{}
++	SingleLine Compare End
++	b"It's a assert, flag: scan, pattern: public func f < T >(p: T): AutoGenType0 where T <: JSInteropType<T> { , result: True, matched at output line: 16 "
++	back reference dict:{}
++	SingleLine Compare End
++	[Compare Pass]
+
+2025-12-17 12:04:47 DEBUG stderr : 
+
+2025-12-17 12:04:47 DEBUG Run time: 0.19071 second, remain time: 179.19 second
+2025-12-17 12:04:47 DEBUG Task executed successfully

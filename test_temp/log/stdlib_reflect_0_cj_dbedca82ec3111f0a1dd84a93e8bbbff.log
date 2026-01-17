@@ -1,0 +1,133 @@
+2026-01-08 09:32:14 DEBUG Log file at: E:\cangjie_test_suite\cangjie_test_framework\test_temp\log\stdlib_reflect_0_cj_dbedca82ec3111f0a1dd84a93e8bbbff.log
+2026-01-08 09:32:14 DEBUG Case Path: E:\cangjie_test_suite\cangjie_test\testsuites\HLT\API\std\reflect\cjnative\stdlib_reflect\stdlib_reflect_0.cj
+2026-01-08 09:32:14 DEBUG Work directory: E:\cangjie_test_suite\cangjie_test_framework\test_temp\run\stdlib_reflect_0_cj_dbedca82ec3111f0a1dd84a93e8bbbff
+2026-01-08 09:32:14 DEBUG execute cmd ===>>>: cjc --error-count-limit=all --diagnostic-format=json stdlib_reflect_0.cj --test -o stdlib_reflect_0.exe
+2026-01-08 09:32:15 DEBUG return code: 0
+2026-01-08 09:32:15 DEBUG stdout : 
+
+2026-01-08 09:32:15 DEBUG stderr : 
+@	{
+@	    "Diags":[
+@	            {
+@	                "DiagKind": "sema_unused_import",
+@	                "Severity": "warning",
+@	                "WarnGroup": "unused",
+@	                "DiagCategory": "sema",
+@	                "Message": "unused import 'std.fs.*'",
+@	                "Location": {
+@	                    "File": "stdlib_reflect_0.cj",
+@	                    "Line": 15,
+@	                    "Column": 1
+@	                },
+@	                "MainHint": {
+@	                    "Content": "unused import",
+@	                    "Range": {
+@	                        "Begin": {
+@	                            "File": "stdlib_reflect_0.cj",
+@	                            "Line": 15,
+@	                            "Column": 1
+@	                        },
+@	                        "End": {
+@	                            "File": "stdlib_reflect_0.cj",
+@	                            "Line": 15,
+@	                            "Column": 16
+@	                        }
+@	                    }
+@	                },
+@	                "OtherHints": [],
+@	                "Notes": [
+@	                    {
+@	                        "Message": "this warning can be suppressed by setting the compiler option `-Woff unused`",
+@	                        "MainHint": null,
+@	                        "OtherHints": [],
+@	                        "Help": null
+@	                    }
+@	                ],
+@	                "Helps": []
+@	            },
+@	            {
+@	                "DiagKind": "sema_unused_import",
+@	                "Severity": "warning",
+@	                "WarnGroup": "unused",
+@	                "DiagCategory": "sema",
+@	                "Message": "unused import 'std.math.*'",
+@	                "Location": {
+@	                    "File": "stdlib_reflect_0.cj",
+@	                    "Line": 17,
+@	                    "Column": 1
+@	                },
+@	                "MainHint": {
+@	                    "Content": "unused import",
+@	                    "Range": {
+@	                        "Begin": {
+@	                            "File": "stdlib_reflect_0.cj",
+@	                            "Line": 17,
+@	                            "Column": 1
+@	                        },
+@	                        "End": {
+@	                            "File": "stdlib_reflect_0.cj",
+@	                            "Line": 17,
+@	                            "Column": 18
+@	                        }
+@	                    }
+@	                },
+@	                "OtherHints": [],
+@	                "Notes": [
+@	                    {
+@	                        "Message": "this warning can be suppressed by setting the compiler option `-Woff unused`",
+@	                        "MainHint": null,
+@	                        "OtherHints": [],
+@	                        "Help": null
+@	                    }
+@	                ],
+@	                "Helps": []
+@	            }
+@	    ],
+@	    "Num":{
+@	        "Errors": 0,
+@	        "PrintedErrors": 0,
+@	        "Warnings": 2,
+@	        "PrintedWarnings": 2
+@	    }
+@	}
+
+2026-01-08 09:32:15 DEBUG Run time: 1.8339 second, remain time: 598.17 second
+2026-01-08 09:32:15 DEBUG execute cmd ===>>>: set LD_LIBRARY_PATH=%chdir%:%LD_LIBRARY_PATH% && stdlib_reflect_0.exe --no-progress
+2026-01-08 09:32:16 DEBUG return code: 1
+2026-01-08 09:32:16 DEBUG stdout : 
++	--------------------------------------------------------------------------------------------------
++	TP: [33mdefault[0m, time elapsed: 1935100 ns, RESULT:
++	    TCS: [33mTestStdCoreReflection[0m, time elapsed: 748200 ns, RESULT:
++	    [[32m PASSED [0m] CASE: test00 (187800 ns)
++	    [[32m PASSED [0m] CASE: genericStructType (118100 ns)
++	    [[32m PASSED [0m] CASE: nonGenericStructType (18700 ns)
++	    [[32m PASSED [0m] CASE: interfaceType (31000 ns)
++	    TCS: [33mTestStdCoreReflectionUnqualified[0m, time elapsed: 172900 ns, RESULT:
++	    [[32m PASSED [0m] CASE: test00 (16700 ns)
++	    [[32m PASSED [0m] CASE: genericStructType (19600 ns)
++	    [[32m PASSED [0m] CASE: nonGenericStructType (18300 ns)
++	    [[32m PASSED [0m] CASE: interfaceType (14100 ns)
++	    TCS: [33mTestStdMiscReflection[0m, time elapsed: 979200 ns, RESULT:
++	    [[32m PASSED [0m] CASE: test00 (285800 ns)
++	    [[32m PASSED [0m] CASE: globalFunctionWithOverload (79100 ns)
++	    [[32m PASSED [0m] CASE: genericGlobalFunction (50700 ns)
++	    [[32m PASSED [0m] CASE: genericClassType (28300 ns)
++	    [[32m PASSED [0m] CASE: genericStructType (28300 ns)
++	    [[32m PASSED [0m] CASE: nonGenericStructType (17300 ns)
++	    [[32m PASSED [0m] CASE: interfaceType (13300 ns)
++	    [[31m FAILED [0m] CASE: nonGenericClassType (242100 ns)
++	    Expect Failed: [33mt.toString()[0m != [33m"xxx"[0m
++	        t.toString(): "[33mstd.fs.Directory[0m"
++	               "xxx": "[33mxxx[0m"
++	
++	Summary: TOTAL: 16
++	    [32mPASSED[0m: 15, [32mSKIPPED[0m: 0, ERROR: 0
++	    [31mFAILED[0m: 1, listed below:
++	            TCS: [33mTestStdMiscReflection[0m, CASE: nonGenericClassType
++	--------------------------------------------------------------------------------------------------
+
+2026-01-08 09:32:16 DEBUG stderr : 
+
+2026-01-08 09:32:16 DEBUG Run time: 0.58553 second, remain time: 597.58 second
+2026-01-08 09:32:16 ERROR Failed!
+2026-01-08 09:32:16 ERROR Command return code 1 not equals to expected return code 0

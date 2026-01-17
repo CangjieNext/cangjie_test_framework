@@ -1,0 +1,21 @@
+2026-01-05 11:14:47 DEBUG Log file at: E:\cangjie_test_suite\cangjie_test_framework\test_temp\log\alias_import_0_cj_b09498f7e9e411f094cf84a93e8bbbff.log
+2026-01-05 11:14:47 DEBUG Case Path: E:\cangjie_test_suite\cangjie_test\testsuites\HLT\compiler\cjnative\Packages\org_name\import_decl\alias_import_0.cj
+2026-01-05 11:14:47 DEBUG Work directory: E:\cangjie_test_suite\cangjie_test_framework\test_temp\run\alias_import_0_cj_b09498f7e9e411f094cf84a93e8bbbff
+2026-01-05 11:14:47 DEBUG execute cmd ===>>>: cjc --error-count-limit=all --diagnostic-format=json --output-type=dylib upstream_package.cj
+2026-01-05 11:14:47 DEBUG return code: 0
+2026-01-05 11:14:47 DEBUG stdout : 
+
+2026-01-05 11:14:47 DEBUG stderr : 
+
+2026-01-05 11:14:47 DEBUG Run time: 0.60016 second, remain time: 599.4 second
+2026-01-05 11:14:47 DEBUG execute cmd ===>>>: cjc --error-count-limit=all --diagnostic-format=json alias_import_0.cj -L. -lmy_pkg@my_org -o alias_import_0.exe
+2026-01-05 11:14:48 DEBUG return code: 1
+2026-01-05 11:14:48 DEBUG stdout : 
+
+2026-01-05 11:14:48 DEBUG stderr : 
+@	lld: error: unable to find library -lmy_pkg@my_org
+@	error: ""E:\\cangjie\\third_party\\llvm\\bin\\ld.lld.exe" "-o" "E:\\cangjie_test_suite\\cangjie_test_framework\\test_temp\\run\\alias_import_0_cj_b09498f7e9e411f094cf84a93e8bbbff\\alias_import_0.exe" "--nxcompat" "--dynamicbase" "--high-entropy-va" "-m" "i386pep" "-Bdynamic" "E:\\cangjie\\third_party\\mingw\\lib\\crt2.o" "E:\\cangjie\\third_party\\mingw\\lib\\crtbegin.o" "-LE:\\cangjie\\third_party\\mingw\\lib\\" "-LE:\\cangjie_test_suite\\cangjie_test_framework\\test_temp\\run\\alias_import_0_cj_b09498f7e9e411f094cf84a93e8bbbff" "-LE:\\cangjie\\lib\\windows_x86_64_cjnative" "-LE:\\cangjie\\runtime\\lib\\windows_x86_64_cjnative" "-L/lib" "-L/x86_64-w64-mingw32/lib" "-LE:\\cangjie\\third_party\\mingw\\lib\\" "E:\\cangjie\\lib\\windows_x86_64_cjnative\\section.o" "E:\\cangjie\\lib\\windows_x86_64_cjnative\\cjstart.o" "C:\\Users\\wuben\\AppData\\Local\\Temp\\cangjie-tmp-DFGBU8RJYQ5G-5a47b0ab\\alias_import_0.o" "-lmy_pkg@my_org" "--start-group" "-l:libcangjie-std-core.a" "--end-group" "-l:libcangjie-runtime.dll" "-lclang_rt-builtins" "-lboundscheck" "-lm" "-lmsvcrt" "-lmingw32" "-lmoldname" "-lmingwex" "-lmingw32" "-lmsvcrt" "-lpthread" "-ladvapi32" "-lshell32" "-luser32" "-lkernel32" "-lmingw32" "-lmoldname" "-lmingwex" "-lmsvcrt" "E:\\cangjie\\third_party\\mingw\\lib\\crtend.o" ": command failed (use -V to see invocation)
+
+2026-01-05 11:14:48 DEBUG Run time: 0.55863 second, remain time: 598.84 second
+2026-01-05 11:14:48 ERROR Failed!
+2026-01-05 11:14:48 ERROR Command return code 1 not equals to expected return code 0

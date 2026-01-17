@@ -1,0 +1,74 @@
+2025-12-13 11:12:52 DEBUG Log file at: E:\cangjie_test_suite\cangjie_test_framework\test_temp\log\test_info_9ca9f95ad7d111f0880684a93e8bbbff.log
+2025-12-13 11:12:52 DEBUG Case Path: E:\cangjie_test_suite\cangjie_test_1208\testsuites\HLT\compiler\cjnative\HLE\c\bit_field\test.info
+2025-12-13 11:12:52 DEBUG Work directory: E:\cangjie_test_suite\cangjie_test_framework\test_temp\run\test_info_9ca9f95ad7d111f0880684a93e8bbbff
+2025-12-13 11:12:52 DEBUG execute cmd ===>>>: %CANGJIE_HOME%/tools/bin/hle -c -b %CANGJIE_HOME%/tools/dtsparser/node_modules/.bin/cjbind --module-name="my_module" -i a.h -o . --clang-args=""
+2025-12-13 11:12:53 DEBUG return code: 0
+2025-12-13 11:12:53 DEBUG stdout : 
++	========Generate C to cangjie bindings Begins!========
++	The out dir is:./
++	The command is: E:\sdk\cangjie-sdk-windows-x64-1.0.0_1208\cangjie\/tools/dtsparser/node_modules/.bin/cjbind --auto-cstring --array-pointers-in-args --no-layout-test  -p my_module -o ./a.cj a.h -- 
++	========Generate C to cangjie bindings end!========
++	total cost of hle: 314ms828us
+
+2025-12-13 11:12:53 DEBUG stderr : 
+
+2025-12-13 11:12:53 DEBUG Run time: 0.39678 second, remain time: 599.6 second
+2025-12-13 11:12:53 DEBUG execute cmd ===>>>: type a.cj
+2025-12-13 11:12:53 DEBUG return code: 0
+2025-12-13 11:12:53 DEBUG stdout : 
++	// Copyright (c) Huawei Technologies Co., Ltd. 2025. All rights reserved.
++	// This source file is part of the Cangjie project, licensed under Apache-2.0
++	// with Runtime Library Exception.
++	//
++	// See https://cangjie-lang.cn/pages/LICENSE for license information.
++	
++	package my_module
++	
++	@C
++	public struct X {
++	    let _cjbind_opaque_blob: UInt32
++	
++	    public init() {
++	        this._cjbind_opaque_blob = unsafe { zeroValue<UInt32>() }
++	    }
++	}
+
+2025-12-13 11:12:53 DEBUG stderr : 
+
+2025-12-13 11:12:53 DEBUG Run time: 0.015582 second, remain time: 599.59 second
+2025-12-13 11:12:53 DEBUG execute cmd ===>>>: C:\Python314\python.exe E:\cangjie_test_suite\cangjie_test_framework\maple_test\compare.py --comment="//" --condition="'CJNATIVE', 'x86', 'Windows'" test.info
+2025-12-13 11:12:53 DEBUG return code: 0
+2025-12-13 11:12:53 DEBUG stdout : 
++	compare.py input:
++		// Copyright (c) Huawei Technologies Co., Ltd. 2025. All rights reserved.
++		// This source file is part of the Cangjie project, licensed under Apache-2.0
++		// with Runtime Library Exception.
++		//
++		// See https://cangjie-lang.cn/pages/LICENSE for license information.
++		
++		package my_module
++		
++		@C
++		public struct X {
++		    let _cjbind_opaque_blob: UInt32
++		
++		    public init() {
++		        this._cjbind_opaque_blob = unsafe { zeroValue<UInt32>() }
++		    }
++		}
++	
++	compare.py input end
++	
++	Starting SingleLine Compare:
++	b"It's a assert, flag: scan, pattern: let _cjbind_opaque_blob: UInt32 , result: True, matched at output line: 0 "
++	back reference dict:{}
++	SingleLine Compare End
++	b"It's a assert, flag: scan, pattern: this._cjbind_opaque_blob = unsafe { zeroValue<UInt32>() } , result: True, matched at output line: 11 "
++	back reference dict:{}
++	SingleLine Compare End
++	[Compare Pass]
+
+2025-12-13 11:12:53 DEBUG stderr : 
+
+2025-12-13 11:12:53 DEBUG Run time: 0.18001 second, remain time: 599.41 second
+2025-12-13 11:12:53 DEBUG Task executed successfully

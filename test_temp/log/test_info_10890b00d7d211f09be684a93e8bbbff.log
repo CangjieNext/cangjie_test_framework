@@ -1,0 +1,88 @@
+2025-12-13 11:16:07 DEBUG Log file at: E:\cangjie_test_suite\cangjie_test_framework\test_temp\log\test_info_10890b00d7d211f09be684a93e8bbbff.log
+2025-12-13 11:16:07 DEBUG Case Path: E:\cangjie_test_suite\cangjie_test_1208\testsuites\HLT\compiler\cjnative\HLE\c\flexible_array_member\test.info
+2025-12-13 11:16:07 DEBUG Work directory: E:\cangjie_test_suite\cangjie_test_framework\test_temp\run\test_info_10890b00d7d211f09be684a93e8bbbff
+2025-12-13 11:16:07 DEBUG execute cmd ===>>>: %CANGJIE_HOME%/tools/bin/hle -c -b %CANGJIE_HOME%/tools/dtsparser/node_modules/.bin/cjbind --module-name="my_module" -i a.h -o . --clang-args=""
+2025-12-13 11:16:07 DEBUG return code: 0
+2025-12-13 11:16:07 DEBUG stdout : 
++	========Generate C to cangjie bindings Begins!========
++	The out dir is:./
++	The command is: E:\sdk\cangjie-sdk-windows-x64-1.0.0_1208\cangjie\/tools/dtsparser/node_modules/.bin/cjbind --auto-cstring --array-pointers-in-args --no-layout-test  -p my_module -o ./a.cj a.h -- 
++	========Generate C to cangjie bindings end!========
++	total cost of hle: 334ms475us300ns
+
+2025-12-13 11:16:07 DEBUG stderr : 
+
+2025-12-13 11:16:07 DEBUG Run time: 0.41313 second, remain time: 599.59 second
+2025-12-13 11:16:07 DEBUG execute cmd ===>>>: type a.cj
+2025-12-13 11:16:07 DEBUG return code: 0
+2025-12-13 11:16:07 DEBUG stdout : 
++	// Copyright (c) Huawei Technologies Co., Ltd. 2025. All rights reserved.
++	// This source file is part of the Cangjie project, licensed under Apache-2.0
++	// with Runtime Library Exception.
++	//
++	// See https://cangjie-lang.cn/pages/LICENSE for license information.
++	
++	package my_module
++	
++	@C
++	public struct FlexibleString {
++	    public let length: Int32
++	    public let data: VArray<UInt8, $0>
++	
++	    public init(length: Int32, data: VArray<UInt8, $0>) {
++	        this.length = length
++	        this.data = data
++	    }
++	}
+
+2025-12-13 11:16:07 DEBUG stderr : 
+
+2025-12-13 11:16:07 DEBUG Run time: 0.020443 second, remain time: 599.57 second
+2025-12-13 11:16:07 DEBUG execute cmd ===>>>: C:\Python314\python.exe E:\cangjie_test_suite\cangjie_test_framework\maple_test\compare.py --comment="//" --condition="'Windows', 'x86', 'CJNATIVE'" test.info
+2025-12-13 11:16:07 DEBUG return code: 1
+2025-12-13 11:16:07 DEBUG stdout : 
++	compare.py input:
++		// Copyright (c) Huawei Technologies Co., Ltd. 2025. All rights reserved.
++		// This source file is part of the Cangjie project, licensed under Apache-2.0
++		// with Runtime Library Exception.
++		//
++		// See https://cangjie-lang.cn/pages/LICENSE for license information.
++		
++		package my_module
++		
++		@C
++		public struct FlexibleString {
++		    public let length: Int32
++		    public let data: VArray<UInt8, $0>
++		
++		    public init(length: Int32, data: VArray<UInt8, $0>) {
++		        this.length = length
++		        this.data = data
++		    }
++		}
++	
++	compare.py input end
++	
++	Starting SingleLine Compare:
++	b"It's a assert, flag: scan, pattern: public const Color_RED: Color = 0 , result: False, matched at output line: 0 "
++	back reference dict:{}
++	SingleLine Compare Failed
++	b"It's a assert, flag: scan, pattern: public const Color_GREEN: Color = 1 , result: False, matched at output line: 0 "
++	back reference dict:{}
++	SingleLine Compare Failed
++	b"It's a assert, flag: scan, pattern: public const Color_BLUE: Color = 5 , result: False, matched at output line: 0 "
++	back reference dict:{}
++	SingleLine Compare Failed
++	b"It's a assert, flag: scan, pattern: public const Color_YELLOW: Color = 6 , result: False, matched at output line: 0 "
++	back reference dict:{}
++	SingleLine Compare Failed
++	b"It's a assert, flag: scan, pattern: public type Color = UInt32 , result: False, matched at output line: 0 "
++	back reference dict:{}
++	SingleLine Compare Failed
++	[Compare Fail]
+
+2025-12-13 11:16:07 DEBUG stderr : 
+
+2025-12-13 11:16:07 DEBUG Run time: 0.18128 second, remain time: 599.39 second
+2025-12-13 11:16:07 ERROR Failed!
+2025-12-13 11:16:07 ERROR Command return code 1 not equals to expected return code 0

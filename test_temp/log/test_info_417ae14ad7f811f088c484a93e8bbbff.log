@@ -1,0 +1,99 @@
+2025-12-13 15:49:30 DEBUG Log file at: E:\cangjie_test_suite\cangjie_test_framework\test_temp\log\test_info_417ae14ad7f811f088c484a93e8bbbff.log
+2025-12-13 15:49:30 DEBUG Case Path: E:\cangjie_test_suite\cangjie_test_1208\testsuites\HLT\compiler\cjnative\HLE\c\typedef\test.info
+2025-12-13 15:49:30 DEBUG Work directory: E:\cangjie_test_suite\cangjie_test_framework\test_temp\run\test_info_417ae14ad7f811f088c484a93e8bbbff
+2025-12-13 15:49:30 DEBUG execute cmd ===>>>: %CANGJIE_HOME%/tools/bin/hle -c -b %CANGJIE_HOME%/tools/dtsparser/node_modules/.bin/cjbind.exe --module-name="my_module" -i a.h -o . --clang-args=""
+2025-12-13 15:49:30 DEBUG return code: 0
+2025-12-13 15:49:30 DEBUG stdout : 
++	========Generate C to cangjie bindings Begins!========
++	The out dir is:./
++	The command is: E:\sdk\cangjie-sdk-windows-x64-1.1.0-alpha.42_1213\cangjie\/tools/dtsparser/node_modules/.bin/cjbind.exe --auto-cstring --array-pointers-in-args --no-layout-test  -p my_module -o ./a.cj a.h -- 
++	========Generate C to cangjie bindings end!========
++	total cost of hle: 332ms902us600ns
+
+2025-12-13 15:49:30 DEBUG stderr : 
+
+2025-12-13 15:49:30 DEBUG Run time: 0.40564 second, remain time: 599.59 second
+2025-12-13 15:49:30 DEBUG execute cmd ===>>>: type a.cj
+2025-12-13 15:49:30 DEBUG return code: 0
+2025-12-13 15:49:30 DEBUG stdout : 
++	// Copyright (c) Huawei Technologies Co., Ltd. 2025. All rights reserved.
++	// This source file is part of the Cangjie project, licensed under Apache-2.0
++	// with Runtime Library Exception.
++	//
++	// See https://cangjie-lang.cn/pages/LICENSE for license information.
++	
++	package my_module
++	
++	public type Byte_ = UInt8
++	
++	/*FIXME: Non-constant global variable details need to be verified and rewritten by user.*/
++	/* Byte byte1 = 'a' */
++	
++	/*FIXME: Non-constant global variable details need to be verified and rewritten by user.*/
++	/* Byte byte1 = 'a' , byte2 = 'b' */
++	
++	public type byte = UInt8
++	
++	public type callback = CFunc<(arg1: Int32) -> Unit>
+
+2025-12-13 15:49:30 DEBUG stderr : 
+
+2025-12-13 15:49:30 DEBUG Run time: 0.015224 second, remain time: 599.58 second
+2025-12-13 15:49:30 DEBUG execute cmd ===>>>: C:\Python314\python.exe E:\cangjie_test_suite\cangjie_test_framework\maple_test\compare.py --comment="//" --condition="'x86', 'CJNATIVE', 'Windows'" test.info
+2025-12-13 15:49:30 DEBUG return code: 1
+2025-12-13 15:49:30 DEBUG stdout : 
++	compare.py input:
++		// Copyright (c) Huawei Technologies Co., Ltd. 2025. All rights reserved.
++		// This source file is part of the Cangjie project, licensed under Apache-2.0
++		// with Runtime Library Exception.
++		//
++		// See https://cangjie-lang.cn/pages/LICENSE for license information.
++		
++		package my_module
++		
++		public type Byte_ = UInt8
++		
++		/*FIXME: Non-constant global variable details need to be verified and rewritten by user.*/
++		/* Byte byte1 = 'a' */
++		
++		/*FIXME: Non-constant global variable details need to be verified and rewritten by user.*/
++		/* Byte byte1 = 'a' , byte2 = 'b' */
++		
++		public type byte = UInt8
++		
++		public type callback = CFunc<(arg1: Int32) -> Unit>
++	
++	compare.py input end
++	
++	Starting SingleLine Compare:
++	b"It's a assert, flag: scan, pattern: xxxx , result: False, matched at output line: 0 "
++	back reference dict:{}
++	SingleLine Compare Failed
++	b"It's a assert, flag: scan, pattern: xxxx , result: False, matched at output line: 0 "
++	back reference dict:{}
++	SingleLine Compare Failed
++	b"It's a assert, flag: scan, pattern: xxxx , result: False, matched at output line: 0 "
++	back reference dict:{}
++	SingleLine Compare Failed
++	b"It's a assert, flag: scan, pattern: xxxx , result: False, matched at output line: 0 "
++	back reference dict:{}
++	SingleLine Compare Failed
++	b"It's a assert, flag: scan, pattern: xxxx , result: False, matched at output line: 0 "
++	back reference dict:{}
++	SingleLine Compare Failed
++	b"It's a assert, flag: scan, pattern: xxxx , result: False, matched at output line: 0 "
++	back reference dict:{}
++	SingleLine Compare Failed
++	b"It's a assert, flag: scan, pattern: xxxx , result: False, matched at output line: 0 "
++	back reference dict:{}
++	SingleLine Compare Failed
++	b"It's a assert, flag: scan, pattern: xxxx , result: False, matched at output line: 0 "
++	back reference dict:{}
++	SingleLine Compare Failed
++	[Compare Fail]
+
+2025-12-13 15:49:30 DEBUG stderr : 
+
+2025-12-13 15:49:30 DEBUG Run time: 0.17472 second, remain time: 599.4 second
+2025-12-13 15:49:30 ERROR Failed!
+2025-12-13 15:49:30 ERROR Command return code 1 not equals to expected return code 0

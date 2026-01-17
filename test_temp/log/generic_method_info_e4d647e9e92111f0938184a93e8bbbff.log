@@ -1,0 +1,15 @@
+2026-01-04 12:00:23 DEBUG Log file at: E:\cangjie_test_suite\cangjie_test_framework\test_temp\log\generic_method_info_e4d647e9e92111f0938184a93e8bbbff.log
+2026-01-04 12:00:23 DEBUG Case Path: E:\cangjie_test_suite\cangjie_test\testsuites\HLT\compiler\cjnative\HLE\arkts\class\generic_method.info
+2026-01-04 12:00:23 DEBUG Work directory: E:\cangjie_test_suite\cangjie_test_framework\test_temp\run\generic_method_info_e4d647e9e92111f0938184a93e8bbbff
+2026-01-04 12:00:24 DEBUG execute cmd ===>>>: set LD_LIBRARY_PATH=%chdir%:%LD_LIBRARY_PATH% && %hle_arkts -i generic_method.d.ts -o . --module-name="my_module"
+2026-01-04 12:00:24 DEBUG Can not decode stderr with utf-8, ignore error!
+2026-01-04 12:00:24 DEBUG return code: 1
+2026-01-04 12:00:24 DEBUG stdout : 
+
+2026-01-04 12:00:24 DEBUG stderr : 
+@	'%hle_arkts' ڲⲿҲǿеĳ
+@	ļ
+
+2026-01-04 12:00:24 DEBUG Run time: 0.025029 second, remain time: 599.97 second
+2026-01-04 12:00:24 ERROR Failed!
+2026-01-04 12:00:24 ERROR Command return code 1 not equals to expected return code 0

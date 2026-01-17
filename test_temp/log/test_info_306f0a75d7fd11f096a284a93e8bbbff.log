@@ -1,0 +1,33 @@
+2025-12-13 16:24:49 DEBUG Log file at: E:\cangjie_test_suite\cangjie_test_framework\test_temp\log\test_info_306f0a75d7fd11f096a284a93e8bbbff.log
+2025-12-13 16:24:49 DEBUG Case Path: E:\cangjie_test_suite\cangjie_test_1208\testsuites\HLT\compiler\cjnative\HLE\c\multi_include_path\test.info
+2025-12-13 16:24:49 DEBUG Work directory: E:\cangjie_test_suite\cangjie_test_framework\test_temp\run\test_info_306f0a75d7fd11f096a284a93e8bbbff
+2025-12-13 16:24:49 DEBUG execute cmd ===>>>: %CANGJIE_HOME%/tools/bin/hle -c -b %CANGJIE_HOME%/tools/dtsparser/node_modules/.bin/cjbind.exe --module-name="my_module" -i a.h -o . --clang-args="-Ib"
+2025-12-13 16:24:49 DEBUG return code: 0
+2025-12-13 16:24:49 DEBUG stdout : 
++	========Generate C to cangjie bindings Begins!========
++	The out dir is:./
++	The command is: E:\sdk\cangjie-sdk-windows-x64-1.1.0-alpha.42_1213\cangjie\/tools/dtsparser/node_modules/.bin/cjbind.exe --auto-cstring --array-pointers-in-args --no-layout-test  -p my_module -o ./a.cj a.h -- -Ib
++	Error: cjbind generate failed, return code is 1.
++	========Generate C to cangjie bindings end!========
++	total cost of hle: 124ms330us300ns
+
+2025-12-13 16:24:49 DEBUG stderr : 
+@	a.h:7:10: fatal error: 'b.h' file not found
+@	An exception has occurred:
+@	Exception: a.h:7:10: fatal error: 'b.h' file not found
+@	
+@		 at cjbind.parse(cjbind.ir::CjbindContext)(D:\wanggang_cangjie\cjbind\src\lib.cj:42)
+@		 at cjbind.generate(cjbind.options::CjbindOptions)(D:\wanggang_cangjie\cjbind\src\lib.cj:110)
+@		 at cjbind.main()(D:\wanggang_cangjie\cjbind\src\main.cj:15)
+
+2025-12-13 16:24:49 DEBUG Run time: 0.19946 second, remain time: 599.8 second
+2025-12-13 16:24:49 DEBUG execute cmd ===>>>: type a.cj
+2025-12-13 16:24:49 DEBUG return code: 1
+2025-12-13 16:24:49 DEBUG stdout : 
+
+2025-12-13 16:24:49 DEBUG stderr : 
+@	The system cannot find the file specified.
+
+2025-12-13 16:24:49 DEBUG Run time: 0.017498 second, remain time: 599.78 second
+2025-12-13 16:24:49 ERROR Failed!
+2025-12-13 16:24:49 ERROR Command return code 1 not equals to expected return code 0

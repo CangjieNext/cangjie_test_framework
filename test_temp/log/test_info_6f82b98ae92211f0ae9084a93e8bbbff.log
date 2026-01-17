@@ -1,0 +1,45 @@
+2026-01-04 12:04:15 DEBUG Log file at: E:\cangjie_test_suite\cangjie_test_framework\test_temp\log\test_info_6f82b98ae92211f0ae9084a93e8bbbff.log
+2026-01-04 12:04:15 DEBUG Case Path: E:\cangjie_test_suite\cangjie_test\testsuites\HLT\compiler\cjnative\HLE\arkts\class\test.info
+2026-01-04 12:04:15 DEBUG Work directory: E:\cangjie_test_suite\cangjie_test_framework\test_temp\run\test_info_6f82b98ae92211f0ae9084a93e8bbbff
+2026-01-04 12:04:15 DEBUG execute cmd ===>>>: set LD_LIBRARY_PATH=%chdir%:%LD_LIBRARY_PATH% && %CANGJIE_HOME%/tools/bin/hle -r %CANGJIE_HOME%/tools/dtsparser/node_modules/typescript -j %CANGJIE_HOME%/tools/dtsparser/analysis.js -i a.d.ts -o . --module-name="my_module"
+2026-01-04 12:04:16 DEBUG return code: 1
+2026-01-04 12:04:16 DEBUG stdout : 
++	========Analyzing a.d.ts Begins!========
++	Warning: ./json/arkts/a.json generation failed! a.d.ts is skipped.
++	
+
+2026-01-04 12:04:16 DEBUG stderr : 
+@	node:internal/modules/cjs/loader:1423
+@	  throw err;
+@	  ^
+@	
+@	Error: Cannot find module 'E:\cangjie\tools\dtsparser\node_modules\typescript'
+@	Require stack:
+@	- E:\cangjie\tools\dtsparser\analysis.js
+@	    at Module._resolveFilename (node:internal/modules/cjs/loader:1420:15)
+@	    at defaultResolveImpl (node:internal/modules/cjs/loader:1058:19)
+@	    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1063:22)
+@	    at Module._load (node:internal/modules/cjs/loader:1226:37)
+@	    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+@	    at wrapModuleLoad (node:internal/modules/cjs/loader:244:24)
+@	    at Module.require (node:internal/modules/cjs/loader:1503:12)
+@	    at require (node:internal/modules/helpers:152:16)
+@	    at Object.<anonymous> (E:\cangjie\tools\dtsparser\analysis.js:9:12)
+@	    at Module._compile (node:internal/modules/cjs/loader:1760:14) {
+@	  code: 'MODULE_NOT_FOUND',
+@	  requireStack: [ 'E:\\cangjie\\tools\\dtsparser\\analysis.js' ]
+@	}
+@	
+@	Node.js v24.11.0
+@	An exception has occurred:
+@	FSException: Failed to recursive create directory: "No such file or directory".
+@		 at std.io.IOException::init(std.core::String)(std/io\io_exception.cj:19)
+@		 at std.fs.callNativeFunc(std.core::String, (CString) -> CPointer<...>, std.core::String)(std/fs\utils.cj:382)
+@		 at std.fs.Directory::create(std.core::String, Bool)(std/fs\directory.cj:31)
+@		 at hle.entry.A2CJ::transfer()(/devcloud/slavespace/usr1/4ee0f10fd9b24192af5e394290bb462a/cangjie/cangjie_tools/hyperlangExtension/src/entry\hle.cj:45)
+@		 at hle.parseOneFiles(std.core::String)(/devcloud/slavespace/usr1/4ee0f10fd9b24192af5e394290bb462a/cangjie/cangjie_tools/hyperlangExtension/src\main.cj:272)
+@		 at hle.main(std.core::Array<...>)(/devcloud/slavespace/usr1/4ee0f10fd9b24192af5e394290bb462a/cangjie/cangjie_tools/hyperlangExtension/src\main.cj:151)
+
+2026-01-04 12:04:16 DEBUG Run time: 0.4742 second, remain time: 599.53 second
+2026-01-04 12:04:16 ERROR Failed!
+2026-01-04 12:04:16 ERROR Command return code 1 not equals to expected return code 0

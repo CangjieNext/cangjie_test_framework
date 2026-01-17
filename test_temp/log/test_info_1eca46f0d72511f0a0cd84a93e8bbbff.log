@@ -1,0 +1,539 @@
+2025-12-12 14:38:08 DEBUG Log file at: E:\cangjie_test_suite\cangjie_test_framework\test_temp\log\test_info_1eca46f0d72511f0a0cd84a93e8bbbff.log
+2025-12-12 14:38:08 DEBUG Case Path: E:\cangjie_test_suite\cangjie_test_1208\testsuites\HLT\compiler\cjnative\HLE\arkts_src\class\test.info
+2025-12-12 14:38:08 DEBUG Work directory: E:\cangjie_test_suite\cangjie_test_framework\test_temp\run\test_info_1eca46f0d72511f0a0cd84a93e8bbbff
+2025-12-12 14:38:08 DEBUG execute cmd ===>>>: %CANGJIE_HOME%/tools/bin/hle -r %CANGJIE_HOME%/tools/dtsparser/node_modules/typescript -j %CANGJIE_HOME%/tools/dtsparser/analysis.js -i a.d.ts -o . --module-name="my_module"
+2025-12-12 14:38:08 DEBUG return code: 0
+2025-12-12 14:38:08 DEBUG stdout : 
++	a.d.ts is analyzed completely, json file saved!
++	========Analyzing a.d.ts Begins!========
++	module: a.d.ts
++	output: ./cj
++	
++	WARNING: type is not supported - undefined
++	WARNING: type is not supported - undefined
++	WARNING: type is not supported - undefined
++	WARNING: type is not supported - undefined
++	WARNING: type is not supported - undefined
++	WARNING: type is not supported - undefined
++	WARNING: type is not supported - undefined
++	WARNING: type is not supported - undefined
++	WARNING: type is not supported - undefined
++	WARNING: type is not supported - undefined
++	total cost of hle: 531ms167us600ns
+
+2025-12-12 14:38:08 DEBUG stderr : 
+
+2025-12-12 14:38:08 DEBUG Run time: 0.62318 second, remain time: 599.38 second
+2025-12-12 14:38:08 DEBUG execute cmd ===>>>: type cj\a\src\a.cj
+2025-12-12 14:38:08 DEBUG return code: 0
+2025-12-12 14:38:08 DEBUG stdout : 
++	// Copyright (c) Huawei Technologies Co., Ltd. 2025. All rights reserved.
++	// This source file is part of the Cangjie project, licensed under Apache-2.0
++	// with Runtime Library Exception.
++	//
++	// See https://cangjie-lang.cn/pages/LICENSE for license information.
++	
++	package my_module
++	
++	import tpc.*
++	import ohos.ark_interop.*
++	import ohos.ark_interop_helper.*
++	import ohos.base.*
++	
++	public enum AutoGenType5 {
++	    | AUTOGENTYPE3(AutoGenType3)
++	    | AUTOGENTYPE4(AutoGenType4)
++	    
++	    public func toJSValue(context: JSContext): JSValue {
++	        match(this) {
++	            case AUTOGENTYPE3(x) => x.toJSValue(context)
++	            case AUTOGENTYPE4(x) => x.toJSValue(context)
++	        }
++	    }
++	    public static func fromJSValue(context: JSContext, input: JSValue): AutoGenType5 {
++	        
++	        throw Exception("unsupport type!")
++	    }
++	}
++	
++	
++	/*interface AutoGenType0 {
++	    n: number;
++	    }*/
++	
++	public open class AutoGenType0 {
++	    
++	    protected AutoGenType0(public var n: Float64) { }
++	    
++	    
++	    public open func toJSValue(context: JSContext): JSValue {
++	        let obj = context.object()
++	        obj["n"] = n.toJSValue(context)
++	        obj.toJSValue()
++	    }
++	    
++	    public static func fromJSValue(context: JSContext, input: JSValue): AutoGenType0 {
++	        let obj = input.asObject()
++	        AutoGenType0(
++	        Float64.fromJSValue(context, obj["n"])
++	        )
++	    }
++	    
++	}
++	
++	/*interface AutoGenType1 {
++	    n: number;
++	    }*/
++	
++	public open class AutoGenType1 {
++	    
++	    protected AutoGenType1(public var n: Float64) { }
++	    
++	    
++	    public open func toJSValue(context: JSContext): JSValue {
++	        let obj = context.object()
++	        obj["n"] = n.toJSValue(context)
++	        obj.toJSValue()
++	    }
++	    
++	    public static func fromJSValue(context: JSContext, input: JSValue): AutoGenType1 {
++	        let obj = input.asObject()
++	        AutoGenType1(
++	        Float64.fromJSValue(context, obj["n"])
++	        )
++	    }
++	    
++	}
++	
++	/*interface AutoGenType2 {
++	    msg: string;
++	    }*/
++	
++	public open class AutoGenType2 {
++	    
++	    protected AutoGenType2(public var msg: String) { }
++	    
++	    
++	    public open func toJSValue(context: JSContext): JSValue {
++	        let obj = context.object()
++	        obj["msg"] = msg.toJSValue(context)
++	        obj.toJSValue()
++	    }
++	    
++	    public static func fromJSValue(context: JSContext, input: JSValue): AutoGenType2 {
++	        let obj = input.asObject()
++	        AutoGenType2(
++	        String.fromJSValue(context, obj["msg"])
++	        )
++	    }
++	    
++	}
++	
++	/*interface AutoGenType3 {
++	    msg: string;
++	    data: string;
++	    code?: undefined;
++	    }*/
++	
++	public open class AutoGenType3 {
++	    
++	    protected AutoGenType3(public var msg: String,
++	    public var data: String,
++	    public var code!: Option<JSValue/* FIXME: `undefined` */> = None) { }
++	    
++	    
++	    public open func toJSValue(context: JSContext): JSValue {
++	        let obj = context.object()
++	        obj["msg"] = msg.toJSValue(context)
++	        obj["data"] = data.toJSValue(context)
++	        if(let Some(v) <- code) {
++	            obj["code"] = v
++	        }
++	        obj.toJSValue()
++	    }
++	    
++	    public static func fromJSValue(context: JSContext, input: JSValue): AutoGenType3 {
++	        let obj = input.asObject()
++	        AutoGenType3(
++	        String.fromJSValue(context, obj["msg"]),
++	        String.fromJSValue(context, obj["data"]),
++	        code: obj["code"]
++	        )
++	    }
++	    
++	}
++	
++	/*interface AutoGenType4 {
++	    code: number;
++	    msg: string;
++	    data?: undefined;
++	    }*/
++	
++	public open class AutoGenType4 {
++	    
++	    protected AutoGenType4(public var code: Float64,
++	    public var msg: String,
++	    public var data!: Option<JSValue/* FIXME: `undefined` */> = None) { }
++	    
++	    
++	    public open func toJSValue(context: JSContext): JSValue {
++	        let obj = context.object()
++	        obj["code"] = code.toJSValue(context)
++	        obj["msg"] = msg.toJSValue(context)
++	        if(let Some(v) <- data) {
++	            obj["data"] = v
++	        }
++	        obj.toJSValue()
++	    }
++	    
++	    public static func fromJSValue(context: JSContext, input: JSValue): AutoGenType4 {
++	        let obj = input.asObject()
++	        AutoGenType4(
++	        Float64.fromJSValue(context, obj["code"]),
++	        String.fromJSValue(context, obj["msg"]),
++	        data: obj["data"]
++	        )
++	    }
++	    
++	}
++	
++	/*class ExportKeyword DeclareKeyword AnonymousClass {
++	    f1(p: {n: number}): {n: number}
++	    f2(n: number): Promise<String>
++	    f3(n: number): Promise<{
++	        msg: String;
++	    }>
++	    f4(): Promise<{
++	        msg: String;
++	        data: String;
++	        code?: undefined;
++	    } | {
++	        code: number;
++	        msg: String;
++	        data?: undefined;
++	    }>
++	    }*/
++	
++	public class AnonymousClass {
++	    
++	    protected AnonymousClass(var arkts_object: JSObject) { }
++	    
++	    
++	    /**
++		 * @brief f1(p: {n: number}): {n: number}
++		 */
++	    public func f1(p: AutoGenType0): AutoGenType1 {
++	        jsObjApiCall < AutoGenType1 >( arkts_object, "f1", { ctx =>[p.toJSValue(ctx)] }) {
++	            ctx, info => AutoGenType1.fromJSValue(ctx, info)
++	        }
++	    }
++	    /**
++		 * @brief f2(n: number): Promise<String>
++		 */
++	    public func f2(callback: AsyncCallback < JSValue/* FIXME: `Promise<string>` */ >, n: Float64): Unit {
++	        jsObjApiCallPromise < JSValue/* FIXME: `Promise<string>` */ >( arkts_object, "f2", callback, { ctx =>[n.toJSValue(ctx)] }) {
++	            ctx, info => info
++	        }
++	    }
++	    /**
++		 * @brief f3(n: number): Promise<{
++	        msg: String;
++	    }>
++		 */
++	    public func f3(callback: AsyncCallback < JSValue/* FIXME: `Promise<AutoGenType2>` */ >, n: Float64): Unit {
++	        jsObjApiCallPromise < JSValue/* FIXME: `Promise<AutoGenType2>` */ >( arkts_object, "f3", callback, { ctx =>[n.toJSValue(ctx)] }) {
++	            ctx, info => info
++	        }
++	    }
++	    /**
++		 * @brief f4(): Promise<{
++	        msg: String;
++	        data: String;
++	        code?: undefined;
++	    } | {
++	        code: number;
++	        msg: String;
++	        data?: undefined;
++	    }>
++		 */
++	    public func f4(callback: AsyncCallback < JSValue/* FIXME: `Promise<AutoGenType5>` */ >): Unit {
++	        jsObjApiCallPromise < JSValue/* FIXME: `Promise<AutoGenType5>` */ >( arkts_object, "f4", callback, emptyArg) {
++	            ctx, info => info
++	        }
++	    }
++	    
++	    func toJSValue(context: JSContext): JSValue {
++	        arkts_object.toJSValue()
++	    }
++	    
++	     static func fromJSValue(context: JSContext, input: JSValue): AnonymousClass {
++	        AnonymousClass(input.asObject())
++	    }
++	}
++	
+
+2025-12-12 14:38:08 DEBUG stderr : 
+
+2025-12-12 14:38:08 DEBUG Run time: 0.013512 second, remain time: 599.36 second
+2025-12-12 14:38:08 DEBUG execute cmd ===>>>: C:\Python314\python.exe E:\cangjie_test_suite\cangjie_test_framework\maple_test\compare.py --comment="//" --condition="'CJNATIVE', 'Windows', 'x86'" test.info
+2025-12-12 14:38:09 DEBUG return code: 1
+2025-12-12 14:38:09 DEBUG stdout : 
++	compare.py input:
++		// Copyright (c) Huawei Technologies Co., Ltd. 2025. All rights reserved.
++		// This source file is part of the Cangjie project, licensed under Apache-2.0
++		// with Runtime Library Exception.
++		//
++		// See https://cangjie-lang.cn/pages/LICENSE for license information.
++		
++		package my_module
++		
++		import tpc.*
++		import ohos.ark_interop.*
++		import ohos.ark_interop_helper.*
++		import ohos.base.*
++		
++		public enum AutoGenType5 {
++		    | AUTOGENTYPE3(AutoGenType3)
++		    | AUTOGENTYPE4(AutoGenType4)
++		    
++		    public func toJSValue(context: JSContext): JSValue {
++		        match(this) {
++		            case AUTOGENTYPE3(x) => x.toJSValue(context)
++		            case AUTOGENTYPE4(x) => x.toJSValue(context)
++		        }
++		    }
++		    public static func fromJSValue(context: JSContext, input: JSValue): AutoGenType5 {
++		        
++		        throw Exception("unsupport type!")
++		    }
++		}
++		
++		
++		/*interface AutoGenType0 {
++		    n: number;
++		    }*/
++		
++		public open class AutoGenType0 {
++		    
++		    protected AutoGenType0(public var n: Float64) { }
++		    
++		    
++		    public open func toJSValue(context: JSContext): JSValue {
++		        let obj = context.object()
++		        obj["n"] = n.toJSValue(context)
++		        obj.toJSValue()
++		    }
++		    
++		    public static func fromJSValue(context: JSContext, input: JSValue): AutoGenType0 {
++		        let obj = input.asObject()
++		        AutoGenType0(
++		        Float64.fromJSValue(context, obj["n"])
++		        )
++		    }
++		    
++		}
++		
++		/*interface AutoGenType1 {
++		    n: number;
++		    }*/
++		
++		public open class AutoGenType1 {
++		    
++		    protected AutoGenType1(public var n: Float64) { }
++		    
++		    
++		    public open func toJSValue(context: JSContext): JSValue {
++		        let obj = context.object()
++		        obj["n"] = n.toJSValue(context)
++		        obj.toJSValue()
++		    }
++		    
++		    public static func fromJSValue(context: JSContext, input: JSValue): AutoGenType1 {
++		        let obj = input.asObject()
++		        AutoGenType1(
++		        Float64.fromJSValue(context, obj["n"])
++		        )
++		    }
++		    
++		}
++		
++		/*interface AutoGenType2 {
++		    msg: string;
++		    }*/
++		
++		public open class AutoGenType2 {
++		    
++		    protected AutoGenType2(public var msg: String) { }
++		    
++		    
++		    public open func toJSValue(context: JSContext): JSValue {
++		        let obj = context.object()
++		        obj["msg"] = msg.toJSValue(context)
++		        obj.toJSValue()
++		    }
++		    
++		    public static func fromJSValue(context: JSContext, input: JSValue): AutoGenType2 {
++		        let obj = input.asObject()
++		        AutoGenType2(
++		        String.fromJSValue(context, obj["msg"])
++		        )
++		    }
++		    
++		}
++		
++		/*interface AutoGenType3 {
++		    msg: string;
++		    data: string;
++		    code?: undefined;
++		    }*/
++		
++		public open class AutoGenType3 {
++		    
++		    protected AutoGenType3(public var msg: String,
++		    public var data: String,
++		    public var code!: Option<JSValue/* FIXME: `undefined` */> = None) { }
++		    
++		    
++		    public open func toJSValue(context: JSContext): JSValue {
++		        let obj = context.object()
++		        obj["msg"] = msg.toJSValue(context)
++		        obj["data"] = data.toJSValue(context)
++		        if(let Some(v) <- code) {
++		            obj["code"] = v
++		        }
++		        obj.toJSValue()
++		    }
++		    
++		    public static func fromJSValue(context: JSContext, input: JSValue): AutoGenType3 {
++		        let obj = input.asObject()
++		        AutoGenType3(
++		        String.fromJSValue(context, obj["msg"]),
++		        String.fromJSValue(context, obj["data"]),
++		        code: obj["code"]
++		        )
++		    }
++		    
++		}
++		
++		/*interface AutoGenType4 {
++		    code: number;
++		    msg: string;
++		    data?: undefined;
++		    }*/
++		
++		public open class AutoGenType4 {
++		    
++		    protected AutoGenType4(public var code: Float64,
++		    public var msg: String,
++		    public var data!: Option<JSValue/* FIXME: `undefined` */> = None) { }
++		    
++		    
++		    public open func toJSValue(context: JSContext): JSValue {
++		        let obj = context.object()
++		        obj["code"] = code.toJSValue(context)
++		        obj["msg"] = msg.toJSValue(context)
++		        if(let Some(v) <- data) {
++		            obj["data"] = v
++		        }
++		        obj.toJSValue()
++		    }
++		    
++		    public static func fromJSValue(context: JSContext, input: JSValue): AutoGenType4 {
++		        let obj = input.asObject()
++		        AutoGenType4(
++		        Float64.fromJSValue(context, obj["code"]),
++		        String.fromJSValue(context, obj["msg"]),
++		        data: obj["data"]
++		        )
++		    }
++		    
++		}
++		
++		/*class ExportKeyword DeclareKeyword AnonymousClass {
++		    f1(p: {n: number}): {n: number}
++		    f2(n: number): Promise<String>
++		    f3(n: number): Promise<{
++		        msg: String;
++		    }>
++		    f4(): Promise<{
++		        msg: String;
++		        data: String;
++		        code?: undefined;
++		    } | {
++		        code: number;
++		        msg: String;
++		        data?: undefined;
++		    }>
++		    }*/
++		
++		public class AnonymousClass {
++		    
++		    protected AnonymousClass(var arkts_object: JSObject) { }
++		    
++		    
++		    /**
++			 * @brief f1(p: {n: number}): {n: number}
++			 */
++		    public func f1(p: AutoGenType0): AutoGenType1 {
++		        jsObjApiCall < AutoGenType1 >( arkts_object, "f1", { ctx =>[p.toJSValue(ctx)] }) {
++		            ctx, info => AutoGenType1.fromJSValue(ctx, info)
++		        }
++		    }
++		    /**
++			 * @brief f2(n: number): Promise<String>
++			 */
++		    public func f2(callback: AsyncCallback < JSValue/* FIXME: `Promise<string>` */ >, n: Float64): Unit {
++		        jsObjApiCallPromise < JSValue/* FIXME: `Promise<string>` */ >( arkts_object, "f2", callback, { ctx =>[n.toJSValue(ctx)] }) {
++		            ctx, info => info
++		        }
++		    }
++		    /**
++			 * @brief f3(n: number): Promise<{
++		        msg: String;
++		    }>
++			 */
++		    public func f3(callback: AsyncCallback < JSValue/* FIXME: `Promise<AutoGenType2>` */ >, n: Float64): Unit {
++		        jsObjApiCallPromise < JSValue/* FIXME: `Promise<AutoGenType2>` */ >( arkts_object, "f3", callback, { ctx =>[n.toJSValue(ctx)] }) {
++		            ctx, info => info
++		        }
++		    }
++		    /**
++			 * @brief f4(): Promise<{
++		        msg: String;
++		        data: String;
++		        code?: undefined;
++		    } | {
++		        code: number;
++		        msg: String;
++		        data?: undefined;
++		    }>
++			 */
++		    public func f4(callback: AsyncCallback < JSValue/* FIXME: `Promise<AutoGenType5>` */ >): Unit {
++		        jsObjApiCallPromise < JSValue/* FIXME: `Promise<AutoGenType5>` */ >( arkts_object, "f4", callback, emptyArg) {
++		            ctx, info => info
++		        }
++		    }
++		    
++		    func toJSValue(context: JSContext): JSValue {
++		        arkts_object.toJSValue()
++		    }
++		    
++		     static func fromJSValue(context: JSContext, input: JSValue): AnonymousClass {
++		        AnonymousClass(input.asObject())
++		    }
++		}
++		
++	
++	compare.py input end
++	
++	Starting SingleLine Compare:
++	b"It's a assert, flag: scan, pattern: xxxx , result: False, matched at output line: 0 "
++	back reference dict:{}
++	SingleLine Compare Failed
++	[Compare Fail]
+
+2025-12-12 14:38:09 DEBUG stderr : 
+
+2025-12-12 14:38:09 DEBUG Run time: 0.17782 second, remain time: 599.19 second
+2025-12-12 14:38:09 ERROR Failed!
+2025-12-12 14:38:09 ERROR Command return code 1 not equals to expected return code 0

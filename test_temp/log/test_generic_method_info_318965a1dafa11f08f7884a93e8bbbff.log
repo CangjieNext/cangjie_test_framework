@@ -1,0 +1,17 @@
+2025-12-17 11:40:56 DEBUG Log file at: E:\cangjie_test_suite\cangjie_test_framework\test_temp\log\test_generic_method_info_318965a1dafa11f08f7884a93e8bbbff.log
+2025-12-17 11:40:56 DEBUG Case Path: E:\cangjie_test_suite\cangjie_test\testsuites\HLT\compiler\cjnative\HLE\arkts\class\test_generic_method.info
+2025-12-17 11:40:56 DEBUG Work directory: E:\cangjie_test_suite\cangjie_test_framework\test_temp\run\test_generic_method_info_318965a1dafa11f08f7884a93e8bbbff
+2025-12-17 11:40:56 DEBUG execute cmd ===>>>: %CANGJIE_HOME%/tools/bin/hle -r %CANGJIE_HOME%/tools/dtsparser/node_modules/typescript -j %CANGJIE_HOME%/tools/dtsparser/analysis.js -i generic_method.d.ts -o . --module-name="my_module"
+2025-12-17 11:40:56 DEBUG return code: 1
+2025-12-17 11:40:56 DEBUG stdout : 
+
+2025-12-17 11:40:56 DEBUG stderr : 
+@	An exception has occurred:
+@	IllegalArgumentException: Invalid arkts input: generic_method.d.ts
+@		 at hle.parseFile(std.core::String, std.core::String, std.core::String, hle.tool::GlobalConfig, std.core::String, std.core::Option<...>, std.core::String, std.core::String)(/devcloud/slavespace/usr1/4ee0f10fd9b24192af5e394290bb462a/cangjie/cangjie_tools/hyperlangExtension/src\main.cj:357)
+@		 at hle.parseOneFiles(std.core::String)(/devcloud/slavespace/usr1/4ee0f10fd9b24192af5e394290bb462a/cangjie/cangjie_tools/hyperlangExtension/src\main.cj:292)
+@		 at hle.main(std.core::Array<...>)(/devcloud/slavespace/usr1/4ee0f10fd9b24192af5e394290bb462a/cangjie/cangjie_tools/hyperlangExtension/src\main.cj:159)
+
+2025-12-17 11:40:56 DEBUG Run time: 0.11842 second, remain time: 179.88 second
+2025-12-17 11:40:56 ERROR Failed!
+2025-12-17 11:40:56 ERROR Command return code 1 not equals to expected return code 0

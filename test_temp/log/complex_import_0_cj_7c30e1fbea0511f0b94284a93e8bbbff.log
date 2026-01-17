@@ -1,0 +1,50 @@
+2026-01-05 15:09:34 DEBUG Log file at: E:\cangjie_test_suite\cangjie_test_framework\test_temp\log\complex_import_0_cj_7c30e1fbea0511f0b94284a93e8bbbff.log
+2026-01-05 15:09:34 DEBUG Case Path: E:\cangjie_test_suite\cangjie_test\testsuites\HLT\compiler\cjnative\Packages\org_name\import_decl\complex_import_0.cj
+2026-01-05 15:09:34 DEBUG Work directory: E:\cangjie_test_suite\cangjie_test_framework\test_temp\run\complex_import_0_cj_7c30e1fbea0511f0b94284a93e8bbbff
+2026-01-05 15:09:34 DEBUG execute cmd ===>>>: cjc --error-count-limit=all --diagnostic-format=json --output-type=dylib root_pkg.cj
+2026-01-05 15:09:35 DEBUG return code: 0
+2026-01-05 15:09:35 DEBUG stdout : 
+
+2026-01-05 15:09:35 DEBUG stderr : 
+
+2026-01-05 15:09:35 DEBUG Run time: 1.1245 second, remain time: 598.88 second
+2026-01-05 15:09:35 DEBUG execute cmd ===>>>: cjc --error-count-limit=all --diagnostic-format=json --output-type=dylib upstream_package.cj
+2026-01-05 15:09:36 DEBUG return code: 0
+2026-01-05 15:09:36 DEBUG stdout : 
+
+2026-01-05 15:09:36 DEBUG stderr : 
+
+2026-01-05 15:09:36 DEBUG Run time: 1.1406 second, remain time: 597.73 second
+2026-01-05 15:09:36 DEBUG execute cmd ===>>>: cjc --error-count-limit=all --diagnostic-format=json --output-type=dylib sub_pkg.cj
+2026-01-05 15:09:37 DEBUG return code: 0
+2026-01-05 15:09:37 DEBUG stdout : 
+
+2026-01-05 15:09:37 DEBUG stderr : 
+
+2026-01-05 15:09:37 DEBUG Run time: 0.79238 second, remain time: 596.94 second
+2026-01-05 15:09:37 DEBUG execute cmd ===>>>: cjc --error-count-limit=all --diagnostic-format=json --output-type=dylib sub_sub_pkg.cj
+2026-01-05 15:09:38 DEBUG return code: 0
+2026-01-05 15:09:38 DEBUG stdout : 
+
+2026-01-05 15:09:38 DEBUG stderr : 
+
+2026-01-05 15:09:38 DEBUG Run time: 0.75693 second, remain time: 596.19 second
+2026-01-05 15:09:38 DEBUG execute cmd ===>>>: cjc --error-count-limit=all --diagnostic-format=json complex_import_0.cj -L. -lmy_pkg@my_org -lmy_pkg.sub_pkg@my_org -lmy_pkg.sub_pkg.sub_sub_pkg@my_org -lmy_pkg_1@my_org -o complex_import_0.exe
+2026-01-05 15:09:38 DEBUG return code: 0
+2026-01-05 15:09:38 DEBUG stdout : 
+
+2026-01-05 15:09:38 DEBUG stderr : 
+
+2026-01-05 15:09:38 DEBUG Run time: 0.83675 second, remain time: 595.35 second
+2026-01-05 15:09:38 DEBUG execute cmd ===>>>: set LD_LIBRARY_PATH=%chdir%:%LD_LIBRARY_PATH% && complex_import_0.exe
+2026-01-05 15:09:39 DEBUG return code: 0
+2026-01-05 15:09:39 DEBUG stdout : 
++	foo
++	foo
++	foo
++	foo
+
+2026-01-05 15:09:39 DEBUG stderr : 
+
+2026-01-05 15:09:39 DEBUG Run time: 0.28655 second, remain time: 595.06 second
+2026-01-05 15:09:39 DEBUG Task executed successfully

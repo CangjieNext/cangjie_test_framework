@@ -1,0 +1,43 @@
+2026-01-05 14:39:29 DEBUG Log file at: E:\cangjie_test_suite\cangjie_test_framework\test_temp\log\alias_import_0_cj_479c0d78ea0111f0a61d84a93e8bbbff.log
+2026-01-05 14:39:29 DEBUG Case Path: E:\cangjie_test_suite\cangjie_test\testsuites\HLT\compiler\cjnative\Packages\org_name\import_decl\alias_import_0.cj
+2026-01-05 14:39:29 DEBUG Work directory: E:\cangjie_test_suite\cangjie_test_framework\test_temp\run\alias_import_0_cj_479c0d78ea0111f0a61d84a93e8bbbff
+2026-01-05 14:39:29 DEBUG execute cmd ===>>>: cjc --error-count-limit=all --diagnostic-format=json --output-type=dylib upstream_package.cj
+2026-01-05 14:39:30 DEBUG return code: 0
+2026-01-05 14:39:30 DEBUG stdout : 
+
+2026-01-05 14:39:30 DEBUG stderr : 
+
+2026-01-05 14:39:30 DEBUG Run time: 1.2667 second, remain time: 598.73 second
+2026-01-05 14:39:30 DEBUG execute cmd ===>>>: cjc --error-count-limit=all --diagnostic-format=json alias_import_0.cj -L. -lmy_pkg@my_org -o alias_import_0.exe
+2026-01-05 14:39:31 DEBUG return code: 0
+2026-01-05 14:39:31 DEBUG stdout : 
+
+2026-01-05 14:39:31 DEBUG stderr : 
+
+2026-01-05 14:39:31 DEBUG Run time: 0.97707 second, remain time: 597.76 second
+2026-01-05 14:39:31 DEBUG execute cmd ===>>>: set LD_LIBRARY_PATH=%chdir%:%LD_LIBRARY_PATH% && alias_import_0.exe
+2026-01-05 14:39:31 DEBUG return code: 0
+2026-01-05 14:39:31 DEBUG stdout : 
++	foo
+
+2026-01-05 14:39:31 DEBUG stderr : 
+
+2026-01-05 14:39:31 DEBUG Run time: 0.36162 second, remain time: 597.39 second
+2026-01-05 14:39:31 DEBUG execute cmd ===>>>: C:\Python314\python.exe E:\cangjie_test_suite\cangjie_test_framework\maple_test\compare.py --comment="//" --condition="'x86', 'Windows', 'CJNATIVE'" alias_import_0.cj
+2026-01-05 14:39:32 DEBUG return code: 0
+2026-01-05 14:39:32 DEBUG stdout : 
++	compare.py input:
++		foo
++	
++	compare.py input end
++	
++	Starting SingleLine Compare:
++	b"It's a assert, flag: scan, pattern:  , result: True, matched at output line: 0 "
++	back reference dict:{}
++	SingleLine Compare End
++	[Compare Pass]
+
+2026-01-05 14:39:32 DEBUG stderr : 
+
+2026-01-05 14:39:32 DEBUG Run time: 0.44835 second, remain time: 596.95 second
+2026-01-05 14:39:32 DEBUG Task executed successfully

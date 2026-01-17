@@ -1,0 +1,93 @@
+2026-01-07 16:22:50 DEBUG Log file at: E:\cangjie_test_suite\cangjie_test_framework\test_temp\log\stdlib_reflect_0_cj_0e1e6400eba211f08cb084a93e8bbbff.log
+2026-01-07 16:22:50 DEBUG Case Path: E:\cangjie_test_suite\cangjie_test\testsuites\HLT\API\std\reflect\cjnative\stdlib_reflect\stdlib_reflect_0.cj
+2026-01-07 16:22:50 DEBUG Work directory: E:\cangjie_test_suite\cangjie_test_framework\test_temp\run\stdlib_reflect_0_cj_0e1e6400eba211f08cb084a93e8bbbff
+2026-01-07 16:22:50 DEBUG execute cmd ===>>>: cjc --error-count-limit=all --diagnostic-format=json stdlib_reflect_0.cj --test -o stdlib_reflect_0.exe
+2026-01-07 16:22:52 DEBUG return code: 0
+2026-01-07 16:22:52 DEBUG stdout : 
+
+2026-01-07 16:22:52 DEBUG stderr : 
+@	{
+@	    "Diags":[
+@	            {
+@	                "DiagKind": "sema_unused_import",
+@	                "Severity": "warning",
+@	                "WarnGroup": "unused",
+@	                "DiagCategory": "sema",
+@	                "Message": "unused import 'std.collection.*'",
+@	                "Location": {
+@	                    "File": "stdlib_reflect_0.cj",
+@	                    "Line": 14,
+@	                    "Column": 1
+@	                },
+@	                "MainHint": {
+@	                    "Content": "unused import",
+@	                    "Range": {
+@	                        "Begin": {
+@	                            "File": "stdlib_reflect_0.cj",
+@	                            "Line": 14,
+@	                            "Column": 1
+@	                        },
+@	                        "End": {
+@	                            "File": "stdlib_reflect_0.cj",
+@	                            "Line": 14,
+@	                            "Column": 24
+@	                        }
+@	                    }
+@	                },
+@	                "OtherHints": [],
+@	                "Notes": [
+@	                    {
+@	                        "Message": "this warning can be suppressed by setting the compiler option `-Woff unused`",
+@	                        "MainHint": null,
+@	                        "OtherHints": [],
+@	                        "Help": null
+@	                    }
+@	                ],
+@	                "Helps": []
+@	            }
+@	    ],
+@	    "Num":{
+@	        "Errors": 0,
+@	        "PrintedErrors": 0,
+@	        "Warnings": 1,
+@	        "PrintedWarnings": 1
+@	    }
+@	}
+
+2026-01-07 16:22:52 DEBUG Run time: 1.3743 second, remain time: 598.63 second
+2026-01-07 16:22:52 DEBUG execute cmd ===>>>: set LD_LIBRARY_PATH=%chdir%:%LD_LIBRARY_PATH% && stdlib_reflect_0.exe --no-progress
+2026-01-07 16:22:52 DEBUG return code: 1
+2026-01-07 16:22:52 DEBUG stdout : 
++	--------------------------------------------------------------------------------------------------
++	TP: [33mdefault[0m, time elapsed: 1520000 ns, RESULT:
++	    TCS: [33mTestStdCoreReflection[0m, time elapsed: 776300 ns, RESULT:
++	    [[32m PASSED [0m] CASE: test00 (197600 ns)
++	    [[32m PASSED [0m] CASE: genericStructType (158600 ns)
++	    [[32m PASSED [0m] CASE: nonGenericStructType (17700 ns)
++	    [[32m PASSED [0m] CASE: interfaceType (20700 ns)
++	    TCS: [33mTestStdCoreReflectionUnqualified[0m, time elapsed: 156500 ns, RESULT:
++	    [[32m PASSED [0m] CASE: test00 (11500 ns)
++	    [[32m PASSED [0m] CASE: genericStructType (17900 ns)
++	    [[32m PASSED [0m] CASE: nonGenericStructType (14100 ns)
++	    [[32m PASSED [0m] CASE: interfaceType (17500 ns)
++	    TCS: [33mTestStdCollectionReflection[0m, time elapsed: 566700 ns, RESULT:
++	    [[32m PASSED [0m] CASE: test00 (9500 ns)
++	    [[32m PASSED [0m] CASE: genericClassType (29300 ns)
++	    [[32m PASSED [0m] CASE: genericStructType (40600 ns)
++	    [[32m PASSED [0m] CASE: nonGenericStructType (17100 ns)
++	    [[31m FAILED [0m] CASE: interfaceType (322100 ns)
++	    Expect Failed: [33mt.toString()[0m != [33m"std.time.DateTime"[0m
++	               t.toString(): "[33mstd.convert.Formattable[0m"
++	        "std.time.DateTime": "[33mstd.time.DateTime[0m"
++	
++	Summary: TOTAL: 13
++	    [32mPASSED[0m: 12, [32mSKIPPED[0m: 0, ERROR: 0
++	    [31mFAILED[0m: 1, listed below:
++	            TCS: [33mTestStdCollectionReflection[0m, CASE: interfaceType
++	--------------------------------------------------------------------------------------------------
+
+2026-01-07 16:22:52 DEBUG stderr : 
+
+2026-01-07 16:22:52 DEBUG Run time: 0.3573 second, remain time: 598.27 second
+2026-01-07 16:22:52 ERROR Failed!
+2026-01-07 16:22:52 ERROR Command return code 1 not equals to expected return code 0

@@ -1,0 +1,11 @@
+2025-12-20 09:56:28 DEBUG Log file at: E:\cangjie_test_suite\cangjie_test_framework\test_temp\log\main_cj_14f2be74dd4711f0866384a93e8bbbff.log
+2025-12-20 09:56:28 DEBUG Case Path: E:\cangjie_test_suite\cangjie_test\testsuites\HLT\compiler\cjnative\Diagnosis\exponentiation_operator\TestCase_38\main.cj
+2025-12-20 09:56:28 DEBUG Work directory: E:\cangjie_test_suite\cangjie_test_framework\test_temp\run\main_cj_14f2be74dd4711f0866384a93e8bbbff
+2025-12-20 09:56:28 DEBUG execute cmd ===>>>: cjc main.cj --error-count-limit=all --diagnostic-format=json
+2025-12-20 09:56:29 DEBUG return code: 0
+2025-12-20 09:56:29 DEBUG stdout : 
+
+2025-12-20 09:56:29 DEBUG stderr : 
+
+2025-12-20 09:56:29 DEBUG Run time: 1.1499 second, remain time: 178.85 second
+2025-12-20 09:56:29 DEBUG Task executed successfully

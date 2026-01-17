@@ -1,0 +1,43 @@
+2026-01-05 14:43:36 DEBUG Log file at: E:\cangjie_test_suite\cangjie_test_framework\test_temp\log\backtick_in_org_name_0_cj_dc359798ea0111f0a63c84a93e8bbbff.log
+2026-01-05 14:43:36 DEBUG Case Path: E:\cangjie_test_suite\cangjie_test\testsuites\HLT\compiler\cjnative\Packages\org_name\import_decl\backtick_in_org_name_0.cj
+2026-01-05 14:43:36 DEBUG Work directory: E:\cangjie_test_suite\cangjie_test_framework\test_temp\run\backtick_in_org_name_0_cj_dc359798ea0111f0a63c84a93e8bbbff
+2026-01-05 14:43:36 DEBUG execute cmd ===>>>: cjc --error-count-limit=all --diagnostic-format=json --output-type=dylib upstream_package.cj
+2026-01-05 14:43:36 DEBUG return code: 0
+2026-01-05 14:43:36 DEBUG stdout : 
+
+2026-01-05 14:43:36 DEBUG stderr : 
+
+2026-01-05 14:43:36 DEBUG Run time: 0.62124 second, remain time: 599.38 second
+2026-01-05 14:43:36 DEBUG execute cmd ===>>>: cjc --error-count-limit=all --diagnostic-format=json backtick_in_org_name_0.cj -L. -lmy_pkg@my_org -o backtick_in_org_name_0.exe
+2026-01-05 14:43:37 DEBUG return code: 0
+2026-01-05 14:43:37 DEBUG stdout : 
+
+2026-01-05 14:43:37 DEBUG stderr : 
+
+2026-01-05 14:43:37 DEBUG Run time: 0.66058 second, remain time: 598.72 second
+2026-01-05 14:43:37 DEBUG execute cmd ===>>>: set LD_LIBRARY_PATH=%chdir%:%LD_LIBRARY_PATH% && backtick_in_org_name_0.exe
+2026-01-05 14:43:37 DEBUG return code: 0
+2026-01-05 14:43:37 DEBUG stdout : 
++	foo
+
+2026-01-05 14:43:37 DEBUG stderr : 
+
+2026-01-05 14:43:37 DEBUG Run time: 0.20349 second, remain time: 598.51 second
+2026-01-05 14:43:37 DEBUG execute cmd ===>>>: C:\Python314\python.exe E:\cangjie_test_suite\cangjie_test_framework\maple_test\compare.py --comment="//" --condition="'CJNATIVE', 'x86', 'Windows'" backtick_in_org_name_0.cj
+2026-01-05 14:43:37 DEBUG return code: 0
+2026-01-05 14:43:37 DEBUG stdout : 
++	compare.py input:
++		foo
++	
++	compare.py input end
++	
++	Starting SingleLine Compare:
++	b"It's a assert, flag: scan, pattern:  , result: True, matched at output line: 0 "
++	back reference dict:{}
++	SingleLine Compare End
++	[Compare Pass]
+
+2026-01-05 14:43:37 DEBUG stderr : 
+
+2026-01-05 14:43:37 DEBUG Run time: 0.18685 second, remain time: 598.33 second
+2026-01-05 14:43:37 DEBUG Task executed successfully

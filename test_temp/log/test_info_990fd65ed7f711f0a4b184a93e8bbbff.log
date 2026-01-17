@@ -1,0 +1,3 @@
+2025-12-13 15:44:47 DEBUG Log file at: E:\cangjie_test_suite\cangjie_test_framework\test_temp\log\test_info_990fd65ed7f711f0a4b184a93e8bbbff.log
+2025-12-13 15:44:47 DEBUG Case Path: E:\cangjie_test_suite\cangjie_test_1208\testsuites\HLT\compiler\cjnative\HLE\c\union\test.info
+2025-12-13 15:44:47 ERROR Run task exit unexpected : DEPENDENCE keyword error, file: a.h NotFound

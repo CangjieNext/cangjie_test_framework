@@ -1,0 +1,102 @@
+2026-01-07 09:48:32 DEBUG Log file at: E:\cangjie_test_suite\cangjie_test_framework\test_temp\log\test_generic_user_defined_type_0_cj_f892fbc4eb6a11f0bf3784a93e8bbbff.log
+2026-01-07 09:48:32 DEBUG Case Path: E:\cangjie_test_suite\cangjie_test\testsuites\HLT\API\std\reflect\cjnative\Generic\test_generic_user_defined_type_0.cj
+2026-01-07 09:48:32 DEBUG Work directory: E:\cangjie_test_suite\cangjie_test_framework\test_temp\run\test_generic_user_defined_type_0_cj_f892fbc4eb6a11f0bf3784a93e8bbbff
+2026-01-07 09:48:32 DEBUG execute cmd ===>>>: cjc --error-count-limit=all --diagnostic-format=json test_generic_user_defined_type_0.cj --test -o test_generic_user_defined_type_0.exe
+2026-01-07 09:48:36 DEBUG return code: 0
+2026-01-07 09:48:36 DEBUG stdout : 
+
+2026-01-07 09:48:36 DEBUG stderr : 
+
+2026-01-07 09:48:36 DEBUG Run time: 4.0491 second, remain time: 595.95 second
+2026-01-07 09:48:36 DEBUG execute cmd ===>>>: set LD_LIBRARY_PATH=%chdir%:%LD_LIBRARY_PATH% && test_generic_user_defined_type_0.exe --no-progress
+2026-01-07 09:48:37 DEBUG return code: 0
+2026-01-07 09:48:37 DEBUG stdout : 
++	genericInstanceFunction: test0.GenericClass<Int64, Int64, Int64>
++	GenericClassWithConstraints<Int64,test0.GenericClassWithConstraints<Int64, String, Bool>,test0.NonGenericClass>.foo
++	instanceMemberFunction: test0.GenericStruct<Int64, test0.GenericClassWithConstraints<Int64, String, Bool>, test0.NonGenericClass>,Array<test0.GenericClassWithConstraints<Int64, String, Bool>>
++	instanceMemberFunction: Int64,test0.GenericClassWithConstraints<Int64, String, Bool>,test0.NonGenericClass
++	p1 = GenericClassWithConstraints<Int64,String,Bool>
++	测试泛型class的泛型实例变量
++	读取泛型实例成员变量
++	写入泛型实例成员变量
++	再次读取泛型实例成员变量
++	测试泛型class的泛型实例属性
++	读属性
++	写属性
++	再次读属性
++	测试泛型class的操作符重载函数
++	测试泛型class的静态成员函数
++	GenericClass<Int64, String, test0.NonGenericClass>
++	p0: Int64
++	p1: test0.GenericStruct<Int64, String, test0.NonGenericClass>
++	读静态属性
++	GenericClass.sp0.get
++	写静态属性
++	GenericClass.sp0.set
++	再次读静态属性
++	GenericClass.sp0.get
++	读静态变量
++	写静态变量
++	再次读静态变量
++	genericInstanceFunction: test0.GenericClass<Int64, Int64, Int64>
++	测试泛型struct的静态成员函数
++	GenericStruct<Int64, String, test0.NonGenericStruct>
++	p0: Int64
++	p1: test0.GenericStruct<Int64, String, test0.NonGenericStruct>
++	测试struct静态属性
++	读静态属性
++	GenericStruct.sp0.get
++	写静态属性
++	GenericStruct.sp0.set
++	再次读静态属性
++	GenericStruct.sp0.get
++	测试struct静态变量
++	读静态变量
++	写静态变量
++	再次读静态变量
++	测试泛型struct的操作符重载函数
++	测试泛型struct的泛型实例属性
++	读属性
++	写属性
++	再次读属性
++	测试泛型struct的泛型实例变量
++	读取泛型实例成员变量
++	写入泛型实例成员变量
++	再次读取泛型实例成员变量
++	GenericStructWithConstraints<Int64,test0.GenericStructWithConstraints<Int64, String, Bool>,test0.NonGenericStruct>.foo
++	GenericStructWithConstraints.instanceMemberFunction: test0.GenericStruct<Int64, test0.GenericStructWithConstraints<Int64, String, Bool>, test0.NonGenericStruct>,Array<test0.GenericStructWithConstraints<Int64, String, Bool>>
++	GenericStructWithConstraints.instanceMemberFunction: Int64,test0.GenericStructWithConstraints<Int64, String, Bool>,test0.NonGenericStruct
++	p1 = GenericStructWithConstraints<Int64,String,Bool>
++	--------------------------------------------------------------------------------------------------
++	TP: [33mtest0[0m, time elapsed: 3552700 ns, RESULT:
++	    TCS: [33mTestClassType[0m, time elapsed: 2697400 ns, RESULT:
++	    [[32m PASSED [0m] CASE: testClassGenricFunc (942900 ns)
++	    [[32m PASSED [0m] CASE: testConstructClassWithUnmetGenericConstraint (227000 ns)
++	    [[32m PASSED [0m] CASE: testClassInstanceFunction (190200 ns)
++	    [[32m PASSED [0m] CASE: testClassInstanceVariable (122900 ns)
++	    [[32m PASSED [0m] CASE: testClassInstanceProperty (94100 ns)
++	    [[32m PASSED [0m] CASE: testClassOperatorFunc (50000 ns)
++	    [[32m PASSED [0m] CASE: testClassStaticFunction (189300 ns)
++	    [[32m PASSED [0m] CASE: testClassStaticProperty (85700 ns)
++	    [[32m PASSED [0m] CASE: testClassStaticVariable (107300 ns)
++	    TCS: [33mTestStructType[0m, time elapsed: 765900 ns, RESULT:
++	    [[32m PASSED [0m] CASE: testStructGenricFunc (54200 ns)
++	    [[32m PASSED [0m] CASE: testConstructStructWithUnmetGenericConstraint (51900 ns)
++	    [[32m PASSED [0m] CASE: testStructStaticFunction (46500 ns)
++	    [[32m PASSED [0m] CASE: testStructStaticProperty (59900 ns)
++	    [[32m PASSED [0m] CASE: testStructStaticVariable (27600 ns)
++	    [[32m PASSED [0m] CASE: testStructOperatorFunc (54700 ns)
++	    [[32m PASSED [0m] CASE: testStructInstanceProperty (58600 ns)
++	    [[32m PASSED [0m] CASE: testStructInstanceVariable (41200 ns)
++	    [[32m PASSED [0m] CASE: testStructInstanceFunction (135400 ns)
++	    TCS: [33mTestPackageInfo[0m, time elapsed: 59100 ns, RESULT:
++	    [[32m PASSED [0m] CASE: test00 (28300 ns)
++	Summary: TOTAL: 19
++	    [32mPASSED[0m: 19, [32mSKIPPED[0m: 0, ERROR: 0
++	    [31mFAILED[0m: 0
++	--------------------------------------------------------------------------------------------------
+
+2026-01-07 09:48:37 DEBUG stderr : 
+
+2026-01-07 09:48:37 DEBUG Run time: 0.84083 second, remain time: 595.11 second
+2026-01-07 09:48:37 DEBUG Task executed successfully

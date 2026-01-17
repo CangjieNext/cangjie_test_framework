@@ -1,0 +1,181 @@
+2026-01-05 14:39:29 DEBUG Log file at: E:\cangjie_test_suite\cangjie_test_framework\test_temp\log\keyword_as_org_name_0_cj_479be6feea0111f0aba184a93e8bbbff.log
+2026-01-05 14:39:29 DEBUG Case Path: E:\cangjie_test_suite\cangjie_test\testsuites\HLT\compiler\cjnative\Packages\org_name\package_decl\keyword_as_org_name_0.cj
+2026-01-05 14:39:29 DEBUG Work directory: E:\cangjie_test_suite\cangjie_test_framework\test_temp\run\keyword_as_org_name_0_cj_479be6feea0111f0aba184a93e8bbbff
+2026-01-05 14:39:29 DEBUG execute cmd ===>>>: cjc --error-count-limit=all --diagnostic-format=json --output-type=dylib keyword_as_org_name_0.cj 2>&1
+2026-01-05 14:39:29 DEBUG return code: 1
+2026-01-05 14:39:29 DEBUG stdout : 
++	{
++	    "Diags":[
++	            {
++	                "DiagKind": "parse_expected_name",
++	                "Severity": "error",
++	                "WarnGroup": "none",
++	                "DiagCategory": "parse",
++	                "Message": "expected a package name after keyword 'package', found keyword 'import'",
++	                "Location": {
++	                    "File": "keyword_as_org_name_0.cj",
++	                    "Line": 14,
++	                    "Column": 9
++	                },
++	                "MainHint": {
++	                    "Content": "expected a package name here",
++	                    "Range": {
++	                        "Begin": {
++	                            "File": "keyword_as_org_name_0.cj",
++	                            "Line": 14,
++	                            "Column": 9
++	                        },
++	                        "End": {
++	                            "File": "keyword_as_org_name_0.cj",
++	                            "Line": 14,
++	                            "Column": 15
++	                        }
++	                    }
++	                },
++	                "OtherHints": [
++	                    {
++	                        "Content": "after keyword 'package'",
++	                        "Range": {
++	                            "Begin": {
++	                                "File": "keyword_as_org_name_0.cj",
++	                                "Line": 14,
++	                                "Column": 1
++	                            },
++	                            "End": {
++	                                "File": "keyword_as_org_name_0.cj",
++	                                "Line": 14,
++	                                "Column": 8
++	                            }
++	                        }
++	                    }
++	                ],
++	                "Notes": [],
++	                "Helps": [
++	                    {
++	                        "Message": "you could escape keyword as a package name using '`'",
++	                        "Substitutions": [
++	                            {
++	                                "Content": "`import`",
++	                                "Range": {
++	                                    "Begin": {
++	                                        "File": "keyword_as_org_name_0.cj",
++	                                        "Line": 14,
++	                                        "Column": 9
++	                                    },
++	                                    "End": {
++	                                        "File": "keyword_as_org_name_0.cj",
++	                                        "Line": 14,
++	                                        "Column": 15
++	                                    }
++	                                }
++	                            }
++	                        ]
++	                    }
++	                ]
++	            }
++	    ],
++	    "Num":{
++	        "Errors": 1,
++	        "PrintedErrors": 1,
++	        "Warnings": 0,
++	        "PrintedWarnings": 0
++	    }
++	}
+
+2026-01-05 14:39:29 DEBUG stderr : 
+
+2026-01-05 14:39:29 DEBUG Run time: 0.64089 second, remain time: 599.36 second
+2026-01-05 14:39:29 DEBUG execute cmd ===>>>: C:\Python314\python.exe E:\cangjie_test_suite\cangjie_test_framework\maple_test\compare.py --comment="//" --condition="'x86', 'Windows', 'CJNATIVE'" keyword_as_org_name_0.cj
+2026-01-05 14:39:30 DEBUG return code: 0
+2026-01-05 14:39:30 DEBUG stdout : 
++	compare.py input:
++		{
++		    "Diags":[
++		            {
++		                "DiagKind": "parse_expected_name",
++		                "Severity": "error",
++		                "WarnGroup": "none",
++		                "DiagCategory": "parse",
++		                "Message": "expected a package name after keyword 'package', found keyword 'import'",
++		                "Location": {
++		                    "File": "keyword_as_org_name_0.cj",
++		                    "Line": 14,
++		                    "Column": 9
++		                },
++		                "MainHint": {
++		                    "Content": "expected a package name here",
++		                    "Range": {
++		                        "Begin": {
++		                            "File": "keyword_as_org_name_0.cj",
++		                            "Line": 14,
++		                            "Column": 9
++		                        },
++		                        "End": {
++		                            "File": "keyword_as_org_name_0.cj",
++		                            "Line": 14,
++		                            "Column": 15
++		                        }
++		                    }
++		                },
++		                "OtherHints": [
++		                    {
++		                        "Content": "after keyword 'package'",
++		                        "Range": {
++		                            "Begin": {
++		                                "File": "keyword_as_org_name_0.cj",
++		                                "Line": 14,
++		                                "Column": 1
++		                            },
++		                            "End": {
++		                                "File": "keyword_as_org_name_0.cj",
++		                                "Line": 14,
++		                                "Column": 8
++		                            }
++		                        }
++		                    }
++		                ],
++		                "Notes": [],
++		                "Helps": [
++		                    {
++		                        "Message": "you could escape keyword as a package name using '`'",
++		                        "Substitutions": [
++		                            {
++		                                "Content": "`import`",
++		                                "Range": {
++		                                    "Begin": {
++		                                        "File": "keyword_as_org_name_0.cj",
++		                                        "Line": 14,
++		                                        "Column": 9
++		                                    },
++		                                    "End": {
++		                                        "File": "keyword_as_org_name_0.cj",
++		                                        "Line": 14,
++		                                        "Column": 15
++		                                    }
++		                                }
++		                            }
++		                        ]
++		                    }
++		                ]
++		            }
++		    ],
++		    "Num":{
++		        "Errors": 1,
++		        "PrintedErrors": 1,
++		        "Warnings": 0,
++		        "PrintedWarnings": 0
++		    }
++		}
++	
++	compare.py input end
++	
++	Starting SingleLine Compare:
++	b"It's a assert, flag: scan, pattern: expected a package name after keyword 'package', found keyword 'import' , result: True, matched at output line: 0 "
++	back reference dict:{}
++	SingleLine Compare End
++	[Compare Pass]
+
+2026-01-05 14:39:30 DEBUG stderr : 
+
+2026-01-05 14:39:30 DEBUG Run time: 0.48511 second, remain time: 598.87 second
+2026-01-05 14:39:30 DEBUG Task executed successfully

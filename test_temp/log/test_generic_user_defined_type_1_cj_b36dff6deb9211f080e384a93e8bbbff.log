@@ -1,0 +1,120 @@
+2026-01-07 14:32:56 DEBUG Log file at: E:\cangjie_test_suite\cangjie_test_framework\test_temp\log\test_generic_user_defined_type_1_cj_b36dff6deb9211f080e384a93e8bbbff.log
+2026-01-07 14:32:56 DEBUG Case Path: E:\cangjie_test_suite\cangjie_test\testsuites\HLT\API\std\reflect\cjnative\Generic\test_generic_user_defined_type_1.cj
+2026-01-07 14:32:56 DEBUG Work directory: E:\cangjie_test_suite\cangjie_test_framework\test_temp\run\test_generic_user_defined_type_1_cj_b36dff6deb9211f080e384a93e8bbbff
+2026-01-07 14:32:56 DEBUG execute cmd ===>>>: cjc --error-count-limit=all --diagnostic-format=json test_generic_user_defined_type_1.cj --test -o test_generic_user_defined_type_1.exe
+2026-01-07 14:32:58 DEBUG return code: 0
+2026-01-07 14:32:58 DEBUG stdout : 
+
+2026-01-07 14:32:58 DEBUG stderr : 
+
+2026-01-07 14:32:58 DEBUG Run time: 2.3714 second, remain time: 597.63 second
+2026-01-07 14:32:58 DEBUG execute cmd ===>>>: set LD_LIBRARY_PATH=%chdir%:%LD_LIBRARY_PATH% && test_generic_user_defined_type_1.exe --no-progress
+2026-01-07 14:32:59 DEBUG return code: 1
+2026-01-07 14:32:59 DEBUG stdout : 
++	genericInstanceFunction: my_org::test0.GenericClass<Int64, Int64, Int64>
++	GenericClassWithConstraints<Int64,my_org::test0.GenericClassWithConstraints<Int64, String, Bool>,my_org/test0.NonGenericClass>.foo
++	instanceMemberFunction: my_org::test0.GenericStruct<Int64, my_org::test0.GenericClassWithConstraints<Int64, String, Bool>, my_org::test0.NonGenericClass>,Array<my_org::test0.GenericClassWithConstraints<Int64, String, Bool>>
++	instanceMemberFunction: Int64,my_org::test0.GenericClassWithConstraints<Int64, String, Bool>,my_org/test0.NonGenericClass
++	p1 = GenericClassWithConstraints<Int64,String,Bool>
++	测试泛型class的泛型实例变量
++	读取泛型实例成员变量
++	写入泛型实例成员变量
++	再次读取泛型实例成员变量
++	测试泛型class的泛型实例属性
++	读属性
++	写属性
++	再次读属性
++	测试泛型class的操作符重载函数
++	测试泛型class的静态成员函数
++	GenericClass<Int64, String, my_org/test0.NonGenericClass>
++	p0: Int64
++	p1: my_org::test0.GenericStruct<Int64, String, my_org::test0.NonGenericClass>
++	读静态属性
++	GenericClass.sp0.get
++	写静态属性
++	GenericClass.sp0.set
++	再次读静态属性
++	GenericClass.sp0.get
++	读静态变量
++	写静态变量
++	再次读静态变量
++	genericInstanceFunction: my_org::test0.GenericClass<Int64, Int64, Int64>
++	测试泛型struct的静态成员函数
++	GenericStruct<Int64, String, my_org/test0.NonGenericStruct>
++	p0: Int64
++	p1: my_org::test0.GenericStruct<Int64, String, my_org::test0.NonGenericStruct>
++	测试struct静态属性
++	读静态属性
++	GenericStruct.sp0.get
++	写静态属性
++	GenericStruct.sp0.set
++	再次读静态属性
++	GenericStruct.sp0.get
++	测试struct静态变量
++	读静态变量
++	写静态变量
++	再次读静态变量
++	测试泛型struct的操作符重载函数
++	测试泛型struct的泛型实例属性
++	读属性
++	写属性
++	再次读属性
++	测试泛型struct的泛型实例变量
++	读取泛型实例成员变量
++	写入泛型实例成员变量
++	再次读取泛型实例成员变量
++	GenericStructWithConstraints<Int64,my_org::test0.GenericStructWithConstraints<Int64, String, Bool>,my_org/test0.NonGenericStruct>.foo
++	GenericStructWithConstraints.instanceMemberFunction: my_org::test0.GenericStruct<Int64, my_org::test0.GenericStructWithConstraints<Int64, String, Bool>, my_org::test0.NonGenericStruct>,Array<my_org::test0.GenericStructWithConstraints<Int64, String, Bool>>
++	GenericStructWithConstraints.instanceMemberFunction: Int64,my_org::test0.GenericStructWithConstraints<Int64, String, Bool>,my_org/test0.NonGenericStruct
++	p1 = GenericStructWithConstraints<Int64,String,Bool>
++	--------------------------------------------------------------------------------------------------
++	TP: [33mmy_org::test0[0m, time elapsed: 8132400 ns, RESULT:
++	    TCS: [33mTestClassType[0m, time elapsed: 4825100 ns, RESULT:
++	    [[32m PASSED [0m] CASE: testClassGenricFunc (1646800 ns)
++	    [[32m PASSED [0m] CASE: testConstructClassWithUnmetGenericConstraint (320800 ns)
++	    [[32m PASSED [0m] CASE: testClassInstanceFunction (553400 ns)
++	    [[32m PASSED [0m] CASE: testClassInstanceVariable (232000 ns)
++	    [[32m PASSED [0m] CASE: testClassInstanceProperty (121800 ns)
++	    [[32m PASSED [0m] CASE: testClassOperatorFunc (61100 ns)
++	    [[32m PASSED [0m] CASE: testClassStaticFunction (384800 ns)
++	    [[32m PASSED [0m] CASE: testClassStaticProperty (179900 ns)
++	    [[32m PASSED [0m] CASE: testClassStaticVariable (166300 ns)
++	    TCS: [33mTestStructType[0m, time elapsed: 1436600 ns, RESULT:
++	    [[32m PASSED [0m] CASE: testStructGenricFunc (93000 ns)
++	    [[32m PASSED [0m] CASE: testConstructStructWithUnmetGenericConstraint (96900 ns)
++	    [[32m PASSED [0m] CASE: testStructStaticFunction (59000 ns)
++	    [[32m PASSED [0m] CASE: testStructStaticProperty (109500 ns)
++	    [[32m PASSED [0m] CASE: testStructStaticVariable (68700 ns)
++	    [[32m PASSED [0m] CASE: testStructOperatorFunc (89500 ns)
++	    [[32m PASSED [0m] CASE: testStructInstanceProperty (104600 ns)
++	    [[32m PASSED [0m] CASE: testStructInstanceVariable (72200 ns)
++	    [[32m PASSED [0m] CASE: testStructInstanceFunction (306800 ns)
++	    TCS: [33mTestPackageInfo[0m, time elapsed: 1821400 ns, RESULT:
++	    [[31m FAILED [0m] CASE: testName (1565100 ns)
++	    Expect Failed: [33mClassTypeInfo.get("my_org::test0.GenericClass<Int64,String,my_org::test0.NonGenericClass>").toString()[0m != [33m"xxx"[0m
++	        ClassTypeInfo.get("my_org::test0.GenericClass<Int64,String,my_org::test0.NonGenericClass>").toString(): "[33mmy_org::test0.GenericClass<Int64, String, my_org::test0.NonGenericClass>[0m"
++	                                                                                                         "xxx": "[33mxxx[0m"
++	
++	    Expect Failed: [33mClassTypeInfo.get("my_org::test0.GenericClassWithConstraints<Int64,my_org::test0.GenericClassWithConstraints<Int64,String,Bool>,my_org::test0.NonGenericClass>").toString()[0m != [33m"xxx"[0m
++	        ClassTypeInfo.get("my_org::test0.GenericClassWithConstraints<Int64,my_org::test0.GenericClassWithConstraints<Int64,String,Bool>,my_org::test0.NonGenericClass>").toString(): "[33mmy_org::test0.GenericClassWithConstraints<Int64, my_org::test0.GenericClassWithConstraints<Int64, String, Bool>, my_org::test0.NonGenericClass>[0m"
++	                                                                                                                                                                              "xxx": "[33mxxx[0m"
++	
++	    Expect Failed: [33mStructTypeInfo.get("my_org::test0.GenericStruct<Int64,String,my_org::test0.NonGenericStruct>").toString()[0m != [33m"xxx"[0m
++	        StructTypeInfo.get("my_org::test0.GenericStruct<Int64,String,my_org::test0.NonGenericStruct>").toString(): "[33mmy_org::test0.GenericStruct<Int64, String, my_org::test0.NonGenericStruct>[0m"
++	                                                                                                            "xxx": "[33mxxx[0m"
++	
++	    Expect Failed: [33mStructTypeInfo.get("my_org::test0.GenericStructWithConstraints<Int64,my_org::test0.GenericStructWithConstraints<Int64,String,Bool>,my_org::test0.NonGenericStruct>").toString()[0m != [33m"xxx"[0m
++	        StructTypeInfo.get("my_org::test0.GenericStructWithConstraints<Int64,my_org::test0.GenericStructWithConstraints<Int64,String,Bool>,my_org::test0.NonGenericStruct>").toString(): "[33mmy_org::test0.GenericStructWithConstraints<Int64, my_org::test0.GenericStructWithConstraints<Int64, String, Bool>, my_org::test0.NonGenericStruct>[0m"
++	                                                                                                                                                                                  "xxx": "[33mxxx[0m"
++	
++	Summary: TOTAL: 20
++	    [32mPASSED[0m: 18, [32mSKIPPED[0m: 1, ERROR: 0
++	    [31mFAILED[0m: 1, listed below:
++	            TCS: [33mTestPackageInfo[0m, CASE: testName
++	--------------------------------------------------------------------------------------------------
+
+2026-01-07 14:32:59 DEBUG stderr : 
+
+2026-01-07 14:32:59 DEBUG Run time: 0.91941 second, remain time: 596.71 second
+2026-01-07 14:32:59 ERROR Failed!
+2026-01-07 14:32:59 ERROR Command return code 1 not equals to expected return code 0

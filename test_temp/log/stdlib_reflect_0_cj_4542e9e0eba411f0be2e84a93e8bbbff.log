@@ -1,0 +1,266 @@
+2026-01-07 16:38:42 DEBUG Log file at: E:\cangjie_test_suite\cangjie_test_framework\test_temp\log\stdlib_reflect_0_cj_4542e9e0eba411f0be2e84a93e8bbbff.log
+2026-01-07 16:38:42 DEBUG Case Path: E:\cangjie_test_suite\cangjie_test\testsuites\HLT\API\std\reflect\cjnative\stdlib_reflect\stdlib_reflect_0.cj
+2026-01-07 16:38:42 DEBUG Work directory: E:\cangjie_test_suite\cangjie_test_framework\test_temp\run\stdlib_reflect_0_cj_4542e9e0eba411f0be2e84a93e8bbbff
+2026-01-07 16:38:42 DEBUG execute cmd ===>>>: cjc --error-count-limit=all --diagnostic-format=json stdlib_reflect_0.cj --test -o stdlib_reflect_0.exe
+2026-01-07 16:38:43 DEBUG return code: 0
+2026-01-07 16:38:43 DEBUG stdout : 
+
+2026-01-07 16:38:43 DEBUG stderr : 
+@	{
+@	    "Diags":[
+@	            {
+@	                "DiagKind": "sema_unused_import",
+@	                "Severity": "warning",
+@	                "WarnGroup": "unused",
+@	                "DiagCategory": "sema",
+@	                "Message": "unused import 'std.collection.*'",
+@	                "Location": {
+@	                    "File": "stdlib_reflect_0.cj",
+@	                    "Line": 14,
+@	                    "Column": 1
+@	                },
+@	                "MainHint": {
+@	                    "Content": "unused import",
+@	                    "Range": {
+@	                        "Begin": {
+@	                            "File": "stdlib_reflect_0.cj",
+@	                            "Line": 14,
+@	                            "Column": 1
+@	                        },
+@	                        "End": {
+@	                            "File": "stdlib_reflect_0.cj",
+@	                            "Line": 14,
+@	                            "Column": 24
+@	                        }
+@	                    }
+@	                },
+@	                "OtherHints": [],
+@	                "Notes": [
+@	                    {
+@	                        "Message": "this warning can be suppressed by setting the compiler option `-Woff unused`",
+@	                        "MainHint": null,
+@	                        "OtherHints": [],
+@	                        "Help": null
+@	                    }
+@	                ],
+@	                "Helps": []
+@	            },
+@	            {
+@	                "DiagKind": "sema_unused_import",
+@	                "Severity": "warning",
+@	                "WarnGroup": "unused",
+@	                "DiagCategory": "sema",
+@	                "Message": "unused import 'std.fs.*'",
+@	                "Location": {
+@	                    "File": "stdlib_reflect_0.cj",
+@	                    "Line": 15,
+@	                    "Column": 1
+@	                },
+@	                "MainHint": {
+@	                    "Content": "unused import",
+@	                    "Range": {
+@	                        "Begin": {
+@	                            "File": "stdlib_reflect_0.cj",
+@	                            "Line": 15,
+@	                            "Column": 1
+@	                        },
+@	                        "End": {
+@	                            "File": "stdlib_reflect_0.cj",
+@	                            "Line": 15,
+@	                            "Column": 16
+@	                        }
+@	                    }
+@	                },
+@	                "OtherHints": [],
+@	                "Notes": [
+@	                    {
+@	                        "Message": "this warning can be suppressed by setting the compiler option `-Woff unused`",
+@	                        "MainHint": null,
+@	                        "OtherHints": [],
+@	                        "Help": null
+@	                    }
+@	                ],
+@	                "Helps": []
+@	            },
+@	            {
+@	                "DiagKind": "sema_unused_import",
+@	                "Severity": "warning",
+@	                "WarnGroup": "unused",
+@	                "DiagCategory": "sema",
+@	                "Message": "unused import 'std.math.*'",
+@	                "Location": {
+@	                    "File": "stdlib_reflect_0.cj",
+@	                    "Line": 16,
+@	                    "Column": 1
+@	                },
+@	                "MainHint": {
+@	                    "Content": "unused import",
+@	                    "Range": {
+@	                        "Begin": {
+@	                            "File": "stdlib_reflect_0.cj",
+@	                            "Line": 16,
+@	                            "Column": 1
+@	                        },
+@	                        "End": {
+@	                            "File": "stdlib_reflect_0.cj",
+@	                            "Line": 16,
+@	                            "Column": 18
+@	                        }
+@	                    }
+@	                },
+@	                "OtherHints": [],
+@	                "Notes": [
+@	                    {
+@	                        "Message": "this warning can be suppressed by setting the compiler option `-Woff unused`",
+@	                        "MainHint": null,
+@	                        "OtherHints": [],
+@	                        "Help": null
+@	                    }
+@	                ],
+@	                "Helps": []
+@	            },
+@	            {
+@	                "DiagKind": "chir_dce_unused_variable",
+@	                "Severity": "warning",
+@	                "WarnGroup": "unused",
+@	                "DiagCategory": "chir",
+@	                "Message": "unused variable:'t'",
+@	                "Location": {
+@	                    "File": "stdlib_reflect_0.cj",
+@	                    "Line": 112,
+@	                    "Column": 13
+@	                },
+@	                "MainHint": {
+@	                    "Content": "unused variable",
+@	                    "Range": {
+@	                        "Begin": {
+@	                            "File": "stdlib_reflect_0.cj",
+@	                            "Line": 112,
+@	                            "Column": 13
+@	                        },
+@	                        "End": {
+@	                            "File": "stdlib_reflect_0.cj",
+@	                            "Line": 112,
+@	                            "Column": 14
+@	                        }
+@	                    }
+@	                },
+@	                "OtherHints": [],
+@	                "Notes": [
+@	                    {
+@	                        "Message": "which is expanded as follows",
+@	                        "MainHint": {
+@	                            "Content": "",
+@	                            "Range": {
+@	                                "Begin": {
+@	                                    "File": "349",
+@	                                    "Line": 366,
+@	                                    "Column": 25
+@	                                },
+@	                                "End": {
+@	                                    "File": "349",
+@	                                    "Line": 366,
+@	                                    "Column": 26
+@	                                }
+@	                            }
+@	                        },
+@	                        "OtherHints": [],
+@	                        "Help": null
+@	                    },
+@	                    {
+@	                        "Message": "the warning occurs after the macro is expanded",
+@	                        "MainHint": {
+@	                            "Content": "",
+@	                            "Range": {
+@	                                "Begin": {
+@	                                    "File": "stdlib_reflect_0.cj",
+@	                                    "Line": 88,
+@	                                    "Column": 1
+@	                                },
+@	                                "End": {
+@	                                    "File": "stdlib_reflect_0.cj",
+@	                                    "Line": 133,
+@	                                    "Column": 2
+@	                                }
+@	                            }
+@	                        },
+@	                        "OtherHints": [],
+@	                        "Help": null
+@	                    },
+@	                    {
+@	                        "Message": "the code after the macro is expanded as follows",
+@	                        "MainHint": {
+@	                            "Content": "",
+@	                            "Range": {
+@	                                "Begin": {
+@	                                    "File": "349",
+@	                                    "Line": 242,
+@	                                    "Column": 1
+@	                                },
+@	                                "End": {
+@	                                    "File": "349",
+@	                                    "Line": 409,
+@	                                    "Column": 13
+@	                                }
+@	                            }
+@	                        },
+@	                        "OtherHints": [],
+@	                        "Help": null
+@	                    },
+@	                    {
+@	                        "Message": "this warning can be suppressed by setting the compiler option `-Woff unused`",
+@	                        "MainHint": null,
+@	                        "OtherHints": [],
+@	                        "Help": null
+@	                    }
+@	                ],
+@	                "Helps": []
+@	            }
+@	    ],
+@	    "Num":{
+@	        "Errors": 0,
+@	        "PrintedErrors": 0,
+@	        "Warnings": 4,
+@	        "PrintedWarnings": 4
+@	    }
+@	}
+
+2026-01-07 16:38:43 DEBUG Run time: 1.4396 second, remain time: 598.56 second
+2026-01-07 16:38:43 DEBUG execute cmd ===>>>: set LD_LIBRARY_PATH=%chdir%:%LD_LIBRARY_PATH% && stdlib_reflect_0.exe --no-progress
+2026-01-07 16:38:44 DEBUG return code: 1
+2026-01-07 16:38:44 DEBUG stdout : 
++	--------------------------------------------------------------------------------------------------
++	TP: [33mdefault[0m, time elapsed: 1450100 ns, RESULT:
++	    TCS: [33mTestStdCoreReflection[0m, time elapsed: 697800 ns, RESULT:
++	    [[32m PASSED [0m] CASE: test00 (181300 ns)
++	    [[32m PASSED [0m] CASE: genericStructType (107200 ns)
++	    [[32m PASSED [0m] CASE: nonGenericStructType (23000 ns)
++	    [[32m PASSED [0m] CASE: interfaceType (18400 ns)
++	    TCS: [33mTestStdCoreReflectionUnqualified[0m, time elapsed: 166500 ns, RESULT:
++	    [[32m PASSED [0m] CASE: test00 (15500 ns)
++	    [[32m PASSED [0m] CASE: genericStructType (17900 ns)
++	    [[32m PASSED [0m] CASE: nonGenericStructType (18000 ns)
++	    [[32m PASSED [0m] CASE: interfaceType (16200 ns)
++	    TCS: [33mTestStdMiscReflection[0m, time elapsed: 561000 ns, RESULT:
++	    [[32m PASSED [0m] CASE: test00 (9700 ns)
++	    [[32m PASSED [0m] CASE: genericClassType (30100 ns)
++	    [[32m PASSED [0m] CASE: nonGenericClassType (19200 ns)
++	    [[32m PASSED [0m] CASE: genericStructType (40900 ns)
++	    [[32m PASSED [0m] CASE: nonGenericStructType (13900 ns)
++	    [[32m PASSED [0m] CASE: interfaceType (14000 ns)
++	    [[31m FAILED [0m] CASE: globalFunctionWithOverload (231700 ns)
++	    Expect Failed: `([33mp.functions.size[0m == [33m114514[0m)`
++	       left: 162
++	      right: 114514
++	
++	Summary: TOTAL: 15
++	    [32mPASSED[0m: 14, [32mSKIPPED[0m: 0, ERROR: 0
++	    [31mFAILED[0m: 1, listed below:
++	            TCS: [33mTestStdMiscReflection[0m, CASE: globalFunctionWithOverload
++	--------------------------------------------------------------------------------------------------
+
+2026-01-07 16:38:44 DEBUG stderr : 
+
+2026-01-07 16:38:44 DEBUG Run time: 0.77591 second, remain time: 597.78 second
+2026-01-07 16:38:44 ERROR Failed!
+2026-01-07 16:38:44 ERROR Command return code 1 not equals to expected return code 0

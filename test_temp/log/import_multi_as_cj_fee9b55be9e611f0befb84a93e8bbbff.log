@@ -1,0 +1,28 @@
+2026-01-05 11:31:17 DEBUG Log file at: E:\cangjie_test_suite\cangjie_test_framework\test_temp\log\import_multi_as_cj_fee9b55be9e611f0befb84a93e8bbbff.log
+2026-01-05 11:31:17 DEBUG Case Path: E:\cangjie_test_suite\cangjie_test\testsuites\LLT\compiler\Package\org\import_multi_as.cj
+2026-01-05 11:31:17 DEBUG Work directory: E:\cangjie_test_suite\cangjie_test_framework\test_temp\run\import_multi_as_cj_fee9b55be9e611f0befb84a93e8bbbff
+2026-01-05 11:31:17 DEBUG execute cmd ===>>>: cjc.exe -j1 import.pkg.cj --output-type=staticlib -o import_multi_as.a
+2026-01-05 11:31:18 DEBUG return code: 0
+2026-01-05 11:31:18 DEBUG stdout : 
+
+2026-01-05 11:31:18 DEBUG stderr : 
+
+2026-01-05 11:31:18 DEBUG Run time: 0.59275 second, remain time: 599.41 second
+2026-01-05 11:31:18 DEBUG execute cmd ===>>>: cjc.exe -j1 importtwopkgs_withsamename_difforg.pkg.cj --output-type=staticlib
+2026-01-05 11:31:18 DEBUG return code: 0
+2026-01-05 11:31:18 DEBUG stdout : 
+
+2026-01-05 11:31:18 DEBUG stderr : 
+
+2026-01-05 11:31:18 DEBUG Run time: 0.5679 second, remain time: 598.84 second
+2026-01-05 11:31:18 DEBUG execute cmd ===>>>: cjc.exe -j1 import_multi_as.cj import_multi_as.a libb@m.a -o import_multi_as.exe
+2026-01-05 11:31:19 DEBUG return code: 1
+2026-01-05 11:31:19 DEBUG stdout : 
+
+2026-01-05 11:31:19 DEBUG stderr : 
+@	error[0m: invalid binary file 'libb@m.a'
+@	Invalid options. Try: 'cjc --help' for more information.
+
+2026-01-05 11:31:19 DEBUG Run time: 0.24715 second, remain time: 598.59 second
+2026-01-05 11:31:19 ERROR Failed!
+2026-01-05 11:31:19 ERROR Command return code 1 not equals to expected return code 0

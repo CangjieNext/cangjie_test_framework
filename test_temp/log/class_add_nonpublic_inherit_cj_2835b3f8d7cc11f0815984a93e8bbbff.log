@@ -1,0 +1,532 @@
+2025-12-13 10:33:50 DEBUG Log file at: E:\cangjie_test_suite\cangjie_test_framework\test_temp\log\class_add_nonpublic_inherit_cj_2835b3f8d7cc11f0815984a93e8bbbff.log
+2025-12-13 10:33:50 DEBUG Case Path: E:\cangjie_test_suite\cangjie_test_1208\testsuites\HLT\compiler\cjnative\stable_abi\05_class\01_add_delete\add\class_add_nonpublic_inherit.cj
+2025-12-13 10:33:50 DEBUG Work directory: E:\cangjie_test_suite\cangjie_test_framework\test_temp\run\class_add_nonpublic_inherit_cj_2835b3f8d7cc11f0815984a93e8bbbff
+2025-12-13 10:33:50 DEBUG execute cmd ===>>>: cjc --error-count-limit=all --diagnostic-format=json --output-type=dylib template.cj -o libstable_abi.dll
+2025-12-13 10:33:50 DEBUG return code: 0
+2025-12-13 10:33:50 DEBUG stdout : 
+
+2025-12-13 10:33:50 DEBUG stderr : 
+@	{
+@	    "Diags":[
+@	            {
+@	                "DiagKind": "chir_dce_unused_variable",
+@	                "Severity": "warning",
+@	                "WarnGroup": "unused",
+@	                "DiagCategory": "chir",
+@	                "Message": "unused variable:'a'",
+@	                "Location": {
+@	                    "File": "template.cj",
+@	                    "Line": 25,
+@	                    "Column": 27
+@	                },
+@	                "MainHint": {
+@	                    "Content": "unused variable",
+@	                    "Range": {
+@	                        "Begin": {
+@	                            "File": "template.cj",
+@	                            "Line": 25,
+@	                            "Column": 27
+@	                        },
+@	                        "End": {
+@	                            "File": "template.cj",
+@	                            "Line": 25,
+@	                            "Column": 28
+@	                        }
+@	                    }
+@	                },
+@	                "OtherHints": [],
+@	                "Notes": [
+@	                    {
+@	                        "Message": "this warning can be suppressed by setting the compiler option `-Woff unused`",
+@	                        "MainHint": null,
+@	                        "OtherHints": [],
+@	                        "Help": null
+@	                    }
+@	                ],
+@	                "Helps": []
+@	            },
+@	            {
+@	                "DiagKind": "chir_dce_unused_variable",
+@	                "Severity": "warning",
+@	                "WarnGroup": "unused",
+@	                "DiagCategory": "chir",
+@	                "Message": "unused variable:'a'",
+@	                "Location": {
+@	                    "File": "template.cj",
+@	                    "Line": 29,
+@	                    "Column": 29
+@	                },
+@	                "MainHint": {
+@	                    "Content": "unused variable",
+@	                    "Range": {
+@	                        "Begin": {
+@	                            "File": "template.cj",
+@	                            "Line": 29,
+@	                            "Column": 29
+@	                        },
+@	                        "End": {
+@	                            "File": "template.cj",
+@	                            "Line": 29,
+@	                            "Column": 30
+@	                        }
+@	                    }
+@	                },
+@	                "OtherHints": [],
+@	                "Notes": [
+@	                    {
+@	                        "Message": "this warning can be suppressed by setting the compiler option `-Woff unused`",
+@	                        "MainHint": null,
+@	                        "OtherHints": [],
+@	                        "Help": null
+@	                    }
+@	                ],
+@	                "Helps": []
+@	            },
+@	            {
+@	                "DiagKind": "chir_dce_unused_variable",
+@	                "Severity": "warning",
+@	                "WarnGroup": "unused",
+@	                "DiagCategory": "chir",
+@	                "Message": "unused variable:'a'",
+@	                "Location": {
+@	                    "File": "template.cj",
+@	                    "Line": 50,
+@	                    "Column": 27
+@	                },
+@	                "MainHint": {
+@	                    "Content": "unused variable",
+@	                    "Range": {
+@	                        "Begin": {
+@	                            "File": "template.cj",
+@	                            "Line": 50,
+@	                            "Column": 27
+@	                        },
+@	                        "End": {
+@	                            "File": "template.cj",
+@	                            "Line": 50,
+@	                            "Column": 28
+@	                        }
+@	                    }
+@	                },
+@	                "OtherHints": [],
+@	                "Notes": [
+@	                    {
+@	                        "Message": "this warning can be suppressed by setting the compiler option `-Woff unused`",
+@	                        "MainHint": null,
+@	                        "OtherHints": [],
+@	                        "Help": null
+@	                    }
+@	                ],
+@	                "Helps": []
+@	            },
+@	            {
+@	                "DiagKind": "chir_dce_unused_variable",
+@	                "Severity": "warning",
+@	                "WarnGroup": "unused",
+@	                "DiagCategory": "chir",
+@	                "Message": "unused variable:'a'",
+@	                "Location": {
+@	                    "File": "template.cj",
+@	                    "Line": 54,
+@	                    "Column": 29
+@	                },
+@	                "MainHint": {
+@	                    "Content": "unused variable",
+@	                    "Range": {
+@	                        "Begin": {
+@	                            "File": "template.cj",
+@	                            "Line": 54,
+@	                            "Column": 29
+@	                        },
+@	                        "End": {
+@	                            "File": "template.cj",
+@	                            "Line": 54,
+@	                            "Column": 30
+@	                        }
+@	                    }
+@	                },
+@	                "OtherHints": [],
+@	                "Notes": [
+@	                    {
+@	                        "Message": "this warning can be suppressed by setting the compiler option `-Woff unused`",
+@	                        "MainHint": null,
+@	                        "OtherHints": [],
+@	                        "Help": null
+@	                    }
+@	                ],
+@	                "Helps": []
+@	            }
+@	    ],
+@	    "Num":{
+@	        "Errors": 0,
+@	        "PrintedErrors": 0,
+@	        "Warnings": 4,
+@	        "PrintedWarnings": 4
+@	    }
+@	}
+
+2025-12-13 10:33:50 DEBUG Run time: 0.66532 second, remain time: 599.33 second
+2025-12-13 10:33:50 DEBUG execute cmd ===>>>: cjc --error-count-limit=all --diagnostic-format=json main.cj -L. -lstable_abi -o class_add_nonpublic_inherit.exe
+2025-12-13 10:33:51 DEBUG return code: 0
+2025-12-13 10:33:51 DEBUG stdout : 
+
+2025-12-13 10:33:51 DEBUG stderr : 
+
+2025-12-13 10:33:51 DEBUG Run time: 0.62912 second, remain time: 598.71 second
+2025-12-13 10:33:51 DEBUG execute cmd ===>>>: set LD_LIBRARY_PATH=%chdir%:%LD_LIBRARY_PATH% && class_add_nonpublic_inherit.exe
+2025-12-13 10:33:51 DEBUG return code: 0
+2025-12-13 10:33:51 DEBUG stdout : 
+
+2025-12-13 10:33:51 DEBUG stderr : 
+
+2025-12-13 10:33:51 DEBUG Run time: 0.297 second, remain time: 598.41 second
+2025-12-13 10:33:51 DEBUG execute cmd ===>>>: del libstable_abi.*
+2025-12-13 10:33:51 DEBUG return code: 0
+2025-12-13 10:33:51 DEBUG stdout : 
+
+2025-12-13 10:33:51 DEBUG stderr : 
+
+2025-12-13 10:33:51 DEBUG Run time: 0.013862 second, remain time: 598.39 second
+2025-12-13 10:33:51 DEBUG execute cmd ===>>>: move test_stable_abi.cjo old.cjo
+2025-12-13 10:33:51 DEBUG return code: 0
+2025-12-13 10:33:51 DEBUG stdout : 
++	        1 file(s) moved.
+
+2025-12-13 10:33:51 DEBUG stderr : 
+
+2025-12-13 10:33:51 DEBUG Run time: 0.017414 second, remain time: 598.38 second
+2025-12-13 10:33:51 DEBUG execute cmd ===>>>: cjc --error-count-limit=all --diagnostic-format=json --output-type=dylib class_add_nonpublic_inherit.cj -o libstable_abi.dll
+2025-12-13 10:33:52 DEBUG return code: 0
+2025-12-13 10:33:52 DEBUG stdout : 
+
+2025-12-13 10:33:52 DEBUG stderr : 
+@	{
+@	    "Diags":[
+@	            {
+@	                "DiagKind": "chir_dce_unused_variable",
+@	                "Severity": "warning",
+@	                "WarnGroup": "unused",
+@	                "DiagCategory": "chir",
+@	                "Message": "unused variable:'a'",
+@	                "Location": {
+@	                    "File": "class_add_nonpublic_inherit.cj",
+@	                    "Line": 49,
+@	                    "Column": 27
+@	                },
+@	                "MainHint": {
+@	                    "Content": "unused variable",
+@	                    "Range": {
+@	                        "Begin": {
+@	                            "File": "class_add_nonpublic_inherit.cj",
+@	                            "Line": 49,
+@	                            "Column": 27
+@	                        },
+@	                        "End": {
+@	                            "File": "class_add_nonpublic_inherit.cj",
+@	                            "Line": 49,
+@	                            "Column": 28
+@	                        }
+@	                    }
+@	                },
+@	                "OtherHints": [],
+@	                "Notes": [
+@	                    {
+@	                        "Message": "this warning can be suppressed by setting the compiler option `-Woff unused`",
+@	                        "MainHint": null,
+@	                        "OtherHints": [],
+@	                        "Help": null
+@	                    }
+@	                ],
+@	                "Helps": []
+@	            },
+@	            {
+@	                "DiagKind": "chir_dce_unused_variable",
+@	                "Severity": "warning",
+@	                "WarnGroup": "unused",
+@	                "DiagCategory": "chir",
+@	                "Message": "unused variable:'a'",
+@	                "Location": {
+@	                    "File": "class_add_nonpublic_inherit.cj",
+@	                    "Line": 53,
+@	                    "Column": 29
+@	                },
+@	                "MainHint": {
+@	                    "Content": "unused variable",
+@	                    "Range": {
+@	                        "Begin": {
+@	                            "File": "class_add_nonpublic_inherit.cj",
+@	                            "Line": 53,
+@	                            "Column": 29
+@	                        },
+@	                        "End": {
+@	                            "File": "class_add_nonpublic_inherit.cj",
+@	                            "Line": 53,
+@	                            "Column": 30
+@	                        }
+@	                    }
+@	                },
+@	                "OtherHints": [],
+@	                "Notes": [
+@	                    {
+@	                        "Message": "this warning can be suppressed by setting the compiler option `-Woff unused`",
+@	                        "MainHint": null,
+@	                        "OtherHints": [],
+@	                        "Help": null
+@	                    }
+@	                ],
+@	                "Helps": []
+@	            },
+@	            {
+@	                "DiagKind": "chir_dce_unused_variable",
+@	                "Severity": "warning",
+@	                "WarnGroup": "unused",
+@	                "DiagCategory": "chir",
+@	                "Message": "unused variable:'a'",
+@	                "Location": {
+@	                    "File": "class_add_nonpublic_inherit.cj",
+@	                    "Line": 74,
+@	                    "Column": 27
+@	                },
+@	                "MainHint": {
+@	                    "Content": "unused variable",
+@	                    "Range": {
+@	                        "Begin": {
+@	                            "File": "class_add_nonpublic_inherit.cj",
+@	                            "Line": 74,
+@	                            "Column": 27
+@	                        },
+@	                        "End": {
+@	                            "File": "class_add_nonpublic_inherit.cj",
+@	                            "Line": 74,
+@	                            "Column": 28
+@	                        }
+@	                    }
+@	                },
+@	                "OtherHints": [],
+@	                "Notes": [
+@	                    {
+@	                        "Message": "this warning can be suppressed by setting the compiler option `-Woff unused`",
+@	                        "MainHint": null,
+@	                        "OtherHints": [],
+@	                        "Help": null
+@	                    }
+@	                ],
+@	                "Helps": []
+@	            },
+@	            {
+@	                "DiagKind": "chir_dce_unused_variable",
+@	                "Severity": "warning",
+@	                "WarnGroup": "unused",
+@	                "DiagCategory": "chir",
+@	                "Message": "unused variable:'a'",
+@	                "Location": {
+@	                    "File": "class_add_nonpublic_inherit.cj",
+@	                    "Line": 78,
+@	                    "Column": 29
+@	                },
+@	                "MainHint": {
+@	                    "Content": "unused variable",
+@	                    "Range": {
+@	                        "Begin": {
+@	                            "File": "class_add_nonpublic_inherit.cj",
+@	                            "Line": 78,
+@	                            "Column": 29
+@	                        },
+@	                        "End": {
+@	                            "File": "class_add_nonpublic_inherit.cj",
+@	                            "Line": 78,
+@	                            "Column": 30
+@	                        }
+@	                    }
+@	                },
+@	                "OtherHints": [],
+@	                "Notes": [
+@	                    {
+@	                        "Message": "this warning can be suppressed by setting the compiler option `-Woff unused`",
+@	                        "MainHint": null,
+@	                        "OtherHints": [],
+@	                        "Help": null
+@	                    }
+@	                ],
+@	                "Helps": []
+@	            },
+@	            {
+@	                "DiagKind": "chir_dce_unused_variable",
+@	                "Severity": "warning",
+@	                "WarnGroup": "unused",
+@	                "DiagCategory": "chir",
+@	                "Message": "unused variable:'a'",
+@	                "Location": {
+@	                    "File": "class_add_nonpublic_inherit.cj",
+@	                    "Line": 93,
+@	                    "Column": 31
+@	                },
+@	                "MainHint": {
+@	                    "Content": "unused variable",
+@	                    "Range": {
+@	                        "Begin": {
+@	                            "File": "class_add_nonpublic_inherit.cj",
+@	                            "Line": 93,
+@	                            "Column": 31
+@	                        },
+@	                        "End": {
+@	                            "File": "class_add_nonpublic_inherit.cj",
+@	                            "Line": 93,
+@	                            "Column": 32
+@	                        }
+@	                    }
+@	                },
+@	                "OtherHints": [],
+@	                "Notes": [
+@	                    {
+@	                        "Message": "this warning can be suppressed by setting the compiler option `-Woff unused`",
+@	                        "MainHint": null,
+@	                        "OtherHints": [],
+@	                        "Help": null
+@	                    }
+@	                ],
+@	                "Helps": []
+@	            },
+@	            {
+@	                "DiagKind": "chir_dce_unused_variable",
+@	                "Severity": "warning",
+@	                "WarnGroup": "unused",
+@	                "DiagCategory": "chir",
+@	                "Message": "unused variable:'a'",
+@	                "Location": {
+@	                    "File": "class_add_nonpublic_inherit.cj",
+@	                    "Line": 97,
+@	                    "Column": 35
+@	                },
+@	                "MainHint": {
+@	                    "Content": "unused variable",
+@	                    "Range": {
+@	                        "Begin": {
+@	                            "File": "class_add_nonpublic_inherit.cj",
+@	                            "Line": 97,
+@	                            "Column": 35
+@	                        },
+@	                        "End": {
+@	                            "File": "class_add_nonpublic_inherit.cj",
+@	                            "Line": 97,
+@	                            "Column": 36
+@	                        }
+@	                    }
+@	                },
+@	                "OtherHints": [],
+@	                "Notes": [
+@	                    {
+@	                        "Message": "this warning can be suppressed by setting the compiler option `-Woff unused`",
+@	                        "MainHint": null,
+@	                        "OtherHints": [],
+@	                        "Help": null
+@	                    }
+@	                ],
+@	                "Helps": []
+@	            },
+@	            {
+@	                "DiagKind": "chir_dce_unused_variable",
+@	                "Severity": "warning",
+@	                "WarnGroup": "unused",
+@	                "DiagCategory": "chir",
+@	                "Message": "unused variable:'a'",
+@	                "Location": {
+@	                    "File": "class_add_nonpublic_inherit.cj",
+@	                    "Line": 110,
+@	                    "Column": 31
+@	                },
+@	                "MainHint": {
+@	                    "Content": "unused variable",
+@	                    "Range": {
+@	                        "Begin": {
+@	                            "File": "class_add_nonpublic_inherit.cj",
+@	                            "Line": 110,
+@	                            "Column": 31
+@	                        },
+@	                        "End": {
+@	                            "File": "class_add_nonpublic_inherit.cj",
+@	                            "Line": 110,
+@	                            "Column": 32
+@	                        }
+@	                    }
+@	                },
+@	                "OtherHints": [],
+@	                "Notes": [
+@	                    {
+@	                        "Message": "this warning can be suppressed by setting the compiler option `-Woff unused`",
+@	                        "MainHint": null,
+@	                        "OtherHints": [],
+@	                        "Help": null
+@	                    }
+@	                ],
+@	                "Helps": []
+@	            },
+@	            {
+@	                "DiagKind": "chir_dce_unused_variable",
+@	                "Severity": "warning",
+@	                "WarnGroup": "unused",
+@	                "DiagCategory": "chir",
+@	                "Message": "unused variable:'a'",
+@	                "Location": {
+@	                    "File": "class_add_nonpublic_inherit.cj",
+@	                    "Line": 114,
+@	                    "Column": 35
+@	                },
+@	                "MainHint": {
+@	                    "Content": "unused variable",
+@	                    "Range": {
+@	                        "Begin": {
+@	                            "File": "class_add_nonpublic_inherit.cj",
+@	                            "Line": 114,
+@	                            "Column": 35
+@	                        },
+@	                        "End": {
+@	                            "File": "class_add_nonpublic_inherit.cj",
+@	                            "Line": 114,
+@	                            "Column": 36
+@	                        }
+@	                    }
+@	                },
+@	                "OtherHints": [],
+@	                "Notes": [
+@	                    {
+@	                        "Message": "this warning can be suppressed by setting the compiler option `-Woff unused`",
+@	                        "MainHint": null,
+@	                        "OtherHints": [],
+@	                        "Help": null
+@	                    }
+@	                ],
+@	                "Helps": []
+@	            }
+@	    ],
+@	    "Num":{
+@	        "Errors": 0,
+@	        "PrintedErrors": 0,
+@	        "Warnings": 8,
+@	        "PrintedWarnings": 8
+@	    }
+@	}
+
+2025-12-13 10:33:52 DEBUG Run time: 0.63558 second, remain time: 597.74 second
+2025-12-13 10:33:52 DEBUG execute cmd ===>>>: set LD_LIBRARY_PATH=%chdir%:%LD_LIBRARY_PATH% && class_add_nonpublic_inherit.exe
+2025-12-13 10:33:52 DEBUG return code: 0
+2025-12-13 10:33:52 DEBUG stdout : 
+
+2025-12-13 10:33:52 DEBUG stderr : 
+
+2025-12-13 10:33:52 DEBUG Run time: 0.10624 second, remain time: 597.64 second
+2025-12-13 10:33:52 DEBUG execute cmd ===>>>: cjc --error-count-limit=all --diagnostic-format=json main.cj -L. -lstable_abi -o class_add_nonpublic_inherit.exe
+2025-12-13 10:33:53 DEBUG return code: 0
+2025-12-13 10:33:53 DEBUG stdout : 
+
+2025-12-13 10:33:53 DEBUG stderr : 
+
+2025-12-13 10:33:53 DEBUG Run time: 0.69759 second, remain time: 596.94 second
+2025-12-13 10:33:53 DEBUG execute cmd ===>>>: set LD_LIBRARY_PATH=%chdir%:%LD_LIBRARY_PATH% && class_add_nonpublic_inherit.exe
+2025-12-13 10:33:53 DEBUG return code: 0
+2025-12-13 10:33:53 DEBUG stdout : 
+
+2025-12-13 10:33:53 DEBUG stderr : 
+
+2025-12-13 10:33:53 DEBUG Run time: 0.090352 second, remain time: 596.85 second
+2025-12-13 10:33:53 DEBUG Task executed successfully

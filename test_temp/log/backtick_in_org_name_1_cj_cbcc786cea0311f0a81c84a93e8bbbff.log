@@ -1,0 +1,125 @@
+2026-01-05 14:57:31 DEBUG Log file at: E:\cangjie_test_suite\cangjie_test_framework\test_temp\log\backtick_in_org_name_1_cj_cbcc786cea0311f0a81c84a93e8bbbff.log
+2026-01-05 14:57:31 DEBUG Case Path: E:\cangjie_test_suite\cangjie_test\testsuites\HLT\compiler\cjnative\Packages\org_name\import_decl\backtick_in_org_name_1.cj
+2026-01-05 14:57:31 DEBUG Work directory: E:\cangjie_test_suite\cangjie_test_framework\test_temp\run\backtick_in_org_name_1_cj_cbcc786cea0311f0a81c84a93e8bbbff
+2026-01-05 14:57:31 DEBUG execute cmd ===>>>: cjc --error-count-limit=all --diagnostic-format=json --output-type=dylib upstream_package.cj
+2026-01-05 14:57:33 DEBUG return code: 0
+2026-01-05 14:57:33 DEBUG stdout : 
+
+2026-01-05 14:57:33 DEBUG stderr : 
+
+2026-01-05 14:57:33 DEBUG Run time: 1.7879 second, remain time: 598.21 second
+2026-01-05 14:57:33 DEBUG execute cmd ===>>>: cjc --error-count-limit=all --diagnostic-format=json backtick_in_org_name_1.cj -L. -lmy_pkg@my_org -o backtick_in_org_name_1.exe 2>&1
+2026-01-05 14:57:33 DEBUG return code: 1
+2026-01-05 14:57:33 DEBUG stdout : 
++	{
++	    "Diags":[
++	            {
++	                "DiagKind": "package_search_error",
++	                "Severity": "error",
++	                "WarnGroup": "none",
++	                "DiagCategory": "import_package",
++	                "Message": "can not find package 'xxx::my_pkg'",
++	                "Location": {
++	                    "File": "backtick_in_org_name_1.cj",
++	                    "Line": 16,
++	                    "Column": 9
++	                },
++	                "MainHint": {
++	                    "Content": "",
++	                    "Range": {
++	                        "Begin": {
++	                            "File": "backtick_in_org_name_1.cj",
++	                            "Line": 16,
++	                            "Column": 9
++	                        },
++	                        "End": {
++	                            "File": "backtick_in_org_name_1.cj",
++	                            "Line": 16,
++	                            "Column": 21
++	                        }
++	                    }
++	                },
++	                "OtherHints": [],
++	                "Notes": [],
++	                "Helps": [
++	                    {
++	                        "Message": "check if the .cjo file of the package exists in CANGJIE_PATH or CANGJIE_HOME, or use '--import-path' to specify the .cjo file path",
++	                        "Substitutions": []
++	                    }
++	                ]
++	            }
++	    ],
++	    "Num":{
++	        "Errors": 1,
++	        "PrintedErrors": 1,
++	        "Warnings": 0,
++	        "PrintedWarnings": 0
++	    }
++	}
+
+2026-01-05 14:57:33 DEBUG stderr : 
+
+2026-01-05 14:57:33 DEBUG Run time: 0.67323 second, remain time: 597.54 second
+2026-01-05 14:57:33 DEBUG execute cmd ===>>>: C:\Python314\python.exe E:\cangjie_test_suite\cangjie_test_framework\maple_test\compare.py --comment="//" --condition="'CJNATIVE', 'Windows', 'x86'" backtick_in_org_name_1.cj
+2026-01-05 14:57:34 DEBUG return code: 1
+2026-01-05 14:57:34 DEBUG stdout : 
++	compare.py input:
++		{
++		    "Diags":[
++		            {
++		                "DiagKind": "package_search_error",
++		                "Severity": "error",
++		                "WarnGroup": "none",
++		                "DiagCategory": "import_package",
++		                "Message": "can not find package 'xxx::my_pkg'",
++		                "Location": {
++		                    "File": "backtick_in_org_name_1.cj",
++		                    "Line": 16,
++		                    "Column": 9
++		                },
++		                "MainHint": {
++		                    "Content": "",
++		                    "Range": {
++		                        "Begin": {
++		                            "File": "backtick_in_org_name_1.cj",
++		                            "Line": 16,
++		                            "Column": 9
++		                        },
++		                        "End": {
++		                            "File": "backtick_in_org_name_1.cj",
++		                            "Line": 16,
++		                            "Column": 21
++		                        }
++		                    }
++		                },
++		                "OtherHints": [],
++		                "Notes": [],
++		                "Helps": [
++		                    {
++		                        "Message": "check if the .cjo file of the package exists in CANGJIE_PATH or CANGJIE_HOME, or use '--import-path' to specify the .cjo file path",
++		                        "Substitutions": []
++		                    }
++		                ]
++		            }
++		    ],
++		    "Num":{
++		        "Errors": 1,
++		        "PrintedErrors": 1,
++		        "Warnings": 0,
++		        "PrintedWarnings": 0
++		    }
++		}
++	
++	compare.py input end
++	
++	Starting SingleLine Compare:
++	b"It's a assert, flag: scan, pattern: parse_package_name_has_backtick , result: False, matched at output line: 0 "
++	back reference dict:{}
++	SingleLine Compare Failed
++	[Compare Fail]
+
+2026-01-05 14:57:34 DEBUG stderr : 
+
+2026-01-05 14:57:34 DEBUG Run time: 0.65091 second, remain time: 596.89 second
+2026-01-05 14:57:34 ERROR Failed!
+2026-01-05 14:57:34 ERROR Command return code 1 not equals to expected return code 0

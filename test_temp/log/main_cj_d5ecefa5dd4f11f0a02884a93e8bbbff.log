@@ -1,0 +1,107 @@
+2025-12-20 10:59:22 DEBUG Log file at: E:\cangjie_test_suite\cangjie_test_framework\test_temp\log\main_cj_d5ecefa5dd4f11f0a02884a93e8bbbff.log
+2025-12-20 10:59:22 DEBUG Case Path: E:\cangjie_test_suite\cangjie_test\testsuites\HLT\compiler\cjnative\Function\Overload\enum\TestCase_351\main.cj
+2025-12-20 10:59:22 DEBUG Work directory: E:\cangjie_test_suite\cangjie_test_framework\test_temp\run\main_cj_d5ecefa5dd4f11f0a02884a93e8bbbff
+2025-12-20 10:59:23 DEBUG execute cmd ===>>>: cjc main.cj --error-count-limit=all --diagnostic-format=json 2>&1
+2025-12-20 10:59:23 DEBUG return code: 1
+2025-12-20 10:59:23 DEBUG stdout : 
++	{
++	    "Diags":[
++	            {
++	                "DiagKind": "sema_generic_type_without_type_argument",
++	                "Severity": "error",
++	                "WarnGroup": "none",
++	                "DiagCategory": "sema",
++	                "Message": "generic type should be used with type argument",
++	                "Location": {
++	                    "File": "main.cj",
++	                    "Line": 31,
++	                    "Column": 18
++	                },
++	                "MainHint": {
++	                    "Content": "",
++	                    "Range": {
++	                        "Begin": {
++	                            "File": "main.cj",
++	                            "Line": 31,
++	                            "Column": 18
++	                        },
++	                        "End": {
++	                            "File": "main.cj",
++	                            "Line": 31,
++	                            "Column": 19
++	                        }
++	                    }
++	                },
++	                "OtherHints": [],
++	                "Notes": [],
++	                "Helps": []
++	            }
++	    ],
++	    "Num":{
++	        "Errors": 1,
++	        "PrintedErrors": 1,
++	        "Warnings": 0,
++	        "PrintedWarnings": 0
++	    }
++	}
+
+2025-12-20 10:59:23 DEBUG stderr : 
+
+2025-12-20 10:59:23 DEBUG Run time: 0.59427 second, remain time: 179.41 second
+2025-12-20 10:59:23 DEBUG execute cmd ===>>>: C:\Python314\python.exe E:\cangjie_test_suite\cangjie_test_framework\maple_test\compare.py --comment="//" --condition="'Windows', 'CJNATIVE', 'x86'" main.cj
+2025-12-20 10:59:24 DEBUG return code: 0
+2025-12-20 10:59:24 DEBUG stdout : 
++	compare.py input:
++		{
++		    "Diags":[
++		            {
++		                "DiagKind": "sema_generic_type_without_type_argument",
++		                "Severity": "error",
++		                "WarnGroup": "none",
++		                "DiagCategory": "sema",
++		                "Message": "generic type should be used with type argument",
++		                "Location": {
++		                    "File": "main.cj",
++		                    "Line": 31,
++		                    "Column": 18
++		                },
++		                "MainHint": {
++		                    "Content": "",
++		                    "Range": {
++		                        "Begin": {
++		                            "File": "main.cj",
++		                            "Line": 31,
++		                            "Column": 18
++		                        },
++		                        "End": {
++		                            "File": "main.cj",
++		                            "Line": 31,
++		                            "Column": 19
++		                        }
++		                    }
++		                },
++		                "OtherHints": [],
++		                "Notes": [],
++		                "Helps": []
++		            }
++		    ],
++		    "Num":{
++		        "Errors": 1,
++		        "PrintedErrors": 1,
++		        "Warnings": 0,
++		        "PrintedWarnings": 0
++		    }
++		}
++	
++	compare.py input end
++	
++	Starting SingleLine Compare:
++	b"It's a assert, flag: scan, pattern: sema_generic_type_without_type_argument , result: True, matched at output line: 0 "
++	back reference dict:{}
++	SingleLine Compare End
++	[Compare Pass]
+
+2025-12-20 10:59:24 DEBUG stderr : 
+
+2025-12-20 10:59:24 DEBUG Run time: 0.52793 second, remain time: 178.88 second
+2025-12-20 10:59:24 DEBUG Task executed successfully
