@@ -1,0 +1,43 @@
+2026-01-05 14:39:30 DEBUG Log file at: E:\cangjie_test_suite\cangjie_test_framework\test_temp\log\complex_import_0_cj_479d66dcea0111f090e684a93e8bbbff.log
+2026-01-05 14:39:30 DEBUG Case Path: E:\cangjie_test_suite\cangjie_test\testsuites\HLT\compiler\cjnative\Packages\org_name\import_decl\complex_import_0.cj
+2026-01-05 14:39:30 DEBUG Work directory: E:\cangjie_test_suite\cangjie_test_framework\test_temp\run\complex_import_0_cj_479d66dcea0111f090e684a93e8bbbff
+2026-01-05 14:39:30 DEBUG execute cmd ===>>>: cjc --error-count-limit=all --diagnostic-format=json --output-type=dylib root_pkg.cj
+2026-01-05 14:39:31 DEBUG return code: 0
+2026-01-05 14:39:31 DEBUG stdout : 
+
+2026-01-05 14:39:31 DEBUG stderr : 
+
+2026-01-05 14:39:31 DEBUG Run time: 0.94252 second, remain time: 599.06 second
+2026-01-05 14:39:31 DEBUG execute cmd ===>>>: cjc --error-count-limit=all --diagnostic-format=json --output-type=dylib upstream_package.cj
+2026-01-05 14:39:32 DEBUG return code: 0
+2026-01-05 14:39:32 DEBUG stdout : 
+
+2026-01-05 14:39:32 DEBUG stderr : 
+
+2026-01-05 14:39:32 DEBUG Run time: 0.99962 second, remain time: 598.06 second
+2026-01-05 14:39:32 DEBUG execute cmd ===>>>: cjc --error-count-limit=all --diagnostic-format=json --output-type=dylib sub_pkg.cj
+2026-01-05 14:39:33 DEBUG return code: 0
+2026-01-05 14:39:33 DEBUG stdout : 
+
+2026-01-05 14:39:33 DEBUG stderr : 
+
+2026-01-05 14:39:33 DEBUG Run time: 0.93434 second, remain time: 597.12 second
+2026-01-05 14:39:33 DEBUG execute cmd ===>>>: cjc --error-count-limit=all --diagnostic-format=json --output-type=dylib sub_sub_pkg.cj
+2026-01-05 14:39:34 DEBUG return code: 0
+2026-01-05 14:39:34 DEBUG stdout : 
+
+2026-01-05 14:39:34 DEBUG stderr : 
+
+2026-01-05 14:39:34 DEBUG Run time: 0.70202 second, remain time: 596.42 second
+2026-01-05 14:39:34 DEBUG execute cmd ===>>>: ls -la
+2026-01-05 14:39:34 DEBUG Can not decode stderr with utf-8, ignore error!
+2026-01-05 14:39:34 DEBUG return code: 1
+2026-01-05 14:39:34 DEBUG stdout : 
+
+2026-01-05 14:39:34 DEBUG stderr : 
+@	'ls' ڲⲿҲǿеĳ
+@	ļ
+
+2026-01-05 14:39:34 DEBUG Run time: 0.018159 second, remain time: 596.4 second
+2026-01-05 14:39:34 ERROR Failed!
+2026-01-05 14:39:34 ERROR Command return code 1 not equals to expected return code 0

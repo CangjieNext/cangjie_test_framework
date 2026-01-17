@@ -1,0 +1,182 @@
+2025-12-17 12:14:48 DEBUG Log file at: E:\cangjie_test_suite\cangjie_test_framework\test_temp\log\test_info_ed117f0bdafe11f0b7a084a93e8bbbff.log
+2025-12-17 12:14:48 DEBUG Case Path: E:\cangjie_test_suite\cangjie_test\testsuites\HLT\compiler\cjnative\HLE\c\union\test.info
+2025-12-17 12:14:48 DEBUG Work directory: E:\cangjie_test_suite\cangjie_test_framework\test_temp\run\test_info_ed117f0bdafe11f0b7a084a93e8bbbff
+2025-12-17 12:14:48 DEBUG execute cmd ===>>>: %CANGJIE_HOME%/tools/bin/hle -c -b %CANGJIE_HOME%/tools/dtsparser/node_modules/.bin/cjbind.exe --module-name="my_module" -i a.h -o . --clang-args=""
+2025-12-17 12:14:50 DEBUG return code: 0
+2025-12-17 12:14:50 DEBUG stdout : 
++	========Generate C to cangjie bindings Begins!========
++	The out dir is:./
++	The command is: E:\sdk\cangjie-sdk-windows-x64-1.1.0-alpha.42_1213\cangjie\/tools/dtsparser/node_modules/.bin/cjbind.exe --auto-cstring --array-pointers-in-args --no-layout-test  -p my_module -o ./a.cj a.h -- 
++	========Generate C to cangjie bindings end!========
++	total cost of hle: 1s23ms239us300ns
+
+2025-12-17 12:14:50 DEBUG stderr : 
+
+2025-12-17 12:14:50 DEBUG Run time: 1.3161 second, remain time: 178.68 second
+2025-12-17 12:14:50 DEBUG execute cmd ===>>>: type a.cj
+2025-12-17 12:14:50 DEBUG return code: 0
+2025-12-17 12:14:50 DEBUG stdout : 
++	// Copyright (c) Huawei Technologies Co., Ltd. 2025. All rights reserved.
++	// This source file is part of the Cangjie project, licensed under Apache-2.0
++	// with Runtime Library Exception.
++	//
++	// See https://cangjie-lang.cn/pages/LICENSE for license information.
++	
++	package my_module
++	
++	@C
++	public struct X {
++	    let _cjbind_opaque_blob: UInt64
++	
++	    public init() {
++	        this._cjbind_opaque_blob = unsafe { zeroValue<UInt64>() }
++	    }
++	}
++	
++	@C
++	public struct _cjbind_ty_1 {
++	    public let length: Int32
++	    public let cproto: Int32
++	
++	    public init(length: Int32, cproto: Int32) {
++	        this.length = length
++	        this.cproto = cproto
++	    }
++	}
++	
++	@C
++	public struct _cjbind_ty_2 {
++	    public let name: CString
++	    public let base: Int32
++	
++	    public init(name: CString, base: Int32) {
++	        this.name = name
++	        this.base = base
++	    }
++	}
++	
++	@C
++	public struct _cjbind_ty_3 {
++	    public let tab: CPointer<JSCFunctionListEntry>
++	    public let len: Int32
++	
++	    public init(tab: CPointer<JSCFunctionListEntry>, len: Int32) {
++	        this.tab = tab
++	        this.len = len
++	    }
++	}
++	
++	@C
++	public struct _cjbind_ty_4 {
++	    let _cjbind_opaque_blob: VArray<UInt64, $2>
++	
++	    public init() {
++	        this._cjbind_opaque_blob = unsafe { zeroValue<VArray<UInt64, $2>>() }
++	    }
++	}
++	
++	/*FIXME: Non-constant global variable details need to be verified and rewritten by user.*/
++	/* union { struct { int length ; /* XXX: should move outside union */ int cproto ; /* XXX: should move outside union */ } func ; struct { const char * name ; int base ; } alias ; struct { const struct JSCFunctionListEntry * tab ; int len ; } prop_list ; const char * str ; int i32 ; int i64 ; double f64 ; } u */
++	
++	@C
++	public struct JSCFunctionListEntry {}
+
+2025-12-17 12:14:50 DEBUG stderr : 
+
+2025-12-17 12:14:50 DEBUG Run time: 0.12005 second, remain time: 178.56 second
+2025-12-17 12:14:50 DEBUG execute cmd ===>>>: C:\Python314\python.exe E:\cangjie_test_suite\cangjie_test_framework\maple_test\compare.py --comment="//" --condition="'CJNATIVE', 'Windows', 'x86'" test.info
+2025-12-17 12:14:50 DEBUG return code: 0
+2025-12-17 12:14:50 DEBUG stdout : 
++	compare.py input:
++		// Copyright (c) Huawei Technologies Co., Ltd. 2025. All rights reserved.
++		// This source file is part of the Cangjie project, licensed under Apache-2.0
++		// with Runtime Library Exception.
++		//
++		// See https://cangjie-lang.cn/pages/LICENSE for license information.
++		
++		package my_module
++		
++		@C
++		public struct X {
++		    let _cjbind_opaque_blob: UInt64
++		
++		    public init() {
++		        this._cjbind_opaque_blob = unsafe { zeroValue<UInt64>() }
++		    }
++		}
++		
++		@C
++		public struct _cjbind_ty_1 {
++		    public let length: Int32
++		    public let cproto: Int32
++		
++		    public init(length: Int32, cproto: Int32) {
++		        this.length = length
++		        this.cproto = cproto
++		    }
++		}
++		
++		@C
++		public struct _cjbind_ty_2 {
++		    public let name: CString
++		    public let base: Int32
++		
++		    public init(name: CString, base: Int32) {
++		        this.name = name
++		        this.base = base
++		    }
++		}
++		
++		@C
++		public struct _cjbind_ty_3 {
++		    public let tab: CPointer<JSCFunctionListEntry>
++		    public let len: Int32
++		
++		    public init(tab: CPointer<JSCFunctionListEntry>, len: Int32) {
++		        this.tab = tab
++		        this.len = len
++		    }
++		}
++		
++		@C
++		public struct _cjbind_ty_4 {
++		    let _cjbind_opaque_blob: VArray<UInt64, $2>
++		
++		    public init() {
++		        this._cjbind_opaque_blob = unsafe { zeroValue<VArray<UInt64, $2>>() }
++		    }
++		}
++		
++		/*FIXME: Non-constant global variable details need to be verified and rewritten by user.*/
++		/* union { struct { int length ; /* XXX: should move outside union */ int cproto ; /* XXX: should move outside union */ } func ; struct { const char * name ; int base ; } alias ; struct { const struct JSCFunctionListEntry * tab ; int len ; } prop_list ; const char * str ; int i32 ; int i64 ; double f64 ; } u */
++		
++		@C
++		public struct JSCFunctionListEntry {}
++	
++	compare.py input end
++	
++	Starting SingleLine Compare:
++	b"It's a assert, flag: scan, pattern: public struct X  , result: True, matched at output line: 0 "
++	back reference dict:{}
++	SingleLine Compare End
++	b"It's a assert, flag: scan, pattern: this._cjbind_opaque_blob = unsafe { zeroValue<UInt64>() } , result: True, matched at output line: 9 "
++	back reference dict:{}
++	SingleLine Compare End
++	b"It's a assert, flag: scan, pattern: public init(length: Int32, cproto: Int32) , result: True, matched at output line: 14 "
++	back reference dict:{}
++	SingleLine Compare End
++	b"It's a assert, flag: scan, pattern: public init(name: CString, base: Int32) , result: True, matched at output line: 23 "
++	back reference dict:{}
++	SingleLine Compare End
++	b"It's a assert, flag: scan, pattern: public init(tab: CPointer<JSCFunctionListEntry>, len: Int32) , result: True, matched at output line: 34 "
++	back reference dict:{}
++	SingleLine Compare End
++	b"It's a assert, flag: scan, pattern: public struct JSCFunctionListEntry , result: True, matched at output line: 45 "
++	back reference dict:{}
++	SingleLine Compare End
++	[Compare Pass]
+
+2025-12-17 12:14:50 DEBUG stderr : 
+
+2025-12-17 12:14:50 DEBUG Run time: 0.72965 second, remain time: 177.83 second
+2025-12-17 12:14:50 DEBUG Task executed successfully

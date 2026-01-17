@@ -1,0 +1,3 @@
+2025-12-18 18:54:15 DEBUG Log file at: E:\cangjie_test_suite\cangjie_test_framework\test_temp\log\test_info_e4ea6d7adbff11f0afb984a93e8bbbff.log
+2025-12-18 18:54:15 DEBUG Case Path: E:\cangjie_test_suite\cangjie_test\testsuites\HLT\compiler\cjnative\visibility\overload\testcase_0\test.info
+2025-12-18 18:54:15 ERROR Run task exit unexpected : DEPENDENCE keyword error, file: c.cj NotFound

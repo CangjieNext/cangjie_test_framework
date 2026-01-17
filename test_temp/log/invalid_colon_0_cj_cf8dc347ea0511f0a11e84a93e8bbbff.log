@@ -1,0 +1,75 @@
+2026-01-05 15:11:57 DEBUG Log file at: E:\cangjie_test_suite\cangjie_test_framework\test_temp\log\invalid_colon_0_cj_cf8dc347ea0511f0a11e84a93e8bbbff.log
+2026-01-05 15:11:57 DEBUG Case Path: E:\cangjie_test_suite\cangjie_test\testsuites\HLT\compiler\cjnative\Packages\org_name\import_decl\invalid_colon_0.cj
+2026-01-05 15:11:57 DEBUG Work directory: E:\cangjie_test_suite\cangjie_test_framework\test_temp\run\invalid_colon_0_cj_cf8dc347ea0511f0a11e84a93e8bbbff
+2026-01-05 15:11:57 DEBUG execute cmd ===>>>: cjc --error-count-limit=all --diagnostic-format=json --output-type=dylib upstream_package.cj
+2026-01-05 15:11:59 DEBUG return code: 0
+2026-01-05 15:11:59 DEBUG stdout : 
+
+2026-01-05 15:11:59 DEBUG stderr : 
+
+2026-01-05 15:11:59 DEBUG Run time: 1.5513 second, remain time: 598.45 second
+2026-01-05 15:11:59 DEBUG execute cmd ===>>>: cjc --error-count-limit=all --diagnostic-format=json invalid_colon_0.cj -L. -lmy_pkg@my_org -o invalid_colon_0.exe
+2026-01-05 15:11:59 DEBUG return code: 1
+2026-01-05 15:11:59 DEBUG stdout : 
+
+2026-01-05 15:11:59 DEBUG stderr : 
+@	{
+@	    "Diags":[
+@	            {
+@	                "DiagKind": "parse_expected_name",
+@	                "Severity": "error",
+@	                "WarnGroup": "none",
+@	                "DiagCategory": "parse",
+@	                "Message": "expected a '*' or identifier after '.' in qualified name, found ':'",
+@	                "Location": {
+@	                    "File": "invalid_colon_0.cj",
+@	                    "Line": 17,
+@	                    "Column": 16
+@	                },
+@	                "MainHint": {
+@	                    "Content": "expected a '*' or identifier here",
+@	                    "Range": {
+@	                        "Begin": {
+@	                            "File": "invalid_colon_0.cj",
+@	                            "Line": 17,
+@	                            "Column": 16
+@	                        },
+@	                        "End": {
+@	                            "File": "invalid_colon_0.cj",
+@	                            "Line": 17,
+@	                            "Column": 17
+@	                        }
+@	                    }
+@	                },
+@	                "OtherHints": [
+@	                    {
+@	                        "Content": "after '.' in qualified name",
+@	                        "Range": {
+@	                            "Begin": {
+@	                                "File": "invalid_colon_0.cj",
+@	                                "Line": 17,
+@	                                "Column": 14
+@	                            },
+@	                            "End": {
+@	                                "File": "invalid_colon_0.cj",
+@	                                "Line": 17,
+@	                                "Column": 15
+@	                            }
+@	                        }
+@	                    }
+@	                ],
+@	                "Notes": [],
+@	                "Helps": []
+@	            }
+@	    ],
+@	    "Num":{
+@	        "Errors": 1,
+@	        "PrintedErrors": 1,
+@	        "Warnings": 0,
+@	        "PrintedWarnings": 0
+@	    }
+@	}
+
+2026-01-05 15:11:59 DEBUG Run time: 0.51827 second, remain time: 597.93 second
+2026-01-05 15:11:59 ERROR Failed!
+2026-01-05 15:11:59 ERROR Command return code 1 not equals to expected return code 0

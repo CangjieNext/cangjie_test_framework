@@ -1,0 +1,181 @@
+2026-01-05 14:58:45 DEBUG Log file at: E:\cangjie_test_suite\cangjie_test_framework\test_temp\log\keyword_as_org_name_2_cj_f82e11ffea0311f0a64984a93e8bbbff.log
+2026-01-05 14:58:45 DEBUG Case Path: E:\cangjie_test_suite\cangjie_test\testsuites\HLT\compiler\cjnative\Packages\org_name\package_decl\keyword_as_org_name_2.cj
+2026-01-05 14:58:45 DEBUG Work directory: E:\cangjie_test_suite\cangjie_test_framework\test_temp\run\keyword_as_org_name_2_cj_f82e11ffea0311f0a64984a93e8bbbff
+2026-01-05 14:58:45 DEBUG execute cmd ===>>>: cjc --error-count-limit=all --diagnostic-format=json --output-type=dylib keyword_as_org_name_2.cj 2>&1
+2026-01-05 14:58:45 DEBUG return code: 1
+2026-01-05 14:58:45 DEBUG stdout : 
++	{
++	    "Diags":[
++	            {
++	                "DiagKind": "parse_expected_name",
++	                "Severity": "error",
++	                "WarnGroup": "none",
++	                "DiagCategory": "parse",
++	                "Message": "expected a package name after keyword 'package', found keyword 'as'",
++	                "Location": {
++	                    "File": "keyword_as_org_name_2.cj",
++	                    "Line": 14,
++	                    "Column": 9
++	                },
++	                "MainHint": {
++	                    "Content": "expected a package name here",
++	                    "Range": {
++	                        "Begin": {
++	                            "File": "keyword_as_org_name_2.cj",
++	                            "Line": 14,
++	                            "Column": 9
++	                        },
++	                        "End": {
++	                            "File": "keyword_as_org_name_2.cj",
++	                            "Line": 14,
++	                            "Column": 11
++	                        }
++	                    }
++	                },
++	                "OtherHints": [
++	                    {
++	                        "Content": "after keyword 'package'",
++	                        "Range": {
++	                            "Begin": {
++	                                "File": "keyword_as_org_name_2.cj",
++	                                "Line": 14,
++	                                "Column": 1
++	                            },
++	                            "End": {
++	                                "File": "keyword_as_org_name_2.cj",
++	                                "Line": 14,
++	                                "Column": 8
++	                            }
++	                        }
++	                    }
++	                ],
++	                "Notes": [],
++	                "Helps": [
++	                    {
++	                        "Message": "you could escape keyword as a package name using '`'",
++	                        "Substitutions": [
++	                            {
++	                                "Content": "`as`",
++	                                "Range": {
++	                                    "Begin": {
++	                                        "File": "keyword_as_org_name_2.cj",
++	                                        "Line": 14,
++	                                        "Column": 9
++	                                    },
++	                                    "End": {
++	                                        "File": "keyword_as_org_name_2.cj",
++	                                        "Line": 14,
++	                                        "Column": 11
++	                                    }
++	                                }
++	                            }
++	                        ]
++	                    }
++	                ]
++	            }
++	    ],
++	    "Num":{
++	        "Errors": 1,
++	        "PrintedErrors": 1,
++	        "Warnings": 0,
++	        "PrintedWarnings": 0
++	    }
++	}
+
+2026-01-05 14:58:45 DEBUG stderr : 
+
+2026-01-05 14:58:45 DEBUG Run time: 0.6092 second, remain time: 599.39 second
+2026-01-05 14:58:46 DEBUG execute cmd ===>>>: C:\Python314\python.exe E:\cangjie_test_suite\cangjie_test_framework\maple_test\compare.py --comment="//" --condition="'Windows', 'x86', 'CJNATIVE'" keyword_as_org_name_2.cj
+2026-01-05 14:58:46 DEBUG return code: 0
+2026-01-05 14:58:46 DEBUG stdout : 
++	compare.py input:
++		{
++		    "Diags":[
++		            {
++		                "DiagKind": "parse_expected_name",
++		                "Severity": "error",
++		                "WarnGroup": "none",
++		                "DiagCategory": "parse",
++		                "Message": "expected a package name after keyword 'package', found keyword 'as'",
++		                "Location": {
++		                    "File": "keyword_as_org_name_2.cj",
++		                    "Line": 14,
++		                    "Column": 9
++		                },
++		                "MainHint": {
++		                    "Content": "expected a package name here",
++		                    "Range": {
++		                        "Begin": {
++		                            "File": "keyword_as_org_name_2.cj",
++		                            "Line": 14,
++		                            "Column": 9
++		                        },
++		                        "End": {
++		                            "File": "keyword_as_org_name_2.cj",
++		                            "Line": 14,
++		                            "Column": 11
++		                        }
++		                    }
++		                },
++		                "OtherHints": [
++		                    {
++		                        "Content": "after keyword 'package'",
++		                        "Range": {
++		                            "Begin": {
++		                                "File": "keyword_as_org_name_2.cj",
++		                                "Line": 14,
++		                                "Column": 1
++		                            },
++		                            "End": {
++		                                "File": "keyword_as_org_name_2.cj",
++		                                "Line": 14,
++		                                "Column": 8
++		                            }
++		                        }
++		                    }
++		                ],
++		                "Notes": [],
++		                "Helps": [
++		                    {
++		                        "Message": "you could escape keyword as a package name using '`'",
++		                        "Substitutions": [
++		                            {
++		                                "Content": "`as`",
++		                                "Range": {
++		                                    "Begin": {
++		                                        "File": "keyword_as_org_name_2.cj",
++		                                        "Line": 14,
++		                                        "Column": 9
++		                                    },
++		                                    "End": {
++		                                        "File": "keyword_as_org_name_2.cj",
++		                                        "Line": 14,
++		                                        "Column": 11
++		                                    }
++		                                }
++		                            }
++		                        ]
++		                    }
++		                ]
++		            }
++		    ],
++		    "Num":{
++		        "Errors": 1,
++		        "PrintedErrors": 1,
++		        "Warnings": 0,
++		        "PrintedWarnings": 0
++		    }
++		}
++	
++	compare.py input end
++	
++	Starting SingleLine Compare:
++	b"It's a assert, flag: scan, pattern: expected a package name after keyword 'package', found keyword 'as' , result: True, matched at output line: 0 "
++	back reference dict:{}
++	SingleLine Compare End
++	[Compare Pass]
+
+2026-01-05 14:58:46 DEBUG stderr : 
+
+2026-01-05 14:58:46 DEBUG Run time: 0.46404 second, remain time: 598.93 second
+2026-01-05 14:58:46 DEBUG Task executed successfully

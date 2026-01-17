@@ -1,0 +1,121 @@
+2025-12-20 09:56:24 DEBUG Log file at: E:\cangjie_test_suite\cangjie_test_framework\test_temp\log\main_cj_14e99930dd4711f0991884a93e8bbbff.log
+2025-12-20 09:56:24 DEBUG Case Path: E:\cangjie_test_suite\cangjie_test\testsuites\HLT\compiler\cjnative\Diagnosis\exponentiation_operator\TestCase_91\main.cj
+2025-12-20 09:56:24 DEBUG Work directory: E:\cangjie_test_suite\cangjie_test_framework\test_temp\run\main_cj_14e99930dd4711f0991884a93e8bbbff
+2025-12-20 09:56:24 DEBUG execute cmd ===>>>: cjc main.cj --error-count-limit=all --diagnostic-format=json 2>&1
+2025-12-20 09:56:25 DEBUG return code: 1
+2025-12-20 09:56:25 DEBUG stdout : 
++	{
++	    "Diags":[
++	            {
++	                "DiagKind": "sema_invalid_binary_expr",
++	                "Severity": "error",
++	                "WarnGroup": "none",
++	                "DiagCategory": "sema",
++	                "Message": "invalid binary operator '**' on type 'Float64' and 'Int8'",
++	                "Location": {
++	                    "File": "main.cj",
++	                    "Line": 18,
++	                    "Column": 25
++	                },
++	                "MainHint": {
++	                    "Content": "",
++	                    "Range": {
++	                        "Begin": {
++	                            "File": "main.cj",
++	                            "Line": 18,
++	                            "Column": 25
++	                        },
++	                        "End": {
++	                            "File": "main.cj",
++	                            "Line": 18,
++	                            "Column": 27
++	                        }
++	                    }
++	                },
++	                "OtherHints": [],
++	                "Notes": [
++	                    {
++	                        "Message": "you may want to implement 'operator func **(right: Int8)' for type 'Float64', or to provide a right operand of type 'Int64' or 'Float64'",
++	                        "MainHint": null,
++	                        "OtherHints": [],
++	                        "Help": null
++	                    }
++	                ],
++	                "Helps": []
++	            }
++	    ],
++	    "Num":{
++	        "Errors": 1,
++	        "PrintedErrors": 1,
++	        "Warnings": 0,
++	        "PrintedWarnings": 0
++	    }
++	}
+
+2025-12-20 09:56:25 DEBUG stderr : 
+
+2025-12-20 09:56:25 DEBUG Run time: 0.54462 second, remain time: 179.46 second
+2025-12-20 09:56:25 DEBUG execute cmd ===>>>: C:\Python314\python.exe E:\cangjie_test_suite\cangjie_test_framework\maple_test\compare.py --comment="//" --condition="'CJNATIVE', 'x86', 'Windows'" main.cj
+2025-12-20 09:56:25 DEBUG return code: 0
+2025-12-20 09:56:25 DEBUG stdout : 
++	compare.py input:
++		{
++		    "Diags":[
++		            {
++		                "DiagKind": "sema_invalid_binary_expr",
++		                "Severity": "error",
++		                "WarnGroup": "none",
++		                "DiagCategory": "sema",
++		                "Message": "invalid binary operator '**' on type 'Float64' and 'Int8'",
++		                "Location": {
++		                    "File": "main.cj",
++		                    "Line": 18,
++		                    "Column": 25
++		                },
++		                "MainHint": {
++		                    "Content": "",
++		                    "Range": {
++		                        "Begin": {
++		                            "File": "main.cj",
++		                            "Line": 18,
++		                            "Column": 25
++		                        },
++		                        "End": {
++		                            "File": "main.cj",
++		                            "Line": 18,
++		                            "Column": 27
++		                        }
++		                    }
++		                },
++		                "OtherHints": [],
++		                "Notes": [
++		                    {
++		                        "Message": "you may want to implement 'operator func **(right: Int8)' for type 'Float64', or to provide a right operand of type 'Int64' or 'Float64'",
++		                        "MainHint": null,
++		                        "OtherHints": [],
++		                        "Help": null
++		                    }
++		                ],
++		                "Helps": []
++		            }
++		    ],
++		    "Num":{
++		        "Errors": 1,
++		        "PrintedErrors": 1,
++		        "Warnings": 0,
++		        "PrintedWarnings": 0
++		    }
++		}
++	
++	compare.py input end
++	
++	Starting SingleLine Compare:
++	b"It's a assert, flag: scan, pattern: sema_invalid_binary_expr , result: True, matched at output line: 0 "
++	back reference dict:{}
++	SingleLine Compare End
++	[Compare Pass]
+
+2025-12-20 09:56:25 DEBUG stderr : 
+
+2025-12-20 09:56:25 DEBUG Run time: 0.70628 second, remain time: 178.75 second
+2025-12-20 09:56:25 DEBUG Task executed successfully

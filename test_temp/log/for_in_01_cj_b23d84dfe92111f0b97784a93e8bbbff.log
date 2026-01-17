@@ -1,0 +1,18 @@
+2026-01-04 11:58:58 DEBUG Log file at: E:\cangjie_test_suite\cangjie_test_framework\test_temp\log\for_in_01_cj_b23d84dfe92111f0b97784a93e8bbbff.log
+2026-01-04 11:58:58 DEBUG Case Path: E:\cangjie_test_suite\cangjie_test\testsuites\HLT\compiler\cjnative\Chir\ForIn\for_in_01.cj
+2026-01-04 11:58:58 DEBUG Work directory: E:\cangjie_test_suite\cangjie_test_framework\test_temp\run\for_in_01_cj_b23d84dfe92111f0b97784a93e8bbbff
+2026-01-04 11:58:58 DEBUG execute cmd ===>>>: cjc --error-count-limit=all --diagnostic-format=json for_in_01.cj -o for_in_01.exe
+2026-01-04 11:59:00 DEBUG return code: 0
+2026-01-04 11:59:00 DEBUG stdout : 
+
+2026-01-04 11:59:00 DEBUG stderr : 
+
+2026-01-04 11:59:00 DEBUG Run time: 1.9229 second, remain time: 598.08 second
+2026-01-04 11:59:00 DEBUG execute cmd ===>>>: set LD_LIBRARY_PATH=%chdir%:%LD_LIBRARY_PATH% && for_in_01.exe
+2026-01-04 11:59:00 DEBUG return code: 0
+2026-01-04 11:59:00 DEBUG stdout : 
+
+2026-01-04 11:59:00 DEBUG stderr : 
+
+2026-01-04 11:59:00 DEBUG Run time: 0.22679 second, remain time: 597.85 second
+2026-01-04 11:59:00 DEBUG Task executed successfully

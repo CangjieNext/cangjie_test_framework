@@ -1,0 +1,110 @@
+2026-01-05 14:58:42 DEBUG Log file at: E:\cangjie_test_suite\cangjie_test_framework\test_temp\log\batch_import_0_cj_f82af536ea0311f0bfd284a93e8bbbff.log
+2026-01-05 14:58:42 DEBUG Case Path: E:\cangjie_test_suite\cangjie_test\testsuites\HLT\compiler\cjnative\Packages\org_name\import_decl\batch_import_0.cj
+2026-01-05 14:58:42 DEBUG Work directory: E:\cangjie_test_suite\cangjie_test_framework\test_temp\run\batch_import_0_cj_f82af536ea0311f0bfd284a93e8bbbff
+2026-01-05 14:58:42 DEBUG execute cmd ===>>>: cjc --error-count-limit=all --diagnostic-format=json --output-type=dylib upstream_package.cj
+2026-01-05 14:58:43 DEBUG return code: 0
+2026-01-05 14:58:43 DEBUG stdout : 
+
+2026-01-05 14:58:43 DEBUG stderr : 
+
+2026-01-05 14:58:43 DEBUG Run time: 1.1127 second, remain time: 598.89 second
+2026-01-05 14:58:43 DEBUG execute cmd ===>>>: cjc --error-count-limit=all --diagnostic-format=json batch_import_0.cj -L. -lmy_pkg@my_org -o batch_import_0.exe
+2026-01-05 14:58:44 DEBUG return code: 0
+2026-01-05 14:58:44 DEBUG stdout : 
+
+2026-01-05 14:58:44 DEBUG stderr : 
+@	{
+@	    "Diags":[
+@	            {
+@	                "DiagKind": "sema_unused_import",
+@	                "Severity": "warning",
+@	                "WarnGroup": "unused",
+@	                "DiagCategory": "sema",
+@	                "Message": "unused import 'my_org::my_pkg.S'",
+@	                "Location": {
+@	                    "File": "batch_import_0.cj",
+@	                    "Line": 16,
+@	                    "Column": 27
+@	                },
+@	                "MainHint": {
+@	                    "Content": "unused import",
+@	                    "Range": {
+@	                        "Begin": {
+@	                            "File": "batch_import_0.cj",
+@	                            "Line": 16,
+@	                            "Column": 27
+@	                        },
+@	                        "End": {
+@	                            "File": "batch_import_0.cj",
+@	                            "Line": 16,
+@	                            "Column": 28
+@	                        }
+@	                    }
+@	                },
+@	                "OtherHints": [],
+@	                "Notes": [
+@	                    {
+@	                        "Message": "this warning can be suppressed by setting the compiler option `-Woff unused`",
+@	                        "MainHint": null,
+@	                        "OtherHints": [],
+@	                        "Help": null
+@	                    }
+@	                ],
+@	                "Helps": []
+@	            },
+@	            {
+@	                "DiagKind": "sema_unused_import",
+@	                "Severity": "warning",
+@	                "WarnGroup": "unused",
+@	                "DiagCategory": "sema",
+@	                "Message": "unused import 'my_org::my_pkg.I'",
+@	                "Location": {
+@	                    "File": "batch_import_0.cj",
+@	                    "Line": 16,
+@	                    "Column": 30
+@	                },
+@	                "MainHint": {
+@	                    "Content": "unused import",
+@	                    "Range": {
+@	                        "Begin": {
+@	                            "File": "batch_import_0.cj",
+@	                            "Line": 16,
+@	                            "Column": 30
+@	                        },
+@	                        "End": {
+@	                            "File": "batch_import_0.cj",
+@	                            "Line": 16,
+@	                            "Column": 31
+@	                        }
+@	                    }
+@	                },
+@	                "OtherHints": [],
+@	                "Notes": [
+@	                    {
+@	                        "Message": "this warning can be suppressed by setting the compiler option `-Woff unused`",
+@	                        "MainHint": null,
+@	                        "OtherHints": [],
+@	                        "Help": null
+@	                    }
+@	                ],
+@	                "Helps": []
+@	            }
+@	    ],
+@	    "Num":{
+@	        "Errors": 0,
+@	        "PrintedErrors": 0,
+@	        "Warnings": 2,
+@	        "PrintedWarnings": 2
+@	    }
+@	}
+
+2026-01-05 14:58:44 DEBUG Run time: 1.3766 second, remain time: 597.51 second
+2026-01-05 14:58:44 DEBUG execute cmd ===>>>: set LD_LIBRARY_PATH=%chdir%:%LD_LIBRARY_PATH% && batch_import_0.exe
+2026-01-05 14:58:45 DEBUG return code: 0
+2026-01-05 14:58:45 DEBUG stdout : 
++	foo
+
+2026-01-05 14:58:45 DEBUG stderr : 
+
+2026-01-05 14:58:45 DEBUG Run time: 0.54754 second, remain time: 596.96 second
+2026-01-05 14:58:45 DEBUG Task executed successfully

@@ -1,0 +1,140 @@
+2026-01-05 15:11:53 DEBUG Log file at: E:\cangjie_test_suite\cangjie_test_framework\test_temp\log\invalid_colon_1_cj_cf8a41c2ea0511f0b0ef84a93e8bbbff.log
+2026-01-05 15:11:53 DEBUG Case Path: E:\cangjie_test_suite\cangjie_test\testsuites\HLT\compiler\cjnative\Packages\org_name\package_decl\invalid_colon_1.cj
+2026-01-05 15:11:53 DEBUG Work directory: E:\cangjie_test_suite\cangjie_test_framework\test_temp\run\invalid_colon_1_cj_cf8a41c2ea0511f0b0ef84a93e8bbbff
+2026-01-05 15:11:53 DEBUG execute cmd ===>>>: cjc --error-count-limit=all --diagnostic-format=json --output-type=dylib invalid_colon_1.cj 2>&1
+2026-01-05 15:11:53 DEBUG return code: 1
+2026-01-05 15:11:53 DEBUG stdout : 
++	{
++	    "Diags":[
++	            {
++	                "DiagKind": "parse_expected_name",
++	                "Severity": "error",
++	                "WarnGroup": "none",
++	                "DiagCategory": "parse",
++	                "Message": "expected a package name after '.' in qualified name, found '::'",
++	                "Location": {
++	                    "File": "invalid_colon_1.cj",
++	                    "Line": 14,
++	                    "Column": 14
++	                },
++	                "MainHint": {
++	                    "Content": "expected a package name here",
++	                    "Range": {
++	                        "Begin": {
++	                            "File": "invalid_colon_1.cj",
++	                            "Line": 14,
++	                            "Column": 14
++	                        },
++	                        "End": {
++	                            "File": "invalid_colon_1.cj",
++	                            "Line": 14,
++	                            "Column": 16
++	                        }
++	                    }
++	                },
++	                "OtherHints": [
++	                    {
++	                        "Content": "after '.' in qualified name",
++	                        "Range": {
++	                            "Begin": {
++	                                "File": "invalid_colon_1.cj",
++	                                "Line": 14,
++	                                "Column": 12
++	                            },
++	                            "End": {
++	                                "File": "invalid_colon_1.cj",
++	                                "Line": 14,
++	                                "Column": 13
++	                            }
++	                        }
++	                    }
++	                ],
++	                "Notes": [],
++	                "Helps": []
++	            }
++	    ],
++	    "Num":{
++	        "Errors": 1,
++	        "PrintedErrors": 1,
++	        "Warnings": 0,
++	        "PrintedWarnings": 0
++	    }
++	}
+
+2026-01-05 15:11:53 DEBUG stderr : 
+
+2026-01-05 15:11:53 DEBUG Run time: 0.61409 second, remain time: 599.39 second
+2026-01-05 15:11:53 DEBUG execute cmd ===>>>: C:\Python314\python.exe E:\cangjie_test_suite\cangjie_test_framework\maple_test\compare.py --comment="//" --condition="'CJNATIVE', 'Windows', 'x86'" invalid_colon_1.cj
+2026-01-05 15:11:54 DEBUG return code: 1
+2026-01-05 15:11:54 DEBUG stdout : 
++	compare.py input:
++		{
++		    "Diags":[
++		            {
++		                "DiagKind": "parse_expected_name",
++		                "Severity": "error",
++		                "WarnGroup": "none",
++		                "DiagCategory": "parse",
++		                "Message": "expected a package name after '.' in qualified name, found '::'",
++		                "Location": {
++		                    "File": "invalid_colon_1.cj",
++		                    "Line": 14,
++		                    "Column": 14
++		                },
++		                "MainHint": {
++		                    "Content": "expected a package name here",
++		                    "Range": {
++		                        "Begin": {
++		                            "File": "invalid_colon_1.cj",
++		                            "Line": 14,
++		                            "Column": 14
++		                        },
++		                        "End": {
++		                            "File": "invalid_colon_1.cj",
++		                            "Line": 14,
++		                            "Column": 16
++		                        }
++		                    }
++		                },
++		                "OtherHints": [
++		                    {
++		                        "Content": "after '.' in qualified name",
++		                        "Range": {
++		                            "Begin": {
++		                                "File": "invalid_colon_1.cj",
++		                                "Line": 14,
++		                                "Column": 12
++		                            },
++		                            "End": {
++		                                "File": "invalid_colon_1.cj",
++		                                "Line": 14,
++		                                "Column": 13
++		                            }
++		                        }
++		                    }
++		                ],
++		                "Notes": [],
++		                "Helps": []
++		            }
++		    ],
++		    "Num":{
++		        "Errors": 1,
++		        "PrintedErrors": 1,
++		        "Warnings": 0,
++		        "PrintedWarnings": 0
++		    }
++		}
++	
++	compare.py input end
++	
++	Starting SingleLine Compare:
++	b"It's a assert, flag: scan, pattern: expected a package name after '::' in qualified name, found ':' , result: False, matched at output line: 0 "
++	back reference dict:{}
++	SingleLine Compare Failed
++	[Compare Fail]
+
+2026-01-05 15:11:54 DEBUG stderr : 
+
+2026-01-05 15:11:54 DEBUG Run time: 0.42115 second, remain time: 598.96 second
+2026-01-05 15:11:54 ERROR Failed!
+2026-01-05 15:11:54 ERROR Command return code 1 not equals to expected return code 0

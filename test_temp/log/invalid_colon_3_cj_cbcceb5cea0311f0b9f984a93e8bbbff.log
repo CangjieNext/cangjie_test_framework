@@ -1,0 +1,107 @@
+2026-01-05 14:57:31 DEBUG Log file at: E:\cangjie_test_suite\cangjie_test_framework\test_temp\log\invalid_colon_3_cj_cbcceb5cea0311f0b9f984a93e8bbbff.log
+2026-01-05 14:57:31 DEBUG Case Path: E:\cangjie_test_suite\cangjie_test\testsuites\HLT\compiler\cjnative\Packages\org_name\package_decl\invalid_colon_3.cj
+2026-01-05 14:57:31 DEBUG Work directory: E:\cangjie_test_suite\cangjie_test_framework\test_temp\run\invalid_colon_3_cj_cbcceb5cea0311f0b9f984a93e8bbbff
+2026-01-05 14:57:31 DEBUG execute cmd ===>>>: cjc --error-count-limit=all --diagnostic-format=json --output-type=dylib invalid_colon_3.cj 2>&1
+2026-01-05 14:57:32 DEBUG return code: 1
+2026-01-05 14:57:32 DEBUG stdout : 
++	{
++	    "Diags":[
++	            {
++	                "DiagKind": "parse_expected_character",
++	                "Severity": "error",
++	                "WarnGroup": "none",
++	                "DiagCategory": "parse",
++	                "Message": "expected ';' or '<NL>', found '::'",
++	                "Location": {
++	                    "File": "invalid_colon_3.cj",
++	                    "Line": 14,
++	                    "Column": 17
++	                },
++	                "MainHint": {
++	                    "Content": "expected ';' or '<NL>' here",
++	                    "Range": {
++	                        "Begin": {
++	                            "File": "invalid_colon_3.cj",
++	                            "Line": 14,
++	                            "Column": 17
++	                        },
++	                        "End": {
++	                            "File": "invalid_colon_3.cj",
++	                            "Line": 14,
++	                            "Column": 19
++	                        }
++	                    }
++	                },
++	                "OtherHints": [],
++	                "Notes": [],
++	                "Helps": []
++	            }
++	    ],
++	    "Num":{
++	        "Errors": 1,
++	        "PrintedErrors": 1,
++	        "Warnings": 0,
++	        "PrintedWarnings": 0
++	    }
++	}
+
+2026-01-05 14:57:32 DEBUG stderr : 
+
+2026-01-05 14:57:32 DEBUG Run time: 0.79709 second, remain time: 599.2 second
+2026-01-05 14:57:32 DEBUG execute cmd ===>>>: C:\Python314\python.exe E:\cangjie_test_suite\cangjie_test_framework\maple_test\compare.py --comment="//" --condition="'CJNATIVE', 'Windows', 'x86'" invalid_colon_3.cj
+2026-01-05 14:57:33 DEBUG return code: 0
+2026-01-05 14:57:33 DEBUG stdout : 
++	compare.py input:
++		{
++		    "Diags":[
++		            {
++		                "DiagKind": "parse_expected_character",
++		                "Severity": "error",
++		                "WarnGroup": "none",
++		                "DiagCategory": "parse",
++		                "Message": "expected ';' or '<NL>', found '::'",
++		                "Location": {
++		                    "File": "invalid_colon_3.cj",
++		                    "Line": 14,
++		                    "Column": 17
++		                },
++		                "MainHint": {
++		                    "Content": "expected ';' or '<NL>' here",
++		                    "Range": {
++		                        "Begin": {
++		                            "File": "invalid_colon_3.cj",
++		                            "Line": 14,
++		                            "Column": 17
++		                        },
++		                        "End": {
++		                            "File": "invalid_colon_3.cj",
++		                            "Line": 14,
++		                            "Column": 19
++		                        }
++		                    }
++		                },
++		                "OtherHints": [],
++		                "Notes": [],
++		                "Helps": []
++		            }
++		    ],
++		    "Num":{
++		        "Errors": 1,
++		        "PrintedErrors": 1,
++		        "Warnings": 0,
++		        "PrintedWarnings": 0
++		    }
++		}
++	
++	compare.py input end
++	
++	Starting SingleLine Compare:
++	b"It's a assert, flag: scan, pattern: parse_expected_character , result: True, matched at output line: 0 "
++	back reference dict:{}
++	SingleLine Compare End
++	[Compare Pass]
+
+2026-01-05 14:57:33 DEBUG stderr : 
+
+2026-01-05 14:57:33 DEBUG Run time: 1.1718 second, remain time: 598.03 second
+2026-01-05 14:57:33 DEBUG Task executed successfully

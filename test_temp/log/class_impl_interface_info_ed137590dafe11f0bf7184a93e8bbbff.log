@@ -1,0 +1,186 @@
+2025-12-17 12:14:50 DEBUG Log file at: E:\cangjie_test_suite\cangjie_test_framework\test_temp\log\class_impl_interface_info_ed137590dafe11f0bf7184a93e8bbbff.log
+2025-12-17 12:14:50 DEBUG Case Path: E:\cangjie_test_suite\cangjie_test\testsuites\HLT\compiler\cjnative\HLE\arkts\class\class_impl_interface.info
+2025-12-17 12:14:50 DEBUG Work directory: E:\cangjie_test_suite\cangjie_test_framework\test_temp\run\class_impl_interface_info_ed137590dafe11f0bf7184a93e8bbbff
+2025-12-17 12:14:50 DEBUG execute cmd ===>>>: %CANGJIE_HOME%/tools/bin/hle -r %CANGJIE_HOME%/tools/dtsparser/node_modules/typescript -j %CANGJIE_HOME%/tools/dtsparser/analysis.js -i class_impl_interface.d.ts -o . --module-name="my_module"
+2025-12-17 12:14:51 DEBUG return code: 0
+2025-12-17 12:14:51 DEBUG stdout : 
++	class_impl_interface.d.ts is analyzed completely, json file saved!
++	========Analyzing class_impl_interface.d.ts Begins!========
++	module: class_impl_interface.d.ts
++	output: ./cj
++	
++	total cost of hle: 1s101ms531us800ns
+
+2025-12-17 12:14:51 DEBUG stderr : 
+
+2025-12-17 12:14:51 DEBUG Run time: 1.2911 second, remain time: 178.71 second
+2025-12-17 12:14:51 DEBUG execute cmd ===>>>: type cj\class_impl_interface\src\class_impl_interface.cj
+2025-12-17 12:14:51 DEBUG return code: 0
+2025-12-17 12:14:51 DEBUG stdout : 
++	// Copyright (c) Huawei Technologies Co., Ltd. 2025. All rights reserved.
++	// This source file is part of the Cangjie project, licensed under Apache-2.0
++	// with Runtime Library Exception.
++	//
++	// See https://cangjie-lang.cn/pages/LICENSE for license information.
++	
++	package my_module
++	
++	import tpc.*
++	import ohos.ark_interop.*
++	import ohos.ark_interop_helper.*
++	import ohos.base.*
++	
++	/***********OBJECT***********/
++	
++	/*interface I {
++	    p: number;
++	    }*/
++	
++	public open class I {
++	    
++	    protected I(private var p: Float64) { }
++	    
++	    
++	    public open func toJSValue(context: JSContext): JSValue {
++	        let obj = context.object()
++	        obj["p"] = p.toJSValue(context)
++	        obj.toJSValue()
++	    }
++	    
++	    public static func fromJSValue(context: JSContext, input: JSValue): I {
++	        let obj = input.asObject()
++	        I(
++	        Float64.fromJSValue(context, obj["p"])
++	        )
++	    }
++	    
++	}
++	
++	/*class DeclareKeyword C {
++	    p: number;
++	    }*/
++	
++	public class C <: I {
++	    
++	    protected C(public var arkts_object: JSObject) {
++	        super(Float64.fromJSValue(getMainContext(), arkts_object["p"])) }
++	    
++	    
++	    public mut prop p: Float64 {
++	        get() {
++	            checkThreadAndCall < Float64 >(getMainContext()) {
++	                ctx: JSContext => Float64.fromJSValue(ctx, arkts_object["p"])
++	            }
++	        }
++	        set(v) {
++	            checkThreadAndCall < Unit >(getMainContext()) {
++	                ctx: JSContext => arkts_object["p"] = v.toJSValue(ctx)
++	            }
++	        }
++	        
++	    }
++	    
++	    
++	    public func toJSValue(context: JSContext): JSValue {
++	        arkts_object.toJSValue()
++	    }
++	    
++	    public  static func fromJSValue(context: JSContext, input: JSValue): C {
++	        C(input.asObject())
++	    }
++	}
++	
+
+2025-12-17 12:14:51 DEBUG stderr : 
+
+2025-12-17 12:14:51 DEBUG Run time: 0.050882 second, remain time: 178.66 second
+2025-12-17 12:14:51 DEBUG execute cmd ===>>>: C:\Python314\python.exe E:\cangjie_test_suite\cangjie_test_framework\maple_test\compare.py --comment="//" --condition="'CJNATIVE', 'Windows', 'x86'" class_impl_interface.info
+2025-12-17 12:14:51 DEBUG return code: 0
+2025-12-17 12:14:51 DEBUG stdout : 
++	compare.py input:
++		// Copyright (c) Huawei Technologies Co., Ltd. 2025. All rights reserved.
++		// This source file is part of the Cangjie project, licensed under Apache-2.0
++		// with Runtime Library Exception.
++		//
++		// See https://cangjie-lang.cn/pages/LICENSE for license information.
++		
++		package my_module
++		
++		import tpc.*
++		import ohos.ark_interop.*
++		import ohos.ark_interop_helper.*
++		import ohos.base.*
++		
++		/***********OBJECT***********/
++		
++		/*interface I {
++		    p: number;
++		    }*/
++		
++		public open class I {
++		    
++		    protected I(private var p: Float64) { }
++		    
++		    
++		    public open func toJSValue(context: JSContext): JSValue {
++		        let obj = context.object()
++		        obj["p"] = p.toJSValue(context)
++		        obj.toJSValue()
++		    }
++		    
++		    public static func fromJSValue(context: JSContext, input: JSValue): I {
++		        let obj = input.asObject()
++		        I(
++		        Float64.fromJSValue(context, obj["p"])
++		        )
++		    }
++		    
++		}
++		
++		/*class DeclareKeyword C {
++		    p: number;
++		    }*/
++		
++		public class C <: I {
++		    
++		    protected C(public var arkts_object: JSObject) {
++		        super(Float64.fromJSValue(getMainContext(), arkts_object["p"])) }
++		    
++		    
++		    public mut prop p: Float64 {
++		        get() {
++		            checkThreadAndCall < Float64 >(getMainContext()) {
++		                ctx: JSContext => Float64.fromJSValue(ctx, arkts_object["p"])
++		            }
++		        }
++		        set(v) {
++		            checkThreadAndCall < Unit >(getMainContext()) {
++		                ctx: JSContext => arkts_object["p"] = v.toJSValue(ctx)
++		            }
++		        }
++		        
++		    }
++		    
++		    
++		    public func toJSValue(context: JSContext): JSValue {
++		        arkts_object.toJSValue()
++		    }
++		    
++		    public  static func fromJSValue(context: JSContext, input: JSValue): C {
++		        C(input.asObject())
++		    }
++		}
++		
++	
++	compare.py input end
++	
++	Starting SingleLine Compare:
++	b"It's a assert, flag: scan, pattern: protected C(public var arkts_object: JSObject) { , result: True, matched at output line: 0 "
++	back reference dict:{}
++	SingleLine Compare End
++	[Compare Pass]
+
+2025-12-17 12:14:51 DEBUG stderr : 
+
+2025-12-17 12:14:51 DEBUG Run time: 0.49683 second, remain time: 178.16 second
+2025-12-17 12:14:51 DEBUG Task executed successfully

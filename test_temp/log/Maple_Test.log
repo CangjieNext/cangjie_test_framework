@@ -1,0 +1,15 @@
+2026-01-12 20:25:27 DEBUG Maple_Test Log file at: E:\cangjie_test_suite\cangjie_test_framework\test_temp\log\Maple_Test.log
+2026-01-12 20:25:27 INFO Maple_Test Test log saved to E:\cangjie_test_suite\cangjie_test_framework\test_temp\log
+2026-01-12 20:25:27 INFO Maple_Test Test log saved to E:\cangjie_test_suite\cangjie_test_framework\test_temp\log
+2026-01-12 20:25:27 INFO Maple_Test CONDITION:{'CJNATIVE', 'Windows', 'x86'}
+2026-01-12 20:25:27 INFO Maple_Test Run 1 times
+2026-01-12 20:25:27 DEBUG Maple_Test The number of running processes is 1, which will run serial
+2026-01-12 20:25:28 INFO Maple_Test Test log saved to E:\cangjie_test_suite\cangjie_test_framework\test_temp\log
+2026-01-12 20:25:28 INFO Maple_Test ------------------------------------------------------------------------------------------------------------------------
+2026-01-12 20:25:28 INFO Maple_Test TestSuite Path: E:\cangjie_test_suite\cangjie_test\testsuites\HLT\compiler\cjnative\Class\Class\5-1-2\5-1-2-2\class_var_open_private\class_var_open_private_n.cj
+2026-01-12 20:25:28 INFO Maple_Test   cangjie2cjnative_win_test_cfg, Case: E:\cangjie_test_suite\cangjie_test\testsuites\HLT\compiler\cjnative\Class\Class\5-1-2\5-1-2-2\class_var_open_private\class_var_open_private_n.cj, Result: PASS, LogFile: class_var_open_private_n_cj_c72f9fe6efb111f09c4b84a93e8bbbff.log
+2026-01-12 20:25:28 INFO Maple_Test 
+2026-01-12 20:25:28 INFO Maple_Test TestSuiteTask: Cangjie2cjnativeWINTest, Total: 1, PASS: 1, FAIL: 0, 
+2026-01-12 20:25:28 INFO Maple_Test   cangjie2cjnative_win_test_cfg, total: 1, PASS: 1, FAIL: 0, 
+2026-01-12 20:25:28 INFO Maple_Test ------------------------------------------------------------------------------------------------------------------------
+2026-01-12 20:25:28 DEBUG Maple_Test remove temp_dir E:\cangjie_test_suite\cangjie_test_framework\test_temp\run

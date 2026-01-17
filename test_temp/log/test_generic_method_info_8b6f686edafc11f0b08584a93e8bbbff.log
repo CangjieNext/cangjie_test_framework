@@ -1,0 +1,167 @@
+2025-12-17 11:57:45 DEBUG Log file at: E:\cangjie_test_suite\cangjie_test_framework\test_temp\log\test_generic_method_info_8b6f686edafc11f0b08584a93e8bbbff.log
+2025-12-17 11:57:45 DEBUG Case Path: E:\cangjie_test_suite\cangjie_test\testsuites\HLT\compiler\cjnative\HLE\arkts\class\test_generic_method.info
+2025-12-17 11:57:45 DEBUG Work directory: E:\cangjie_test_suite\cangjie_test_framework\test_temp\run\test_generic_method_info_8b6f686edafc11f0b08584a93e8bbbff
+2025-12-17 11:57:45 DEBUG execute cmd ===>>>: %CANGJIE_HOME%/tools/bin/hle -r %CANGJIE_HOME%/tools/dtsparser/node_modules/typescript -j %CANGJIE_HOME%/tools/dtsparser/analysis.js -i generic_method.d.ts -o . --module-name="my_module"
+2025-12-17 11:57:46 DEBUG return code: 0
+2025-12-17 11:57:46 DEBUG stdout : 
++	generic_method.d.ts is analyzed completely, json file saved!
++	========Analyzing generic_method.d.ts Begins!========
++	module: generic_method.d.ts
++	output: ./cj
++	
++	total cost of hle: 518ms949us400ns
+
+2025-12-17 11:57:46 DEBUG stderr : 
+
+2025-12-17 11:57:46 DEBUG Run time: 0.58699 second, remain time: 179.41 second
+2025-12-17 11:57:46 DEBUG execute cmd ===>>>: type cj\generic_method\src\generic_method.cj
+2025-12-17 11:57:46 DEBUG return code: 0
+2025-12-17 11:57:46 DEBUG stdout : 
++	// Copyright (c) Huawei Technologies Co., Ltd. 2025. All rights reserved.
++	// This source file is part of the Cangjie project, licensed under Apache-2.0
++	// with Runtime Library Exception.
++	//
++	// See https://cangjie-lang.cn/pages/LICENSE for license information.
++	
++	package my_module
++	
++	import tpc.*
++	import ohos.ark_interop.*
++	import ohos.ark_interop_helper.*
++	import ohos.base.*
++	
++	public enum AutoGenType0 {
++	    | NUMBER(Float64)
++	    | STRING(String)
++	    
++	    public func toJSValue(context: JSContext): JSValue {
++	        match(this) {
++	            case NUMBER(x) => context.number(x).toJSValue()
++	            case STRING(x) => context.string(x).toJSValue()
++	        }
++	    }
++	    public static func fromJSValue(context: JSContext, input: JSValue): AutoGenType0 {
++	        
++	        if(input.isNumber()) {
++	            return NUMBER(Float64.fromJSValue(context, input))
++	        }  
++	        if(input.isString()) {
++	            return STRING(String.fromJSValue(context, input))
++	        }
++	        throw Exception("unsupport type!")
++	    }
++	}
++	
++	
++	/*class ExportKeyword DeclareKeyword C {
++	    f(p: T): number | String
++	    }*/
++	
++	public class C {
++	    
++	    protected C(var arkts_object: JSObject) { }
++	    
++	    
++	    /**
++		 * @brief f(p: T): number | String
++		 */
++	    public func f < T >(p: T): AutoGenType0 where T <: JSInteropType<T> {
++	        jsObjApiCall < AutoGenType0 >( arkts_object, "f", { ctx =>[p.toJSValue(ctx)] }) {
++	            ctx, info => AutoGenType0.fromJSValue(ctx, info)
++	        }
++	    }
++	    
++	    func toJSValue(context: JSContext): JSValue {
++	        arkts_object.toJSValue()
++	    }
++	    
++	     static func fromJSValue(context: JSContext, input: JSValue): C {
++	        C(input.asObject())
++	    }
++	}
++	
+
+2025-12-17 11:57:46 DEBUG stderr : 
+
+2025-12-17 11:57:46 DEBUG Run time: 0.013302 second, remain time: 179.4 second
+2025-12-17 11:57:46 DEBUG execute cmd ===>>>: C:\Python314\python.exe E:\cangjie_test_suite\cangjie_test_framework\maple_test\compare.py --comment="//" --condition="'x86', 'Windows', 'CJNATIVE'" test_generic_method.info
+2025-12-17 11:57:46 DEBUG return code: 1
+2025-12-17 11:57:46 DEBUG stdout : 
++	compare.py input:
++		// Copyright (c) Huawei Technologies Co., Ltd. 2025. All rights reserved.
++		// This source file is part of the Cangjie project, licensed under Apache-2.0
++		// with Runtime Library Exception.
++		//
++		// See https://cangjie-lang.cn/pages/LICENSE for license information.
++		
++		package my_module
++		
++		import tpc.*
++		import ohos.ark_interop.*
++		import ohos.ark_interop_helper.*
++		import ohos.base.*
++		
++		public enum AutoGenType0 {
++		    | NUMBER(Float64)
++		    | STRING(String)
++		    
++		    public func toJSValue(context: JSContext): JSValue {
++		        match(this) {
++		            case NUMBER(x) => context.number(x).toJSValue()
++		            case STRING(x) => context.string(x).toJSValue()
++		        }
++		    }
++		    public static func fromJSValue(context: JSContext, input: JSValue): AutoGenType0 {
++		        
++		        if(input.isNumber()) {
++		            return NUMBER(Float64.fromJSValue(context, input))
++		        }  
++		        if(input.isString()) {
++		            return STRING(String.fromJSValue(context, input))
++		        }
++		        throw Exception("unsupport type!")
++		    }
++		}
++		
++		
++		/*class ExportKeyword DeclareKeyword C {
++		    f(p: T): number | String
++		    }*/
++		
++		public class C {
++		    
++		    protected C(var arkts_object: JSObject) { }
++		    
++		    
++		    /**
++			 * @brief f(p: T): number | String
++			 */
++		    public func f < T >(p: T): AutoGenType0 where T <: JSInteropType<T> {
++		        jsObjApiCall < AutoGenType0 >( arkts_object, "f", { ctx =>[p.toJSValue(ctx)] }) {
++		            ctx, info => AutoGenType0.fromJSValue(ctx, info)
++		        }
++		    }
++		    
++		    func toJSValue(context: JSContext): JSValue {
++		        arkts_object.toJSValue()
++		    }
++		    
++		     static func fromJSValue(context: JSContext, input: JSValue): C {
++		        C(input.asObject())
++		    }
++		}
++		
++	
++	compare.py input end
++	
++	Starting SingleLine Compare:
++	b"It's a assert, flag: scan, pattern: xxxx , result: False, matched at output line: 0 "
++	back reference dict:{}
++	SingleLine Compare Failed
++	[Compare Fail]
+
+2025-12-17 11:57:46 DEBUG stderr : 
+
+2025-12-17 11:57:46 DEBUG Run time: 0.18129 second, remain time: 179.22 second
+2025-12-17 11:57:46 ERROR Failed!
+2025-12-17 11:57:46 ERROR Command return code 1 not equals to expected return code 0

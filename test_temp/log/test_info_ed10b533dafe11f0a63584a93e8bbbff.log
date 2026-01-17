@@ -1,0 +1,79 @@
+2025-12-17 12:14:48 DEBUG Log file at: E:\cangjie_test_suite\cangjie_test_framework\test_temp\log\test_info_ed10b533dafe11f0a63584a93e8bbbff.log
+2025-12-17 12:14:48 DEBUG Case Path: E:\cangjie_test_suite\cangjie_test\testsuites\HLT\compiler\cjnative\HLE\c\enum\test.info
+2025-12-17 12:14:48 DEBUG Work directory: E:\cangjie_test_suite\cangjie_test_framework\test_temp\run\test_info_ed10b533dafe11f0a63584a93e8bbbff
+2025-12-17 12:14:48 DEBUG execute cmd ===>>>: %CANGJIE_HOME%/tools/bin/hle -c -b %CANGJIE_HOME%/tools/dtsparser/node_modules/.bin/cjbind.exe --module-name="my_module" -i a.h -o . --clang-args=""
+2025-12-17 12:14:49 DEBUG return code: 0
+2025-12-17 12:14:49 DEBUG stdout : 
++	========Generate C to cangjie bindings Begins!========
++	The out dir is:./
++	The command is: E:\sdk\cangjie-sdk-windows-x64-1.1.0-alpha.42_1213\cangjie\/tools/dtsparser/node_modules/.bin/cjbind.exe --auto-cstring --array-pointers-in-args --no-layout-test  -p my_module -o ./a.cj a.h -- 
++	========Generate C to cangjie bindings end!========
++	total cost of hle: 909ms14us800ns
+
+2025-12-17 12:14:49 DEBUG stderr : 
+
+2025-12-17 12:14:49 DEBUG Run time: 1.177 second, remain time: 178.82 second
+2025-12-17 12:14:49 DEBUG execute cmd ===>>>: type a.cj
+2025-12-17 12:14:49 DEBUG return code: 0
+2025-12-17 12:14:49 DEBUG stdout : 
++	// Copyright (c) Huawei Technologies Co., Ltd. 2025. All rights reserved.
++	// This source file is part of the Cangjie project, licensed under Apache-2.0
++	// with Runtime Library Exception.
++	//
++	// See https://cangjie-lang.cn/pages/LICENSE for license information.
++	
++	package my_module
++	
++	public const Color_RED: Color = 0
++	public const Color_GREEN: Color = 1
++	public const Color_BLUE: Color = 5
++	public const Color_YELLOW: Color = 6
++	
++	public type Color = UInt32
+
+2025-12-17 12:14:49 DEBUG stderr : 
+
+2025-12-17 12:14:49 DEBUG Run time: 0.031986 second, remain time: 178.79 second
+2025-12-17 12:14:49 DEBUG execute cmd ===>>>: C:\Python314\python.exe E:\cangjie_test_suite\cangjie_test_framework\maple_test\compare.py --comment="//" --condition="'CJNATIVE', 'Windows', 'x86'" test.info
+2025-12-17 12:14:50 DEBUG return code: 0
+2025-12-17 12:14:50 DEBUG stdout : 
++	compare.py input:
++		// Copyright (c) Huawei Technologies Co., Ltd. 2025. All rights reserved.
++		// This source file is part of the Cangjie project, licensed under Apache-2.0
++		// with Runtime Library Exception.
++		//
++		// See https://cangjie-lang.cn/pages/LICENSE for license information.
++		
++		package my_module
++		
++		public const Color_RED: Color = 0
++		public const Color_GREEN: Color = 1
++		public const Color_BLUE: Color = 5
++		public const Color_YELLOW: Color = 6
++		
++		public type Color = UInt32
++	
++	compare.py input end
++	
++	Starting SingleLine Compare:
++	b"It's a assert, flag: scan, pattern: public const Color_RED: Color = 0 , result: True, matched at output line: 0 "
++	back reference dict:{}
++	SingleLine Compare End
++	b"It's a assert, flag: scan, pattern: public const Color_GREEN: Color = 1 , result: True, matched at output line: 8 "
++	back reference dict:{}
++	SingleLine Compare End
++	b"It's a assert, flag: scan, pattern: public const Color_BLUE: Color = 5 , result: True, matched at output line: 9 "
++	back reference dict:{}
++	SingleLine Compare End
++	b"It's a assert, flag: scan, pattern: public const Color_YELLOW: Color = 6 , result: True, matched at output line: 10 "
++	back reference dict:{}
++	SingleLine Compare End
++	b"It's a assert, flag: scan, pattern: public type Color = UInt32 , result: True, matched at output line: 11 "
++	back reference dict:{}
++	SingleLine Compare End
++	[Compare Pass]
+
+2025-12-17 12:14:50 DEBUG stderr : 
+
+2025-12-17 12:14:50 DEBUG Run time: 0.93895 second, remain time: 177.85 second
+2025-12-17 12:14:50 DEBUG Task executed successfully

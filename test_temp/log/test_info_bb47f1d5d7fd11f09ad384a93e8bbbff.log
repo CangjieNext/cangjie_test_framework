@@ -1,0 +1,63 @@
+2025-12-13 16:28:42 DEBUG Log file at: E:\cangjie_test_suite\cangjie_test_framework\test_temp\log\test_info_bb47f1d5d7fd11f09ad384a93e8bbbff.log
+2025-12-13 16:28:42 DEBUG Case Path: E:\cangjie_test_suite\cangjie_test_1208\testsuites\HLT\compiler\cjnative\HLE\c\complex\test.info
+2025-12-13 16:28:42 DEBUG Work directory: E:\cangjie_test_suite\cangjie_test_framework\test_temp\run\test_info_bb47f1d5d7fd11f09ad384a93e8bbbff
+2025-12-13 16:28:42 DEBUG execute cmd ===>>>: %CANGJIE_HOME%/tools/bin/hle -c -b %CANGJIE_HOME%/tools/dtsparser/node_modules/.bin/cjbind.exe --module-name="my_module" -i a.h -o . --clang-args=""
+2025-12-13 16:28:42 DEBUG return code: 0
+2025-12-13 16:28:42 DEBUG stdout : 
++	========Generate C to cangjie bindings Begins!========
++	The out dir is:./
++	The command is: E:\sdk\cangjie-sdk-windows-x64-1.1.0-alpha.42_1213\cangjie\/tools/dtsparser/node_modules/.bin/cjbind.exe --auto-cstring --array-pointers-in-args --no-layout-test  -p my_module -o ./a.cj a.h -- 
++	Error: cjbind generate failed, return code is 1.
++	========Generate C to cangjie bindings end!========
++	total cost of hle: 116ms957us700ns
+
+2025-12-13 16:28:42 DEBUG stderr : 
+@	C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include/vadefs.h:65:33: error: expected ';' after top level declarator
+@	C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include/vadefs.h:18:22: error: expected identifier
+@	C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include/vcruntime.h:96:20: error: expected ';' after top level declarator
+@	C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include/vcruntime.h:188:29: error: expected ';' after top level declarator
+@	C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include/vcruntime.h:399:51: error: unknown type name 'uintptr_t'
+@	C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include/vcruntime.h:400:67: error: unknown type name 'uintptr_t'
+@	C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include/vcruntime.h:404:8: error: unknown type name 'uintptr_t'
+@	C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include/vcruntime.h:92:23: error: a parameter list without types is only allowed in a function definition
+@	C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include/vcruntime.h:89:9: error: expected function body after function declarator
+@	C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\ucrt/corecrt.h:380:16: error: unknown type name 'uintptr_t'
+@	C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\ucrt/corecrt.h:694:13: error: unknown type name 'size_t'
+@	C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include/vcruntime.h:92:23: error: a parameter list without types is only allowed in a function definition
+@	C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include/vcruntime.h:89:9: error: expected function body after function declarator
+@	C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\ucrt/complex.h:47:9: error: unknown type name '_C_double_complex'
+@	C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include/vcruntime.h:92:23: error: a parameter list without types is only allowed in a function definition
+@	C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\ucrt/complex.h:576:18: error: expected ';' after top level declarator
+@	An exception has occurred:
+@	Exception: C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include/vadefs.h:65:33: error: expected ';' after top level declarator
+@	C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include/vadefs.h:18:22: error: expected identifier
+@	C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include/vcruntime.h:96:20: error: expected ';' after top level declarator
+@	C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include/vcruntime.h:188:29: error: expected ';' after top level declarator
+@	C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include/vcruntime.h:399:51: error: unknown type name 'uintptr_t'
+@	C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include/vcruntime.h:400:67: error: unknown type name 'uintptr_t'
+@	C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include/vcruntime.h:404:8: error: unknown type name 'uintptr_t'
+@	C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include/vcruntime.h:92:23: error: a parameter list without types is only allowed in a function definition
+@	C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include/vcruntime.h:89:9: error: expected function body after function declarator
+@	C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\ucrt/corecrt.h:380:16: error: unknown type name 'uintptr_t'
+@	C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\ucrt/corecrt.h:694:13: error: unknown type name 'size_t'
+@	C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include/vcruntime.h:92:23: error: a parameter list without types is only allowed in a function definition
+@	C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include/vcruntime.h:89:9: error: expected function body after function declarator
+@	C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\ucrt/complex.h:47:9: error: unknown type name '_C_double_complex'
+@	C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include/vcruntime.h:92:23: error: a parameter list without types is only allowed in a function definition
+@	C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\ucrt/complex.h:576:18: error: expected ';' after top level declarator
+@	
+@		 at cjbind.parse(cjbind.ir::CjbindContext)(D:\wanggang_cangjie\cjbind\src\lib.cj:42)
+@		 at cjbind.generate(cjbind.options::CjbindOptions)(D:\wanggang_cangjie\cjbind\src\lib.cj:110)
+@		 at cjbind.main()(D:\wanggang_cangjie\cjbind\src\main.cj:15)
+
+2025-12-13 16:28:42 DEBUG Run time: 0.20419 second, remain time: 599.8 second
+2025-12-13 16:28:42 DEBUG execute cmd ===>>>: type a.cj
+2025-12-13 16:28:42 DEBUG return code: 1
+2025-12-13 16:28:42 DEBUG stdout : 
+
+2025-12-13 16:28:42 DEBUG stderr : 
+@	The system cannot find the file specified.
+
+2025-12-13 16:28:42 DEBUG Run time: 0.016005 second, remain time: 599.78 second
+2025-12-13 16:28:42 ERROR Failed!
+2025-12-13 16:28:42 ERROR Command return code 1 not equals to expected return code 0

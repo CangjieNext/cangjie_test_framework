@@ -1,0 +1,150 @@
+2025-12-13 11:54:20 DEBUG Log file at: E:\cangjie_test_suite\cangjie_test_framework\test_temp\log\test_info_671b9ad8d7d711f096a984a93e8bbbff.log
+2025-12-13 11:54:20 DEBUG Case Path: E:\cangjie_test_suite\cangjie_test_1208\testsuites\HLT\compiler\cjnative\HLE\c\global_function\test.info
+2025-12-13 11:54:20 DEBUG Work directory: E:\cangjie_test_suite\cangjie_test_framework\test_temp\run\test_info_671b9ad8d7d711f096a984a93e8bbbff
+2025-12-13 11:54:20 DEBUG execute cmd ===>>>: %CANGJIE_HOME%/tools/bin/hle -c -b %CANGJIE_HOME%\tools\dtsparser\node_modules\.bin\cjbind.exe --module-name="my_module" -i a.h -o . --clang-args=""
+2025-12-13 11:54:23 DEBUG return code: 0
+2025-12-13 11:54:23 DEBUG stdout : 
++	========Generate C to cangjie bindings Begins!========
++	The out dir is:./
++	The command is: E:\sdk\cangjie-sdk-windows-x64-1.1.0-alpha.42_1213\cangjie\\tools\dtsparser\node_modules\.bin\cjbind.exe --auto-cstring --array-pointers-in-args --no-layout-test  -p my_module -o ./a.cj a.h -- 
++	========Generate C to cangjie bindings end!========
++	total cost of hle: 3s279ms121us300ns
+
+2025-12-13 11:54:23 DEBUG stderr : 
+
+2025-12-13 11:54:23 DEBUG Run time: 3.3523 second, remain time: 596.65 second
+2025-12-13 11:54:23 DEBUG execute cmd ===>>>: type a.cj
+2025-12-13 11:54:23 DEBUG return code: 0
+2025-12-13 11:54:23 DEBUG stdout : 
++	// Copyright (c) Huawei Technologies Co., Ltd. 2025. All rights reserved.
++	// This source file is part of the Cangjie project, licensed under Apache-2.0
++	// with Runtime Library Exception.
++	//
++	// See https://cangjie-lang.cn/pages/LICENSE for license information.
++	
++	package my_module
++	
++	foreign func add(a: Int32, b: Float32): Int32
++	
++	foreign func multiply(a: Int32, b: Float32): Float32
++	
++	foreign func legacy_func(): Int32
++	
++	foreign func cfoo1(a: CPointer<Int32>): Unit
++	
++	foreign func cfoo2(a: VArray<Int32, $3>): Unit
++	
++	foreign func main_(argc: Int32, argv: CPointer<CString>): Int32
++	
++	public type callback = CFunc<(arg1: Int32) -> Unit>
++	
++	foreign func set_callback(cb: callback): Unit
++	
++	foreign func add2(a: Int32, b: Int32, func_: CFunc<(arg1: Int32, arg2: Int32) -> Int32>): Int32
++	
++	@C
++	public struct Point3D {
++	    public let x: Int64
++	    public let y: Int64
++	    public let z: Int64
++	
++	    public init(x: Int64, y: Int64, z: Int64) {
++	        this.x = x
++	        this.y = y
++	        this.z = z
++	    }
++	}
++	
++	foreign func addPoint(p1: Point3D, p2: Point3D): Point3D
+
+2025-12-13 11:54:23 DEBUG stderr : 
+
+2025-12-13 11:54:23 DEBUG Run time: 0.018959 second, remain time: 596.63 second
+2025-12-13 11:54:23 DEBUG execute cmd ===>>>: C:\Python314\python.exe E:\cangjie_test_suite\cangjie_test_framework\maple_test\compare.py --comment="//" --condition="'x86', 'CJNATIVE', 'Windows'" test.info
+2025-12-13 11:54:23 DEBUG return code: 1
+2025-12-13 11:54:23 DEBUG stdout : 
++	compare.py input:
++		// Copyright (c) Huawei Technologies Co., Ltd. 2025. All rights reserved.
++		// This source file is part of the Cangjie project, licensed under Apache-2.0
++		// with Runtime Library Exception.
++		//
++		// See https://cangjie-lang.cn/pages/LICENSE for license information.
++		
++		package my_module
++		
++		foreign func add(a: Int32, b: Float32): Int32
++		
++		foreign func multiply(a: Int32, b: Float32): Float32
++		
++		foreign func legacy_func(): Int32
++		
++		foreign func cfoo1(a: CPointer<Int32>): Unit
++		
++		foreign func cfoo2(a: VArray<Int32, $3>): Unit
++		
++		foreign func main_(argc: Int32, argv: CPointer<CString>): Int32
++		
++		public type callback = CFunc<(arg1: Int32) -> Unit>
++		
++		foreign func set_callback(cb: callback): Unit
++		
++		foreign func add2(a: Int32, b: Int32, func_: CFunc<(arg1: Int32, arg2: Int32) -> Int32>): Int32
++		
++		@C
++		public struct Point3D {
++		    public let x: Int64
++		    public let y: Int64
++		    public let z: Int64
++		
++		    public init(x: Int64, y: Int64, z: Int64) {
++		        this.x = x
++		        this.y = y
++		        this.z = z
++		    }
++		}
++		
++		foreign func addPoint(p1: Point3D, p2: Point3D): Point3D
++	
++	compare.py input end
++	
++	Starting SingleLine Compare:
++	b"It's a assert, flag: scan, pattern: foreign func add(a: Int32, b: Float32): Int32 , result: True, matched at output line: 0 "
++	back reference dict:{}
++	SingleLine Compare End
++	b"It's a assert, flag: scan, pattern: foreign func multiply(a: Int32, b: Float32): Float32 , result: True, matched at output line: 8 "
++	back reference dict:{}
++	SingleLine Compare End
++	b"It's a assert, flag: scan, pattern: foreign func legacy_func(): Int32 , result: True, matched at output line: 10 "
++	back reference dict:{}
++	SingleLine Compare End
++	b"It's a assert, flag: scan, pattern: foreign func cfoo1(a: CPointer<Int32>): Unit , result: True, matched at output line: 12 "
++	back reference dict:{}
++	SingleLine Compare End
++	b"It's a assert, flag: scan, pattern: foreign func cfoo2(a: VArray<Int32, $3>): Unit , result: True, matched at output line: 14 "
++	back reference dict:{}
++	SingleLine Compare End
++	b"It's a assert, flag: scan, pattern: foreign func main_(argc: Int32, argv: VArray<CString, $0>): Int32 , result: False, matched at output line: 16 "
++	back reference dict:{}
++	SingleLine Compare Failed
++	b"It's a assert, flag: scan, pattern: xxxxx , result: False, matched at output line: 0 "
++	back reference dict:{}
++	SingleLine Compare Failed
++	b"It's a assert, flag: scan, pattern: xxxxx , result: False, matched at output line: 0 "
++	back reference dict:{}
++	SingleLine Compare Failed
++	b"It's a assert, flag: scan, pattern: xxxxx , result: False, matched at output line: 0 "
++	back reference dict:{}
++	SingleLine Compare Failed
++	b"It's a assert, flag: scan, pattern: xxxxx , result: False, matched at output line: 0 "
++	back reference dict:{}
++	SingleLine Compare Failed
++	b"It's a assert, flag: scan, pattern: xxxxx , result: False, matched at output line: 0 "
++	back reference dict:{}
++	SingleLine Compare Failed
++	[Compare Fail]
+
+2025-12-13 11:54:23 DEBUG stderr : 
+
+2025-12-13 11:54:23 DEBUG Run time: 0.18121 second, remain time: 596.45 second
+2025-12-13 11:54:23 ERROR Failed!
+2025-12-13 11:54:23 ERROR Command return code 1 not equals to expected return code 0

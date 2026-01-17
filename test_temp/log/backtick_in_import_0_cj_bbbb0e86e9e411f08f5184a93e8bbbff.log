@@ -1,0 +1,22 @@
+2026-01-05 11:15:05 DEBUG Log file at: E:\cangjie_test_suite\cangjie_test_framework\test_temp\log\backtick_in_import_0_cj_bbbb0e86e9e411f08f5184a93e8bbbff.log
+2026-01-05 11:15:05 DEBUG Case Path: E:\cangjie_test_suite\cangjie_test\testsuites\HLT\compiler\cjnative\Packages\org_name\import_decl\backtick_in_import_0.cj
+2026-01-05 11:15:05 DEBUG Work directory: E:\cangjie_test_suite\cangjie_test_framework\test_temp\run\backtick_in_import_0_cj_bbbb0e86e9e411f08f5184a93e8bbbff
+2026-01-05 11:15:06 DEBUG execute cmd ===>>>: cjc --error-count-limit=all --diagnostic-format=json --output-type=dylib upstream_package.cj
+2026-01-05 11:15:06 DEBUG return code: 0
+2026-01-05 11:15:06 DEBUG stdout : 
+
+2026-01-05 11:15:06 DEBUG stderr : 
+
+2026-01-05 11:15:06 DEBUG Run time: 0.56904 second, remain time: 599.43 second
+2026-01-05 11:15:06 DEBUG execute cmd ===>>>: ls
+2026-01-05 11:15:06 DEBUG Can not decode stderr with utf-8, ignore error!
+2026-01-05 11:15:06 DEBUG return code: 1
+2026-01-05 11:15:06 DEBUG stdout : 
+
+2026-01-05 11:15:06 DEBUG stderr : 
+@	'ls' ڲⲿҲǿеĳ
+@	ļ
+
+2026-01-05 11:15:06 DEBUG Run time: 0.015785 second, remain time: 599.42 second
+2026-01-05 11:15:06 ERROR Failed!
+2026-01-05 11:15:06 ERROR Command return code 1 not equals to expected return code 0

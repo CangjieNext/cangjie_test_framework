@@ -1,0 +1,170 @@
+2026-01-12 20:25:27 DEBUG Log file at: E:\cangjie_test_suite\cangjie_test_framework\test_temp\log\class_var_open_private_n_cj_c72f9fe6efb111f09c4b84a93e8bbbff.log
+2026-01-12 20:25:27 DEBUG Case Path: E:\cangjie_test_suite\cangjie_test\testsuites\HLT\compiler\cjnative\Class\Class\5-1-2\5-1-2-2\class_var_open_private\class_var_open_private_n.cj
+2026-01-12 20:25:27 DEBUG Work directory: E:\cangjie_test_suite\cangjie_test_framework\test_temp\run\class_var_open_private_n_cj_c72f9fe6efb111f09c4b84a93e8bbbff
+2026-01-12 20:25:27 DEBUG execute cmd ===>>>: cjc --error-count-limit=all --diagnostic-format=json pkg.cj class_var_open_private_n.cj -o class_var_open_private_n.exe 2>&1
+2026-01-12 20:25:28 DEBUG return code: 1
+2026-01-12 20:25:28 DEBUG stdout : 
++	{
++	    "Diags":[
++	            {
++	                "DiagKind": "sema_undeclared_identifier",
++	                "Severity": "error",
++	                "WarnGroup": "none",
++	                "DiagCategory": "sema",
++	                "Message": "undeclared identifier 'one'",
++	                "Location": {
++	                    "File": "class_var_open_private_n.cj",
++	                    "Line": 16,
++	                    "Column": 29
++	                },
++	                "MainHint": {
++	                    "Content": "",
++	                    "Range": {
++	                        "Begin": {
++	                            "File": "class_var_open_private_n.cj",
++	                            "Line": 16,
++	                            "Column": 29
++	                        },
++	                        "End": {
++	                            "File": "class_var_open_private_n.cj",
++	                            "Line": 16,
++	                            "Column": 30
++	                        }
++	                    }
++	                },
++	                "OtherHints": [],
++	                "Notes": [],
++	                "Helps": []
++	            },
++	            {
++	                "DiagKind": "sema_missing_entry",
++	                "Severity": "error",
++	                "WarnGroup": "none",
++	                "DiagCategory": "sema",
++	                "Message": "'main' is missing",
++	                "Location": {
++	                    "File": "class_var_open_private_n.cj",
++	                    "Line": 1,
++	                    "Column": 1
++	                },
++	                "MainHint": {
++	                    "Content": "",
++	                    "Range": {
++	                        "Begin": {
++	                            "File": "class_var_open_private_n.cj",
++	                            "Line": 1,
++	                            "Column": 1
++	                        },
++	                        "End": {
++	                            "File": "class_var_open_private_n.cj",
++	                            "Line": 1,
++	                            "Column": 2
++	                        }
++	                    }
++	                },
++	                "OtherHints": [],
++	                "Notes": [],
++	                "Helps": []
++	            }
++	    ],
++	    "Num":{
++	        "Errors": 2,
++	        "PrintedErrors": 2,
++	        "Warnings": 0,
++	        "PrintedWarnings": 0
++	    }
++	}
+
+2026-01-12 20:25:28 DEBUG stderr : 
+
+2026-01-12 20:25:28 DEBUG Run time: 0.29472 second, remain time: 599.71 second
+2026-01-12 20:25:28 DEBUG execute cmd ===>>>: C:\Python314\python.exe E:\cangjie_test_suite\cangjie_test_framework\maple_test\compare.py --comment="//" --condition="'CJNATIVE', 'Windows', 'x86'" class_var_open_private_n.cj
+2026-01-12 20:25:28 DEBUG return code: 0
+2026-01-12 20:25:28 DEBUG stdout : 
++	compare.py input:
++		{
++		    "Diags":[
++		            {
++		                "DiagKind": "sema_undeclared_identifier",
++		                "Severity": "error",
++		                "WarnGroup": "none",
++		                "DiagCategory": "sema",
++		                "Message": "undeclared identifier 'one'",
++		                "Location": {
++		                    "File": "class_var_open_private_n.cj",
++		                    "Line": 16,
++		                    "Column": 29
++		                },
++		                "MainHint": {
++		                    "Content": "",
++		                    "Range": {
++		                        "Begin": {
++		                            "File": "class_var_open_private_n.cj",
++		                            "Line": 16,
++		                            "Column": 29
++		                        },
++		                        "End": {
++		                            "File": "class_var_open_private_n.cj",
++		                            "Line": 16,
++		                            "Column": 30
++		                        }
++		                    }
++		                },
++		                "OtherHints": [],
++		                "Notes": [],
++		                "Helps": []
++		            },
++		            {
++		                "DiagKind": "sema_missing_entry",
++		                "Severity": "error",
++		                "WarnGroup": "none",
++		                "DiagCategory": "sema",
++		                "Message": "'main' is missing",
++		                "Location": {
++		                    "File": "class_var_open_private_n.cj",
++		                    "Line": 1,
++		                    "Column": 1
++		                },
++		                "MainHint": {
++		                    "Content": "",
++		                    "Range": {
++		                        "Begin": {
++		                            "File": "class_var_open_private_n.cj",
++		                            "Line": 1,
++		                            "Column": 1
++		                        },
++		                        "End": {
++		                            "File": "class_var_open_private_n.cj",
++		                            "Line": 1,
++		                            "Column": 2
++		                        }
++		                    }
++		                },
++		                "OtherHints": [],
++		                "Notes": [],
++		                "Helps": []
++		            }
++		    ],
++		    "Num":{
++		        "Errors": 2,
++		        "PrintedErrors": 2,
++		        "Warnings": 0,
++		        "PrintedWarnings": 0
++		    }
++		}
++	
++	compare.py input end
++	
++	Starting SingleLine Compare:
++	b"It's a assert, flag: scan, pattern: sema_missing_entry , result: True, matched at output line: 0 "
++	back reference dict:{}
++	SingleLine Compare End
++	b"It's a assert, flag: scan, pattern: sema_undeclared_identifier , result: True, matched at output line: 34 "
++	back reference dict:{}
++	SingleLine Compare End
++	[Compare Pass]
+
+2026-01-12 20:25:28 DEBUG stderr : 
+
+2026-01-12 20:25:28 DEBUG Run time: 0.19154 second, remain time: 599.51 second
+2026-01-12 20:25:28 DEBUG Task executed successfully

@@ -1,0 +1,138 @@
+2026-01-08 09:52:12 DEBUG Log file at: E:\cangjie_test_suite\cangjie_test_framework\test_temp\log\stdlib_reflect_0_cj_a615a218ec3411f0a4d484a93e8bbbff.log
+2026-01-08 09:52:12 DEBUG Case Path: E:\cangjie_test_suite\cangjie_test\testsuites\HLT\API\std\reflect\cjnative\stdlib_reflect\stdlib_reflect_0.cj
+2026-01-08 09:52:12 DEBUG Work directory: E:\cangjie_test_suite\cangjie_test_framework\test_temp\run\stdlib_reflect_0_cj_a615a218ec3411f0a4d484a93e8bbbff
+2026-01-08 09:52:12 DEBUG execute cmd ===>>>: cjc --error-count-limit=all --diagnostic-format=json stdlib_reflect_0.cj --test -o stdlib_reflect_0.exe
+2026-01-08 09:52:13 DEBUG return code: 0
+2026-01-08 09:52:13 DEBUG stdout : 
+
+2026-01-08 09:52:13 DEBUG stderr : 
+@	{
+@	    "Diags":[
+@	            {
+@	                "DiagKind": "sema_unused_import",
+@	                "Severity": "warning",
+@	                "WarnGroup": "unused",
+@	                "DiagCategory": "sema",
+@	                "Message": "unused import 'std.fs.*'",
+@	                "Location": {
+@	                    "File": "stdlib_reflect_0.cj",
+@	                    "Line": 15,
+@	                    "Column": 1
+@	                },
+@	                "MainHint": {
+@	                    "Content": "unused import",
+@	                    "Range": {
+@	                        "Begin": {
+@	                            "File": "stdlib_reflect_0.cj",
+@	                            "Line": 15,
+@	                            "Column": 1
+@	                        },
+@	                        "End": {
+@	                            "File": "stdlib_reflect_0.cj",
+@	                            "Line": 15,
+@	                            "Column": 16
+@	                        }
+@	                    }
+@	                },
+@	                "OtherHints": [],
+@	                "Notes": [
+@	                    {
+@	                        "Message": "this warning can be suppressed by setting the compiler option `-Woff unused`",
+@	                        "MainHint": null,
+@	                        "OtherHints": [],
+@	                        "Help": null
+@	                    }
+@	                ],
+@	                "Helps": []
+@	            },
+@	            {
+@	                "DiagKind": "sema_unused_import",
+@	                "Severity": "warning",
+@	                "WarnGroup": "unused",
+@	                "DiagCategory": "sema",
+@	                "Message": "unused import 'std.math.*'",
+@	                "Location": {
+@	                    "File": "stdlib_reflect_0.cj",
+@	                    "Line": 17,
+@	                    "Column": 1
+@	                },
+@	                "MainHint": {
+@	                    "Content": "unused import",
+@	                    "Range": {
+@	                        "Begin": {
+@	                            "File": "stdlib_reflect_0.cj",
+@	                            "Line": 17,
+@	                            "Column": 1
+@	                        },
+@	                        "End": {
+@	                            "File": "stdlib_reflect_0.cj",
+@	                            "Line": 17,
+@	                            "Column": 18
+@	                        }
+@	                    }
+@	                },
+@	                "OtherHints": [],
+@	                "Notes": [
+@	                    {
+@	                        "Message": "this warning can be suppressed by setting the compiler option `-Woff unused`",
+@	                        "MainHint": null,
+@	                        "OtherHints": [],
+@	                        "Help": null
+@	                    }
+@	                ],
+@	                "Helps": []
+@	            }
+@	    ],
+@	    "Num":{
+@	        "Errors": 0,
+@	        "PrintedErrors": 0,
+@	        "Warnings": 2,
+@	        "PrintedWarnings": 2
+@	    }
+@	}
+
+2026-01-08 09:52:13 DEBUG Run time: 1.5568 second, remain time: 598.44 second
+2026-01-08 09:52:13 DEBUG execute cmd ===>>>: set LD_LIBRARY_PATH=%chdir%:%LD_LIBRARY_PATH% && stdlib_reflect_0.exe --no-progress
+2026-01-08 09:52:14 DEBUG return code: 1
+2026-01-08 09:52:14 DEBUG stdout : 
++	23--------------------------------------------------------------------------------------------------
++	TP: [33mdefault[0m, time elapsed: 35448900 ns, RESULT:
++	    TCS: [33mTestStdCoreReflection[0m, time elapsed: 34823600 ns, RESULT:
++	    [[32m PASSED [0m] CASE: globalFunctionWithNoOverload (1127300 ns)
++	    [[32m PASSED [0m] CASE: globalFunctionWithOverload (154500 ns)
++	    [[32m PASSED [0m] CASE: genericClassType (66200 ns)
++	    [[32m PASSED [0m] CASE: nonGenericClassType (20700 ns)
++	    [[32m PASSED [0m] CASE: genericStructType (23700 ns)
++	    [[32m PASSED [0m] CASE: nonGenericStructType (14100 ns)
++	    [[32m PASSED [0m] CASE: interfaceType (19500 ns)
++	    [[31m ERROR  [0m] CASE: genericGlobalFunction (32450900 ns)
++	    REASON: An exception has occurred:IllegalArgumentException: The input parameter item does not comply with the required quantity.
++		at ._CNac7HashMapIRNat6StringECNam11PackageInfoEE3addHY2_Y5_.exception_outlined_func.7(std.collection\hash_map.cj:1168)
++		at std.reflect.GlobalFunctionInfo.apply(std.core.Array<...>, std.core.Array<...>)(std/reflect\function_info_cjnative.cj:1061)
++		at default.TestStdCoreReflection.genericGlobalFunction()(E:\cangjie_test_suite\cangjie_test_framework\test_temp\run\stdlib_reflect_0_cj_a615a218ec3411f0a4d484a93e8bbbff\stdlib_reflect_0.cj:53)
++		at default.TestStdCoreReflection.asTestSuite.lambda.2.lambda.0()(E:\cangjie_test_suite\cangjie_test_framework\test_temp\run\stdlib_reflect_0_cj_a615a218ec3411f0a4d484a93e8bbbff\stdlib_reflect_0.cj:47)
++	    TCS: [33mTestStdCoreReflectionUnqualified[0m, time elapsed: 157500 ns, RESULT:
++	    [[32m PASSED [0m] CASE: test00 (15300 ns)
++	    [[32m PASSED [0m] CASE: genericStructType (20600 ns)
++	    [[32m PASSED [0m] CASE: nonGenericStructType (14600 ns)
++	    [[32m PASSED [0m] CASE: interfaceType (13500 ns)
++	    TCS: [33mTestStdMiscReflection[0m, time elapsed: 432900 ns, RESULT:
++	    [[32m PASSED [0m] CASE: test00 (33000 ns)
++	    [[32m PASSED [0m] CASE: globalFunctionWithOverload (81600 ns)
++	    [[32m PASSED [0m] CASE: genericGlobalFunction (35200 ns)
++	    [[32m PASSED [0m] CASE: genericClassType (25900 ns)
++	    [[32m PASSED [0m] CASE: nonGenericClassType (14800 ns)
++	    [[32m PASSED [0m] CASE: genericStructType (27700 ns)
++	    [[32m PASSED [0m] CASE: nonGenericStructType (16600 ns)
++	    [[32m PASSED [0m] CASE: interfaceType (15800 ns)
++	Summary: TOTAL: 20
++	    [32mPASSED[0m: 19, [32mSKIPPED[0m: 0, ERROR: 1
++	    [31mFAILED[0m: 0, listed below:
++	            TCS: [33mTestStdCoreReflection[0m, CASE: genericGlobalFunction
++	--------------------------------------------------------------------------------------------------
+
+2026-01-08 09:52:14 DEBUG stderr : 
+
+2026-01-08 09:52:14 DEBUG Run time: 0.59537 second, remain time: 597.85 second
+2026-01-08 09:52:14 ERROR Failed!
+2026-01-08 09:52:14 ERROR Command return code 1 not equals to expected return code 0

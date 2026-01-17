@@ -1,0 +1,124 @@
+2026-01-05 15:11:53 DEBUG Log file at: E:\cangjie_test_suite\cangjie_test_framework\test_temp\log\all_import_1_cj_cf8a68f0ea0511f0828584a93e8bbbff.log
+2026-01-05 15:11:53 DEBUG Case Path: E:\cangjie_test_suite\cangjie_test\testsuites\HLT\compiler\cjnative\Packages\org_name\import_decl\all_import_1.cj
+2026-01-05 15:11:53 DEBUG Work directory: E:\cangjie_test_suite\cangjie_test_framework\test_temp\run\all_import_1_cj_cf8a68f0ea0511f0828584a93e8bbbff
+2026-01-05 15:11:53 DEBUG execute cmd ===>>>: cjc --error-count-limit=all --diagnostic-format=json --output-type=dylib upstream_package.cj
+2026-01-05 15:11:54 DEBUG return code: 0
+2026-01-05 15:11:54 DEBUG stdout : 
+
+2026-01-05 15:11:54 DEBUG stderr : 
+
+2026-01-05 15:11:54 DEBUG Run time: 1.1711 second, remain time: 598.83 second
+2026-01-05 15:11:54 DEBUG execute cmd ===>>>: cjc --error-count-limit=all --diagnostic-format=json all_import_1.cj -L. -lmy_pkg@my_org -o all_import_1.exe 2>&1
+2026-01-05 15:11:54 DEBUG return code: 1
+2026-01-05 15:11:54 DEBUG stdout : 
++	{
++	    "Diags":[
++	            {
++	                "DiagKind": "package_search_error",
++	                "Severity": "error",
++	                "WarnGroup": "none",
++	                "DiagCategory": "import_package",
++	                "Message": "can not find package 'my_org'",
++	                "Location": {
++	                    "File": "all_import_1.cj",
++	                    "Line": 16,
++	                    "Column": 8
++	                },
++	                "MainHint": {
++	                    "Content": "",
++	                    "Range": {
++	                        "Begin": {
++	                            "File": "all_import_1.cj",
++	                            "Line": 16,
++	                            "Column": 8
++	                        },
++	                        "End": {
++	                            "File": "all_import_1.cj",
++	                            "Line": 16,
++	                            "Column": 14
++	                        }
++	                    }
++	                },
++	                "OtherHints": [],
++	                "Notes": [],
++	                "Helps": [
++	                    {
++	                        "Message": "check if the .cjo file of the package exists in CANGJIE_PATH or CANGJIE_HOME, or use '--import-path' to specify the .cjo file path",
++	                        "Substitutions": []
++	                    }
++	                ]
++	            }
++	    ],
++	    "Num":{
++	        "Errors": 1,
++	        "PrintedErrors": 1,
++	        "Warnings": 0,
++	        "PrintedWarnings": 0
++	    }
++	}
+
+2026-01-05 15:11:54 DEBUG stderr : 
+
+2026-01-05 15:11:54 DEBUG Run time: 0.55924 second, remain time: 598.27 second
+2026-01-05 15:11:54 DEBUG execute cmd ===>>>: C:\Python314\python.exe E:\cangjie_test_suite\cangjie_test_framework\maple_test\compare.py --comment="//" --condition="'CJNATIVE', 'Windows', 'x86'" all_import_1.cj
+2026-01-05 15:11:55 DEBUG return code: 0
+2026-01-05 15:11:55 DEBUG stdout : 
++	compare.py input:
++		{
++		    "Diags":[
++		            {
++		                "DiagKind": "package_search_error",
++		                "Severity": "error",
++		                "WarnGroup": "none",
++		                "DiagCategory": "import_package",
++		                "Message": "can not find package 'my_org'",
++		                "Location": {
++		                    "File": "all_import_1.cj",
++		                    "Line": 16,
++		                    "Column": 8
++		                },
++		                "MainHint": {
++		                    "Content": "",
++		                    "Range": {
++		                        "Begin": {
++		                            "File": "all_import_1.cj",
++		                            "Line": 16,
++		                            "Column": 8
++		                        },
++		                        "End": {
++		                            "File": "all_import_1.cj",
++		                            "Line": 16,
++		                            "Column": 14
++		                        }
++		                    }
++		                },
++		                "OtherHints": [],
++		                "Notes": [],
++		                "Helps": [
++		                    {
++		                        "Message": "check if the .cjo file of the package exists in CANGJIE_PATH or CANGJIE_HOME, or use '--import-path' to specify the .cjo file path",
++		                        "Substitutions": []
++		                    }
++		                ]
++		            }
++		    ],
++		    "Num":{
++		        "Errors": 1,
++		        "PrintedErrors": 1,
++		        "Warnings": 0,
++		        "PrintedWarnings": 0
++		    }
++		}
++	
++	compare.py input end
++	
++	Starting SingleLine Compare:
++	b"It's a assert, flag: scan, pattern: can not find package 'my_org' , result: True, matched at output line: 0 "
++	back reference dict:{}
++	SingleLine Compare End
++	[Compare Pass]
+
+2026-01-05 15:11:55 DEBUG stderr : 
+
+2026-01-05 15:11:55 DEBUG Run time: 0.46446 second, remain time: 597.81 second
+2026-01-05 15:11:55 DEBUG Task executed successfully

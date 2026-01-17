@@ -1,0 +1,68 @@
+2026-01-07 09:52:35 DEBUG Log file at: E:\cangjie_test_suite\cangjie_test_framework\test_temp\log\test_generic_user_defined_type_1_cj_89c6e4e2eb6b11f0ae9c84a93e8bbbff.log
+2026-01-07 09:52:35 DEBUG Case Path: E:\cangjie_test_suite\cangjie_test\testsuites\HLT\API\std\reflect\cjnative\Generic\test_generic_user_defined_type_1.cj
+2026-01-07 09:52:35 DEBUG Work directory: E:\cangjie_test_suite\cangjie_test_framework\test_temp\run\test_generic_user_defined_type_1_cj_89c6e4e2eb6b11f0ae9c84a93e8bbbff
+2026-01-07 09:52:35 DEBUG execute cmd ===>>>: cjc --error-count-limit=all --diagnostic-format=json test_generic_user_defined_type_1.cj --test -o test_generic_user_defined_type_1.exe
+2026-01-07 09:52:36 DEBUG return code: 1
+2026-01-07 09:52:36 DEBUG stdout : 
+
+2026-01-07 09:52:36 DEBUG stderr : 
+@	{
+@	    "Diags":[
+@	            {
+@	                "DiagKind": "parse_expected_name",
+@	                "Severity": "error",
+@	                "WarnGroup": "none",
+@	                "DiagCategory": "parse",
+@	                "Message": "expected a member name after '.' in qualified name, found '@'",
+@	                "Location": {
+@	                    "File": "test_generic_user_defined_type_1.cj",
+@	                    "Line": 441,
+@	                    "Column": 9
+@	                },
+@	                "MainHint": {
+@	                    "Content": "expected a member name here",
+@	                    "Range": {
+@	                        "Begin": {
+@	                            "File": "test_generic_user_defined_type_1.cj",
+@	                            "Line": 441,
+@	                            "Column": 9
+@	                        },
+@	                        "End": {
+@	                            "File": "test_generic_user_defined_type_1.cj",
+@	                            "Line": 441,
+@	                            "Column": 10
+@	                        }
+@	                    }
+@	                },
+@	                "OtherHints": [
+@	                    {
+@	                        "Content": "after '.' in qualified name",
+@	                        "Range": {
+@	                            "Begin": {
+@	                                "File": "test_generic_user_defined_type_1.cj",
+@	                                "Line": 440,
+@	                                "Column": 20
+@	                            },
+@	                            "End": {
+@	                                "File": "test_generic_user_defined_type_1.cj",
+@	                                "Line": 440,
+@	                                "Column": 21
+@	                            }
+@	                        }
+@	                    }
+@	                ],
+@	                "Notes": [],
+@	                "Helps": []
+@	            }
+@	    ],
+@	    "Num":{
+@	        "Errors": 1,
+@	        "PrintedErrors": 1,
+@	        "Warnings": 0,
+@	        "PrintedWarnings": 0
+@	    }
+@	}
+
+2026-01-07 09:52:36 DEBUG Run time: 0.67918 second, remain time: 599.32 second
+2026-01-07 09:52:36 ERROR Failed!
+2026-01-07 09:52:36 ERROR Command return code 1 not equals to expected return code 0

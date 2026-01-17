@@ -307,6 +307,20 @@ Optional keyword used during result verification.
 * `ASSERT: scan pattern` - literal text match.
 * `ASSERT: regex pattern` - regex match.
 
+### Conditional Execution
+
+This test framework supports conditional execution control of test cases based on conditional tags. By adding conditional expressions before comment directives in test cases, you can dynamically determine whether to execute specific test commands based on runtime conditions. The basic syntax is:
+
+```shell
+// (conditional_expression) builtin_command: command_content
+```
+
+#### Basic Rules for Conditional Expressions
+
+- Supports logical operators and parentheses. Logical operators can be symbols `&`, `|`, `!`, or their corresponding English words `and`, `or`, `not`.
+- Identifiers support any string composed of letters (both uppercase and lowercase), numbers, and underscores, such as `debug_mode`, `001`, `IMPORTANT`, etc.
+- All whitespace characters in conditional expressions will be ignored.
+
 ### Test-Case Validation
 
 * Exit code of executed commands

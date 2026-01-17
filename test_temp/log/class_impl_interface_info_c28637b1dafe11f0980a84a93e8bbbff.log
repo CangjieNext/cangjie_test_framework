@@ -1,0 +1,196 @@
+2025-12-17 12:13:37 DEBUG Log file at: E:\cangjie_test_suite\cangjie_test_framework\test_temp\log\class_impl_interface_info_c28637b1dafe11f0980a84a93e8bbbff.log
+2025-12-17 12:13:37 DEBUG Case Path: E:\cangjie_test_suite\cangjie_test\testsuites\HLT\compiler\cjnative\HLE\arkts\class\class_impl_interface.info
+2025-12-17 12:13:37 DEBUG Work directory: E:\cangjie_test_suite\cangjie_test_framework\test_temp\run\class_impl_interface_info_c28637b1dafe11f0980a84a93e8bbbff
+2025-12-17 12:13:37 DEBUG execute cmd ===>>>: %CANGJIE_HOME%/tools/bin/hle -r %CANGJIE_HOME%/tools/dtsparser/node_modules/typescript -j %CANGJIE_HOME%/tools/dtsparser/analysis.js -i class_impl_interface.d.ts -o . --module-name="my_module"
+2025-12-17 12:13:38 DEBUG return code: 0
+2025-12-17 12:13:38 DEBUG stdout : 
++	class_impl_interface.d.ts is analyzed completely, json file saved!
++	========Analyzing class_impl_interface.d.ts Begins!========
++	module: class_impl_interface.d.ts
++	output: ./cj
++	
++	total cost of hle: 629ms228us200ns
+
+2025-12-17 12:13:38 DEBUG stderr : 
+
+2025-12-17 12:13:38 DEBUG Run time: 0.72831 second, remain time: 179.27 second
+2025-12-17 12:13:38 DEBUG execute cmd ===>>>: type cj\class_impl_interface\src\class_impl_interface.cj
+2025-12-17 12:13:38 DEBUG return code: 0
+2025-12-17 12:13:38 DEBUG stdout : 
++	// Copyright (c) Huawei Technologies Co., Ltd. 2025. All rights reserved.
++	// This source file is part of the Cangjie project, licensed under Apache-2.0
++	// with Runtime Library Exception.
++	//
++	// See https://cangjie-lang.cn/pages/LICENSE for license information.
++	
++	package my_module
++	
++	import tpc.*
++	import ohos.ark_interop.*
++	import ohos.ark_interop_helper.*
++	import ohos.base.*
++	
++	/***********OBJECT***********/
++	
++	/*interface I {
++	    p: number;
++	    }*/
++	
++	public open class I {
++	    
++	    protected I(private var p: Float64) { }
++	    
++	    
++	    public open func toJSValue(context: JSContext): JSValue {
++	        let obj = context.object()
++	        obj["p"] = p.toJSValue(context)
++	        obj.toJSValue()
++	    }
++	    
++	    public static func fromJSValue(context: JSContext, input: JSValue): I {
++	        let obj = input.asObject()
++	        I(
++	        Float64.fromJSValue(context, obj["p"])
++	        )
++	    }
++	    
++	}
++	
++	/*class DeclareKeyword C {
++	    p: number;
++	    }*/
++	
++	public class C <: I {
++	    
++	    protected C(public var arkts_object: JSObject) {
++	        super(Float64.fromJSValue(getMainContext(), arkts_object["p"])) }
++	    
++	    
++	    public mut prop p: Float64 {
++	        get() {
++	            checkThreadAndCall < Float64 >(getMainContext()) {
++	                ctx: JSContext => Float64.fromJSValue(ctx, arkts_object["p"])
++	            }
++	        }
++	        set(v) {
++	            checkThreadAndCall < Unit >(getMainContext()) {
++	                ctx: JSContext => arkts_object["p"] = v.toJSValue(ctx)
++	            }
++	        }
++	        
++	    }
++	    
++	    
++	    public func toJSValue(context: JSContext): JSValue {
++	        arkts_object.toJSValue()
++	    }
++	    
++	    public  static func fromJSValue(context: JSContext, input: JSValue): C {
++	        C(input.asObject())
++	    }
++	}
++	
+
+2025-12-17 12:13:38 DEBUG stderr : 
+
+2025-12-17 12:13:38 DEBUG Run time: 0.013406 second, remain time: 179.26 second
+2025-12-17 12:13:38 DEBUG execute cmd ===>>>: C:\Python314\python.exe E:\cangjie_test_suite\cangjie_test_framework\maple_test\compare.py --comment="//" --condition="'Windows', 'CJNATIVE', 'x86'" class_impl_interface.info
+2025-12-17 12:13:38 DEBUG return code: 1
+2025-12-17 12:13:38 DEBUG stdout : 
++	compare.py input:
++		// Copyright (c) Huawei Technologies Co., Ltd. 2025. All rights reserved.
++		// This source file is part of the Cangjie project, licensed under Apache-2.0
++		// with Runtime Library Exception.
++		//
++		// See https://cangjie-lang.cn/pages/LICENSE for license information.
++		
++		package my_module
++		
++		import tpc.*
++		import ohos.ark_interop.*
++		import ohos.ark_interop_helper.*
++		import ohos.base.*
++		
++		/***********OBJECT***********/
++		
++		/*interface I {
++		    p: number;
++		    }*/
++		
++		public open class I {
++		    
++		    protected I(private var p: Float64) { }
++		    
++		    
++		    public open func toJSValue(context: JSContext): JSValue {
++		        let obj = context.object()
++		        obj["p"] = p.toJSValue(context)
++		        obj.toJSValue()
++		    }
++		    
++		    public static func fromJSValue(context: JSContext, input: JSValue): I {
++		        let obj = input.asObject()
++		        I(
++		        Float64.fromJSValue(context, obj["p"])
++		        )
++		    }
++		    
++		}
++		
++		/*class DeclareKeyword C {
++		    p: number;
++		    }*/
++		
++		public class C <: I {
++		    
++		    protected C(public var arkts_object: JSObject) {
++		        super(Float64.fromJSValue(getMainContext(), arkts_object["p"])) }
++		    
++		    
++		    public mut prop p: Float64 {
++		        get() {
++		            checkThreadAndCall < Float64 >(getMainContext()) {
++		                ctx: JSContext => Float64.fromJSValue(ctx, arkts_object["p"])
++		            }
++		        }
++		        set(v) {
++		            checkThreadAndCall < Unit >(getMainContext()) {
++		                ctx: JSContext => arkts_object["p"] = v.toJSValue(ctx)
++		            }
++		        }
++		        
++		    }
++		    
++		    
++		    public func toJSValue(context: JSContext): JSValue {
++		        arkts_object.toJSValue()
++		    }
++		    
++		    public  static func fromJSValue(context: JSContext, input: JSValue): C {
++		        C(input.asObject())
++		    }
++		}
++		
++	
++	compare.py input end
++	
++	Starting SingleLine Compare:
++	b"It's a assert, flag: scan, pattern: public enum AutoGenType0 < T > where T <: JSInteropType<T> { , result: False, matched at output line: 0 "
++	back reference dict:{}
++	SingleLine Compare Failed
++	b"It's a assert, flag: scan, pattern: | T0(T) , result: False, matched at output line: 0 "
++	back reference dict:{}
++	SingleLine Compare Failed
++	b"It's a assert, flag: scan, pattern: | STRING(String) , result: False, matched at output line: 0 "
++	back reference dict:{}
++	SingleLine Compare Failed
++	b"It's a assert, flag: scan, pattern: public func testGenric < T >(t: T): AutoGenType0< T > where T <: JSInteropType<T> { , result: False, matched at output line: 0 "
++	back reference dict:{}
++	SingleLine Compare Failed
++	[Compare Fail]
+
+2025-12-17 12:13:38 DEBUG stderr : 
+
+2025-12-17 12:13:38 DEBUG Run time: 0.18215 second, remain time: 179.08 second
+2025-12-17 12:13:38 ERROR Failed!
+2025-12-17 12:13:38 ERROR Command return code 1 not equals to expected return code 0

@@ -1,0 +1,26 @@
+2026-01-05 15:09:33 DEBUG Log file at: E:\cangjie_test_suite\cangjie_test_framework\test_temp\log\single_import_0_cj_7c2ff6e3ea0511f09a6284a93e8bbbff.log
+2026-01-05 15:09:33 DEBUG Case Path: E:\cangjie_test_suite\cangjie_test\testsuites\HLT\compiler\cjnative\Packages\org_name\import_decl\single_import_0.cj
+2026-01-05 15:09:33 DEBUG Work directory: E:\cangjie_test_suite\cangjie_test_framework\test_temp\run\single_import_0_cj_7c2ff6e3ea0511f09a6284a93e8bbbff
+2026-01-05 15:09:33 DEBUG execute cmd ===>>>: cjc --error-count-limit=all --diagnostic-format=json --output-type=dylib upstream_package.cj
+2026-01-05 15:09:34 DEBUG return code: 0
+2026-01-05 15:09:34 DEBUG stdout : 
+
+2026-01-05 15:09:34 DEBUG stderr : 
+
+2026-01-05 15:09:34 DEBUG Run time: 1.0731 second, remain time: 598.93 second
+2026-01-05 15:09:34 DEBUG execute cmd ===>>>: cjc --error-count-limit=all --diagnostic-format=json single_import_0.cj -L. -lmy_pkg@my_org -o single_import_0.exe
+2026-01-05 15:09:35 DEBUG return code: 0
+2026-01-05 15:09:35 DEBUG stdout : 
+
+2026-01-05 15:09:35 DEBUG stderr : 
+
+2026-01-05 15:09:35 DEBUG Run time: 1.4415 second, remain time: 597.49 second
+2026-01-05 15:09:35 DEBUG execute cmd ===>>>: set LD_LIBRARY_PATH=%chdir%:%LD_LIBRARY_PATH% && single_import_0.exe
+2026-01-05 15:09:36 DEBUG return code: 0
+2026-01-05 15:09:36 DEBUG stdout : 
++	foo
+
+2026-01-05 15:09:36 DEBUG stderr : 
+
+2026-01-05 15:09:36 DEBUG Run time: 0.52119 second, remain time: 596.96 second
+2026-01-05 15:09:36 DEBUG Task executed successfully

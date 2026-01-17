@@ -1,0 +1,100 @@
+2025-12-18 19:14:12 DEBUG Log file at: E:\cangjie_test_suite\cangjie_test_framework\test_temp\log\test_info_ae0f7268dc0211f09d2384a93e8bbbff.log
+2025-12-18 19:14:12 DEBUG Case Path: E:\cangjie_test_suite\cangjie_test\testsuites\HLT\compiler\cjnative\visibility\overload\testcase_0\test.info
+2025-12-18 19:14:12 DEBUG Work directory: E:\cangjie_test_suite\cangjie_test_framework\test_temp\run\test_info_ae0f7268dc0211f09d2384a93e8bbbff
+2025-12-18 19:14:12 DEBUG execute cmd ===>>>: cjc --error-count-limit=all --diagnostic-format=json --output-type=staticlib sub.cj -o libsub.a
+2025-12-18 19:14:12 DEBUG return code: 0
+2025-12-18 19:14:12 DEBUG stdout : 
+
+2025-12-18 19:14:12 DEBUG stderr : 
+
+2025-12-18 19:14:12 DEBUG Run time: 0.60214 second, remain time: 179.4 second
+2025-12-18 19:14:12 DEBUG execute cmd ===>>>: cjc --error-count-limit=all --diagnostic-format=json a.cj b.cj c.cj main.cj -L . -lsub -o test.exe
+2025-12-18 19:14:13 DEBUG return code: 0
+2025-12-18 19:14:13 DEBUG stdout : 
+
+2025-12-18 19:14:13 DEBUG stderr : 
+@	{
+@	    "Diags":[
+@	            {
+@	                "DiagKind": "sema_unused_import",
+@	                "Severity": "warning",
+@	                "WarnGroup": "unused",
+@	                "DiagCategory": "sema",
+@	                "Message": "unused import 'a.sub.foo'",
+@	                "Location": {
+@	                    "File": "a.cj",
+@	                    "Line": 11,
+@	                    "Column": 1
+@	                },
+@	                "MainHint": {
+@	                    "Content": "unused import",
+@	                    "Range": {
+@	                        "Begin": {
+@	                            "File": "a.cj",
+@	                            "Line": 11,
+@	                            "Column": 1
+@	                        },
+@	                        "End": {
+@	                            "File": "a.cj",
+@	                            "Line": 11,
+@	                            "Column": 17
+@	                        }
+@	                    }
+@	                },
+@	                "OtherHints": [],
+@	                "Notes": [
+@	                    {
+@	                        "Message": "this warning can be suppressed by setting the compiler option `-Woff unused`",
+@	                        "MainHint": null,
+@	                        "OtherHints": [],
+@	                        "Help": null
+@	                    }
+@	                ],
+@	                "Helps": []
+@	            }
+@	    ],
+@	    "Num":{
+@	        "Errors": 0,
+@	        "PrintedErrors": 0,
+@	        "Warnings": 1,
+@	        "PrintedWarnings": 1
+@	    }
+@	}
+
+2025-12-18 19:14:13 DEBUG Run time: 0.59809 second, remain time: 178.8 second
+2025-12-18 19:14:13 DEBUG execute cmd ===>>>: set LD_LIBRARY_PATH=%chdir%:%LD_LIBRARY_PATH% && test.exe 2>&1
+2025-12-18 19:14:13 DEBUG return code: 0
+2025-12-18 19:14:13 DEBUG stdout : 
++	a.p, 1
++	a.sub.p, 2
++	c.p, 3
+
+2025-12-18 19:14:13 DEBUG stderr : 
+
+2025-12-18 19:14:13 DEBUG Run time: 0.25456 second, remain time: 178.55 second
+2025-12-18 19:14:13 DEBUG execute cmd ===>>>: C:\Python314\python.exe E:\cangjie_test_suite\cangjie_test_framework\maple_test\compare.py --comment="//" --condition="'CJNATIVE', 'x86', 'Windows'" test.info
+2025-12-18 19:14:13 DEBUG return code: 0
+2025-12-18 19:14:13 DEBUG stdout : 
++	compare.py input:
++		a.p, 1
++		a.sub.p, 2
++		c.p, 3
++	
++	compare.py input end
++	
++	Starting SingleLine Compare:
++	b"It's a assert, flag: scan, pattern: a.p, 1 , result: True, matched at output line: 0 "
++	back reference dict:{}
++	SingleLine Compare End
++	b"It's a assert, flag: scan, pattern: a.sub.p, 2 , result: True, matched at output line: 1 "
++	back reference dict:{}
++	SingleLine Compare End
++	b"It's a assert, flag: scan, pattern: c.p, 3 , result: True, matched at output line: 1 "
++	back reference dict:{}
++	SingleLine Compare End
++	[Compare Pass]
+
+2025-12-18 19:14:13 DEBUG stderr : 
+
+2025-12-18 19:14:13 DEBUG Run time: 0.18605 second, remain time: 178.36 second
+2025-12-18 19:14:13 DEBUG Task executed successfully

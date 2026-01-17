@@ -1,0 +1,241 @@
+2025-12-19 09:17:52 DEBUG Log file at: E:\cangjie_test_suite\cangjie_test_framework\test_temp\log\test_info_8a05de8fdc7811f0954784a93e8bbbff.log
+2025-12-19 09:17:52 DEBUG Case Path: E:\cangjie_test_suite\cangjie_test\testsuites\HLT\compiler\cjnative\visibility\overload\testcase_6\test.info
+2025-12-19 09:17:52 DEBUG Work directory: E:\cangjie_test_suite\cangjie_test_framework\test_temp\run\test_info_8a05de8fdc7811f0954784a93e8bbbff
+2025-12-19 09:17:52 DEBUG execute cmd ===>>>: cjc --error-count-limit=all --diagnostic-format=json a.cj b.cj c.cj main.cj -o test.exe
+2025-12-19 09:17:59 DEBUG return code: 0
+2025-12-19 09:17:59 DEBUG stdout : 
+
+2025-12-19 09:17:59 DEBUG stderr : 
+@	{
+@	    "Diags":[
+@	            {
+@	                "DiagKind": "chir_dce_unused_function",
+@	                "Severity": "warning",
+@	                "WarnGroup": "unused",
+@	                "DiagCategory": "chir",
+@	                "Message": "unused function:'foo'",
+@	                "Location": {
+@	                    "File": "b.cj",
+@	                    "Line": 14,
+@	                    "Column": 1
+@	                },
+@	                "MainHint": {
+@	                    "Content": "unused function",
+@	                    "Range": {
+@	                        "Begin": {
+@	                            "File": "b.cj",
+@	                            "Line": 14,
+@	                            "Column": 1
+@	                        },
+@	                        "End": {
+@	                            "File": "b.cj",
+@	                            "Line": 16,
+@	                            "Column": 2
+@	                        }
+@	                    }
+@	                },
+@	                "OtherHints": [],
+@	                "Notes": [
+@	                    {
+@	                        "Message": "this warning can be suppressed by setting the compiler option `-Woff unused`",
+@	                        "MainHint": null,
+@	                        "OtherHints": [],
+@	                        "Help": null
+@	                    }
+@	                ],
+@	                "Helps": []
+@	            },
+@	            {
+@	                "DiagKind": "chir_dce_unused_function",
+@	                "Severity": "warning",
+@	                "WarnGroup": "unused",
+@	                "DiagCategory": "chir",
+@	                "Message": "unused function:'foo'",
+@	                "Location": {
+@	                    "File": "c.cj",
+@	                    "Line": 14,
+@	                    "Column": 1
+@	                },
+@	                "MainHint": {
+@	                    "Content": "unused function",
+@	                    "Range": {
+@	                        "Begin": {
+@	                            "File": "c.cj",
+@	                            "Line": 14,
+@	                            "Column": 1
+@	                        },
+@	                        "End": {
+@	                            "File": "c.cj",
+@	                            "Line": 16,
+@	                            "Column": 2
+@	                        }
+@	                    }
+@	                },
+@	                "OtherHints": [],
+@	                "Notes": [
+@	                    {
+@	                        "Message": "this warning can be suppressed by setting the compiler option `-Woff unused`",
+@	                        "MainHint": null,
+@	                        "OtherHints": [],
+@	                        "Help": null
+@	                    }
+@	                ],
+@	                "Helps": []
+@	            },
+@	            {
+@	                "DiagKind": "chir_dce_unused_function",
+@	                "Severity": "warning",
+@	                "WarnGroup": "unused",
+@	                "DiagCategory": "chir",
+@	                "Message": "unused function:'foo'",
+@	                "Location": {
+@	                    "File": "a.cj",
+@	                    "Line": 15,
+@	                    "Column": 1
+@	                },
+@	                "MainHint": {
+@	                    "Content": "unused function",
+@	                    "Range": {
+@	                        "Begin": {
+@	                            "File": "a.cj",
+@	                            "Line": 15,
+@	                            "Column": 1
+@	                        },
+@	                        "End": {
+@	                            "File": "a.cj",
+@	                            "Line": 17,
+@	                            "Column": 2
+@	                        }
+@	                    }
+@	                },
+@	                "OtherHints": [],
+@	                "Notes": [
+@	                    {
+@	                        "Message": "this warning can be suppressed by setting the compiler option `-Woff unused`",
+@	                        "MainHint": null,
+@	                        "OtherHints": [],
+@	                        "Help": null
+@	                    }
+@	                ],
+@	                "Helps": []
+@	            },
+@	            {
+@	                "DiagKind": "chir_dce_unused_function",
+@	                "Severity": "warning",
+@	                "WarnGroup": "unused",
+@	                "DiagCategory": "chir",
+@	                "Message": "unused function:'foo'",
+@	                "Location": {
+@	                    "File": "b.cj",
+@	                    "Line": 18,
+@	                    "Column": 1
+@	                },
+@	                "MainHint": {
+@	                    "Content": "unused function",
+@	                    "Range": {
+@	                        "Begin": {
+@	                            "File": "b.cj",
+@	                            "Line": 18,
+@	                            "Column": 1
+@	                        },
+@	                        "End": {
+@	                            "File": "b.cj",
+@	                            "Line": 20,
+@	                            "Column": 2
+@	                        }
+@	                    }
+@	                },
+@	                "OtherHints": [],
+@	                "Notes": [
+@	                    {
+@	                        "Message": "this warning can be suppressed by setting the compiler option `-Woff unused`",
+@	                        "MainHint": null,
+@	                        "OtherHints": [],
+@	                        "Help": null
+@	                    }
+@	                ],
+@	                "Helps": []
+@	            },
+@	            {
+@	                "DiagKind": "chir_dce_unused_function",
+@	                "Severity": "warning",
+@	                "WarnGroup": "unused",
+@	                "DiagCategory": "chir",
+@	                "Message": "unused function:'foo'",
+@	                "Location": {
+@	                    "File": "a.cj",
+@	                    "Line": 19,
+@	                    "Column": 1
+@	                },
+@	                "MainHint": {
+@	                    "Content": "unused function",
+@	                    "Range": {
+@	                        "Begin": {
+@	                            "File": "a.cj",
+@	                            "Line": 19,
+@	                            "Column": 1
+@	                        },
+@	                        "End": {
+@	                            "File": "a.cj",
+@	                            "Line": 21,
+@	                            "Column": 2
+@	                        }
+@	                    }
+@	                },
+@	                "OtherHints": [],
+@	                "Notes": [
+@	                    {
+@	                        "Message": "this warning can be suppressed by setting the compiler option `-Woff unused`",
+@	                        "MainHint": null,
+@	                        "OtherHints": [],
+@	                        "Help": null
+@	                    }
+@	                ],
+@	                "Helps": []
+@	            }
+@	    ],
+@	    "Num":{
+@	        "Errors": 0,
+@	        "PrintedErrors": 0,
+@	        "Warnings": 5,
+@	        "PrintedWarnings": 5
+@	    }
+@	}
+
+2025-12-19 09:17:59 DEBUG Run time: 7.0769 second, remain time: 172.92 second
+2025-12-19 09:17:59 DEBUG execute cmd ===>>>: set LD_LIBRARY_PATH=%chdir%:%LD_LIBRARY_PATH% && test.exe 2>&1
+2025-12-19 09:17:59 DEBUG return code: 0
+2025-12-19 09:17:59 DEBUG stdout : 
++	a.p, 1
++	b.p, 2
++	c.p, 3
+
+2025-12-19 09:17:59 DEBUG stderr : 
+
+2025-12-19 09:17:59 DEBUG Run time: 0.25919 second, remain time: 172.66 second
+2025-12-19 09:17:59 DEBUG execute cmd ===>>>: C:\Python314\python.exe E:\cangjie_test_suite\cangjie_test_framework\maple_test\compare.py --comment="//" --condition="'Windows', 'CJNATIVE', 'x86'" test.info
+2025-12-19 09:17:59 DEBUG return code: 0
+2025-12-19 09:17:59 DEBUG stdout : 
++	compare.py input:
++		a.p, 1
++		b.p, 2
++		c.p, 3
++	
++	compare.py input end
++	
++	Starting SingleLine Compare:
++	b"It's a assert, flag: scan, pattern: a.p, 1 , result: True, matched at output line: 0 "
++	back reference dict:{}
++	SingleLine Compare End
++	b"It's a assert, flag: scan, pattern: b.p, 2 , result: True, matched at output line: 1 "
++	back reference dict:{}
++	SingleLine Compare End
++	b"It's a assert, flag: scan, pattern: c.p, 3 , result: True, matched at output line: 1 "
++	back reference dict:{}
++	SingleLine Compare End
++	[Compare Pass]
+
+2025-12-19 09:17:59 DEBUG stderr : 
+
+2025-12-19 09:17:59 DEBUG Run time: 0.18406 second, remain time: 172.48 second
+2025-12-19 09:17:59 DEBUG Task executed successfully

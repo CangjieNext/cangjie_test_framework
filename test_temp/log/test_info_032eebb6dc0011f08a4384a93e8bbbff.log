@@ -1,0 +1,41 @@
+2025-12-18 18:55:06 DEBUG Log file at: E:\cangjie_test_suite\cangjie_test_framework\test_temp\log\test_info_032eebb6dc0011f08a4384a93e8bbbff.log
+2025-12-18 18:55:06 DEBUG Case Path: E:\cangjie_test_suite\cangjie_test\testsuites\HLT\compiler\cjnative\visibility\overload\testcase_0\test.info
+2025-12-18 18:55:06 DEBUG Work directory: E:\cangjie_test_suite\cangjie_test_framework\test_temp\run\test_info_032eebb6dc0011f08a4384a93e8bbbff
+2025-12-18 18:55:06 DEBUG execute cmd ===>>>: cjc --error-count-limit=all --diagnostic-format=json a.cj b.cj c.cj main.cj -o test.exe
+2025-12-18 18:55:12 DEBUG return code: 0
+2025-12-18 18:55:12 DEBUG stdout : 
+
+2025-12-18 18:55:12 DEBUG stderr : 
+
+2025-12-18 18:55:12 DEBUG Run time: 6.2572 second, remain time: 173.74 second
+2025-12-18 18:55:12 DEBUG execute cmd ===>>>: set LD_LIBRARY_PATH=%chdir%:%LD_LIBRARY_PATH% && test.exe 2>&1
+2025-12-18 18:55:12 DEBUG return code: 0
+2025-12-18 18:55:12 DEBUG stdout : 
++	a.p, 1
++	b.p, 2
++	c.p, 3
+
+2025-12-18 18:55:12 DEBUG stderr : 
+
+2025-12-18 18:55:12 DEBUG Run time: 0.27043 second, remain time: 173.47 second
+2025-12-18 18:55:12 DEBUG execute cmd ===>>>: C:\Python314\python.exe E:\cangjie_test_suite\cangjie_test_framework\maple_test\compare.py --comment="//" --condition="'CJNATIVE', 'Windows', 'x86'" test.info
+2025-12-18 18:55:13 DEBUG return code: 1
+2025-12-18 18:55:13 DEBUG stdout : 
++	compare.py input:
++		a.p, 1
++		b.p, 2
++		c.p, 3
++	
++	compare.py input end
++	
++	Starting SingleLine Compare:
++	b"It's a assert, flag: scan, pattern: xxx , result: False, matched at output line: 0 "
++	back reference dict:{}
++	SingleLine Compare Failed
++	[Compare Fail]
+
+2025-12-18 18:55:13 DEBUG stderr : 
+
+2025-12-18 18:55:13 DEBUG Run time: 0.22079 second, remain time: 173.25 second
+2025-12-18 18:55:13 ERROR Failed!
+2025-12-18 18:55:13 ERROR Command return code 1 not equals to expected return code 0

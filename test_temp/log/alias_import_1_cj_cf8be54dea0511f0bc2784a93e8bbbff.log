@@ -1,0 +1,42 @@
+2026-01-05 15:11:55 DEBUG Log file at: E:\cangjie_test_suite\cangjie_test_framework\test_temp\log\alias_import_1_cj_cf8be54dea0511f0bc2784a93e8bbbff.log
+2026-01-05 15:11:55 DEBUG Case Path: E:\cangjie_test_suite\cangjie_test\testsuites\HLT\compiler\cjnative\Packages\org_name\import_decl\alias_import_1.cj
+2026-01-05 15:11:55 DEBUG Work directory: E:\cangjie_test_suite\cangjie_test_framework\test_temp\run\alias_import_1_cj_cf8be54dea0511f0bc2784a93e8bbbff
+2026-01-05 15:11:55 DEBUG execute cmd ===>>>: cjc --error-count-limit=all --diagnostic-format=json --output-type=dylib upstream_package.cj
+2026-01-05 15:11:57 DEBUG return code: 0
+2026-01-05 15:11:57 DEBUG stdout : 
+
+2026-01-05 15:11:57 DEBUG stderr : 
+
+2026-01-05 15:11:57 DEBUG Run time: 1.6737 second, remain time: 598.33 second
+2026-01-05 15:11:57 DEBUG execute cmd ===>>>: cjc --error-count-limit=all --diagnostic-format=json --output-type=dylib sub_pkg.cj
+2026-01-05 15:11:58 DEBUG return code: 0
+2026-01-05 15:11:58 DEBUG stdout : 
+
+2026-01-05 15:11:58 DEBUG stderr : 
+
+2026-01-05 15:11:58 DEBUG Run time: 1.4964 second, remain time: 596.83 second
+2026-01-05 15:11:58 DEBUG execute cmd ===>>>: cjc --error-count-limit=all --diagnostic-format=json --output-type=dylib sub_sub_pkg.cj
+2026-01-05 15:11:59 DEBUG return code: 0
+2026-01-05 15:11:59 DEBUG stdout : 
+
+2026-01-05 15:11:59 DEBUG stderr : 
+
+2026-01-05 15:11:59 DEBUG Run time: 1.2107 second, remain time: 595.62 second
+2026-01-05 15:11:59 DEBUG execute cmd ===>>>: cjc --error-count-limit=all --diagnostic-format=json alias_import_1.cj -L. -lmy_pkg@my_org -lmy_pkg.sub_pkg@my_org -lmy_pkg.sub_pkg.sub_sub_pkg@my_org -o alias_import_1.exe
+2026-01-05 15:12:00 DEBUG return code: 0
+2026-01-05 15:12:00 DEBUG stdout : 
+
+2026-01-05 15:12:00 DEBUG stderr : 
+
+2026-01-05 15:12:00 DEBUG Run time: 0.8111 second, remain time: 594.81 second
+2026-01-05 15:12:00 DEBUG execute cmd ===>>>: set LD_LIBRARY_PATH=%chdir%:%LD_LIBRARY_PATH% && alias_import_1.exe
+2026-01-05 15:12:00 DEBUG return code: 0
+2026-01-05 15:12:00 DEBUG stdout : 
++	foo
++	foo
++	foo
+
+2026-01-05 15:12:00 DEBUG stderr : 
+
+2026-01-05 15:12:00 DEBUG Run time: 0.22582 second, remain time: 594.58 second
+2026-01-05 15:12:00 DEBUG Task executed successfully

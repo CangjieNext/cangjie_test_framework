@@ -1,0 +1,15 @@
+2026-01-04 12:00:23 DEBUG Log file at: E:\cangjie_test_suite\cangjie_test_framework\test_temp\log\test_info_e4bfdb3be92111f0957284a93e8bbbff.log
+2026-01-04 12:00:23 DEBUG Case Path: E:\cangjie_test_suite\cangjie_test\testsuites\HLT\compiler\cjnative\HLE\c\enum\test.info
+2026-01-04 12:00:23 DEBUG Work directory: E:\cangjie_test_suite\cangjie_test_framework\test_temp\run\test_info_e4bfdb3be92111f0957284a93e8bbbff
+2026-01-04 12:00:23 DEBUG execute cmd ===>>>: set LD_LIBRARY_PATH=%chdir%:%LD_LIBRARY_PATH% && %hle_c --module-name="my_module" -i a.h -o . --clang-args=""
+2026-01-04 12:00:23 DEBUG Can not decode stderr with utf-8, ignore error!
+2026-01-04 12:00:23 DEBUG return code: 1
+2026-01-04 12:00:23 DEBUG stdout : 
+
+2026-01-04 12:00:23 DEBUG stderr : 
+@	'%hle_c' ڲⲿҲǿеĳ
+@	ļ
+
+2026-01-04 12:00:23 DEBUG Run time: 0.016449 second, remain time: 599.98 second
+2026-01-04 12:00:23 ERROR Failed!
+2026-01-04 12:00:23 ERROR Command return code 1 not equals to expected return code 0
