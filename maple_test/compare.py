@@ -61,7 +61,7 @@ def check_condition(compare_lines, conditions):
             res.append(line)
             continue
         else:
-            cur_con = re.match(r'\([0-9a-zA-Z\|\&\!\(\) ]+\)', src)
+            cur_con = re.match(r'\([0-9a-zA-Z_\|\&\!\(\) ]+\)', src)
             if cur_con and process_condition(cur_con.group(), conditions):
                 tmp = line.copy()
                 tmp[0] = tmp[0].replace(cur_con.group(), "")
