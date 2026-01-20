@@ -184,7 +184,7 @@ def filter_line(line, flag=None, condition=None):
         return None
     else:
         line_flag = line.strip().split(":")[0].strip()
-        cur_condition = re.match(r'\([0-9a-zA-Z\|\&\!\(\) ]+\)', line_flag)
+        cur_condition = re.match(r'\([0-9a-zA-Z_\|\&\!\(\) ]+\)', line_flag)
         if cur_condition == None:
             if line_flag == flag:
                 new_line = line.strip()[len(flag) + 1:].strip().lstrip(":").strip()
@@ -317,7 +317,7 @@ def filter_command_line(line: str, conditions: set, run_script: str, compatible:
     line_flag = line.strip().split(":")[0].strip()
     if precheck_flag(line_flag):
         return None
-    cur_con = re.match(r'\([0-9a-zA-Z\|\&\!\(\) ]+\)', line_flag)
+    cur_con = re.match(r'\([0-9a-zA-Z_\|\&\!\(\) ]+\)', line_flag)
     if cur_con != None:  # None condition means good.
         target = cur_con.group()
         if not process_condition(target, conditions):
