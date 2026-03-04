@@ -411,8 +411,21 @@ def not_match(content, line_map, pattern, start=0, match_func=regex_match, count
 
 
 def next_match(content, line_map, pattern, start=0, match_func=regex_match, count=-1):
+    # line_num = text_index_to_line_num(line_map, start)
+    # return match_func(content.splitlines()[line_num], line_map, pattern, start)
     line_num = text_index_to_line_num(line_map, start)
-    return match_func(content.splitlines()[line_num], line_map, pattern, start)
+    
+    # 修正1：传入从 start 开始的剩余内容
+    remaining_content = content[start:]
+    
+    # 修正2：重新计算 line_map 或调整匹配逻辑
+    result, new_start = match_func(remaining_content, line_map, pattern, 0, count=count)
+    
+    if result:
+        # 修正3：正确计算新的全局位置
+        new_global_start = start + new_start
+        return True, new_global_start
+    return False, start
 
 
 def after_match(content, line_map, pattern, start=0, match_func=regex_match, count=-1):
