@@ -622,7 +622,9 @@ class SingleTask:
         if running_config["directory_structure"] == "normal":
             self.temp_dir = "{}_{}".format(self.path.name.replace(".", "_"), int(time.time()))
         elif running_config["directory_structure"] == "tile":
-            self.temp_dir = "{}_{}".format(self.path.name.replace(".", "_"), str(uuid.uuid1()).replace("-", ""))
+            mark =  str(uuid.uuid1()).replace("-", "")
+            mark = mark[:len(mark) // 2]
+            self.temp_dir = "{}_{}".format(self.path.name.replace(".", "_"), mark)
         if not configs.get_val("compatible") and running_config.get("directory_list"):
             file_mod = "w" if OVERWRITE_FILE else "a"
             with open(str(running_config["directory_list"]), file_mod) as f:
