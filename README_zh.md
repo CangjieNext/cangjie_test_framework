@@ -359,7 +359,7 @@ positional arguments:
 
 `cangjie_test/testsuites/HLT/compiler/cjnative/Chir/ForIn/for_in_01.cj`
 
-```cj
+```cangjie
 /*
  * Copyright (c) Huawei Technologies Co., Ltd. 2025. All rights reserved.
  * This source file is part of the Cangjie project, licensed under Apache-2.0
@@ -396,7 +396,7 @@ main() {
 
 #### 测试用例测试代码部分
 
-```cj
+```cangjie
 func test() {
     var a = "HELLO"
     var b: UInt8 = 0
@@ -421,7 +421,7 @@ main() {
 
 #### 测试用例运行部分
 
-```cj
+```cangjie
 // EXEC: %compiler %cmp_opt %f -o %output
 // RUN-EXEC: %run %run_opt %output %run_args
 ```
@@ -431,3 +431,282 @@ main() {
 1. EXEC语句，利用 `%compiler`，采用 `%cmp_opt` 编译选项，编译测试用例 `%f` 为 `%output`
 2. RUN-EXEC语句，运行编译产物 `%output`
 
+## `ASSERT` 的详细使用方法
+
+`compare.py` 是一个用于验证程序输出结果的测试框架工具。它通过解析测试用例文件中的 `// ASSERT:` 注释行，对程序的输出进行字符串或正则表达式匹配。`ASSERT` 的基本语法如下：
+
+```cangjie
+// ASSERT: <模式类型> [关键词] <匹配内容>
+```
+
+其中：
+
+- 模式类型：`scan` 或 `regex`
+- 关键词：可选，用于修饰匹配行为
+- 匹配内容：要匹配的字符串或正则表达式
+
+以下是一个所有断言均成功的使用案例：
+
+```cangjie
+// EXEC: %compiler %cmp_opt %f -o %output
+// RUN-EXEC: %run %run_opt %output %run_args | compare %f
+// ASSERT: scan-begin Starting test
+// ASSERT: scan-next Step 1
+// ASSERT: scan-after OK
+// ASSERT: scan-next Step 2
+// ASSERT: scan-3 OK
+// ASSERT: regex-not (fail|error)
+// ASSERT: scan-begin All checks
+// ASSERT: scan-after passed
+// ASSERT: scan-end
+
+main(): Unit {
+    println("Starting test")
+    println("Step 1")
+    println("OK")
+    println("Step 2")
+    println("OK")
+    println("Final OK")
+    println("Test completed successfully")
+    println("All checks passed")
+}
+```
+
+下表列举了所有支持的模式类型和关键词组合的场景：
+
+|方法 | 类型 | 关键词 | 功能描述 |
+|---|-----|-------|----------|
+|scan | scan | 无 | 基础包含匹配 |
+|scan-not | scan | not | 否定匹配 |
+|scan-full | scan | full | 完全匹配 |
+|scan-begin | scan | begin | 从头开始匹配 |
+|scan-next | scan | next | 从下一行匹配 |
+|scan-after | scan | after | 从之后匹配 |
+|scan-end | scan | end | 检查末尾 |
+|scan-N | scan | 数字 | 精确次数匹配 |
+|scan-txt | scan | txt | 文本模式（Windows） |
+|regex | regex | 无 | 基础正则匹配 |
+|regex-not | regex | not | 正则否定匹配 |
+|regex-full | regex | full | 正则完全匹配 |
+|regex-begin | regex | begin | 从头开始正则匹配 |
+|regex-next | regex | next | 从下一行正则匹配 |
+|regex-after | regex | after | 从之后正则匹配 |
+|regex-end | regex | end | 检查末尾 |
+|regex-auto | regex | auto | 自动正则匹配 |
+|regex-N | regex | 数字 | 精确次数正则匹配 |
+
+### scan 模式（字符串匹配）
+
+#### scan 基础包含匹配
+
+检查输出中包含指定字符串。
+
+```cangjie
+// ASSERT: scan Hello World
+```
+
+- 匹配方式：content.find(pattern) != -1
+- 成功条件：输出中任意位置包含 "Hello World"
+- 默认起始位置：从输出开头开始搜索
+
+#### scan-not 否定匹配
+
+检查输出中不包含指定字符串。
+
+```cangjie
+// ASSERT: scan not Error
+```
+
+- 匹配方式：对 scan结果取反
+- 成功条件：输出中不包含 "Error"
+
+#### scan-full 完全匹配
+
+检查输出完全等于指定字符串。
+
+```cangjie
+// ASSERT: scan full Hello World
+```
+
+- 匹配方式：content != pattern
+- 成功条件：输出内容与 "Hello World" 完全一致
+注意：会进行 Unicode 转义处理
+
+#### scan-begin 从头开始匹配
+
+从输出开头开始搜索。
+
+```cangjie
+// ASSERT: scan begin Hello
+```
+
+- 匹配方式：从位置 0 开始调用 scan_match
+- 成功条件：输出开头包含 "Hello"
+影响：会重置后续 next/after的起始位置
+
+#### scan-next 从下一行匹配
+
+从上一次匹配位置的下一行开始搜索。
+
+```cangjie
+// ASSERT: scan begin Start
+// ASSERT: scan next Middle
+// ASSERT: scan next End
+```
+
+- 匹配方式：在 content.splitlines()[line_num]中搜索
+- 成功条件：在指定行中找到模式
+前置要求：必须先使用 begin
+
+#### scan-after 从之后匹配
+
+从上一次匹配位置之后开始搜索。
+
+```cangjie
+// ASSERT: scan begin Start
+// ASSERT: scan after End
+```
+
+- 匹配方式：在 '\n'.join(content.splitlines()[line_num:])中搜索
+- 成功条件：在 "Start" 之后的位置找到 "End"
+前置要求：必须先使用 begin
+
+#### scan-end 检查末尾
+
+检查是否已经到达输出末尾。
+
+```cangjie
+// ASSERT: scan begin Content
+// ASSERT: scan end
+```
+
+- 匹配方式：检查 line_num < len(line_map)
+- 成功条件：当前行号超出输出总行数
+
+#### scan-N 精确次数匹配
+
+检查指定字符串恰好出现 N 次。
+
+```cangjie
+// ASSERT: scan-3 Hello
+```
+
+- 匹配方式：content.count(pattern) != count
+- 成功条件："Hello" 恰好出现 3 次
+支持：scan not-3（不恰好出现 N 次）
+
+#### scan-txt 文本模式（Windows 路径）
+
+用于 Windows 路径匹配，自动处理路径分隔符。
+
+```cangjie
+// ASSERT: scan txt C:\path\to\file
+```
+
+- 匹配方式：在 Windows 上不进行路径转换
+- 成功条件：输出包含指定路径
+
+### regex模式（正则表达式匹配）
+
+#### regex 基础正则匹配
+
+检查输出匹配指定正则表达式。
+
+```cangjie
+// ASSERT: regex Error code: \d+
+```
+
+- 匹配方式：re.finditer(pattern, content, re.MULTILINE)
+- 成功条件：输出中存在至少一处匹配
+支持命名分组：匹配结果会存入 global_group_dict，可在后续断言中通过 (?P=name)引用
+
+#### regex-not 正则否定匹配
+
+检查输出不匹配指定正则表达式。
+
+```cangjie
+// ASSERT: regex not (fail|error|warning)
+```
+
+- 匹配方式：对 regex_match结果取反
+- 成功条件：输出中不匹配正则
+
+#### regex-full 正则完全匹配
+
+检查输出完全匹配指定正则表达式。
+
+```cangjie
+// ASSERT: regex full Hello World
+```
+
+- 匹配方式：content != pattern
+- 成功条件：输出与正则完全一致
+
+#### regex-begin 从头开始正则匹配
+
+从输出开头开始正则搜索。
+
+```cangjie
+// ASSERT: regex begin Hello
+```
+
+- 匹配方式：从位置 0 开始调用 regex_match
+- 成功条件：输出开头匹配正则
+
+#### regex-next 从下一行正则匹配
+
+从上一次匹配位置的下一行开始正则搜索。
+
+```cangjie
+// ASSERT: regex begin Start
+// ASSERT: regex next Middle
+// ASSERT: regex next End
+```
+
+- 匹配方式：在 content.splitlines()[line_num]中搜索
+前置要求：必须先使用 begin
+
+#### regex-after 从之后正则匹配
+
+从上一次匹配位置之后开始正则搜索。
+
+```cangjie
+// ASSERT: regex begin Start
+// ASSERT: regex after End
+```
+
+- 匹配方式：在 '\n'.join(content.splitlines()[line_num:])中搜索
+前置要求：必须先使用 begin
+
+#### regex-end 检查末尾（正则模式）
+
+检查是否已经到达输出末尾。
+
+```cangjie
+// ASSERT: regex begin Content
+// ASSERT: regex end
+```
+
+- 匹配方式：同 scan end
+
+#### regex-auto 自动正则匹配
+
+自动将空格分隔的单词转换为正则表达式。
+
+```cangjie
+// ASSERT: regex auto Hello World
+```
+
+- 匹配方式：r"\s+".join([re.escape(word) for word in pattern.split()])
+- 成功条件：输出中 "Hello" 和 "World" 之间可以有任意空白
+
+#### regex-N 精确次数正则匹配
+
+检查正则表达式恰好匹配 N 次。
+
+```cangjie
+// ASSERT: regex-3 \d{3}
+```
+
+- 匹配方式：len(re.findall(pattern, content)) != count
+- 成功条件：三位数字恰好出现 3 次
