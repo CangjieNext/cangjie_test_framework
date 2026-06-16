@@ -359,7 +359,7 @@ positional arguments:
 
 `cangjie_test/testsuites/HLT/compiler/cjnative/Chir/ForIn/for_in_01.cj`
 
-```cj
+```cangjie
 /*
  * Copyright (c) Huawei Technologies Co., Ltd. 2025. All rights reserved.
  * This source file is part of the Cangjie project, licensed under Apache-2.0
@@ -396,7 +396,7 @@ main() {
 
 #### 测试用例测试代码部分
 
-```cj
+```cangjie
 func test() {
     var a = "HELLO"
     var b: UInt8 = 0
@@ -421,7 +421,7 @@ main() {
 
 #### 测试用例运行部分
 
-```cj
+```cangjie
 // EXEC: %compiler %cmp_opt %f -o %output
 // RUN-EXEC: %run %run_opt %output %run_args
 ```
@@ -431,3 +431,348 @@ main() {
 1. EXEC语句，利用 `%compiler`，采用 `%cmp_opt` 编译选项，编译测试用例 `%f` 为 `%output`
 2. RUN-EXEC语句，运行编译产物 `%output`
 
+## `ASSERT` 的详细使用方法
+
+`compare.py` 是用于验证程序输出结果的测试框架内置工具，它通过解析指定文件中的 `// ASSERT:` 注释行，对程序的输出内容进行字符串或正则表达式匹配。`ASSERT` 的基本语法如下：
+
+```cangjie
+// ASSERT: <模式类型>[-关键词] <匹配内容>
+```
+
+其中的三个组成部分：
+
+- 模式类型：`scan` 或 `regex`，分别表示字符串匹配和正则表达式匹配
+- 关键词：可选，用于进一步确定匹配行为
+- 匹配内容：要匹配的字符串或正则表达式
+
+举个例子，以下所有断言均将成功：
+
+```cangjie
+// EXEC: %compiler %cmp_opt %f -o %output
+// RUN-EXEC: %run %run_opt %output %run_args | compare %f
+// ASSERT: scan-begin Starting test
+// ASSERT: scan-next Step 1
+// ASSERT: scan-after OK
+// ASSERT: scan-next Step 2
+// ASSERT: scan-3 OK
+// ASSERT: regex-not (fail|error)
+// ASSERT: scan-begin All checks
+// ASSERT: scan-after passed
+// ASSERT: scan-end
+
+main(): Unit {
+    println("Starting test")
+    println("Step 1")
+    println("OK")
+    println("Step 2")
+    println("OK")
+    println("Final OK")
+    println("Test completed successfully")
+    println("All checks passed")
+}
+```
+
+下表中列举了所有支持的模式类型和关键词组合的场景，其中部分关键词可以叠加组合：
+
+| 方法 | 功能描述 |
+| ---- | ---------|
+| `scan` | 检查输出中是否包含指定的字符串 |
+| `scan-not` | 检查输出中是否不包含指定的字符串 |
+| `scan-full` | 检查输出是否与指定的字符串完全一致 |
+| `scan-begin` | 同 `scan`，但将重置后续 `scan-next`、`scan-after` 的搜索起始位置 |
+| `scan-next` | 在上一次 `scan-begin` 匹配成功的位置的下一行中进行搜索 |
+| `scan-after` | 从上一次 `scan-begin` 匹配成功的位置的下一个字符开始搜索 |
+| `scan-end` | 检查当前的搜索起始位置是否已经到达输出内容的末尾 |
+| `scan-N` | 检查指定的字符串是否在输出中恰好出现 `N` 次 |
+| `regex` | 检查指定的正则表达式是否能够成功匹配输出内容 |
+| `regex-not` | 检查指定的正则表达式是否并不能成功匹配输出内容 |
+| `regex-auto` | 同 `regex`，但将简化指定的正则表达式中空格的处理 |
+| `regex-N` |  检查指定的正则表达式是否在输出内容中恰好成功匹配 `N` 次 |
+
+### scan 模式
+
+#### `scan`
+
+总是从输出的开头开始搜索，检查输出中是否包含指定的字符串。
+
+```cangjie
+// EXEC: %compiler %cmp_opt %f -o %output
+// RUN-EXEC: %run %run_opt %output %run_args | compare %f
+// ASSERT: scan World
+
+main(): Unit {
+    println("Hello World, My Friend!")
+}
+```
+
+以上用例将成功，因为输出中存在字符串 `"World"`。
+
+#### `scan-not`
+
+总是从输出的开头开始搜索，检查输出中是否不包含指定的字符串。
+
+```cangjie
+// EXEC: %compiler %cmp_opt %f -o %output
+// RUN-EXEC: %run %run_opt %output %run_args | compare %f
+// ASSERT: scan-not Bad
+
+main(): Unit {
+    println("Hello World, My Friend!")
+}
+```
+
+以上用例将成功，因为输出中不存在字符串 `"Bad"`。
+
+#### `scan-full`
+
+检查输出是否与指定的字符串完全一致。注意，字符串中支持转义字符。
+
+```cangjie
+// EXEC: %compiler %cmp_opt %f -o %output
+// RUN-EXEC: %run %run_opt %output %run_args | compare %f
+// ASSERT: scan-full Hello World\nAnd Have A Good Day\n
+
+main(): Unit {
+    println("Hello World")
+    println("And Have A Good Day")
+}
+```
+
+以上用例将成功，因为输出的内容与 `"Hello World\nAnd Have A Good Day\n"` 完全一致。
+
+#### `scan-begin`
+
+匹配并设置搜索起始位置。匹配能力同 `scan`，但匹配成功后将设置下一次匹配时的搜索起始位置，应与 `scan-next`、`scan-after` 和 `scan-end` 配合使用。
+
+```cangjie
+// EXEC: %compiler %cmp_opt %f -o %output
+// RUN-EXEC: %run %run_opt %output %run_args | compare %f
+// ASSERT: scan-begin Hello
+// ASSERT: scan-after World
+// ASSERT: scan-next EveryOne
+// ASSERT: scan-begin End
+// ASSERT: scan-next
+// ASSERT: scan-end
+
+main(): Unit {
+    println("First Of All,")
+    println("HelloWorld")
+    println("EveryOne")
+    println("End")
+}
+```
+
+以上用例将全部断言成功，`scan-begin Hello` 将从输出内容的开头开始搜索，匹配到第二行的 `"Hello"`，此时将设置下一次匹配时的搜索起始位置为 `"Hello"` 之后的第一个字符 `"W"` 处，紧接着的 `scan-after World` 于是继续成功匹配。之后的 `scan-begin End` 匹配成功后，将再次设置下一次匹配时的搜索起始位置为 `"End"` 的后一个字符，即换行符，接着的 `scan-next` 从下一行开始匹配，但匹配的是空字符串，于是也能成功匹配。最后的 `scan-end` 成功匹配到输出的末尾。
+
+#### `scan-next`
+
+在当前搜索起始位置（由上一个 `scan-begin` 决定）的下一行中匹配。
+
+```cangjie
+// EXEC: %compiler %cmp_opt %f -o %output
+// RUN-EXEC: %run %run_opt %output %run_args | compare %f
+// ASSERT: scan-begin Hello
+// ASSERT: scan-next World
+
+main(): Unit {
+    println("Hello")
+    println("Goodbye")
+    println("World")
+}
+```
+
+以上用例中 `scan-next World` 将断言失败，因为 `scan-begin Hello` 断言成功后，此时下一次搜索起始位置位于 `"Hello"` 所在行，`scan-next World` 将只在下一行，也就是 `"Goodbye"` 所在行进行搜索，故没有搜索到 `"World"`，从而导致失败。
+
+将以上用例修改为如下用例后，所有断言均将成功：
+
+```cangjie
+// EXEC: %compiler %cmp_opt %f -o %output
+// RUN-EXEC: %run %run_opt %output %run_args | compare %f
+// ASSERT: scan-begin Hello
+// ASSERT: scan-next Goodbye
+// ASSERT: scan-next World
+
+main(): Unit {
+    println("Hello")
+    println("Goodbye")
+    println("World")
+}
+```
+
+#### `scan-after`
+
+从当前搜索起始位置（由上一个 `scan-begin` 决定）开始搜索匹配。
+
+```cangjie
+// EXEC: %compiler %cmp_opt %f -o %output
+// RUN-EXEC: %run %run_opt %output %run_args | compare %f
+// ASSERT: scan-begin Goodbye
+// ASSERT: scan-after Hello
+
+main(): Unit {
+    println("Hello")
+    println("Goodbye")
+    println("AndGoodNight")
+}
+```
+
+以上用例将失败，`scan-after Hello` 将断言失败，因为当 `scan-begin Goodbye` 断言成功后，搜索起始位置之后不存在 `"Hello"`。
+
+将以上用例修改为如下用例后，所有断言均将成功：
+
+```cangjie
+// EXEC: %compiler %cmp_opt %f -o %output
+// RUN-EXEC: %run %run_opt %output %run_args | compare %f
+// ASSERT: scan-begin Hello
+// ASSERT: scan-after Goodbye
+
+main(): Unit {
+    println("Hello")
+    println("Goodbye")
+    println("AndGoodNight")
+}
+```
+
+或将 `scan-after` 修改为 `scan`：
+
+```cangjie
+// EXEC: %compiler %cmp_opt %f -o %output
+// RUN-EXEC: %run %run_opt %output %run_args | compare %f
+// ASSERT: scan-begin Goodbye
+// ASSERT: scan Hello
+
+main(): Unit {
+    println("Hello")
+    println("Goodbye")
+    println("AndGoodNight")
+}
+```
+
+#### `scan-end`
+
+检查当前搜索起始位置是否已经到达输出内容的末尾，如果已经到达末尾则判定成功，否则失败。
+
+```cangjie
+// EXEC: %compiler %cmp_opt %f -o %output
+// RUN-EXEC: %run %run_opt %output %run_args | compare %f
+// ASSERT: scan-begin Hello
+// ASSERT: scan-after Goodbye
+// ASSERT: scan-end
+
+main(): Unit {
+    println("Hello")
+    println("Goodbye")
+    println("AndGoodNight")
+}
+```
+
+以上用例将失败，`scan-end` 将断言失败，因为 `scan-after Goodbye` 断言成功后，搜索起始位置尚未到底输出内容的末尾。
+
+将以上用例修改为如下后将成功：
+
+```cangjie
+// EXEC: %compiler %cmp_opt %f -o %output
+// RUN-EXEC: %run %run_opt %output %run_args | compare %f
+// ASSERT: scan-begin Hello
+// ASSERT: scan-after Goodbye
+// ASSERT: scan-after AndGoodNight
+// ASSERT: scan-end
+
+main(): Unit {
+    println("Hello")
+    println("Goodbye")
+    println("AndGoodNight")
+}
+```
+
+#### `scan-N`
+
+精确次数匹配。检查指定字符串是否恰好出现 `N` 次，只要出现次数与 `N` 不相等即判定失败。
+
+```cangjie
+// EXEC: %compiler %cmp_opt %f -o %output
+// RUN-EXEC: %run %run_opt %output %run_args | compare %f
+// ASSERT: scan-3 Good
+
+main(): Unit {
+    println("GoodMorning")
+    println("Hello")
+    println("Goodbye")
+    println("AndGoodNight")
+}
+```
+
+以上用例将成功，因为字符串 `"Good"` 恰好出现了3次。
+
+### `regex` 模式
+
+正则表达式匹配。
+
+#### `regex`
+
+基础正则表达式匹配。检查输出中是否包含至少一处正则匹配，总是从输出的开头尝试匹配。
+
+```cangjie
+// EXEC: %compiler %cmp_opt %f -o %output
+// RUN-EXEC: %run %run_opt %output %run_args | compare %f
+// ASSERT: regex My #\d+ Friend
+
+main(): Unit {
+    println("Hello World, My #100 Friend!")
+}
+```
+
+以上用例将成功，因为输出中存在 `"My #100 Friend"` 与正则表达式匹配。
+
+#### `regex-not`
+
+正则否定匹配。检查输出内容完全不匹配指定的正则表达式，总是从输出的开头尝试匹配。
+
+```cangjie
+// EXEC: %compiler %cmp_opt %f -o %output
+// RUN-EXEC: %run %run_opt %output %run_args | compare %f
+// ASSERT: regex-not (Fail|Error|Warning)
+
+main(): Unit {
+    println("Success")
+}
+```
+
+以上用例将成功，因为输出中完全不存在 `"Fail"`、`"Error"` 或 `"Warning"`。
+
+#### `regex-auto`
+
+在普通正则匹配的基础上，简化用户手写正则表达式中空白符。
+
+```cangjie
+// EXEC: %compiler %cmp_opt %f -o %output
+// RUN-EXEC: %run %run_opt %output %run_args | compare %f
+// ASSERT: regex-auto Nice to  meet   you
+// ASSERT: regex Nice to  meet   you
+
+main(): Unit {
+    println("Nice   to  meet you~")
+}
+```
+
+在以上用例中，`regex-auto` 将断言成功，而 `regex` 将断言失败，因为 `regex` 将按照给定的正则表达式字符串进行匹配，而 `regex-auto` 则会自动替换`\s+`，故能成功匹配输出内容。
+
+#### `regex-N`
+
+精确次数正则匹配。检查指定正则表达式是否恰好成功匹配 `N` 次，只要匹配次数与 `N` 不相等即判定失败。
+
+```cangjie
+// EXEC: %compiler %cmp_opt %f -o %output
+// RUN-EXEC: %run %run_opt %output %run_args | compare %f
+// ASSERT: regex-10 My #\d+ Friend
+
+main(): Unit {
+    println("Nice to meet you~")
+    for (i in 0..10) {
+        println("Hello World, My #${i} Friend!")
+    }
+}
+
+```
+
+以上用例将成功，因为正则表达式恰好成功匹配了10次。
