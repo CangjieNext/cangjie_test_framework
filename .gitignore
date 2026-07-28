@@ -65,3 +65,6 @@ libs/std/ast/decode.cj
 
 # macOS build cache
 .DS_Store
+
+# local security review notes, not for upstream
+SECURITY_REVIEW.md
