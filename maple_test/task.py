@@ -688,13 +688,22 @@ class SingleTask:
         if separation == []:
             return
         
+        dest_resolved = dest.resolve()
         for filepath, content in separation:
             filepath = SingleTask._form_line(filepath, config)
-            path = os.path.normpath(dest / filepath)
-            (dir, file) = os.path.split(path)
-            SingleTask.prepare_dir(Path(dir))
-            with open(path, "w") as file:
-                file.write(content)
+            path = (dest / filepath).resolve()
+            try:
+                path.relative_to(dest_resolved)
+            except ValueError:
+                logger.error(
+                    "SEPARATE-FILE path escapes work dir: {}".format(filepath)
+                )
+                raise TestError(
+                    "SEPARATE-FILE path escapes work dir: {}".format(filepath)
+                )
+            SingleTask.prepare_dir(path.parent)
+            with open(path, "w", encoding="utf-8") as f:
+                f.write(content)
 
 
     @staticmethod
