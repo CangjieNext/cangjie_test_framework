@@ -801,18 +801,84 @@ class SingleTask:
 
     @staticmethod
     def _form_line(line, config):
-        for key, value in config.get("internal_var").items():
+        """Substitute %key placeholders in *line* with values from *config*.
+
+        Placeholder syntax: ``%key`` — a percent sign followed by the key
+        name.  A placeholder is only replaced when the character immediately
+        after the key name is a **word boundary** (end-of-string, or a
+        character that is neither alphanumeric nor ``_``).  For example
+        ``%compiler`` is replaced in ``%compiler -o %n.exe``, but NOT in
+        ``%compiler_extra`` because ``_`` follows ``compiler``.
+
+        Multi-pass resolution (order independence)
+        -------------------------------------------
+        The method iterates over *all* ``internal_var`` entries repeatedly
+        until a full pass produces no further substitutions.  This makes
+        resolution independent of the insertion order of the dictionary.
+
+        Motivation: config-file values may themselves contain ``%other``
+        references (written as ``%%other`` in the ``.cfg`` file; the
+        ``%%`` → ``%`` reduction is performed by ``configparser`` before
+        we see the value).  A single pass would only resolve references
+        whose **target** key appears **after** the key being expanded::
+
+            # Order in config              Single-pass behaviour
+            output   = %n.%suffix          processed early → no %n yet, skip
+            suffix   = exe                 processed later → replaced
+            n        = <built-in>          processed later → replaced
+            #  Result:  %n.exe  ← %n was resolved, %suffix was NOT
+
+        With multiple passes the chain is fully unwound regardless of
+        definition order::
+
+            Pass 1: suffix(no) → n(no) → output(%n.%suffix inserted)
+            Pass 2: suffix(%suffix→exe) → n(%n→name) → output(no)
+            Pass 3: no changes → done
+            # Result:  name.exe
+
+        The outer loop is bounded by *max_iterations* (20) to break
+        circular references (e.g. ``a = %b``, ``b = %a``) without
+        looping forever.  20 is far deeper than any realistic chain in
+        a test-suite config (typically ≤ 3–5 levels).
+        """
+        internal_var = config.get("internal_var")
+
+        def substitute(text, key, value):
+            """Replace every ``%key`` in *text* with *value*, respecting
+            word-boundary rules."""
+            token = "%{}".format(key)
             end = 0
-            while end < len(line):
-                start = line.find("%{}".format(key), end)
+            while end < len(text):
+                start = text.find(token, end)
                 if start == -1:
                     break
-                end = len(key) + start + 1
-                if end == len(line):
-                    line = line[:start] + value + line[end:]
-                elif not line[end].isalnum() and line[end] != "_":
-                    line = line[:start] + value + line[end:]
-                end = len(value) + start + 1
+                after = start + len(token)            # char right after %key
+                if after == len(text) or (not text[after].isalnum() and text[after] != "_"):
+                    text = text[:start] + value + text[after:]
+                end = start + len(value) + 1          # skip past inserted value
+            return text
+
+        # Fixed-point iteration — resolves arbitrarily deep reference
+        # chains regardless of dict insertion order.
+        max_iterations = 20
+        for iteration in range(1, max_iterations + 1):
+            before = line
+            for key, value in internal_var.items():
+                line = substitute(line, key, value)
+            if line == before:
+                break
+        else:
+            # Loop exhausted without converging → circular reference
+            import re
+            unresolved = sorted(set(re.findall(r'%[a-zA-Z_][a-zA-Z0-9_]*', line)))
+            configs.LOGGER.warning(
+                "Variable substitution did not converge after %d iterations.  "
+                "This usually means a circular reference in [internal-var] "
+                "(e.g. a = %%b, b = %%a).  "
+                "Unresolved placeholder(s): %s.  Raw command line: %s",
+                max_iterations, unresolved, line,
+            )
+
         return line
 
     def __repr__(self):

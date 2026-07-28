@@ -65,3 +65,4 @@ libs/std/ast/decode.cj
 
 # macOS build cache
 .DS_Store
+test_temp
