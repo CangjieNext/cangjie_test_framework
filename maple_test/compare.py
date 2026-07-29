@@ -385,13 +385,22 @@ def scan_match(content, line_map, pattern, start=0, match_func=regex_match, coun
         if content.find(pattern) != -1:
             end = content.find(pattern) + len(pattern) + start
             line_num = text_index_to_line_num(line_map, end)
+            # Clamp to the last valid line_map index.  When the match
+            # ends exactly at (or past) the end of the content and the
+            # last line has no trailing newline, *end* can fall beyond
+            # every line_map entry, causing text_index_to_line_num to
+            # return len(line_map).
+            if line_num >= len(line_map):
+                line_num = len(line_map) - 1
             return True, line_map[line_num] + 1
         return False, start
     else:
         if content.count(pattern) != count:
             return False, start
+        # Same boundary guard for the count-based branch.
+        if line_num >= len(line_map):
+            line_num = len(line_map) - 1
         return True, line_map[line_num] + 1
-
 
 def begin_match(content, line_map, pattern, start=0, match_func=regex_match, count=-1):
     return match_func(content, line_map, pattern, start=0)
