@@ -273,10 +273,18 @@ def progress(results, progress_type):
         time.sleep(time_gape)
         finished = sum([result.ready() for result in results])
         rate = finished / total
-        print_progress(
-            "\rRunning test cases: {:.2%} ({}/{}) ".format(rate, finished, total)
-        )
-        flush_stdout()
+        # Hold PRINT_LOCK across write+flush so the progress line is not torn
+        # apart by a worker's safe_print landing between write() and flush().
+        # PRINT_LOCK is a multiprocessing.Lock shared with all Pool workers, so
+        # this serializes progress output against worker output too.
+        try:
+            with PRINT_LOCK:
+                print_progress(
+                    "\rRunning test cases: {:.2%} ({}/{}) ".format(rate, finished, total)
+                )
+                sys.stdout.flush()
+        except BlockingIOError:
+            safe_print("Caught BlockingIOError, retrying...")
 
 
 def flush_stdout():

@@ -24,6 +24,7 @@ import timeit
 import re
 import platform
 import shlex
+import multiprocessing
 from functools import wraps
 from pathlib import Path
 from typing import Set
@@ -71,7 +72,23 @@ else:
     EXECUTABLE = sys.executable
 COMPARE = BASE_DIR / "compare.py"
 
-PRINT_LOCK = threading.Lock()
+PRINT_LOCK = multiprocessing.Lock()
+
+
+def init_print_lock(lock):
+    """Inject a shared multiprocessing.Lock into the worker process.
+
+    Called from multiprocessing.Pool(initializer=init_print_lock, initargs=(lock,))
+    so that every worker shares the SAME lock object instead of each forked/spawned
+    process holding its own private (and thus useless) copy.
+
+    A threading.Lock only serializes threads *within one process*; under
+    multiprocessing.Pool each worker is a separate interpreter with its own
+    PRINT_LOCK, so output from different workers still interleaves.  Sharing one
+    multiprocessing.Lock across all workers fixes that.
+    """
+    global PRINT_LOCK
+    PRINT_LOCK = lock
 
 
 def read_file(file_path):

@@ -39,7 +39,9 @@ from maple_test.utils import (
     DEFAULT_PRINT,
     OS_SEP,
     PIPE_KEY,
-    EXIT_CODE
+    EXIT_CODE,
+    PRINT_LOCK,
+    init_print_lock,
 )
 from maple_test.utils import (
     read_config,
@@ -61,6 +63,15 @@ directory_dict = dict()
 OVERWRITE_FILE = True
 
 OVERWRITE_LEVEL_FILE = True
+
+# Guards the check-then-write of OVERWRITE_FILE / OVERWRITE_LEVEL_FILE so that
+# the "first writer resets the file with 'w', later writers append with 'a'"
+# semantics stays correct even if SingleTask construction is ever parallelized.
+# Today SingleTask objects are built serially in the main process
+# (TestSuiteTask._form_task_set), so this lock is uncontended, but the original
+# flag-based pattern is a classic TOCTOU hazard the moment that changes.
+import threading as _threading
+_OVERWRITE_LOCK = _threading.Lock()
 
 is_initialized = False
 
@@ -406,7 +417,17 @@ class TestSuiteTask:
 
     def parallel_run_task(self, process_num):
         multiprocessing.freeze_support()
-        pool = multiprocessing.Pool(min(multiprocessing.cpu_count(), process_num))
+        # Each Pool worker is a separate process with its own interpreter state,
+        # so a module-level threading.Lock (or a fresh multiprocessing.Lock
+        # created per-worker) does NOT serialize output across workers.  We
+        # inject the SAME module-level PRINT_LOCK (already a multiprocessing.Lock
+        # in utils.py) into every worker via the Pool initializer, so the main
+        # process's progress thread and all workers share one lock object.
+        pool = multiprocessing.Pool(
+            min(multiprocessing.cpu_count(), process_num),
+            initializer=init_print_lock,
+            initargs=(PRINT_LOCK,),
+        )
         result_queue = []
         if configs.get_val("fail_verbose"):
             callback_func = self.output_failed
@@ -618,7 +639,6 @@ class SingleTask:
         config = config.get_case_config(case)
         ensure_config_initialized()
         base_path = Path(__file__).resolve().parent.parent.parent / "cangjie_test" / "testsuites" / "HLT"
-        global OVERWRITE_FILE
         if running_config["directory_structure"] == "normal":
             self.temp_dir = "{}_{}".format(self.path.name.replace(".", "_"), int(time.time()))
         elif running_config["directory_structure"] == "tile":
@@ -626,11 +646,17 @@ class SingleTask:
             mark = mark[:len(mark) // 2]
             self.temp_dir = "{}_{}".format(self.path.name.replace(".", "_"), mark)
         if not configs.get_val("compatible") and running_config.get("directory_list"):
-            file_mod = "w" if OVERWRITE_FILE else "a"
-            with open(str(running_config["directory_list"]), file_mod) as f:
-                f.write("{} {}".format(case.path.relative_to(base_path), self.temp_dir) + "\n")
-            if OVERWRITE_FILE:
-                OVERWRITE_FILE = False
+            # The "first call resets the file with 'w', later calls append" rule
+            # is a check-then-act on the OVERWRITE_FILE flag.  Guard the whole
+            # decision+write under _OVERWRITE_LOCK so it stays atomic if
+            # SingleTask construction is ever moved off the main thread/serial path.
+            with _OVERWRITE_LOCK:
+                global OVERWRITE_FILE
+                file_mod = "w" if OVERWRITE_FILE else "a"
+                with open(str(running_config["directory_list"]), file_mod) as f:
+                    f.write("{} {}".format(case.path.relative_to(base_path), self.temp_dir) + "\n")
+                if OVERWRITE_FILE:
+                    OVERWRITE_FILE = False
         elif configs.get_val("compatible") and running_config.get("directory_list"):
             linux_path = Path(str(case.path)).as_posix()
             result = linux_path.split("HLT")[-1].lstrip("/")
@@ -716,19 +742,24 @@ class SingleTask:
             print(f"无法读取文件 {case_path}: {e}")
             return
 
-        file_mod = "w" if OVERWRITE_LEVEL_FILE else "a"
-        if OVERWRITE_LEVEL_FILE:
-            OVERWRITE_LEVEL_FILE = False
-        if not has_level and has_exec:
-            try:
-                with open(output_file, file_mod, encoding='utf-8') as out_file:
-                    try:
-                        rel_path = case_path.relative_to(base_path)
-                    except ValueError:
-                        rel_path = case_path
-                    out_file.write(str(rel_path) + '\n')
-            except IOError as e:
-                print(f"无法写入输出文件 {output_file}: {e}")
+        # Same TOCTOU guard as the directory_list writer above: the flag-based
+        # "first call resets with 'w', later calls append" rule is only safe
+        # under a lock.  Lock here so the function is safe even if ever called
+        # from a non-serial context.
+        with _OVERWRITE_LOCK:
+            file_mod = "w" if OVERWRITE_LEVEL_FILE else "a"
+            if OVERWRITE_LEVEL_FILE:
+                OVERWRITE_LEVEL_FILE = False
+            if not has_level and has_exec:
+                try:
+                    with open(output_file, file_mod, encoding='utf-8') as out_file:
+                        try:
+                            rel_path = case_path.relative_to(base_path)
+                        except ValueError:
+                            rel_path = case_path
+                        out_file.write(str(rel_path) + '\n')
+                except IOError as e:
+                    print(f"无法写入输出文件 {output_file}: {e}")
 
     @staticmethod
     def prepare_dependence(src_dir, dependence, separation_by_files, dest, config):
