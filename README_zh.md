@@ -370,7 +370,7 @@ positional arguments:
 
 // LEVEL: 2
 // EXEC: %compiler %cmp_opt %f -o %output
-// RUN-EXEC: %run %run_opt % output %run_args
+// RUN-EXEC: %run %run_opt %output %run_args
 
 func test() {
     var a = "HELLO"
@@ -666,7 +666,7 @@ main(): Unit {
 }
 ```
 
-以上用例将失败，`scan-end` 将断言失败，因为 `scan-after Goodbye` 断言成功后，搜索起始位置尚未到底输出内容的末尾。
+以上用例将失败，`scan-end` 将断言失败，因为 `scan-after Goodbye` 断言成功后，搜索起始位置尚未到达输出内容的末尾。
 
 将以上用例修改为如下后将成功：
 
