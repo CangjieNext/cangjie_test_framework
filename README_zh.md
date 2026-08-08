@@ -23,7 +23,7 @@ cangjie_test_framework/
 
 ## 运行要求
 
-* `python` 版本>=3.5.2
+* `python` 版本>=3.6
 * `llvm-15.0.4`
 * 
 
@@ -666,7 +666,7 @@ main(): Unit {
 }
 ```
 
-以上用例将失败，`scan-end` 将断言失败，因为 `scan-after Goodbye` 断言成功后，搜索起始位置尚未到底输出内容的末尾。
+以上用例将失败，`scan-end` 将断言失败，因为 `scan-after Goodbye` 断言成功后，搜索起始位置尚未到达输出内容的末尾。
 
 将以上用例修改为如下后将成功：
 
