@@ -347,7 +347,7 @@ positional arguments:
   --assert_flag ASSERT_FLAG
                         Test case assert flag, default ASSERT 
   --expected_flag EXPECTED_FLAG
-                        Test case expected flag for compile, default EXCEPTED
+                        Test case expected flag for compile, default EXPECTED
   --condition [CONDITION]
                         Compare condition for Keyword, default empty. 
   --compare_object [COMPARE_OBJECT]
