@@ -50,7 +50,7 @@ level = INFO
 
 Test-case execution depends:
 
-* Cangjie SDK:[Install Cangjie SDK](https://gitcode.com/Cangjie/cangjie_docs/blob/main/docs/dev-guide/source_zh_cn/first_understanding/install.md)
+* Cangjie SDK: [Install Cangjie SDK](https://gitcode.com/Cangjie/cangjie_docs/blob/main/docs/dev-guide/source_zh_cn/first_understanding/install.md)
 * `Git Bash`: Add to the `Path` environment variable
 * `Python` packages: `pexpect` and `fasteners` modules
 * `OpenSSL 3`: Dynamic libraries `ssl` and `crypto`
