@@ -197,9 +197,12 @@ class TestSuiteTask:
         user_config = cli_running_config.get("user_config")
         user_env = cli_running_config.get("user_env")
         raw_top_config = read_config(self.cfg_path)
-        self.config = TaskConfig(
-            self.cfg_path, raw_top_config, user_config, user_env
-        )
+        try:
+            self.config = TaskConfig(
+                self.cfg_path, raw_top_config, user_config, user_env
+            )
+        finally:
+            CONFIG_SET.clear()
         self.condition.update(self.config.condition)
         if user_test_list is None:
             top_testlist_path = self._get_testlist(raw_top_config, self.config.base_dir)
