@@ -214,7 +214,7 @@ def main():
                 compare_result = False
     diagkind = re.findall(r'("DiagKind": .*")', str(content))
     if transfer:
-        safe_print("[WARNING] trying to transfer cur case {} into multi line compare case.".format(transfer))
+        safe_print("[WARNING] trying to transfer current case {} into multi line compare case.".format(transfer))
         with open(transfer, 'r', encoding='utf-8') as f:
             src = f.read()
             pattern = r'(//.*ASSERT.*|//.*EXPECTED.*)'
@@ -562,7 +562,7 @@ def parse_cli():
     )
     parser.add_argument(
         "--expected_flag",
-        help="Test case expected flag for compile, default EXCEPTED",
+        help="Test case expected flag for compile, default EXPECTED",
         action="append",
         default=[],
     )
@@ -571,7 +571,7 @@ def parse_cli():
     )
     parser.add_argument(
         "--compare_number", type=int, nargs='?', default=-1,
-        help="Number of 'compare %%f' pipe in file after which SCANs will be checked. All SCANs is checked by default."
+        help="Number of 'compare %%f' pipe in file after which SCANs will be checked.All SCANs are checked by default ."
     )
     parser.add_argument(
         "com_opt", type=str, nargs='?', default='', help="Compile option of this case, default empty."
