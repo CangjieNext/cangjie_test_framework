@@ -347,7 +347,7 @@ positional arguments:
   --assert_flag ASSERT_FLAG
                         Test case assert flag, default ASSERT 
   --expected_flag EXPECTED_FLAG
-                        Test case expected flag for compile, default EXCEPTED
+                        Test case expected flag for compile, default EXPECTED
   --condition [CONDITION]
                         Compare condition for Keyword, default empty. 
   --compare_object [COMPARE_OBJECT]
@@ -666,7 +666,7 @@ main(): Unit {
 }
 ```
 
-以上用例将失败，`scan-end` 将断言失败，因为 `scan-after Goodbye` 断言成功后，搜索起始位置尚未到底输出内容的末尾。
+以上用例将失败，`scan-end` 将断言失败，因为 `scan-after Goodbye` 断言成功后，搜索起始位置尚未到达输出内容的末尾。
 
 将以上用例修改为如下后将成功：
 
