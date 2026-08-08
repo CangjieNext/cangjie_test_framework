@@ -484,5 +484,5 @@ def check_for_run_split(num):
             or nums[0] <= 0 \
             or nums[1] <= 0:
         raise argparse.ArgumentTypeError("Input invalid, should be like 1/2, "
-                                         "first number can not bigger then second number".format(num))
+                                         "first number can not cannot be bigger second number".format(num))
     return nums
