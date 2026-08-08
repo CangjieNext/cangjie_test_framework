@@ -116,7 +116,7 @@ def main():
             if output.exists() and output.is_file():
                 name = "{}_{}{}".format(output.stem, int(time.time()), output.suffix)
                 logger.info(
-                    "result file: {} exists, will move exists file to: {}".format(
+                    "result file: {} exists, will move existing file to: {}".format(
                         output, name
                     )
                 )
