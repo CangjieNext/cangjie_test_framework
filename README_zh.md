@@ -93,7 +93,7 @@ cp -r ${CANGJIE_HOME}/modules ${CANGJIE_HOME}/tools/bin
 ```ini
 [lsp_server]
     win_path = ${win_lsp_server_path} 	   // Windows环境执行修改此处
-    linux_path = ${linux_lsp_server_path}  // Linux或MAC环境执行修改此处
+    linux_path = ${linux_lsp_server_path}  // Linux或macOS环境执行修改此处
 ```
 
 剩余执行步骤与其他用例无区别
