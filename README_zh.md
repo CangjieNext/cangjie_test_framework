@@ -347,7 +347,7 @@ positional arguments:
   --assert_flag ASSERT_FLAG
                         Test case assert flag, default ASSERT 
   --expected_flag EXPECTED_FLAG
-                        Test case expected flag for compile, default EXCEPTED
+                        Test case expected flag for compile, default EXPECTED
   --condition [CONDITION]
                         Compare condition for Keyword, default empty. 
   --compare_object [COMPARE_OBJECT]
@@ -370,7 +370,7 @@ positional arguments:
 
 // LEVEL: 2
 // EXEC: %compiler %cmp_opt %f -o %output
-// RUN-EXEC: %run %run_opt % output %run_args
+// RUN-EXEC: %run %run_opt %output %run_args
 
 func test() {
     var a = "HELLO"
