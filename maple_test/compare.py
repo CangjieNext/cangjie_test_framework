@@ -562,7 +562,7 @@ def parse_cli():
     )
     parser.add_argument(
         "--expected_flag",
-        help="Test case expected flag for compile, default EXCEPTED",
+        help="Test case expected flag for compile, default EXPECTED",
         action="append",
         default=[],
     )
