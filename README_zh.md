@@ -34,7 +34,7 @@ cangjie_test_framework/
 ```ini
 # 测试框架配置文件，当前框架仅支持通过配置文件配置测试套，测试运行时的临时路径，测试日志的保存
 [test-home]
-# 指定测试套路径，以‘：’划分
+# 指定测试套路径，以'：'划分
 dir = 
     ../../cangjie_test/testsuites/HLT:../../cangjie_test/testsuites/LLT
 
@@ -296,7 +296,7 @@ cangjie_test/testsuites/HLT/configs/cjnative/
 
 #### `ERRCHECK` 命令说明
 
-`ERRCHECK: <my_cmd>` 命令等价于 `EXEC-PIPE-1: <my_cmd> 2>&1 | compare %f`
+`ERRCHECK: <my_cmd>` 命令等价于 `EXEC-PIPE-1: <my_cmd> 2>&1 1>/dev/null \|  compare %f`
 
 #### `DEPENDENCE` 命令说明
 
