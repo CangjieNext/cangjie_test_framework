@@ -133,7 +133,7 @@ def main():
     safe_print("compare.py input end\n")
 
     if compare_object.isatty():
-        sys.stderr.write("ERROR: require compare objects, filepath or stdin \n")
+        sys.stderr.write("ERROR: requires compare objects, filepath or stdin \n")
         sys.exit(253)
     compare_line_regex = gen_compare_regex(comment, assert_flags, expected_flags)
     compare_lines = extract_compare_lines(case_path, compare_line_regex)
