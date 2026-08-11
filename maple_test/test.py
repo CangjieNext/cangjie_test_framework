@@ -96,7 +96,7 @@ def extract_dependence(comment_lines, condition):
 
 
 def extract_separation_by_files(comment_lines, filepath, condition):
-    # Check if file need to be separated
+    # Check if file needs to be separated
     need_separation = False
     for line in comment_lines:
         if filter_line(line, SEPARATE_FILE_DIRECTIVE, condition):
