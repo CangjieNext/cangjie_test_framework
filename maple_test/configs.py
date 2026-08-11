@@ -122,7 +122,7 @@ def parse_args():
         default=[],
         choices=ALL[:],
         help="Print test cases with specified results, "
-             "-pPASS -pFAIL, to print all test case that failed or passed, "
+             "-pPASS -pFAIL, to print all test cases that failed or passed, "
              "UNRESOLVED test case results are not displayed by default.",
     )
     test_framework_parser.add_argument(
