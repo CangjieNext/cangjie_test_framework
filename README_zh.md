@@ -92,8 +92,8 @@ cp -r ${CANGJIE_HOME}/modules ${CANGJIE_HOME}/tools/bin
 
 ```ini
 [lsp_server]
-    win_path = ${win_lsp_server_path} 	   // Windows环境执行修改此处
-    linux_path = ${linux_lsp_server_path}  // Linux或MAC环境执行修改此处
+    win_path = ${win_lsp_server_path} 	   // Windows环境执行时修改此处
+    linux_path = ${linux_lsp_server_path}  // Linux或MAC环境执行时修改此处
 ```
 
 剩余执行步骤与其他用例无区别
@@ -158,7 +158,7 @@ Test FrameWork arguments:
                         Input condition for run, default empty.
   --level [LEVEL]       Input level for run, default empty.
   -p {PASS,FAIL,XFAIL,XPASS,UNSUPPORTED,UNRESOLVED}
-                        Print test cases with specified results, -pPASS -pFAIL, to print all test case that failed or passed, UNRESOLVED test case results are not displayed by default.
+                        Print test cases with specified results, -pPASS -pFAIL, to print all test cases that failed or passed, UNRESOLVED test case results are not displayed by default.
   --progress {silent,normal,no_flush_progress}
                         set progress type, silent: Don't show progress, normal: one line progress bar, update per second,no_flush_progress: print test progress per 10 seconds
   --split SPLIT         Split cases into <num> testlist
@@ -193,7 +193,7 @@ Log arguments:
   --log_level LOG_LEVEL, -l LOG_LEVEL
                         set log level from: CRITICAL, ERROR, WARNING, INFO, DEBUG, NOTSET
   --verbose             enable verbose output
-  --fail-verbose        enable not pass testcase verbose output
+  --fail-verbose        enable not pass test case verbose output
 ```
 
 ## `testsuites/HLT` 测试套
