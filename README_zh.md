@@ -23,7 +23,7 @@ cangjie_test_framework/
 
 ## 运行要求
 
-* `python` 版本>=3.5.2
+* `python` 版本>= 3.6
 * `llvm-15.0.4`
 * 
 
@@ -370,7 +370,8 @@ positional arguments:
 
 // LEVEL: 2
 // EXEC: %compiler %cmp_opt %f -o %output
-// RUN-EXEC: %run %run_opt % output %run_args
+// RUN-EXEC: %run %run_opt %output %run_args
+
 
 func test() {
     var a = "HELLO"
