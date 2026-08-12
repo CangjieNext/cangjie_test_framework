@@ -275,7 +275,7 @@ cangjie_test/testsuites/HLT/configs/cjnative/
 ```
 
 * 所有测试用例中的EXEC语句内的 `%compiler` 会被替换为 `cjc`
-* 如果涉及脚本的运行路径需要填写绝对路径或者在环境变量 `PATH` 中，例如配置文件中：如果 `compiler` 在 `PATH` 中，则 `compiler = cjc` 即可，如果不在则 `compiler = ${CANGJIE_HOME}/bin/cjc`
+* 脚本路径建议填写绝对路径，或将脚本所在目录加入环境变量 `PATH` ，例如配置文件中：如果 `compiler` 在 `PATH` 中，则 `compiler = cjc` 即可，如果不在则 `compiler = ${CANGJIE_HOME}/bin/cjc`
 
 ### 测试框架内置变量说明
 
@@ -290,7 +290,7 @@ cangjie_test/testsuites/HLT/configs/cjnative/
 以注释符号和 `EXEC` 起头，是测试框架的一个关键字，如果用例文件中存在该关键字认定为一个有效的测试用例，如果不存在则该文件被认定为一个辅助文件。
 
 * `EXEC(-PIPE)(-NUM): <my_cmd>`：表示执行 `my_cmd` 命令，其中 `(-PIPE)` 和 `(-NUM)` 表示可选内容，可单独出现，也可一起出现
-* `EXEC-NUM: <my_cmd>`：为了可以控制所有命令的预期 `exit code`，我们支持了 `-NUM` 选项来控制命令整体的 `exit code`。-NUM的缺省默认值为0，可以自己指定一个整数值（负数溢出需要写溢出后的正数）
+* `EXEC-NUM: <my_cmd>`：为了可以控制所有命令的预期 `exit code`，我们支持了 `-NUM` 选项来控制命令整体的 `exit code`。-NUM的默认值为0，可以自己指定一个整数值（负数溢出需要写溢出后的正数）
 * `EXEC-PIPE-NUM: <my_cmd>`：`-PIPE` 代表命令 `my_cmd` 中包含管道符 `|`，需要测试框架介入对管道符前面的命令 `exit code` 进行 `check`。`-NUM` 的功能和 `EXEC-NUM` 中的用法略有区别，此时会检查的是管道符 `|` 前命令的 `exit code`，命令整体的 `exit code` 则仍然要求为0，`-NUM` 的缺省默认值仍然为0
 * `RUN-EXEC: <my_cmd>`：配置文件中若存在 `[run] script = my_script` 会自动拼接命令为：`<my_script> "my_cmd"`
 
@@ -666,7 +666,7 @@ main(): Unit {
 }
 ```
 
-以上用例将失败，`scan-end` 将断言失败，因为 `scan-after Goodbye` 断言成功后，搜索起始位置尚未到底输出内容的末尾。
+以上用例将失败，`scan-end` 将断言失败，因为 `scan-after Goodbye` 断言成功后，搜索起始位置尚未到达输出内容的末尾。
 
 将以上用例修改为如下后将成功：
 
