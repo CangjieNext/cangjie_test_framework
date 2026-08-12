@@ -133,7 +133,7 @@ def main():
     safe_print("compare.py input end\n")
 
     if compare_object.isatty():
-        sys.stderr.write("ERROR: require compare objects, filepath or stdin \n")
+        sys.stderr.write("ERROR: requires a compare objects, filepath or stdin \n")
         sys.exit(253)
     compare_line_regex = gen_compare_regex(comment, assert_flags, expected_flags)
     compare_lines = extract_compare_lines(case_path, compare_line_regex)
@@ -164,7 +164,7 @@ def main():
         info = ""
         keywords = pattern_flag.split("-")
         if flag.strip() in assert_flags:
-            info = "It's a assert, "
+            info = "It's an assert, "
         elif flag.strip() in expected_flags:
             if "auto" in keywords:
                 pattern = r"\s+".join([re.escape(word) for word in pattern.split()])
@@ -462,7 +462,7 @@ def text_index_to_line_num(line_map, index):
 def gen_compare_regex(comment, assert_flags, expected_flag):
     regex = ""
     for flag in expected_flag:
-        excepted_regex = r"(?:{comment}\s*)(.*{flag}[\t ]*\:[\t ]*.*$)".format(  # check condition later
+        ecpected_regex = r"(?:{comment}\s*)(.*{flag}[\t ]*\:[\t ]*.*$)".format(  # check condition later
             comment=escape("\\$()*+.[]?^{}|", comment), flag=flag
         )
         if regex != "":
@@ -562,7 +562,7 @@ def parse_cli():
     )
     parser.add_argument(
         "--expected_flag",
-        help="Test case expected flag for compile, default EXCEPTED",
+        help="Test case expected flag for compile, default EXPECTED",
         action="append",
         default=[],
     )
@@ -571,7 +571,7 @@ def parse_cli():
     )
     parser.add_argument(
         "--compare_number", type=int, nargs='?', default=-1,
-        help="Number of 'compare %%f' pipe in file after which SCANs will be checked. All SCANs is checked by default."
+        help="Number of 'compare %%f' pipe in file after which SCANs will be checked. All SCANs are checked by default."
     )
     parser.add_argument(
         "com_opt", type=str, nargs='?', default='', help="Compile option of this case, default empty."
@@ -587,7 +587,7 @@ def parse_cli():
     )
     parser.add_argument(
         "--transfer",
-        help="Base dir for transfer/update normal case to multiline case.",
+        help="File path of the case to transfer/update to multiline case",
         type=str,
         default="",
     )
