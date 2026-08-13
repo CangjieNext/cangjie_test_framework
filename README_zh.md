@@ -93,7 +93,7 @@ cp -r ${CANGJIE_HOME}/modules ${CANGJIE_HOME}/tools/bin
 ```ini
 [lsp_server]
     win_path = ${win_lsp_server_path} 	   // Windows环境执行修改此处
-    linux_path = ${linux_lsp_server_path}  // Linux或MAC环境执行修改此处
+    linux_path = ${linux_lsp_server_path}  // Linux或macOS环境执行修改此处
 ```
 
 剩余执行步骤与其他用例无区别
@@ -141,7 +141,7 @@ usage: main.py [-h] [--cfg CFG] [-j <num>] [--retry <num>] [--output <file>] [--
 options:
   -h, --help            show this help message and exit
 
-Test FrameWork arguments:
+Test Framework arguments:
   --cfg CFG             Test framework configuration file
   -j <num>              Run <num> cases in parallel
   --retry <num>         Re-run unsuccessful test cases
@@ -347,7 +347,7 @@ positional arguments:
   --assert_flag ASSERT_FLAG
                         Test case assert flag, default ASSERT 
   --expected_flag EXPECTED_FLAG
-                        Test case expected flag for compile, default EXCEPTED
+                        Test case expected flag for compile, default EXPECTED
   --condition [CONDITION]
                         Compare condition for Keyword, default empty. 
   --compare_object [COMPARE_OBJECT]
