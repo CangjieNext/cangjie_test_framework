@@ -23,7 +23,7 @@ cangjie_test_framework/
 
 ## Requirements
 
-* `python` Version > = 3.5.2
+* `python` Version >= 3.5.2
 
 ## Modify Framework Configuration
 
@@ -55,7 +55,7 @@ Test-case execution depends:
 * `Python` packages: `pexpect` and `fasteners` modules
 * `OpenSSL 3`: Dynamic libraries `ssl` and `crypto`
 * `JDK`
-* `llvm`
+* `llvm-15.0.4`
 * `MinGW-w64`
 
 Download test cases:
@@ -347,7 +347,7 @@ positional arguments:
   --assert_flag ASSERT_FLAG
                         Test case assert flag, default ASSERT 
   --expected_flag EXPECTED_FLAG
-                        Test case expected flag for compile, default EXCEPTED
+                        Test case expected flag for compile, default EXPECTED
   --condition [CONDITION]
                         Compare condition for Keyword, default empty. 
   --compare_object [COMPARE_OBJECT]
@@ -370,7 +370,7 @@ positional arguments:
 
 // LEVEL: 2
 // EXEC: %compiler %cmp_opt %f -o %output
-// RUN-EXEC: %run %run_opt % output %run_args
+// RUN-EXEC: %run %run_opt %output %run_args
 
 func test() {
     var a = "HELLO"
