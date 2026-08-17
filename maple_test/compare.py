@@ -164,7 +164,7 @@ def main():
         info = ""
         keywords = pattern_flag.split("-")
         if flag.strip() in assert_flags:
-            info = "It's a assert, "
+            info = "It's an assert, "
         elif flag.strip() in expected_flags:
             if "auto" in keywords:
                 pattern = r"\s+".join([re.escape(word) for word in pattern.split()])
@@ -562,7 +562,7 @@ def parse_cli():
     )
     parser.add_argument(
         "--expected_flag",
-        help="Test case expected flag for compile, default EXCEPTED",
+        help="Test case expected flag for compile, default EXPECTED",
         action="append",
         default=[],
     )
