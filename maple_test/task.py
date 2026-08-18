@@ -24,6 +24,7 @@ from collections import defaultdict, OrderedDict
 from pathlib import Path
 import sys
 import os
+import re
 import uuid
 from configparser import ConfigParser
 from maple_test import configs
@@ -46,10 +47,10 @@ from maple_test.utils import (
     config_section_to_dict,
     config_section_to_set,
     get_config_value,
-    ls_all,
     complete_path,
     split_and_complete_path,
     is_relative,
+    is_case,
     quote,
     safe_print,
 )
@@ -70,6 +71,72 @@ def ensure_config_initialized():
     if not is_initialized:
         _, _, _ = configs.init_config()
         is_initialized = True
+
+
+def glob_to_regex(pattern):
+    """Translate a testlist glob pattern into an anchored regex.
+
+    Aligned with Path.glob semantics: ``*`` does not cross ``/``, ``**`` is
+    recursive (``**/`` may match zero directories), ``?`` and ``[...]`` are
+    single-character matchers. Because the discovery flow expands every glob
+    match with an ls_all walk, a file matches a pattern when it lies at or
+    below a glob match, hence the trailing ``(?:/.*)?`` suffix. The result is
+    used with fullmatch-style matching.
+    """
+    pattern = pattern.replace("\\", "/")
+    while pattern.startswith("./"):
+        pattern = pattern[2:]
+    # 尾部斜杠(如 "API/")只是表示"该目录下",glob 命中的目录被 ls_all
+    # 整树展开;剥掉它,让后续 (?:/.*)? 后缀表达"命中路径之下的任意文件"
+    pattern = pattern.rstrip("/")
+    parts = []
+    i = 0
+    while i < len(pattern):
+        char = pattern[i]
+        if char == "*":
+            if i + 1 < len(pattern) and pattern[i + 1] == "*":
+                i += 2
+                if i < len(pattern) and pattern[i] == "/":
+                    # `**/` matches zero or more directory levels
+                    parts.append("(?:.*/)?")
+                    i += 1
+                else:
+                    parts.append(".*")
+            else:
+                parts.append("[^/]*")
+                i += 1
+        elif char == "?":
+            parts.append("[^/]")
+            i += 1
+        elif char == "[":
+            end = pattern.find("]", i + 1)
+            if end == -1:
+                parts.append(re.escape(char))
+                i += 1
+            else:
+                char_class = pattern[i:end + 1]
+                if char_class.startswith("[!"):
+                    # glob negation class `[!...]` == regex `[^...]`
+                    char_class = "[^" + char_class[2:]
+                parts.append(char_class)
+                i = end + 1
+        else:
+            parts.append(re.escape(char))
+            i += 1
+    # Windows 文件系统大小写不敏感,Path.glob 同样不区分大小写;
+    # POSIX 平台保持大小写敏感。
+    flags = re.IGNORECASE if os.name == "nt" else 0
+    return re.compile("(?:{})".format("".join(parts)) + r"(?:/.*)?\Z", flags)
+
+
+def glob_static_prefix(pattern):
+    """Literal directory part of a glob pattern, up to the first wildcard."""
+    first_wildcard = len(pattern)
+    for wildcard in "*?[":
+        pos = pattern.find(wildcard)
+        if pos != -1 and pos < first_wildcard:
+            first_wildcard = pos
+    return pattern[:first_wildcard].rstrip("/")
 
 
 class TaskConfig:
@@ -266,34 +333,34 @@ class TestSuiteTask:
                     temp += content
         include, exclude = read_list(temp)
         cases = []
-        all_test_case, exclude_test_case = self._search_case(
-            include, exclude, base_dir, suffixes
-        )
-        case_files = set()
-        for pattern in all_test_case:
-            _cases = all_test_case[pattern]
-            if _cases:
-                case_files.update(_cases)
-            else:
-                logger.info(
-                    "Testlist: {}, ALL-TEST-CASE: {} is invalid test case".format(
-                        [i.name for i in testlist_paths], pattern
-                    )
-                )
-        for pattern in exclude_test_case:
-            _cases = exclude_test_case[pattern]
-            if _cases:
-                case_files -= _cases
-            else:
-                logger.info(
-                    "Testlist: {}, EXCLUDE-TEST-CASE: {} is invalid test case".format(
-                        [i.name for i in testlist_paths], pattern
-                    )
-                )
-
         if self.path.is_file():
+            # 单文件输入:跳过 testlist 扫描,直接运行该文件
             case_files = [self.path]
         else:
+            all_test_case, exclude_test_case = self._search_case_scoped(
+                include, exclude, self.path, base_dir, suffixes
+            )
+            case_files = set()
+            for pattern in all_test_case:
+                _cases = all_test_case[pattern]
+                if _cases:
+                    case_files.update(_cases)
+                elif self._pattern_in_scope(pattern, base_dir):
+                    logger.info(
+                        "Testlist: {}, ALL-TEST-CASE: {} is invalid test case".format(
+                            [i.name for i in testlist_paths], pattern
+                        )
+                    )
+            for pattern in exclude_test_case:
+                _cases = exclude_test_case[pattern]
+                if _cases:
+                    case_files -= _cases
+                elif self._pattern_in_scope(pattern, base_dir):
+                    logger.info(
+                        "Testlist: {}, EXCLUDE-TEST-CASE: {} is invalid test case".format(
+                            [i.name for i in testlist_paths], pattern
+                        )
+                    )
             case_files = [
                 file.relative_to(self.path)
                 for file in case_files
@@ -314,21 +381,76 @@ class TestSuiteTask:
         return cases
 
     @staticmethod
-    def _search_case(include, exclude, base_dir, suffixes):
-        case_files = set()
-        all_test_case = {}
-        exclude_test_case = {}
-        for glob_pattern in include:
-            all_test_case[glob_pattern] = set()
-            for include_path in base_dir.glob(glob_pattern):
-                case_files.update(ls_all(include_path, suffixes))
-                all_test_case[glob_pattern].update(ls_all(include_path, suffixes))
-        for glob_pattern in exclude:
-            exclude_test_case[glob_pattern] = set()
-            for exclude_path in base_dir.glob(glob_pattern):
-                case_files -= set(ls_all(exclude_path, suffixes))
-                exclude_test_case[glob_pattern].update(ls_all(exclude_path, suffixes))
-        return all_test_case, exclude_test_case
+    def _search_case_scoped(include, exclude, scope, base_dir, suffixes):
+        """Discover cases inside the scope directory, matching the testlist.
+
+        The original implementation globbed every include/exclude pattern
+        against the whole base_dir and walked each matched subtree with
+        ls_all twice, then dropped everything outside the scope with
+        is_relative — so discovery time grew with the size of the entire
+        test suite (65k+ case files) instead of with the requested directory.
+
+        This version walks the scope directory exactly once and matches each
+        case file's path relative to base_dir against the glob patterns
+        (translated to regex by :func:`glob_to_regex`). Semantics are
+        equivalent: a file is included when it lies at or below any glob
+        match of an include pattern, and excluded when it lies at or below
+        any glob match of an exclude pattern. Files outside base_dir never
+        matched the old implementation either and are skipped.
+        """
+        # base_dir 由 cfg 的 [root] path 拼接而来,可能含 ".." 成分;
+        # Path.relative_to 是纯文本比较不归一化 "..",必须先 resolve,
+        # 否则相对路径计算抛 ValueError 导致发现结果为空。
+        base_dir = complete_path(base_dir)
+        include_matches = {pattern: set() for pattern in include}
+        exclude_matches = {pattern: set() for pattern in exclude}
+        include_matchers = [(pattern, glob_to_regex(pattern)) for pattern in include]
+        exclude_matchers = [(pattern, glob_to_regex(pattern)) for pattern in exclude]
+        for name, _, files in os.walk(str(scope)):
+            for file_name in files:
+                file = Path(name) / file_name
+                if not is_case(file, suffixes):
+                    continue
+                try:
+                    rel = file.relative_to(base_dir).as_posix()
+                except ValueError:
+                    # scope outside base_dir: the old code never matched
+                    # such files either
+                    continue
+                for pattern, matcher in include_matchers:
+                    if matcher.match(rel):
+                        include_matches[pattern].add(file)
+                        break
+                else:
+                    continue
+                for pattern, matcher in exclude_matchers:
+                    if matcher.match(rel):
+                        exclude_matches[pattern].add(file)
+                        break
+        return include_matches, exclude_matches
+
+    def _pattern_in_scope(self, pattern, base_dir):
+        """Whether a testlist pattern can intersect the requested directory.
+
+        Used to keep the "invalid test case" logging meaningful: a pattern
+        that matches nothing inside the requested directory is only reported
+        when it actually overlaps the directory — patterns elsewhere in the
+        test suite are simply not collected, as before.
+        """
+        prefix = glob_static_prefix(pattern)
+        if not prefix:
+            return True
+        try:
+            scope_rel = self.path.relative_to(complete_path(base_dir)).as_posix()
+        except ValueError:
+            # requested directory outside base_dir: no pattern can hit it
+            return False
+        if os.name == "nt":
+            prefix = prefix.lower()
+            scope_rel = scope_rel.lower()
+        return (scope_rel == prefix
+                or scope_rel.startswith(prefix + "/")
+                or prefix.startswith(scope_rel + "/"))
 
     def serial_run_task(self):
         for tasks_name in self.task_set:
@@ -615,6 +737,7 @@ class SingleTask:
         self.name = "{}{}{}".format(case.test_name, OS_SEP, case.name)
         self.path = Path(self.name)
         self.condition = condition
+        run_script_template = getattr(config, "run_script", None)
         config = config.get_case_config(case)
         ensure_config_initialized()
         base_path = Path(__file__).resolve().parent.parent.parent / "cangjie_test" / "testsuites" / "HLT"
@@ -650,7 +773,8 @@ class SingleTask:
             "work_dir": self.work_dir,
             "log_config": (running_config["log_config"], self.log_config),
             "timeout": timeout,
-            "env": config["env"]
+            "env": config["env"],
+            "run_script_prefix": self._resolved_run_script_prefix(run_script_template, config),
         }
         self.case_path = case.relative_path
         if case.commands:
@@ -669,7 +793,35 @@ class SingleTask:
         if self.result[0] == NOT_RUN:
             self._form_commands(case, config)
 
-        self.check_and_record_cases_without_level(case.path, base_path)
+        # 该检查会逐个重读用例文件并每次运行都写 cases_without_level.txt,
+        # 仅在需要统计 LEVEL 时(设置了 CHECK_LEVEL 环境变量)才执行,
+        # 避免普通运行白花发现阶段的 I/O。
+        if "CHECK_LEVEL" in os.environ:
+            self.check_and_record_cases_without_level(case.path, base_path)
+
+    @staticmethod
+    def _resolved_run_script_prefix(run_script, config):
+        """Resolve a ``[run] script`` template into an executable prefix.
+
+        The framework invokes the script once per RUN-EXEC line; the script
+        cannot tell which invocation is the last one, so a case that passes
+        leaves its remote run directory behind. To let the framework remove
+        that directory after a case finishes, we expose the script-invocation
+        prefix (with ``%%key``/``%key`` internal-var placeholders expanded by
+        ``_form_line``) here. Shell/env variables such as ``$CANGJIE_TEST`` or
+        ``${DEVICE_ID}`` are left intact for the host shell to expand, exactly
+        as in a normal command execution.
+
+        The trailing ``| ignore_cmd_redirect`` marker (see
+        :func:`maple_test.utils.filter_command_line`) is stripped so the
+        prefix can be suffixed with ``--cleanup`` and re-run.
+        """
+        if not run_script:
+            return None
+        prefix = run_script
+        if '|' in prefix and 'ignore_cmd_redirect' in prefix:
+            prefix = prefix[:prefix.rfind('|')].strip()
+        return SingleTask._form_line(prefix, config)
 
     def prepare(self, case, dest, config):
         src_path = case.path

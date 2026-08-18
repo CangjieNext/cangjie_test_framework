@@ -1,0 +1,1 @@
+compiler\cjnative\Chir\testcases\external\TC-GENINST-CROSS-PACKAGE\TestCase.info
