@@ -615,6 +615,7 @@ class SingleTask:
         self.name = "{}{}{}".format(case.test_name, OS_SEP, case.name)
         self.path = Path(self.name)
         self.condition = condition
+        run_script_template = getattr(config, "run_script", None)
         config = config.get_case_config(case)
         ensure_config_initialized()
         base_path = Path(__file__).resolve().parent.parent.parent / "cangjie_test" / "testsuites" / "HLT"
@@ -650,7 +651,8 @@ class SingleTask:
             "work_dir": self.work_dir,
             "log_config": (running_config["log_config"], self.log_config),
             "timeout": timeout,
-            "env": config["env"]
+            "env": config["env"],
+            "run_script_prefix": self._resolved_run_script_prefix(run_script_template, config),
         }
         self.case_path = case.relative_path
         if case.commands:
@@ -670,6 +672,30 @@ class SingleTask:
             self._form_commands(case, config)
 
         self.check_and_record_cases_without_level(case.path, base_path)
+
+    @staticmethod
+    def _resolved_run_script_prefix(run_script, config):
+        """Resolve a ``[run] script`` template into an executable prefix.
+
+        The framework invokes the script once per RUN-EXEC line; the script
+        cannot tell which invocation is the last one, so a case that passes
+        leaves its remote run directory behind. To let the framework remove
+        that directory after a case finishes, we expose the script-invocation
+        prefix (with ``%%key``/``%key`` internal-var placeholders expanded by
+        ``_form_line``) here. Shell/env variables such as ``$CANGJIE_TEST`` or
+        ``${DEVICE_ID}`` are left intact for the host shell to expand, exactly
+        as in a normal command execution.
+
+        The trailing ``| ignore_cmd_redirect`` marker (see
+        :func:`maple_test.utils.filter_command_line`) is stripped so the
+        prefix can be suffixed with ``--cleanup`` and re-run.
+        """
+        if not run_script:
+            return None
+        prefix = run_script
+        if '|' in prefix and 'ignore_cmd_redirect' in prefix:
+            prefix = prefix[:prefix.rfind('|')].strip()
+        return SingleTask._form_line(prefix, config)
 
     def prepare(self, case, dest, config):
         src_path = case.path

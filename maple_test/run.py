@@ -168,7 +168,8 @@ def run_command_linux(cmd, work_dir, timeout, logger, env=None, mystdin=None):
 
 
 def run_commands(
-        position, old_result, commands, case_path, work_dir, timeout, log_config, env=None
+        position, old_result, commands, case_path, work_dir, timeout, log_config, env=None,
+        run_script_prefix=None
 ):
     name = log_config[1]
     log_file = str(log_config[0].get("dir") / name) + '.log'
@@ -245,6 +246,40 @@ def run_commands(
         logger.removeHandler(handler)
     ensure_config_initialized()
     if result[0] == PASS and not configs.get_val('keep_temp'):
+        # Cross-device test drivers (e.g. the Android run_cross_compilation.py
+        # script) cannot tell which RUN-EXEC invocation is the last one of a
+        # case, so a passing case leaves its remote run directory behind on
+        # small-capacity devices. The framework owns the "case finished"
+        # signal, so it re-invokes the same script with --cleanup here to
+        # remove that directory. The script derives the remote path from the
+        # basename of the work directory it runs in, so this must happen
+        # before the local work_dir is removed.
+        if run_script_prefix:
+            cleanup_cmd = '{} --cleanup'.format(run_script_prefix)
+            cleanup_timeout = min(timeout, 60) if timeout else 60
+            # The script's --cleanup path removes the remote case dir. Its exit
+            # code is 0 on a clean rm, non-zero if the rm failed (the script
+            # updates EXIT_CODE on a remove-stage failure) or if argparse
+            # rejected --cleanup (old script without the flag — exit 2). Either
+            # way the device may be left with a stale run dir, so surface it:
+            # the old logger.debug here was invisible by default (stream level
+            # is WARNING) and leftover remote dirs went unnoticed. run_command
+            # is bound to run_command_win/linux above for the command loop.
+            try:
+                origin_rc, com_out, com_err = run_command(
+                    cleanup_cmd, work_dir, cleanup_timeout, logger, env, None,
+                )
+            except Exception as e:
+                logger.warning(
+                    "Remote cleanup aborted for %s: %s", work_dir, e,
+                )
+            else:
+                rc = process_exit_code(origin_rc)
+                if rc != 0:
+                    logger.warning(
+                        "Remote cleanup FAILED for %s (exit %s): %s",
+                        work_dir, origin_rc, (com_err or com_out or "").strip()[:500],
+                    )
         try:
             def change_mod_write(func, path, info):
                 os.chmod(path, stat.S_IWRITE)
