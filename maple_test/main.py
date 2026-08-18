@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 # -*- coding:utf-8 -*-
 #
-# Copyright (c) [2020] Huawei Technologies Co.,Ltd.All rights reserved.
+# Copyright (c) [2020] Huawei Technologies Co. ,Ltd. All rights reserved.
 #
 # OpenArkCompiler is licensed under Mulan PSL v2.
 # You can use this software according to the terms and conditions of the Mulan PSL v2.
@@ -25,8 +25,7 @@ import time
 import io
 import sys
 
-sys.output = io.TextIOWrapper(sys.stdout.buffer, encoding='utf8')
-KeepRunFile = False
+sys.output = io.TextIOWrapper(sys.stdout.buffer, encoding='utfj-8')
 from xml.etree import ElementTree
 
 from maple_test import configs
@@ -79,7 +78,7 @@ def main():
                     task.check(check)
                 else:
                     for run_time in range(1, retry + 2):
-                        logger.info("Run {} times".format(run_time))
+                        logger.info("Run {} time(s)".format(run_time))
                         failed_num, num_dict = task.run(configs.get_val("processes"), run_time)
                         if num_dict["total"] != 0 and num_dict["pass"] / num_dict["total"] * 100 >= pass_rate:
                             test_failed_rate = False
@@ -121,7 +120,7 @@ def main():
                     )
                 )
                 shutil.move(str(output), str(output.parent / name))
-            logger.info("Save test result at: {}".format(output))
+            logger.info("Saveing test result to: {}".format(output))
             with output.open("w", encoding="utf-8") as f:
                 f.write(result)
     finally:
@@ -136,7 +135,7 @@ def main():
             if os.path.exists("cases_without_level.txt") and os.path.getsize("cases_without_level.txt") != 0:
                 with open("cases_without_level.txt", "r", encoding='utf-8') as file:
                     content = file.read().strip()
-                    print("These cases do not have level: \n")
+                    print("These cases do not have level:\n")
                     print(content)
                     print("-" * 120)
 
