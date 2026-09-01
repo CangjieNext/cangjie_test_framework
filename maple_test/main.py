@@ -21,6 +21,7 @@ maple test - Maple Tester
 """
 import os.path
 import shutil
+import subprocess
 import time
 import io
 import sys
@@ -33,6 +34,30 @@ from maple_test import configs
 from maple_test.task import TestSuiteTask
 from maple_test.run import TestError
 
+
+def ios_exe_setup(test_cfg):
+    """若使用 iOS 模拟器 exe 路线(免 xcodebuild)的 cfg，
+    启动前一次性给共享运行时 dylib 签名，避免多进程并发 codesign 竞争。"""
+    if not test_cfg:
+        return
+    cfg_str = str(test_cfg)
+    if "ios_simulator_aarch64_exe" not in cfg_str:
+        return
+    # 由 cfg 路径推导 CANGJIE_TEST:
+    # .../testsuites/HLT/configs/cjnative/<cfgdir>/basic.cfg 向上 6 层
+    cangjie_test = os.environ.get("CANGJIE_TEST")
+    if not cangjie_test:
+        p = cfg_str
+        for _ in range(6):
+            p = os.path.dirname(p)
+        cangjie_test = p
+    sign_script = os.path.join(
+        cangjie_test,
+        "testsuites/HLT/configs/cjnative/ios/ios_sign_runtime.sh",
+    )
+    if os.path.isfile(sign_script):
+        print("ios exe route: sign shared runtime dylibs before running ...")
+        subprocess.run(["bash", sign_script])
 
 def main():
     test_suite_config, running_config, log_config = configs.init_config()
@@ -58,6 +83,8 @@ def main():
     json_output = configs.get_val("json_output")
 
     try:
+        # iOS exe 路线一次性初始化(签名共享 dylib)
+        ios_exe_setup(cli_test_cfg)
         for test in test_paths:
             test_cfg = cli_test_cfg
             test_result = None
