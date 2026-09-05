@@ -677,7 +677,7 @@ class TestSuiteTask:
                 if result in print_type or (not print_type and result in DEFAULT_PRINT):
                     if run_time == 1 or (run_time > 1 and result == FAIL):
                         summary += "  {}, Case: {}, Result: {}, LogFile: {}\n".format(
-                            tasks_name, task.case_path, result, task.temp_dir + ".log"
+                            tasks_name, task.case_path, result, task.log_config + ".log"
                         )
         summary += "\n" + brief_summary
         summary += "-" * 120
