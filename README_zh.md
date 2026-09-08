@@ -140,7 +140,7 @@ usage: main.py [-h] [--cfg CFG] [-j <num>] [--retry <num>] [--output <file>] [--
 options:
   -h, --help            show this help message and exit
 
-Test FrameWork arguments:
+Test Framework arguments:
   --cfg CFG             Test framework configuration file
   -j <num>              Run <num> cases in parallel
   --retry <num>         Re-run unsuccessful test cases
@@ -159,7 +159,7 @@ Test FrameWork arguments:
   -p {PASS,FAIL,XFAIL,XPASS,UNSUPPORTED,UNRESOLVED}
                         Print test cases with specified results, -pPASS -pFAIL, to print all test case that failed or passed, UNRESOLVED test case results are not displayed by default.
   --progress {silent,normal,no_flush_progress}
-                        set progress type, silent: Don't show progress, normal: one line progress bar, update per second,no_flush_progress: print test progress per 10 seconds
+                        set progress type, silent: Don't show progress, normal: one line progress bar, update per second, no_flush_progress: print test progress per 10 seconds
   --split SPLIT         Split cases into <num> testlist
   --run_split RUN_SPLIT
                         '<A>/<B>' Split cases into <B> testlist and run part<A>
@@ -228,7 +228,7 @@ cangjie_test/testsuites/HLT
 
 `[ALL-TEST-CASE]`节限定了所有可能的测试用例路径，上述测试列表指定搜索文件夹子目录下的所有测试用例。
 
-`[EXCLUDE-TEST-CASE]`节限定了所有需要排除的用例，上述测试列表指定排除所有以issue开头的文件或文件夹下的所有测试用例。
+`[EXCLUDE-TEST-CASE]`节限定了所有需要排除的用例，上述测试列表指定排除所有以 issue 开头的文件或文件夹下的所有测试用例。
 
 最终的测试用例列表是，`[ALL-TEST-CASE]` 字段限定的用例文件减去 `[EXCLUDE-TEST-CASE]` 限定的用例文件。
 
