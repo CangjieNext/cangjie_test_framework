@@ -410,8 +410,10 @@ class TestSuiteTask:
         (translated to regex by :func:`glob_to_regex`). Semantics are
         equivalent: a file is included when it lies at or below any glob
         match of an include pattern, and excluded when it lies at or below
-        any glob match of an exclude pattern. Files outside base_dir never
-        matched the old implementation either and are skipped.
+        any glob match of an exclude pattern. Patterns may reach outside
+        base_dir ('../x' — Path.glob supported that too), so the relative
+        path is computed with os.path.relpath, which yields '../' segments
+        for siblings of base_dir instead of raising.
         """
         # base_dir 由 cfg 的 [root] path 拼接而来,可能含 ".." 成分;
         # Path.relative_to 是纯文本比较不归一化 "..",必须先 resolve,
@@ -426,12 +428,7 @@ class TestSuiteTask:
                 file = Path(name) / file_name
                 if not is_case(file, suffixes):
                     continue
-                try:
-                    rel = file.relative_to(base_dir).as_posix()
-                except ValueError:
-                    # scope outside base_dir: the old code never matched
-                    # such files either
-                    continue
+                rel = os.path.relpath(str(file), str(base_dir)).replace(os.sep, "/")
                 for pattern, matcher in include_matchers:
                     if matcher.match(rel):
                         include_matches[pattern].add(file)
@@ -458,7 +455,8 @@ class TestSuiteTask:
         try:
             scope_rel = self.path.relative_to(complete_path(base_dir)).as_posix()
         except ValueError:
-            # requested directory outside base_dir: no pattern can hit it
+            # requested directory outside base_dir (e.g. a sibling selected
+            # via '../' patterns): conservative — never log such patterns
             return False
         if os.name == "nt":
             prefix = prefix.lower()
