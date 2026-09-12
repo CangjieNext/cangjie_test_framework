@@ -31,7 +31,7 @@ from xml.etree import ElementTree
 
 from maple_test import configs
 from maple_test.task import TestSuiteTask
-from maple_test.run import TestError
+from maple_test.run import TestError, KeyboardInterrupted, request_stop
 
 
 def main():
@@ -58,11 +58,13 @@ def main():
     json_output = configs.get_val("json_output")
 
     try:
+        test_interrupted = False
         for test in test_paths:
             test_cfg = cli_test_cfg
             test_result = None
             test_failed = False
             test_failed_rate = False
+            loop_interrupted = False
             if test.exists():
                 if not test_cfg:
                     test_cfg = test / "test.cfg"
@@ -80,7 +82,17 @@ def main():
                 else:
                     for run_time in range(1, retry + 2):
                         logger.info("Run {} times".format(run_time))
-                        failed_num, num_dict = task.run(configs.get_val("processes"), run_time)
+                        try:
+                            failed_num, num_dict = task.run(configs.get_val("processes"), run_time)
+                        except (KeyboardInterrupted, KeyboardInterrupt):
+                            # Interrupted by the user (graceful stop, or a
+                            # second Ctrl+C that abandoned the pool): keep
+                            # the results of the cases that finished (the
+                            # rest are NOT_RUN) and generate the usual
+                            # result files.
+                            test_interrupted = True
+                            loop_interrupted = True
+                            break
                         if num_dict["total"] != 0 and num_dict["pass"] / num_dict["total"] * 100 >= pass_rate:
                             test_failed_rate = False
                         else:
@@ -92,11 +104,14 @@ def main():
                         test_result = task.gen_summary([])
                     failed |= test_failed
                     failed_rate |= test_failed_rate
-                    result += test_result
+                    result += test_result if test_result else task.gen_summary([])
                     if xml_output:
                         task.gen_xml_result(root)
                     if json_output:
                         json_result.append(task.gen_json_result())
+                if loop_interrupted:
+                    # An interrupted run also stops any later test paths.
+                    break
 
             else:
                 logger.info("Test path: {} does not exist, please check".format(test))
@@ -124,13 +139,21 @@ def main():
             logger.info("Save test result at: {}".format(output))
             with output.open("w", encoding="utf-8") as f:
                 f.write(result)
+        if test_interrupted:
+            logger.info("Run interrupted by user; partial results saved.")
     finally:
+        request_stop()
         temp_dir = running_config.get("temp_dir")
         if configs.get_val('debug') or configs.get_val('keep_temp'):
             logger.debug("Keep temp file at %s", temp_dir)
         elif temp_dir.exists():
             logger.debug("remove temp_dir %s", temp_dir)
-            shutil.rmtree(str(temp_dir))
+            try:
+                shutil.rmtree(str(temp_dir))
+            except OSError as e:
+                # After an interrupt a worker may still hold a case dir
+                # briefly; the cleanup must not crash the run.
+                logger.debug("remove temp_dir failed: {}".format(e))
 
         if "CHECK_LEVEL" in os.environ:
             if os.path.exists("cases_without_level.txt") and os.path.getsize("cases_without_level.txt") != 0:

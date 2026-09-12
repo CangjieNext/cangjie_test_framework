@@ -28,7 +28,15 @@ import re
 import uuid
 from configparser import ConfigParser
 from maple_test import configs
-from maple_test.run import run_commands, progress, TestError
+from maple_test.run import (
+    STOP_EVENT,
+    KeyboardInterrupted,
+    init_worker,
+    request_stop,
+    run_commands,
+    wait_with_interrupt,
+    TestError,
+)
 from maple_test.test import Case, read_list
 from maple_test.utils import (
     EXECUTABLE,
@@ -264,6 +272,13 @@ class TestSuiteTask:
         user_config = cli_running_config.get("user_config")
         user_env = cli_running_config.get("user_env")
         raw_top_config = read_config(self.cfg_path)
+        # TaskConfig uses CONFIG_SET to detect inheritance cycles within ONE
+        # config chain. It is module-global, so it must be reset per test
+        # suite: loading the same cfg for a later suite (e.g. an explicit
+        # --test_cfg reused across the HLT and LLT paths) is legitimate, not
+        # a cycle — without the reset it raises a false "inheritance cycle
+        # detected".
+        CONFIG_SET.clear()
         self.config = TaskConfig(
             self.cfg_path, raw_top_config, user_config, user_env
         )
@@ -453,24 +468,42 @@ class TestSuiteTask:
                 or prefix.startswith(scope_rel + "/"))
 
     def serial_run_task(self):
-        for tasks_name in self.task_set:
-            for index, task in enumerate(self.task_set[tasks_name]):
-                if task.result[0] == PASS or task.result[0] == UNRESOLVED:
-                    continue
-                self.task_set_result[tasks_name][task.result[0]] -= 1
-                _, task.result = run_commands(
-                    (tasks_name, index),
-                    task.result,
-                    task.commands,
-                    **task.running_config
-                )
-                if configs.get_val("fail_verbose"):
-                    self.output_failed((_, task.result))
-                status = task.result[0]
-                cost_time = task.result[-1]
-                self.task_set_result[tasks_name][status] += 1
-                self.cost_time_info[task] = cost_time
+        interrupted = False
+        try:
+            for tasks_name in self.task_set:
+                for index, task in enumerate(self.task_set[tasks_name]):
+                    if task.result[0] == PASS or task.result[0] == UNRESOLVED:
+                        continue
+                    if STOP_EVENT.is_set():
+                        break
+                    self.task_set_result[tasks_name][task.result[0]] -= 1
+                    try:
+                        _, task.result = run_commands(
+                            (tasks_name, index),
+                            task.result,
+                            task.commands,
+                            **task.running_config
+                        )
+                    except KeyboardInterrupt:
+                        # Restore the counter: the case is still NOT_RUN,
+                        # and the next Ctrl+C stops the wait immediately.
+                        self.task_set_result[tasks_name][task.result[0]] += 1
+                        raise
+                    if configs.get_val("fail_verbose"):
+                        self.output_failed((_, task.result))
+                    status = task.result[0]
+                    cost_time = task.result[-1]
+                    self.task_set_result[tasks_name][status] += 1
+                    self.cost_time_info[task] = cost_time
+        except KeyboardInterrupt:
+            request_stop()
+            interrupted = True
+            safe_print(
+                "\nInterrupted, remaining cases are marked {}".format(NOT_RUN)
+            )
         self.form_cost_time()
+        if interrupted:
+            raise KeyboardInterrupted()
 
     def output_failed(self, result):
         output_template = (
@@ -528,7 +561,11 @@ class TestSuiteTask:
 
     def parallel_run_task(self, process_num):
         multiprocessing.freeze_support()
-        pool = multiprocessing.Pool(min(multiprocessing.cpu_count(), process_num))
+        pool = multiprocessing.Pool(
+            min(multiprocessing.cpu_count(), process_num),
+            initializer=init_worker,
+            initargs=(STOP_EVENT,),
+        )
         result_queue = []
         if configs.get_val("fail_verbose"):
             callback_func = self.output_failed
@@ -538,6 +575,10 @@ class TestSuiteTask:
             for index, task in enumerate(self.task_set[tasks_name]):
                 if task.result[0] == PASS or task.result[0] == UNRESOLVED:
                     continue
+                if STOP_EVENT.is_set():
+                    # Interrupted during an earlier retry round: keep the
+                    # remaining cases NOT_RUN instead of dispatching them.
+                    break
                 result_queue.append(
                     pool.apply_async(
                         run_commands,
@@ -546,7 +587,37 @@ class TestSuiteTask:
                         callback=callback_func,
                     )
                 )
-        progress(result_queue, configs.get_val("progress"))
+        interrupted = wait_with_interrupt(result_queue, configs.get_val("progress"))
+        if interrupted:
+            safe_print(
+                "\nInterrupted, waiting for running cases to finish "
+                "(press Ctrl+C again to abandon)..."
+            )
+            try:
+                wait_with_interrupt(result_queue, "silent", graceful=False)
+            except KeyboardInterrupt:
+                # Second Ctrl+C: abandon. Kill the workers (their in-flight
+                # children die too), harvest the results that did finish,
+                # and leave the rest NOT_RUN.
+                pool.terminate()
+                res_queue = []
+                for result in result_queue:
+                    if not result.ready():
+                        continue
+                    try:
+                        res_queue.append(result.get())
+                    except PermissionError as e:
+                        safe_print("{} {} {}".format(e, e.filename, e.filename2))
+                        continue
+                for position, result in res_queue:
+                    tasks_name, index = position
+                    task = self.task_set[tasks_name][index]
+                    self.task_set_result[tasks_name][task.result[0]] -= 1
+                    task.result = result
+                    self.task_set_result[tasks_name][result[0]] += 1
+                    self.cost_time_info[task] = result[-1]
+                safe_print("\nAbandoned; finished results kept, rest marked {}".format(NOT_RUN))
+                raise KeyboardInterrupted()
         pool.close()
         pool.join()
 
@@ -567,6 +638,8 @@ class TestSuiteTask:
             self.task_set_result[tasks_name][result[0]] += 1
             self.cost_time_info[task] = result[-1]
         self.form_cost_time()
+        if interrupted:
+            raise KeyboardInterrupted()
 
     def form_cost_time(self):
         name = os.path.join(os.path.dirname(self.cfg_path), 'cost_time.csv')
