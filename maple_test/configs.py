@@ -20,9 +20,7 @@ store config file and command line config
 """
 import argparse
 import logging
-import os
 import sys
-import time
 from pathlib import Path
 
 from maple_test.utils import ALL, BASE_DIR, OS_SEP
@@ -32,65 +30,6 @@ from maple_test.utils import complete_path, split_and_complete_path, read_config
 TEST_CONFIG = {}
 LOGGER = None
 LOG_CONFIG = {}
-
-# Suffix pattern for per-instance temp/log dirs: run_<pid>_<start-time>.
-# init_config() appends it whenever the user did not pass --temp_dir/--log_dir
-# explicitly, so concurrent main.py processes never share one directory.
-INSTANCE_DIR_SUFFIX = "{}_{}".format(os.getpid(), int(time.time()))
-
-
-def _process_alive(pid):
-    """Best-effort check whether a pid is alive, cross-platform."""
-    try:
-        if pid <= 0:
-            return False
-        if os.name == "nt":
-            import ctypes
-            PROCESS_QUERY_LIMITED_INFORMATION = 0x1000
-            STILL_ACTIVE = 259
-            kernel32 = ctypes.windll.kernel32
-            handle = kernel32.OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION, False, pid)
-            if not handle:
-                return False
-            try:
-                exit_code = ctypes.c_ulong()
-                if kernel32.GetExitCodeProcess(handle, ctypes.byref(exit_code)):
-                    return exit_code.value == STILL_ACTIVE
-                return True
-            finally:
-                kernel32.CloseHandle(handle)
-        os.kill(pid, 0)
-        return True
-    except PermissionError:
-        return True
-    except OSError:
-        return False
-
-
-def _sweep_stale_instance_dirs(parent_dir, keep_name):
-    """Remove per-instance dirs left behind by dead processes (e.g. killed
-    runs whose finally never fired). Never raises: sweeping is best-effort."""
-    try:
-        if not parent_dir.is_dir():
-            return
-        for child in parent_dir.iterdir():
-            if not child.is_dir():
-                continue
-            parts = child.name.split("_")
-            if len(parts) < 3:
-                continue
-            try:
-                pid = int(parts[-2])
-            except ValueError:
-                continue
-            if pid == os.getpid() or child.name == keep_name:
-                continue
-            if _process_alive(pid):
-                continue
-            import shutil
-            shutil.rmtree(str(child), ignore_errors=True)
-    except OSError:
-        pass
 
 
 def parse_args():
@@ -355,14 +294,7 @@ def parse_args():
         "verbose": args.verbose,
     }
 
-    return (
-        test_framework_config,
-        test_suite_config,
-        running_config,
-        log_config,
-        args.temp_dir is not None,
-        args.log_dir is not None,
-    )
+    return test_framework_config, test_suite_config, running_config, log_config
 
 
 def parser_maple_test_config_file(maple_test_cfg_file):
@@ -398,8 +330,6 @@ def init_config():
         cli_test_suite_config,
         cli_running_config,
         cli_log_config,
-        args_explicit_temp_dir,
-        args_explicit_log_dir,
     ) = parse_args()
 
     (
@@ -423,28 +353,6 @@ def init_config():
     test_suite_config = merge_config(cli_test_suite_config, file_test_suite_config)
     running_config = merge_config(cli_running_config, file_running_config)
     log_config = merge_config(cli_log_config, file_log_config)
-
-    # Concurrent main.py processes sharing the default temp/log dirs delete
-    # each other's case directories (the exit cleanup rmtree's the whole
-    # root). When the user did not pass --temp_dir/--log_dir explicitly, give
-    # this instance its own <pid>_<start-time> subdirectory so instances
-    # never collide; explicitly passed paths are kept untouched.
-    # Exception: --compatible mode reuses case directories across two runs
-    # via --directory_list, which only works when both runs share one
-    # temp_dir, so leave the path unsuffixed whenever it is involved.
-    use_instance_temp_dir = (
-        not args_explicit_temp_dir
-        and running_config.get("temp_dir")
-        and not running_config.get("directory_list")
-    )
-    if use_instance_temp_dir:
-        temp_dir = running_config["temp_dir"] / "run_{}".format(INSTANCE_DIR_SUFFIX)
-        _sweep_stale_instance_dirs(running_config["temp_dir"], temp_dir.name)
-        running_config["temp_dir"] = temp_dir
-    if not args_explicit_log_dir and log_config.get("dir"):
-        log_dir = log_config["dir"] / "log_{}".format(INSTANCE_DIR_SUFFIX)
-        _sweep_stale_instance_dirs(log_config["dir"], log_dir.name)
-        log_config["dir"] = log_dir
 
     if log_config.get("dir") is None:
         log_dir = complete_path(Path("./maple_test_log"))

@@ -89,9 +89,19 @@ def main():
                             # second Ctrl+C that abandoned the pool): keep
                             # the results of the cases that finished (the
                             # rest are NOT_RUN) and generate the usual
-                            # result files.
+                            # result files. A test_result left over from an
+                            # earlier retry round is stale here — regenerate
+                            # it from the current (partial) results, and do
+                            # not skip the xml/json output the normal path
+                            # produces.
                             test_interrupted = True
                             loop_interrupted = True
+                            test_result = task.gen_summary([])
+                            result += test_result
+                            if xml_output:
+                                task.gen_xml_result(root)
+                            if json_output:
+                                json_result.append(task.gen_json_result())
                             break
                         if num_dict["total"] != 0 and num_dict["pass"] / num_dict["total"] * 100 >= pass_rate:
                             test_failed_rate = False

@@ -180,8 +180,10 @@ def run_command_win(cmd, work_dir, timeout, logger, env=None, mystdin=None):
         return_code, com_out, com_err = 3, "TimeOut", "TimeOut"
         return return_code, com_out, com_err
     except KeyboardInterrupt:
-        # Ctrl+C also reaches pool workers (same console); kill the child
-        # and report a failure so the worker can wrap up gracefully.
+        # Ctrl+C also reaches pool workers (same console); kill the child,
+        # flag the interrupt and report 130 so run_commands can mark the
+        # case NOT_RUN (only when the stop event is set) and wrap up.
+        request_stop()
         return_code, com_out, com_err = 130, "", "KeyboardInterrupt"
         return return_code, com_out, com_err
     else:
@@ -231,8 +233,10 @@ def run_command_linux(cmd, work_dir, timeout, logger, env=None, mystdin=None):
         return_code, com_out, com_err = 3, "", "TimeOut"
         return return_code, com_out, com_err
     except KeyboardInterrupt:
-        # Ctrl+C also reaches pool workers (same session); kill the child
-        # and report a failure so the worker can wrap up gracefully.
+        # Ctrl+C also reaches pool workers (same session); kill the child,
+        # flag the interrupt and report 130 so run_commands can mark the
+        # case NOT_RUN (only when the stop event is set) and wrap up.
+        request_stop()
         return_code, com_out, com_err = 130, "", "KeyboardInterrupt"
         return return_code, com_out, com_err
     else:
@@ -254,7 +258,7 @@ def run_command_linux(cmd, work_dir, timeout, logger, env=None, mystdin=None):
 
 def run_commands(
         position, old_result, commands, case_path, work_dir, timeout, log_config, env=None,
-        run_script_prefix=None
+        run_script_prefix=None, run_script_cleanup=True
 ):
     name = log_config[1]
     log_file = str(log_config[0].get("dir") / name) + '.log'
@@ -323,9 +327,14 @@ def run_commands(
         if return_code == return_code_white_list:
             result = [PASS, commands_result]
         else:
-            if return_code == 130:
+            if return_code == 130 and _stop_requested():
                 # The case was killed by the user interrupt, not by a real
-                # test failure: report it as NOT_RUN.
+                # test failure: report it as NOT_RUN. Gated on the stop
+                # event: a 130 without an interrupt is a genuine outcome —
+                # e.g. a child killed by an external SIGINT, or exiting 130
+                # itself — and must stay FAIL, otherwise it drops out of
+                # the summary totals and inflates the pass rate past the
+                # --pass_rate gate.
                 result = [NOT_RUN, commands_result]
                 logger.debug("Interrupted mid-case, marked NOT_RUN")
                 break
@@ -350,7 +359,13 @@ def run_commands(
         # remove that directory. The script derives the remote path from the
         # basename of the work directory it runs in, so this must happen
         # before the local work_dir is removed.
-        if run_script_prefix:
+        # The cfg's [run] cleanup = false opts out: run scripts that do not
+        # understand --cleanup (e.g. the iOS simulator scripts, which take
+        # the run command as "$1" and would report "cannot find executable
+        # '--cleanup'") must not be re-invoked with it. There is nothing to
+        # clean remotely for those suites — the work_dir below is local and
+        # removed by the framework itself.
+        if run_script_prefix and run_script_cleanup:
             cleanup_cmd = '{} --cleanup'.format(run_script_prefix)
             cleanup_timeout = min(timeout, 60) if timeout else 60
             # The script's --cleanup path removes the remote case dir. Its exit
