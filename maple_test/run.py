@@ -254,7 +254,7 @@ def run_command_linux(cmd, work_dir, timeout, logger, env=None, mystdin=None):
 
 def run_commands(
         position, old_result, commands, case_path, work_dir, timeout, log_config, env=None,
-        run_script_prefix=None
+        run_script_prefix=None, run_script_cleanup=True
 ):
     name = log_config[1]
     log_file = str(log_config[0].get("dir") / name) + '.log'
@@ -350,7 +350,13 @@ def run_commands(
         # remove that directory. The script derives the remote path from the
         # basename of the work directory it runs in, so this must happen
         # before the local work_dir is removed.
-        if run_script_prefix:
+        # The cfg's [run] cleanup = false opts out: run scripts that do not
+        # understand --cleanup (e.g. the iOS simulator scripts, which take
+        # the run command as "$1" and would report "cannot find executable
+        # '--cleanup'") must not be re-invoked with it. There is nothing to
+        # clean remotely for those suites — the work_dir below is local and
+        # removed by the framework itself.
+        if run_script_prefix and run_script_cleanup:
             cleanup_cmd = '{} --cleanup'.format(run_script_prefix)
             cleanup_timeout = min(timeout, 60) if timeout else 60
             # The script's --cleanup path removes the remote case dir. Its exit
