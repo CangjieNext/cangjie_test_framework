@@ -558,8 +558,29 @@ class TestSuiteTask:
             safe_print(warning_message)
 
     def parallel_run_task(self, process_num):
+        # The pool must be torn down (terminate + join) before this method
+        # lets ANY KeyboardInterrupt propagate: main() deletes the shared
+        # temp_dir in its finally block, and a KeyboardInterrupt during pool
+        # creation or task dispatch would otherwise leave the workers (and
+        # their test child processes) alive and touching those directories.
+        self._pool = None
+        try:
+            self._parallel_run_pool(process_num)
+        except KeyboardInterrupt:
+            # Not a graceful stop: wait_with_interrupt already handled that
+            # one. This catches an interrupt during pool creation or task
+            # dispatch, before any handler existed, so tear the pool down
+            # here and re-raise for main().
+            pool = self._pool
+            if pool is not None:
+                pool.terminate()
+                pool.join()
+                self._pool = None
+            raise
+
+    def _parallel_run_pool(self, process_num):
         multiprocessing.freeze_support()
-        pool = multiprocessing.Pool(
+        pool = self._pool = multiprocessing.Pool(
             min(multiprocessing.cpu_count(), process_num),
             initializer=init_worker,
             initargs=(STOP_EVENT,),
@@ -596,8 +617,11 @@ class TestSuiteTask:
             except KeyboardInterrupt:
                 # Second Ctrl+C: abandon. Kill the workers (their in-flight
                 # children die too), harvest the results that did finish,
-                # and leave the rest NOT_RUN.
+                # and leave the rest NOT_RUN. terminate() is asynchronous
+                # with respect to the worker processes; join() first so the
+                # workers are really gone before main() removes temp_dir.
                 pool.terminate()
+                pool.join()
                 res_queue = []
                 for result in result_queue:
                     if not result.ready():
@@ -628,6 +652,10 @@ class TestSuiteTask:
                 safe_print("{} {} {}".format(e, e.filename, e.filename2))
                 continue
         result_queue = res_queue
+        # Release the reference: nothing may use the pool after this method
+        # returns, and the outer interrupt guard checks _pool to decide
+        # whether an escaping KeyboardInterrupt still needs a teardown.
+        self._pool = None
         for position, result in result_queue:
             tasks_name, index = position
             task = self.task_set[tasks_name][index]
