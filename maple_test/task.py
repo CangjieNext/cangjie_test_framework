@@ -177,8 +177,21 @@ class TaskConfig:
         self.update_by_user_config(user_config, user_env)
         if config.has_section("run"):
             self.run_script = get_config_value(config, "run", "script").strip()
+            # The PASS-then-re-invoke "--cleanup" hook assumes the run script
+            # understands the --cleanup flag (run_cross_compilation.py does).
+            # Suites whose script does not (e.g. the iOS simulator scripts)
+            # must be able to opt out — the hook would otherwise append
+            # --cleanup to a script that treats it as its run argument and
+            # errors out ("cannot find executable '--cleanup'"). Default: on,
+            # preserving the behavior every existing [run] cfg relies on.
+            self.run_cleanup = get_config_value(config, "run", "cleanup")
+            if self.run_cleanup is not None:
+                self.run_cleanup = self.run_cleanup.strip().lower() not in ("false", "0", "no", "off")
+            else:
+                self.run_cleanup = True
         else:
             self.run_script = None
+            self.run_cleanup = True
 
     def inherit_top_config(self, top_config):
         self.internal_var = copy.deepcopy(top_config.internal_var)
@@ -837,6 +850,7 @@ class SingleTask:
         self.path = Path(self.name)
         self.condition = condition
         run_script_template = getattr(config, "run_script", None)
+        run_cleanup = getattr(config, "run_cleanup", True)
         config = config.get_case_config(case)
         ensure_config_initialized()
         base_path = Path(__file__).resolve().parent.parent.parent / "cangjie_test" / "testsuites" / "HLT"
@@ -874,6 +888,7 @@ class SingleTask:
             "timeout": timeout,
             "env": config["env"],
             "run_script_prefix": self._resolved_run_script_prefix(run_script_template, config),
+            "run_script_cleanup": run_cleanup,
         }
         self.case_path = case.relative_path
         if case.commands:
