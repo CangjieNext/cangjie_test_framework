@@ -48,10 +48,17 @@ def _process_alive(pid):
             import ctypes
             PROCESS_QUERY_LIMITED_INFORMATION = 0x1000
             STILL_ACTIVE = 259
+            ERROR_ACCESS_DENIED = 5
             kernel32 = ctypes.windll.kernel32
             handle = kernel32.OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION, False, pid)
             if not handle:
-                return False
+                # OpenProcess fails with ERROR_ACCESS_DENIED for a live
+                # process owned by another (e.g. elevated) user. Treat it
+                # as alive — same as the POSIX PermissionError branch —
+                # otherwise a sweep started by a less-privileged instance
+                # would rmtree the running dir of a privileged one.
+                # Other errors (e.g. 87 for a nonexistent pid) mean dead.
+                return kernel32.GetLastError() == ERROR_ACCESS_DENIED
             try:
                 exit_code = ctypes.c_ulong()
                 if kernel32.GetExitCodeProcess(handle, ctypes.byref(exit_code)):
