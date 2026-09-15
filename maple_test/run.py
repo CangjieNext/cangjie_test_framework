@@ -25,16 +25,91 @@ import timeit
 import logging
 import platform
 import ctypes
+import multiprocessing
 import shutil
 import datetime
 from textwrap import indent
 
 from maple_test import configs
 from maple_test.configs import construct_logger
-from maple_test.utils import PASS, FAIL, PIPE_KEY, EXIT_CODE, ENCODING, PRINT_LOCK
+from maple_test.utils import PASS, FAIL, NOT_RUN, PIPE_KEY, EXIT_CODE, ENCODING, PRINT_LOCK
 from maple_test.utils import add_run_path, process_exit_code, safe_print
 
 is_initialized = False
+
+# Set when the user interrupts a run (Ctrl+C). The main process sets it;
+# pool workers receive the same event object via the pool initializer
+# (init_worker) because a fresh import in a spawned worker would create a
+# different event. Queued cases check it and return NOT_RUN instead of
+# starting, so an interrupted run can still report finished cases.
+STOP_EVENT = multiprocessing.Event()
+
+_WORKER_STOP_EVENT = None
+
+
+def init_worker(stop_event):
+    """Pool initializer: share the main process's stop event with workers.
+
+    Workers must NOT react to Ctrl+C: on Windows the console event reaches
+    every process in the group, and a KeyboardInterrupt raised inside pool
+    machinery kills the worker, whose in-flight task then never reports a
+    result (the main process would wait forever). So workers ignore the
+    interrupt and rely solely on STOP_EVENT; only the main process handles
+    Ctrl+C.
+    """
+    global _WORKER_STOP_EVENT
+    _WORKER_STOP_EVENT = stop_event
+    try:
+        signal.signal(signal.SIGINT, signal.SIG_IGN)
+    except ValueError:
+        pass
+    if os.name == "nt":
+        try:
+            import ctypes
+            ctypes.windll.kernel32.SetConsoleCtrlHandler(None, True)
+        except Exception:
+            pass
+
+
+def _stop_requested():
+    if _WORKER_STOP_EVENT is not None and _WORKER_STOP_EVENT.is_set():
+        return True
+    return STOP_EVENT.is_set()
+
+
+def request_stop():
+    """Ask queued cases to skip and stop dispatching new work."""
+    STOP_EVENT.set()
+
+
+class KeyboardInterrupted(Exception):
+    """The run was interrupted and the remaining cases were marked NOT_RUN."""
+
+
+def wait_with_interrupt(results, progress_type, graceful=True):
+    """Wait for the queued results, surviving one interrupt.
+
+    First Ctrl+C (graceful=True): request a graceful stop (queued cases
+    return NOT_RUN, running ones finish) and return True so the caller can
+    wait once more. Ctrl+C while graceful=False re-raises, giving the
+    caller the abandon path — otherwise a stuck worker could hang the run
+    with no escape.
+    """
+    try:
+        if progress_type == "silent":
+            # progress() returns immediately in silent mode, but the wait
+            # must still happen here: it is the interruptible point where
+            # Ctrl+C turns into a graceful stop instead of a crash.
+            while not all(r.ready() for r in results):
+                time.sleep(0.5)
+        else:
+            progress(results, progress_type)
+    except KeyboardInterrupt:
+        if not graceful:
+            raise
+        request_stop()
+        return True
+    return STOP_EVENT.is_set()
 
 
 def ensure_config_initialized():
@@ -104,6 +179,11 @@ def run_command_win(cmd, work_dir, timeout, logger, env=None, mystdin=None):
         os.system('taskkill /t /f /pid {}'.format(process_command.pid))
         return_code, com_out, com_err = 3, "TimeOut", "TimeOut"
         return return_code, com_out, com_err
+    except KeyboardInterrupt:
+        # Ctrl+C also reaches pool workers (same console); kill the child
+        # and report a failure so the worker can wrap up gracefully.
+        return_code, com_out, com_err = 130, "", "KeyboardInterrupt"
+        return return_code, com_out, com_err
     else:
         return_code = process_command.returncode
         com_out, com_err = handle_result_encoding(com_out, com_err, logger)
@@ -115,9 +195,9 @@ def run_command_win(cmd, work_dir, timeout, logger, env=None, mystdin=None):
         logger.debug("return code: %d", return_code)
         # For some cases that have a large amount of stdout, windows may get OOM if this code is on
         logger.debug("stdout : \n%s",
-                    indent(com_out, "+\t", lambda line: True).encode().decode(ENCODING, errors='ignore'))
+                    indent(com_out or "", "+\t", lambda line: True).encode().decode(ENCODING, errors='ignore'))
         logger.debug("stderr : \n%s",
-                     indent(com_err, "@\t", lambda line: True).encode().decode(ENCODING, errors='ignore'))
+                     indent(com_err or "", "@\t", lambda line: True).encode().decode(ENCODING, errors='ignore'))
 
 
 def run_command_linux(cmd, work_dir, timeout, logger, env=None, mystdin=None):
@@ -150,6 +230,11 @@ def run_command_linux(cmd, work_dir, timeout, logger, env=None, mystdin=None):
     except subprocess.TimeoutExpired:
         return_code, com_out, com_err = 3, "", "TimeOut"
         return return_code, com_out, com_err
+    except KeyboardInterrupt:
+        # Ctrl+C also reaches pool workers (same session); kill the child
+        # and report a failure so the worker can wrap up gracefully.
+        return_code, com_out, com_err = 130, "", "KeyboardInterrupt"
+        return return_code, com_out, com_err
     else:
         return_code = process_command.returncode
         com_out, com_err = handle_result_encoding(com_out, com_err, logger)
@@ -162,14 +247,14 @@ def run_command_linux(cmd, work_dir, timeout, logger, env=None, mystdin=None):
             pass
         logger.debug("return code: %d", return_code)
         logger.debug("stdout : \n%s",
-                     indent(com_out, "+\t", lambda line: True).encode().decode(ENCODING, errors='ignore'))
+                     indent(com_out or "", "+\t", lambda line: True).encode().decode(ENCODING, errors='ignore'))
         logger.debug("stderr : \n%s",
-                     indent(com_err, "@\t", lambda line: True).encode().decode(ENCODING, errors='ignore'))
+                     indent(com_err or "", "@\t", lambda line: True).encode().decode(ENCODING, errors='ignore'))
 
 
 def run_commands(
         position, old_result, commands, case_path, work_dir, timeout, log_config, env=None,
-        run_script_prefix=None
+        run_script_prefix=None, run_script_cleanup=True
 ):
     name = log_config[1]
     log_file = str(log_config[0].get("dir") / name) + '.log'
@@ -178,6 +263,11 @@ def run_commands(
     )
     logger = construct_logger(log_config[0], log_config[1], file_fmt=formatter)
     logger.debug("Case Path: {}".format(case_path))
+    if _stop_requested() and old_result[0] == NOT_RUN:
+        # Run interrupted while this case was still queued: skip it so the
+        # run can wrap up and report the cases that did finish.
+        logger.debug("Run interrupted, case not started")
+        return position, old_result
     if not commands:
         logger.error("Run task exit unexpected : {}".format(old_result[1]))
         return position, old_result
@@ -233,6 +323,12 @@ def run_commands(
         if return_code == return_code_white_list:
             result = [PASS, commands_result]
         else:
+            if return_code == 130:
+                # The case was killed by the user interrupt, not by a real
+                # test failure: report it as NOT_RUN.
+                result = [NOT_RUN, commands_result]
+                logger.debug("Interrupted mid-case, marked NOT_RUN")
+                break
             result = [FAIL, commands_result]
             logger.error("Failed!")
             logger.error("Command return code {} not equals to expected return code {}".format(origin_return_code, return_code_white_list))
@@ -254,7 +350,13 @@ def run_commands(
         # remove that directory. The script derives the remote path from the
         # basename of the work directory it runs in, so this must happen
         # before the local work_dir is removed.
-        if run_script_prefix:
+        # The cfg's [run] cleanup = false opts out: run scripts that do not
+        # understand --cleanup (e.g. the iOS simulator scripts, which take
+        # the run command as "$1" and would report "cannot find executable
+        # '--cleanup'") must not be re-invoked with it. There is nothing to
+        # clean remotely for those suites — the work_dir below is local and
+        # removed by the framework itself.
+        if run_script_prefix and run_script_cleanup:
             cleanup_cmd = '{} --cleanup'.format(run_script_prefix)
             cleanup_timeout = min(timeout, 60) if timeout else 60
             # The script's --cleanup path removes the remote case dir. Its exit

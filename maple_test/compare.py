@@ -164,7 +164,7 @@ def main():
         info = ""
         keywords = pattern_flag.split("-")
         if flag.strip() in assert_flags:
-            info = "It's an assert, "
+            info = "It's an assertion, "
         elif flag.strip() in expected_flags:
             if "auto" in keywords:
                 pattern = r"\s+".join([re.escape(word) for word in pattern.split()])
