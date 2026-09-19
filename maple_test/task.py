@@ -1021,10 +1021,19 @@ class SingleTask:
 
         # Fixed-point iteration — resolves arbitrarily deep reference
         # chains regardless of dict insertion order.
+        #
+        # Longest key first: one key may be a prefix of another (e.g.
+        # 'dump-ir' and 'dump-ir-to-screen').  The boundary test above accepts
+        # '-' as a separator, so a shorter key would otherwise win the race and
+        # rewrite '%dump-ir-to-screen' into the non-existent option
+        # '--dump-ir-to-screen', leaving the longer key unreachable.  Trying
+        # longer keys first makes the longest match win, while still allowing
+        # '-' to act as a separator for keys that are not prefixes of others.
+        ordered_var = sorted(internal_var.items(), key=lambda item: len(item[0]), reverse=True)
         max_iterations = 20
         for iteration in range(1, max_iterations + 1):
             before = line
-            for key, value in internal_var.items():
+            for key, value in ordered_var:
                 line = substitute(line, key, value)
             if line == before:
                 break
