@@ -28,7 +28,15 @@ import re
 import uuid
 from configparser import ConfigParser
 from maple_test import configs
-from maple_test.run import run_commands, progress, TestError
+from maple_test.run import (
+    STOP_EVENT,
+    KeyboardInterrupted,
+    init_worker,
+    request_stop,
+    run_commands,
+    wait_with_interrupt,
+    TestError,
+)
 from maple_test.test import Case, read_list
 from maple_test.utils import (
     EXECUTABLE,
@@ -169,8 +177,21 @@ class TaskConfig:
         self.update_by_user_config(user_config, user_env)
         if config.has_section("run"):
             self.run_script = get_config_value(config, "run", "script").strip()
+            # The PASS-then-re-invoke "--cleanup" hook assumes the run script
+            # understands the --cleanup flag (run_cross_compilation.py does).
+            # Suites whose script does not (e.g. the iOS simulator scripts)
+            # must be able to opt out — the hook would otherwise append
+            # --cleanup to a script that treats it as its run argument and
+            # errors out ("cannot find executable '--cleanup'"). Default: on,
+            # preserving the behavior every existing [run] cfg relies on.
+            self.run_cleanup = get_config_value(config, "run", "cleanup")
+            if self.run_cleanup is not None:
+                self.run_cleanup = self.run_cleanup.strip().lower() not in ("false", "0", "no", "off")
+            else:
+                self.run_cleanup = True
         else:
             self.run_script = None
+            self.run_cleanup = True
 
     def inherit_top_config(self, top_config):
         self.internal_var = copy.deepcopy(top_config.internal_var)
@@ -264,6 +285,13 @@ class TestSuiteTask:
         user_config = cli_running_config.get("user_config")
         user_env = cli_running_config.get("user_env")
         raw_top_config = read_config(self.cfg_path)
+        # TaskConfig uses CONFIG_SET to detect inheritance cycles within ONE
+        # config chain. It is module-global, so it must be reset per test
+        # suite: loading the same cfg for a later suite (e.g. an explicit
+        # --test_cfg reused across the HLT and LLT paths) is legitimate, not
+        # a cycle — without the reset it raises a false "inheritance cycle
+        # detected".
+        CONFIG_SET.clear()
         self.config = TaskConfig(
             self.cfg_path, raw_top_config, user_config, user_env
         )
@@ -395,8 +423,10 @@ class TestSuiteTask:
         (translated to regex by :func:`glob_to_regex`). Semantics are
         equivalent: a file is included when it lies at or below any glob
         match of an include pattern, and excluded when it lies at or below
-        any glob match of an exclude pattern. Files outside base_dir never
-        matched the old implementation either and are skipped.
+        any glob match of an exclude pattern. Patterns may reach outside
+        base_dir ('../x' — Path.glob supported that too), so the relative
+        path is computed with os.path.relpath, which yields '../' segments
+        for siblings of base_dir instead of raising.
         """
         # base_dir 由 cfg 的 [root] path 拼接而来,可能含 ".." 成分;
         # Path.relative_to 是纯文本比较不归一化 "..",必须先 resolve,
@@ -411,12 +441,7 @@ class TestSuiteTask:
                 file = Path(name) / file_name
                 if not is_case(file, suffixes):
                     continue
-                try:
-                    rel = file.relative_to(base_dir).as_posix()
-                except ValueError:
-                    # scope outside base_dir: the old code never matched
-                    # such files either
-                    continue
+                rel = os.path.relpath(str(file), str(base_dir)).replace(os.sep, "/")
                 for pattern, matcher in include_matchers:
                     if matcher.match(rel):
                         include_matches[pattern].add(file)
@@ -443,7 +468,8 @@ class TestSuiteTask:
         try:
             scope_rel = self.path.relative_to(complete_path(base_dir)).as_posix()
         except ValueError:
-            # requested directory outside base_dir: no pattern can hit it
+            # requested directory outside base_dir (e.g. a sibling selected
+            # via '../' patterns): conservative — never log such patterns
             return False
         if os.name == "nt":
             prefix = prefix.lower()
@@ -453,24 +479,53 @@ class TestSuiteTask:
                 or prefix.startswith(scope_rel + "/"))
 
     def serial_run_task(self):
-        for tasks_name in self.task_set:
-            for index, task in enumerate(self.task_set[tasks_name]):
-                if task.result[0] == PASS or task.result[0] == UNRESOLVED:
-                    continue
-                self.task_set_result[tasks_name][task.result[0]] -= 1
-                _, task.result = run_commands(
-                    (tasks_name, index),
-                    task.result,
-                    task.commands,
-                    **task.running_config
-                )
-                if configs.get_val("fail_verbose"):
-                    self.output_failed((_, task.result))
-                status = task.result[0]
-                cost_time = task.result[-1]
-                self.task_set_result[tasks_name][status] += 1
-                self.cost_time_info[task] = cost_time
+        interrupted = False
+        try:
+            for tasks_name in self.task_set:
+                for index, task in enumerate(self.task_set[tasks_name]):
+                    if task.result[0] == PASS or task.result[0] == UNRESOLVED:
+                        continue
+                    if STOP_EVENT.is_set():
+                        # Interrupt signalled (serial mode: Ctrl+C during a
+                        # case command is swallowed by the run_command
+                        # handler, which only sets the stop event). Report
+                        # the run as interrupted so main() keeps the partial
+                        # results but skips the pass-rate/fail gates —
+                        # otherwise the gates would run on partial data and
+                        # a short all-pass prefix could exit 0.
+                        interrupted = True
+                        safe_print(
+                            "\nInterrupted, remaining cases are marked {}".format(NOT_RUN)
+                        )
+                        break
+                    self.task_set_result[tasks_name][task.result[0]] -= 1
+                    try:
+                        _, task.result = run_commands(
+                            (tasks_name, index),
+                            task.result,
+                            task.commands,
+                            **task.running_config
+                        )
+                    except KeyboardInterrupt:
+                        # Restore the counter: the case is still NOT_RUN,
+                        # and the next Ctrl+C stops the wait immediately.
+                        self.task_set_result[tasks_name][task.result[0]] += 1
+                        raise
+                    if configs.get_val("fail_verbose"):
+                        self.output_failed((_, task.result))
+                    status = task.result[0]
+                    cost_time = task.result[-1]
+                    self.task_set_result[tasks_name][status] += 1
+                    self.cost_time_info[task] = cost_time
+        except KeyboardInterrupt:
+            request_stop()
+            interrupted = True
+            safe_print(
+                "\nInterrupted, remaining cases are marked {}".format(NOT_RUN)
+            )
         self.form_cost_time()
+        if interrupted:
+            raise KeyboardInterrupted()
 
     def output_failed(self, result):
         output_template = (
@@ -527,8 +582,33 @@ class TestSuiteTask:
             safe_print(warning_message)
 
     def parallel_run_task(self, process_num):
+        # The pool must be torn down (terminate + join) before this method
+        # lets ANY KeyboardInterrupt propagate: main() deletes the shared
+        # temp_dir in its finally block, and a KeyboardInterrupt during pool
+        # creation or task dispatch would otherwise leave the workers (and
+        # their test child processes) alive and touching those directories.
+        self._pool = None
+        try:
+            self._parallel_run_pool(process_num)
+        except KeyboardInterrupt:
+            # Not a graceful stop: wait_with_interrupt already handled that
+            # one. This catches an interrupt during pool creation or task
+            # dispatch, before any handler existed, so tear the pool down
+            # here and re-raise for main().
+            pool = self._pool
+            if pool is not None:
+                pool.terminate()
+                pool.join()
+                self._pool = None
+            raise
+
+    def _parallel_run_pool(self, process_num):
         multiprocessing.freeze_support()
-        pool = multiprocessing.Pool(min(multiprocessing.cpu_count(), process_num))
+        pool = self._pool = multiprocessing.Pool(
+            min(multiprocessing.cpu_count(), process_num),
+            initializer=init_worker,
+            initargs=(STOP_EVENT,),
+        )
         result_queue = []
         if configs.get_val("fail_verbose"):
             callback_func = self.output_failed
@@ -538,6 +618,10 @@ class TestSuiteTask:
             for index, task in enumerate(self.task_set[tasks_name]):
                 if task.result[0] == PASS or task.result[0] == UNRESOLVED:
                     continue
+                if STOP_EVENT.is_set():
+                    # Interrupted during an earlier retry round: keep the
+                    # remaining cases NOT_RUN instead of dispatching them.
+                    break
                 result_queue.append(
                     pool.apply_async(
                         run_commands,
@@ -546,7 +630,40 @@ class TestSuiteTask:
                         callback=callback_func,
                     )
                 )
-        progress(result_queue, configs.get_val("progress"))
+        interrupted = wait_with_interrupt(result_queue, configs.get_val("progress"))
+        if interrupted:
+            safe_print(
+                "\nInterrupted, waiting for running cases to finish "
+                "(press Ctrl+C again to abandon)..."
+            )
+            try:
+                wait_with_interrupt(result_queue, "silent", graceful=False)
+            except KeyboardInterrupt:
+                # Second Ctrl+C: abandon. Kill the workers (their in-flight
+                # children die too), harvest the results that did finish,
+                # and leave the rest NOT_RUN. terminate() is asynchronous
+                # with respect to the worker processes; join() first so the
+                # workers are really gone before main() removes temp_dir.
+                pool.terminate()
+                pool.join()
+                res_queue = []
+                for result in result_queue:
+                    if not result.ready():
+                        continue
+                    try:
+                        res_queue.append(result.get())
+                    except PermissionError as e:
+                        safe_print("{} {} {}".format(e, e.filename, e.filename2))
+                        continue
+                for position, result in res_queue:
+                    tasks_name, index = position
+                    task = self.task_set[tasks_name][index]
+                    self.task_set_result[tasks_name][task.result[0]] -= 1
+                    task.result = result
+                    self.task_set_result[tasks_name][result[0]] += 1
+                    self.cost_time_info[task] = result[-1]
+                safe_print("\nAbandoned; finished results kept, rest marked {}".format(NOT_RUN))
+                raise KeyboardInterrupted()
         pool.close()
         pool.join()
 
@@ -559,6 +676,10 @@ class TestSuiteTask:
                 safe_print("{} {} {}".format(e, e.filename, e.filename2))
                 continue
         result_queue = res_queue
+        # Release the reference: nothing may use the pool after this method
+        # returns, and the outer interrupt guard checks _pool to decide
+        # whether an escaping KeyboardInterrupt still needs a teardown.
+        self._pool = None
         for position, result in result_queue:
             tasks_name, index = position
             task = self.task_set[tasks_name][index]
@@ -567,6 +688,8 @@ class TestSuiteTask:
             self.task_set_result[tasks_name][result[0]] += 1
             self.cost_time_info[task] = result[-1]
         self.form_cost_time()
+        if interrupted:
+            raise KeyboardInterrupted()
 
     def form_cost_time(self):
         name = os.path.join(os.path.dirname(self.cfg_path), 'cost_time.csv')
@@ -738,6 +861,7 @@ class SingleTask:
         self.path = Path(self.name)
         self.condition = condition
         run_script_template = getattr(config, "run_script", None)
+        run_cleanup = getattr(config, "run_cleanup", True)
         config = config.get_case_config(case)
         ensure_config_initialized()
         base_path = Path(__file__).resolve().parent.parent.parent / "cangjie_test" / "testsuites" / "HLT"
@@ -775,6 +899,7 @@ class SingleTask:
             "timeout": timeout,
             "env": config["env"],
             "run_script_prefix": self._resolved_run_script_prefix(run_script_template, config),
+            "run_script_cleanup": run_cleanup,
         }
         self.case_path = case.relative_path
         if case.commands:
