@@ -403,7 +403,7 @@ def begin_match(content, line_map, pattern, start=0, match_func=regex_match, cou
 
 def auto_regex_match(content, line_map, pattern, start=0, match_func=regex_match, count=-1):
     pattern = r"\s+".join([re.escape(word) for word in pattern.split()])
-    return match_func(content, line_map, pattern, start)
+    return match_func(content, line_map, pattern, start, count=count)
 
 
 def not_match(content, line_map, pattern, start=0, match_func=regex_match, count=-1):
