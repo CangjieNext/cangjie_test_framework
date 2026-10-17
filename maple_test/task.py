@@ -719,12 +719,20 @@ class TestSuiteTask:
         g_summary = self.gen_summary(print_type, run_time).splitlines()
         for line in g_summary:
             logger.info(line)
-        pass_num = int(g_summary[-2].split(",")[2].replace(" PASS: ", "")) if "PASS" in g_summary[-2].split(",")[2] else int(g_summary[-2].split(",")[3].replace(" PASS: ", ""))
-        failed_num = int(g_summary[-2].split(",")[3].replace(" FAIL: ", "")) if "FAIL" in g_summary[-2].split(",")[3] else int(g_summary[-2].split(",")[2].replace(" FAIL: ", ""))
+        # The status counters in the printed summary are sorted by count, so
+        # with -p UNRESOLVED the UNRESOLVED field can take the place of PASS or
+        # FAIL.  Splitting that line by position then raised ValueError after
+        # every case had already run: no result file was written and
+        # --pass_rate / --fail_exit never ran.  Read the counters from
+        # self.result instead, with the same total rule gen_brief_summary uses.
+        summary_result = copy.deepcopy(self.result)
+        total = sum(summary_result.values()) - summary_result.pop(NOT_RUN)
+        if UNRESOLVED not in print_type:
+            total -= summary_result.pop(UNRESOLVED)
         r = {
-            "total": int(g_summary[-2].split(",")[1].replace(" total: ", "")),
-            "pass": pass_num,
-            "failed": failed_num
+            "total": total,
+            "pass": self.result[PASS],
+            "failed": self.result[FAIL]
         }
         return self.result[FAIL], r
 
