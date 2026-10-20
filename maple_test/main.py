@@ -57,6 +57,14 @@ def main():
     xml_output = configs.get_val("xml_output")
     json_output = configs.get_val("json_output")
 
+    repeat = configs.get_val("repeat") or 1
+    if repeat > 1 and (configs.get_val("compatible") or split_num):
+        # --compatible reuses work dirs recorded in a directory_list (the
+        # repeat tag would be dropped and repeats would collide on one dir),
+        # and --split writes task names into split testlists (the tag would
+        # end up in the generated lists where no such case file exists).
+        sys.exit("[ERROR] --repeat cannot be used together with --compatible or --split")
+
     try:
         test_interrupted = False
         for test in test_paths:
