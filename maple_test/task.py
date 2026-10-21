@@ -311,33 +311,50 @@ class TestSuiteTask:
         self.task_set_result[name] = OrderedDict(
             {PASS: 0, FAIL: 0, NOT_RUN: 0, UNRESOLVED: 0}
         )
+        repeat_num = configs.get_val("repeat") or 1
         if self.path.is_file():  # Single case input, don`t scan testlist, just run it!
             comment = self.suffix_comments[self.path.name.split('.')[-1]]
             case = Case(self.path, self.path, comment, self.condition, run_script, self.level)
             if case.relative_path != '':
-                task = SingleTask(case, self.config, running_config, self.condition)
-                self.task_set[name].append(task)
-                self.task_set_result[name][task.result[0]] += 1
+                self._append_case_task(case, running_config, repeat_num)
         else:
             if self.run_split is None:
                 for case in self._search_list(base_dir, testlist_path):
-                    task = SingleTask(case, self.config, running_config, self.condition)
-                    self.task_set[name].append(task)
-                    self.task_set_result[name][task.result[0]] += 1
+                    self._append_case_task(case, running_config, repeat_num)
             else:
                 run_num = self.run_split[0]
                 split_num = self.run_split[1]
                 temp_count = 1
                 for case in sorted(self._search_list(base_dir, testlist_path), key=lambda x: x.name):
                     if (temp_count + run_num) % split_num == 0:
-                        task = SingleTask(case, self.config, running_config, self.condition)
-                        self.task_set[name].append(task)
-                        self.task_set_result[name][task.result[0]] += 1
+                        self._append_case_task(case, running_config, repeat_num)
                     temp_count += 1
         if sum([len(case) for case in self.task_set.values()]) < 1:
             logger.info(
                 "Path %s not in testlist, be sure add path to testlist", str(self.path),
             )
+
+    def _append_case_task(self, case, running_config, repeat_num=1):
+        """Append one SingleTask per repeat of *case*, updating the counters.
+
+        With --repeat > 1, each repeat gets a deepcopy of the case: SingleTask
+        and run_commands mutate case.commands in place (placeholder
+        substitution, compare rewriting, Windows path normalization), so
+        repeats must not share those dicts. Each repeat is tagged '#rN' in its
+        task name, which keeps work dirs and log files distinct.
+        """
+        for repeat_index in range(1, repeat_num + 1):
+            if repeat_num > 1:
+                task_case = copy.deepcopy(case)
+                task = SingleTask(
+                    task_case, self.config, running_config, self.condition,
+                    repeat_index=repeat_index,
+                )
+            else:
+                task = SingleTask(case, self.config, running_config, self.condition)
+            name = self.config.name
+            self.task_set[name].append(task)
+            self.task_set_result[name][task.result[0]] += 1
 
     @staticmethod
     def _get_testlist(config, base_dir):
@@ -555,7 +572,11 @@ class TestSuiteTask:
         output["name"] = str(case)
         output["cmd_list"] = ""
         output["cmd_output"] = ""
-        if result[0] == PASS:
+        if result[0] == PASS or result[1] is None:
+            # PASS: nothing failed. result[1] is None: the case never
+            # started — its result is the initial (NOT_RUN, None), e.g. it
+            # was still queued when the run was interrupted — so there is
+            # no command output to report.
             return
         if result[0] != PASS and not isinstance(result[1], str):
             for cmd_result in result[1]:
@@ -800,7 +821,7 @@ class TestSuiteTask:
                 if result in print_type or (not print_type and result in DEFAULT_PRINT):
                     if run_time == 1 or (run_time > 1 and result == FAIL):
                         summary += "  {}, Case: {}, Result: {}, LogFile: {}\n".format(
-                            tasks_name, task.case_path, result, task.temp_dir + ".log"
+                            tasks_name, case_display_name(task), result, task.temp_dir + ".log"
                         )
         summary += "\n" + brief_summary
         summary += "-" * 120
@@ -813,7 +834,7 @@ class TestSuiteTask:
         for task_name in self.task_set:
             for task in self.task_set[task_name]:
                 result = Result(
-                    task.case_path,
+                    case_display_name(task),
                     task_name,
                     self.cfg_path,
                     task.result[0],
@@ -856,10 +877,17 @@ class TestSuiteTask:
 
 
 class SingleTask:
-    def __init__(self, case, config, running_config, condition):
-        self.name = "{}{}{}".format(case.test_name, OS_SEP, case.name)
-        self.path = Path(self.name)
+    def __init__(self, case, config, running_config, condition, repeat_index=None):
+        self.repeat_index = repeat_index
         self.condition = condition
+        name = "{}{}{}".format(case.test_name, OS_SEP, case.name)
+        if repeat_index is not None:
+            # Repeat runs (--repeat) of the same case must not share a work
+            # dir or log file: the name feeds temp_dir/log_config below, so
+            # tag it with the repeat index to keep every repeat distinct.
+            name = "{}#r{}".format(name, repeat_index)
+        self.name = name
+        self.path = Path(self.name)
         run_script_template = getattr(config, "run_script", None)
         run_cleanup = getattr(config, "run_cleanup", True)
         config = config.get_case_config(case)
@@ -1169,6 +1197,17 @@ class SingleTask:
 
     def __repr__(self):
         return "{}".format(self.path)
+
+
+def case_display_name(task):
+    """Name of a task's case for the summary and the xml/json result files.
+
+    Repeat runs (--repeat) get a '#rN' suffix so the N executions of one case
+    are distinguishable in the output; a plain run keeps the bare case path.
+    """
+    if getattr(task, "repeat_index", None) is not None:
+        return "{}#r{}".format(task.case_path, task.repeat_index)
+    return str(task.case_path)
 
 
 def format_compare_command(raw_command, compare_cmd):

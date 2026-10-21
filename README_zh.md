@@ -131,7 +131,7 @@ python3 cangjie_test_framework/main.py -pFAIL -j20 --timeout=180
 参数说明：指定参数会覆盖框架配置文件中的设置
 
 ```shell
-usage: main.py [-h] [--cfg CFG] [-j <num>] [--retry <num>] [--output <file>] [--xml_output <file>] [--json_output <file>] [--debug] [--keep_temp] [--compatible] [--fail_exit] [--pass_rate <num>] [--transfer] [--condition [CONDITION]] [--level [LEVEL]]
+usage: main.py [-h] [--cfg CFG] [-j <num>] [--retry <num>] [--repeat <num>] [--output <file>] [--xml_output <file>] [--json_output <file>] [--debug] [--keep_temp] [--compatible] [--fail_exit] [--pass_rate <num>] [--transfer] [--condition [CONDITION]] [--level [LEVEL]]
                [-p {PASS,FAIL,XFAIL,XPASS,UNSUPPORTED,UNRESOLVED}] [--progress {silent,normal,no_flush_progress}] [--test_cfg <TEST_CFG_FILE>] [--test_list <TEST_LIST_FILE>] [-C key=value] [-E key=value] [--temp_dir <TEMP_DIR_PATH>]
                [--directory_list <DIRECTORY_LIST_PATH>] [--timeout TIMEOUT] [--directory_structure {tile,normal}] [--log_dir <LOG_DIR_FILE_PATH>] [--log_level LOG_LEVEL] [--verbose] [--fail-verbose] [--split SPLIT] [--run_split RUN_SPLIT]
                [--check <CHECK_TEST_CASE>]
@@ -144,6 +144,7 @@ Test FrameWork arguments:
   --cfg CFG             Test framework configuration file
   -j <num>              Run <num> cases in parallel
   --retry <num>         Re-run unsuccessful test cases
+  --repeat <num>        Run every selected test case <num> times, for stability checking
   --output <file>       Store test result at <file>
   --xml_output <file>   Store test result as xunit xml format at <file>
   --json_output <file>  Store test result as json format at <file>

@@ -57,6 +57,13 @@ def parse_args():
         help="Re-run unsuccessful test cases",
     )
     test_framework_parser.add_argument(
+        "--repeat",
+        metavar="<num>",
+        default=None,
+        type=bigger_than_one_integer,
+        help="Run every selected test case <num> times, for stability checking",
+    )
+    test_framework_parser.add_argument(
         "--output",
         metavar="<file>",
         type=complete_path,
@@ -252,6 +259,7 @@ def parse_args():
         "cfg": args.cfg,
         "processes": args.processes,
         "retry": args.retry,
+        "repeat": args.repeat,
         "output": args.output,
         "xml_output": args.xml_output,
         "json_output": args.json_output,
