@@ -1,0 +1,35 @@
+maple_test/main.py
+  s_23d65ff370258c::t_f46533b229eade 60-67
+README.md
+  s_23d65ff370258c::t_e515ffecf7b886 133
+  s_23d65ff370258c::t_79ce43418fb248 146
+maple_test/configs.py
+  s_23d65ff370258c::t_9ea4d76e9787c0 262
+  s_23d65ff370258c::t_b607b9109f894d 59-65
+maple_test/task.py
+  s_23d65ff370258c::t_e9e555c87d98ba 337-358
+  s_23d65ff370258c::t_75b0459aa90bee 1202-1212
+  s_23d65ff370258c::t_7f1586300d08c8 314,319,323,330
+  s_23d65ff370258c::t_b080b736c14528 824
+  s_23d65ff370258c::t_8fc1a92a53564f 837
+  s_23d65ff370258c::t_5f40f150f6c38b 880-881,883-890
+  s_23d65ff370258c::t_a154a11c0dc098 575-579
+README_zh.md
+  s_23d65ff370258c::t_55e9958ef21633 134,147
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "90b9bc62f2dd8b64c2fd0bd41fc52178af471d6c",
+  "prompts": {},
+  "sessions": {
+    "s_23d65ff370258c": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "02a0045a-9eae-44da-99ff-ba6ef5b28182",
+        "model": "GLM-5.3-Flash"
+      },
+      "human_author": "Al_bkt_for_brine <wubenteng1@huawei.com>"
+    }
+  }
+}
