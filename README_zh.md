@@ -276,6 +276,7 @@ cangjie_test/testsuites/HLT/configs/cjnative/
 
 * 所有测试用例中的EXEC语句内的 `%compiler` 会被替换为 `cjc`
 * 如果涉及脚本的运行路径需要填写绝对路径或者在环境变量 `PATH` 中，例如配置文件中：如果 `compiler` 在 `PATH` 中，则 `compiler = cjc` 即可，如果不在则 `compiler = ${CANGJIE_HOME}/bin/cjc`
+* 当两个变量名存在前缀关系时，同一位置上匹配到的较长变量名生效。例如 `dump-ir = --dump-ir` 与 `dump-ir-to-screen = --dump-ir --dump-to-screen` 同时存在的情况下，`%dump-ir-to-screen` 展开为 `--dump-ir --dump-to-screen`，`%dump-ir` 展开为 `--dump-ir`，与两行在配置文件中的先后顺序无关。
 
 ### 测试框架内置变量说明
 

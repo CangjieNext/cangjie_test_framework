@@ -275,6 +275,7 @@ cangjie_test/testsuites/HLT/configs/cjnative/
 
 * All occurrences of `%compiler` in test cases are replaced with `cjc`.
 * If the script is not in `PATH`, use an absolute path (e.g.,`compiler = ${CANGJIE_HOME}/bin/cjc`)
+* When one variable name is a prefix of another, the longest name that matches at that position wins. With `dump-ir = --dump-ir` and `dump-ir-to-screen = --dump-ir --dump-to-screen`, `%dump-ir-to-screen` expands to `--dump-ir --dump-to-screen` and `%dump-ir` expands to `--dump-ir`, regardless of the order the two lines appear in the config.
 
 ### Built-in Variables Of The Test Framework  
 

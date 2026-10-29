@@ -1124,11 +1124,25 @@ class SingleTask:
         ``%compiler`` is replaced in ``%compiler -o %n.exe``, but NOT in
         ``%compiler_extra`` because ``_`` follows ``compiler``.
 
+        Longest match first
+        -------------------
+        Because ``-`` is a word boundary, a key that is a prefix of a longer
+        one also matches the longer one's prefix: in ``%dump-ir-to-screen``
+        the key ``dump-ir`` is followed by ``-`` and would otherwise be
+        substituted first, leaving ``--dump-ir-to-screen``.  A config that
+        maps ``dump-ir-to-screen`` to ``--dump-ir --dump-to-screen`` then
+        produces an option the compiler does not know.
+
+        The scan therefore runs left to right and, at every ``%``, takes the
+        **longest** key that matches and ends on a word boundary.  Which key
+        wins is decided by the text alone, never by the order the keys happen
+        to sit at in the config file.
+
         Multi-pass resolution (order independence)
         -------------------------------------------
-        The method iterates over *all* ``internal_var`` entries repeatedly
-        until a full pass produces no further substitutions.  This makes
-        resolution independent of the insertion order of the dictionary.
+        The method repeats substitution until a full pass produces no further
+        changes.  This makes resolution independent of the insertion order of
+        the dictionary.
 
         Motivation: config-file values may themselves contain ``%other``
         references (written as ``%%other`` in the ``.cfg`` file; the
@@ -1156,29 +1170,43 @@ class SingleTask:
         a test-suite config (typically ≤ 3–5 levels).
         """
         internal_var = config.get("internal_var")
+        # Longest first, so the search below can stop at the first key whose
+        # text matches: no shorter key can win over a longer one it prefixes.
+        keys = sorted(internal_var, key=len, reverse=True)
 
-        def substitute(text, key, value):
-            """Replace every ``%key`` in *text* with *value*, respecting
-            word-boundary rules."""
-            token = "%{}".format(key)
-            end = 0
-            while end < len(text):
-                start = text.find(token, end)
-                if start == -1:
-                    break
-                after = start + len(token)            # char right after %key
-                if after == len(text) or (not text[after].isalnum() and text[after] != "_"):
-                    text = text[:start] + value + text[after:]
-                end = start + len(value) + 1          # skip past inserted value
-            return text
+        def ends_on_boundary(text, pos):
+            return pos == len(text) or (not text[pos].isalnum() and text[pos] != "_")
+
+        def substitute(text):
+            """Replace every placeholder in *text*, preferring the longest key.
+
+            Inserted values are not rescanned; chained references are unwound
+            by the fixed-point loop in the caller, exactly as before.
+            """
+            out = []
+            i = 0
+            while i < len(text):
+                if text[i] != "%":
+                    out.append(text[i])
+                    i += 1
+                    continue
+                for key in keys:
+                    after = i + 1 + len(key)
+                    if text.startswith(key, i + 1) and ends_on_boundary(text, after):
+                        out.append(internal_var[key])
+                        i = after
+                        break
+                else:
+                    out.append(text[i])
+                    i += 1
+            return "".join(out)
 
         # Fixed-point iteration — resolves arbitrarily deep reference
         # chains regardless of dict insertion order.
         max_iterations = 20
         for iteration in range(1, max_iterations + 1):
             before = line
-            for key, value in internal_var.items():
-                line = substitute(line, key, value)
+            line = substitute(line)
             if line == before:
                 break
         else:
