@@ -584,7 +584,9 @@ def parse_cli():
     )
     parser.add_argument(
         "--compare_object",
+        type=argparse.FileType("r", encoding="utf-8"),
         nargs="?",
+        const=sys.stdin,
         default=sys.stdin,
         help="compare object, default stdin",
     )
