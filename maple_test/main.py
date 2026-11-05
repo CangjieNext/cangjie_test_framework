@@ -34,9 +34,55 @@ from maple_test.task import TestSuiteTask
 from maple_test.run import TestError, KeyboardInterrupted, request_stop
 
 
+def cleanup_previous_run(running_config, log_config):
+    """Delete scratch data left by previous runs.
+
+    Without this, repeated runs leak disk space:
+      - every case writes its own ``<case>_<uuid>.log`` into the log dir.
+        The uuid part is regenerated per run, so names never repeat and the
+        ``mode="w"`` file handler cannot reuse old files; nothing deletes
+        them during or after a run, so the log dir grows by one full set of
+        case logs (each holding the complete stdout/stderr of every
+        command, file level is DEBUG) per execution.
+      - with ``--debug`` the whole temp_dir is kept at the end of a run
+        and is never cleaned when the next run starts, so failed cases'
+        work dirs (copied sources, dependencies, compiled outputs) pile
+        up run after run.
+
+    temp_dir is a pure scratch area (each case recreates its work dir), and
+    the previous run's case logs have already served their purpose in that
+    run's summary, so removing both at startup bounds disk usage to a
+    single run.
+
+    Skipped when the run reuses recorded work dirs (--compatible or
+    --directory_list): those dirs and their case files are intentionally
+    kept for reuse. --keep_temp opts out of the temp_dir cleanup only.
+    """
+    logger = configs.LOGGER
+    if configs.get_val("compatible") or running_config.get("directory_list"):
+        return
+    temp_dir = running_config.get("temp_dir")
+    if (temp_dir is not None and temp_dir.exists()
+            and not configs.get_val("keep_temp")):
+        logger.debug("Clean temp dir of previous run: %s", temp_dir)
+        shutil.rmtree(str(temp_dir), ignore_errors=True)
+    log_dir = log_config.get("dir")
+    if log_dir is not None and log_dir.exists():
+        for log_file in log_dir.glob("*.log"):
+            # Maple_Test.log belongs to THIS run: init_config() has just
+            # truncated it and the main logger holds an open handle on it.
+            if log_file.name == "Maple_Test.log":
+                continue
+            try:
+                log_file.unlink()
+            except OSError as err:
+                logger.debug("Remove stale log %s failed: %s", log_file, err)
+
+
 def main():
     test_suite_config, running_config, log_config = configs.init_config()
     logger = configs.LOGGER
+    cleanup_previous_run(running_config, log_config)
 
     test_paths = test_suite_config.get("test_paths")
     cli_test_cfg = test_suite_config.get("test_cfg")
