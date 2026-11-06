@@ -33,7 +33,7 @@ cangjie_test_framework/
 ```ini
 # 测试框架配置文件，当前框架仅支持通过配置文件配置测试套，测试运行时的临时路径，测试日志的保存
 [test-home]
-# 指定测试套路径，以‘：’划分
+# 指定测试套路径，以':'划分
 dir = 
     ../../cangjie_test/testsuites/HLT:../../cangjie_test/testsuites/LLT
 
@@ -92,7 +92,7 @@ cp -r ${CANGJIE_HOME}/modules ${CANGJIE_HOME}/tools/bin
 ```ini
 [lsp_server]
     win_path = ${win_lsp_server_path} 	   // Windows环境执行修改此处
-    linux_path = ${linux_lsp_server_path}  // Linux或MAC环境执行修改此处
+    linux_path = ${linux_lsp_server_path} // Linux或macOS环境执行修改此处
 ```
 
 剩余执行步骤与其他用例无区别
@@ -146,7 +146,7 @@ Test FrameWork arguments:
   --retry <num>         Re-run unsuccessful test cases
   --repeat <num>        Run every selected test case <num> times, for stability checking
   --output <file>       Store test result at <file>
-  --xml_output <file>   Store test result as xunit xml format at <file>
+  --xml_output <file>   Store test result as xUnit XML format at <file>
   --json_output <file>  Store test result as json format at <file>
   --debug               only keep failed temp file
   --keep_temp           keep all test temp file
@@ -566,7 +566,7 @@ main(): Unit {
 
 #### `scan-next`
 
-在当前搜索起始位置（由上一个 `scan-begin` 决定）的下一行中匹配。
+在当前搜索起始位置（每次成功匹配后都会推进到该次匹配结束处）的下一行中匹配。
 
 ```cangjie
 // EXEC: %compiler %cmp_opt %f -o %output
@@ -601,7 +601,7 @@ main(): Unit {
 
 #### `scan-after`
 
-从当前搜索起始位置（由上一个 `scan-begin` 决定）开始搜索匹配。
+从当前搜索起始位置（每次成功匹配后都会推进）开始向后搜索匹配。
 
 ```cangjie
 // EXEC: %compiler %cmp_opt %f -o %output
@@ -755,7 +755,7 @@ main(): Unit {
 }
 ```
 
-在以上用例中，`regex-auto` 将断言成功，而 `regex` 将断言失败，因为 `regex` 将按照给定的正则表达式字符串进行匹配，而 `regex-auto` 会自动将空白符替换为 `\s+`，故能成功匹配”。
+在以上用例中，`regex-auto` 将断言成功，而 `regex` 将断言失败，因为 `regex` 将按照给定的正则表达式字符串进行匹配，而 `regex-auto` 会自动将空白符替换为 `\s+`，故能成功匹配。
 
 #### `regex-N`
 
