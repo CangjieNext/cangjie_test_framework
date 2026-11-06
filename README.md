@@ -50,7 +50,7 @@ level = INFO
 
 Test-case execution depends:
 
-* Cangjie SDK:[Install Cangjie SDK](https://gitcode.com/Cangjie/cangjie_docs/blob/main/docs/dev-guide/source_zh_cn/first_understanding/install.md)
+* Cangjie SDK: [Install Cangjie SDK](https://gitcode.com/Cangjie/cangjie_docs/blob/main/docs/dev-guide/source_zh_cn/first_understanding/install.md)
 * `Git Bash`: Add to the `Path` environment variable
 * `Python` packages: `pexpect` and `fasteners` modules
 * `OpenSSL 3`: Dynamic libraries `ssl` and `crypto`
@@ -91,7 +91,7 @@ Modify the `lsp_server` path in the configuration file `cangjie_test/testsuites/
 ```ini
 [lsp_server]
     win_path = ${win_lsp_server_path} 	   // Modify this line for Windows environment
-    linux_path = ${linux_lsp_server_path}  // Modify this line for Linux or MAC environment
+    linux_path = ${linux_lsp_server_path}  // Modify this line for Linux or macOS environment
 ```
 
 The remaining execution steps are the same as those for other test cases.
@@ -148,7 +148,7 @@ Test Framework arguments:
   --xml_output <file>   Store test result as xunit xml format at <file>
   --json_output <file>  Store test result as json format at <file>
   --debug               only keep failed temp file
-  --keep_temp           keep all test temp file
+  --keep_temp           keep all test temp files
   --compatible          test different versions of cjc
   --fail_exit           Execute test framework with a non-zero exit code if any tests fail
   --pass_rate <num>     Set the pass rate of test cases
@@ -159,7 +159,7 @@ Test Framework arguments:
   -p {PASS,FAIL,XFAIL,XPASS,UNSUPPORTED,UNRESOLVED}
                         Print test cases with specified results, -pPASS -pFAIL, to print all test cases that failed or passed, UNRESOLVED test case results are not displayed by default.
   --progress {silent,normal,no_flush_progress}
-                        set progress type, silent: Don't show progress, normal: one line progress bar, update per second,no_flush_progress: print test progress per 10 seconds
+                        set progress type, silent: Don't show progress, normal: one line progress bar, update per second, no_flush_progress: print test progress per 10 seconds
   --split SPLIT         Split cases into <num> testlist
   --run_split RUN_SPLIT
                         '<A>/<B>' Split cases into <B> testlist and run part<A>
@@ -181,7 +181,7 @@ Running arguments:
   --temp_dir <TEMP_DIR_PATH>
                         Location for test execute.
   --directory_list <DIRECTORY_LIST_PATH>
-                        Write or read a corresponding list of test execution locations and actual paths of test cases,when compatible equals False, write the list, otherwise, read the list.
+                        Write or read a corresponding list of test execution locations and actual paths of test cases, when compatible equals False, write the list, otherwise, read the list.
   --timeout TIMEOUT     test case timeout
   --directory_structure {tile,normal}
                         set temp directory structure type, tile: Tile the temp directory, normal: set the temp directory according to the use case directory structure
